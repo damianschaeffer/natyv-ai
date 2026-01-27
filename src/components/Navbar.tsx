@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Linkedin, Twitter, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProtocolStatus from "./ProtocolStatus";
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
@@ -17,9 +19,14 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Products", href: "#products" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Governance", href: "#governance" },
-    { label: "Advisory", href: "#advisory" },
+    { label: "About", href: "/about", isRoute: true },
+    { label: "Advisory", href: "/advisory", isRoute: true },
+  ];
+
+  const socialLinks = [
+    { icon: Linkedin, href: "https://linkedin.com/in/damianschaeffer", label: "LinkedIn" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Youtube, href: "#", label: "YouTube" },
   ];
 
   return (
@@ -52,16 +59,53 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link, index) => (
+              link.isRoute ? (
+                <motion.div
+                  key={link.label}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index, duration: 0.4 }}
+                  whileHover={{ y: -2 }}
+                >
+                  <Link
+                    to={link.href}
+                    className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ) : (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index, duration: 0.4 }}
+                  whileHover={{ y: -2 }}
+                >
+                  {link.label}
+                </motion.a>
+              )
+            ))}
+          </div>
+
+          {/* Social Links */}
+          <div className="hidden md:flex items-center gap-3">
+            {socialLinks.map((social, index) => (
               <motion.a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index, duration: 0.4 }}
-                whileHover={{ y: -2 }}
+                key={social.label}
+                href={social.href}
+                target={social.href.startsWith("http") ? "_blank" : undefined}
+                rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
+                whileHover={{ scale: 1.1 }}
+                aria-label={social.label}
               >
-                {link.label}
+                <social.icon className="w-4 h-4" />
               </motion.a>
             ))}
           </div>
