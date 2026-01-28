@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Award, Users, Heart } from "lucide-react";
+import { MapPin, Award, Users, Heart, Linkedin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import damianProfile from "@/assets/damian-profile.jpg";
@@ -85,9 +85,20 @@ const About = () => {
                   Founder
                 </span>
                 
-                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-tight">
-                  Damian Schaeffer
-                </h1>
+                <div className="flex items-center gap-4 mb-6">
+                  <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight">
+                    Damian Schaeffer
+                  </h1>
+                  <a
+                    href="https://linkedin.com/in/damianschaeffer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors"
+                    aria-label="Connect on LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5 text-primary" />
+                  </a>
+                </div>
                 
                 <p className="text-xl text-muted-foreground font-body leading-relaxed mb-8 italic border-l-2 border-primary/30 pl-6">
                   "I've spent 20+ years in business operations — the unsexy, behind-the-scenes work of making businesses actually run."
