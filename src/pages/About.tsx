@@ -90,33 +90,42 @@ const About = () => {
                     Damian Schaeffer
                   </h1>
                   <div className="flex items-center gap-2">
-                    <a
+                    <motion.a
                       href="https://linkedin.com/in/damianschaeffer"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors"
+                      className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"
                       aria-label="Connect on LinkedIn"
+                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
                       <Linkedin className="w-5 h-5 text-primary" />
-                    </a>
-                    <a
+                    </motion.a>
+                    <motion.a
                       href="https://x.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors"
+                      className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"
                       aria-label="Follow on X"
+                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
                       <Twitter className="w-5 h-5 text-primary" />
-                    </a>
-                    <a
+                    </motion.a>
+                    <motion.a
                       href="https://youtube.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors"
+                      className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"
                       aria-label="Subscribe on YouTube"
+                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
                       <Youtube className="w-5 h-5 text-primary" />
-                    </a>
+                    </motion.a>
                   </div>
                 </div>
                 
