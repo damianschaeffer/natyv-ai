@@ -100,7 +100,7 @@ const Footer = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-6 border-t border-border relative overflow-hidden">
+      <footer className="py-4 border-t border-border relative overflow-hidden">
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -117,33 +117,36 @@ const Footer = () => {
               />
             </motion.a>
 
-            {/* Navigation Links */}
-            <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) =>
-                link.isRoute ? (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
-                  >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target={link.isExternal ? "_blank" : undefined}
-                    rel={link.isExternal ? "noopener noreferrer" : undefined}
-                    className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
-                  >
-                    {link.label}
-                  </a>
-                )
-              )}
+            {/* Navigation Links - Centered with blue separators like navbar */}
+            <div className="hidden md:flex items-center justify-center gap-6 flex-1">
+              {navLinks.map((link, index) => (
+                <div key={link.label} className="flex items-center gap-6">
+                  {index > 0 && (
+                    <div className="w-[8px] h-5 bg-primary" />
+                  )}
+                  {link.isRoute ? (
+                    <Link
+                      to={link.href}
+                      className="text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em]"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      target={link.isExternal ? "_blank" : undefined}
+                      rel={link.isExternal ? "noopener noreferrer" : undefined}
+                      className="text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em]"
+                    >
+                      {link.label}
+                    </a>
+                  )}
+                </div>
+              ))}
             </div>
 
-            {/* Social Links */}
-            <div className="hidden md:flex items-center gap-3">
+            {/* Right Section - Social Links & Protocol Status */}
+            <div className="hidden md:flex items-center justify-end gap-3 w-32 flex-shrink-0">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -153,13 +156,9 @@ const Footer = () => {
                   className="p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
                   aria-label={social.label}
                 >
-                  <social.icon className="w-4 h-4" />
+                  <social.icon className="w-5 h-5" />
                 </a>
               ))}
-            </div>
-
-            {/* Right Section */}
-            <div className="flex items-center gap-6">
               <div className="hidden lg:block">
                 <ProtocolStatus />
               </div>
