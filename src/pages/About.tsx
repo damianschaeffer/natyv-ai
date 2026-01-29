@@ -66,85 +66,71 @@ const About = () => {
                   Founder
                 </span>
                 
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 mb-4">
-                  <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight">
-                    Damian Schaeffer
-                  </h1>
-                  <div className="flex items-center gap-2">
-                    <motion.a
-                      href="https://linkedin.com/in/damianschaeffer"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
-                      aria-label="Connect on LinkedIn"
-                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <Linkedin className="w-4 h-4 text-primary" />
-                    </motion.a>
-                    <motion.a
-                      href="https://x.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
-                      aria-label="Follow on X"
-                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <Twitter className="w-4 h-4 text-primary" />
-                    </motion.a>
-                    <motion.a
-                      href="https://youtube.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
-                      aria-label="Subscribe on YouTube"
-                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <Youtube className="w-4 h-4 text-primary" />
-                    </motion.a>
-                    <motion.a
-                      href="https://instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
-                      aria-label="Follow on Instagram"
-                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <Instagram className="w-4 h-4 text-primary" />
-                    </motion.a>
-                    <motion.a
-                      href="https://facebook.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
-                      aria-label="Follow on Facebook"
-                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <Facebook className="w-4 h-4 text-primary" />
-                    </motion.a>
-                  </div>
-                </div>
-
-                {/* Quick stats inline */}
-                <div className="flex items-center justify-center md:justify-start gap-6">
-                  <div className="text-center">
-                    <div className="font-display text-xl text-primary">20+</div>
-                    <div className="text-xs text-muted-foreground font-body">Years in Ops</div>
-                  </div>
-                  <div className="w-px h-8 bg-border" />
-                  <div className="text-center">
-                    <div className="font-display text-xl text-primary">150+</div>
-                    <div className="text-xs text-muted-foreground font-body">Communities</div>
-                  </div>
+                <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-4">
+                  Damian Schaeffer
+                </h1>
+                
+                <div className="flex items-center justify-center md:justify-start gap-2">
+                  <motion.a
+                    href="https://linkedin.com/in/damianschaeffer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
+                    aria-label="Connect on LinkedIn"
+                    whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <Linkedin className="w-4 h-4 text-primary" />
+                  </motion.a>
+                  <motion.a
+                    href="https://x.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
+                    aria-label="Follow on X"
+                    whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <Twitter className="w-4 h-4 text-primary" />
+                  </motion.a>
+                  <motion.a
+                    href="https://youtube.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
+                    aria-label="Subscribe on YouTube"
+                    whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <Youtube className="w-4 h-4 text-primary" />
+                  </motion.a>
+                  <motion.a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
+                    aria-label="Follow on Instagram"
+                    whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <Instagram className="w-4 h-4 text-primary" />
+                  </motion.a>
+                  <motion.a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
+                    aria-label="Follow on Facebook"
+                    whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <Facebook className="w-4 h-4 text-primary" />
+                  </motion.a>
                 </div>
               </div>
             </motion.div>
