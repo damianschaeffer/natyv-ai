@@ -55,7 +55,7 @@ const MyAgentSection = () => {
           </div>
           
           <div className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-10 flex flex-col items-center gap-3">
-            <span>Presents</span>
+            <span className="text-foreground">Presents</span>
             <div className="w-16 h-px bg-primary/50" />
             <span className="text-foreground">Our Flagship Product</span>
           </div>
