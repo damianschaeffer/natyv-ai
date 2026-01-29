@@ -9,7 +9,7 @@ const MyAgentSection = () => {
 
   const taglines = [
     {
-      content: "Multi-Modal Google Gemini-Live Voice AI Agents",
+      content: "The Latest Multi-Modal Conversational Voice AI Agents",
     },
     {
       content: "that Understand, Reason, Learn, and Remember...Just Like You...",
@@ -19,7 +19,7 @@ const MyAgentSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentLine((prev) => (prev + 1) % taglines.length);
-    }, 3500);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
