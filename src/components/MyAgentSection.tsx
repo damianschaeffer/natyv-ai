@@ -56,13 +56,13 @@ const MyAgentSection = () => {
     delay: i * 0.05,
     height: Math.random() * 60 + 20
   }));
-  return <section className="py-32 relative overflow-hidden" id="my-agent">
+  return <section className="py-40 min-h-screen flex items-center relative overflow-hidden" id="my-agent">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <motion.div className="text-center mb-16" initial={{
+        <motion.div className="text-center" initial={{
         opacity: 0,
         y: 30
       }} whileInView={{
@@ -77,12 +77,12 @@ const MyAgentSection = () => {
           <img 
             src={natyvLogoTopline} 
             alt="Natyv AI" 
-            className="w-full max-w-md mx-auto mb-4" 
+            className="w-full max-w-md mx-auto mb-6" 
           />
           {/* White separator line */}
-          <div className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-4" />
+          <div className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-6" />
           {/* STUDIO label with blue vertical separators */}
-          <div className="flex items-center justify-center gap-6 mb-8">
+          <div className="flex items-center justify-center gap-6 mb-12">
             <span className="w-[8px] h-8 bg-primary" />
             <span className="text-foreground font-body text-3xl md:text-4xl tracking-[0.3em] uppercase ml-1">
               Studio
@@ -90,11 +90,11 @@ const MyAgentSection = () => {
             <span className="w-[8px] h-8 bg-primary" />
           </div>
           
-          <span className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-4 block">
+          <span className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-6 block">
             Presents Our Flagship Product
           </span>
-          <img src={myAgentLogo} alt="MY AGENT" className="h-28 md:h-32 w-auto mx-auto mb-4 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] cursor-pointer" />
-          <div className="h-12 mb-6 flex items-center justify-center overflow-hidden">
+          <img src={myAgentLogo} alt="MY AGENT" className="h-28 md:h-32 w-auto mx-auto mb-8 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] cursor-pointer" />
+          <div className="h-12 mb-10 flex items-center justify-center overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.p
                 key={currentLine}
