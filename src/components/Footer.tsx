@@ -29,6 +29,9 @@ const Footer = () => {
     { name: "Supabase", logo: "https://seeklogo.com/images/S/supabase-logo-DCC676FFE2-seeklogo.com.png" },
     { name: "Twilio", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Twilio-logo-red.svg" },
     { name: "OpenAI", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" },
+    { name: "Google Gemini", logo: "/logos/google-gemini.svg" },
+    { name: "GoHighLevel", logo: "/logos/gohighlevel.png" },
+    { name: "Anthropic", logo: "/logos/anthropic.svg" },
   ];
 
   return (
