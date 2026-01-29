@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="currentColor">
-  <path d="M30 10 L30 90 L45 90 L45 10 Z"/>
-  <path d="M55 10 L55 90 L70 90 L70 10 Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="currentColor">
+  <rect x="5" y="5" width="6" height="30" rx="1"/>
+  <rect x="15" y="5" width="6" height="30" rx="1"/>
+  <text x="30" y="28" font-family="Arial, sans-serif" font-size="18" font-weight="600">ElevenLabs</text>
 </svg>
