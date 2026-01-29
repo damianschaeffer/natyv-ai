@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play } from "lucide-react";
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 import natyvLogoFooter from "@/assets/natyv-logo-footer.png";
 
 const VideoSequence = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true); // Auto-play on mount
   const [currentScene, setCurrentScene] = useState(0);
   
   // Typewriter state - tracks which line and character we're on
@@ -80,11 +79,6 @@ const VideoSequence = () => {
       return () => clearTimeout(nextLineTimer);
     }
   }, [currentCharIndex, currentLineIndex, isTypingComplete, isPlaying, currentScene]);
-
-  const startSequence = () => {
-    setCurrentScene(0);
-    setIsPlaying(true);
-  };
 
   const getLineStyle = (style: string) => {
     switch (style) {
@@ -201,43 +195,8 @@ const VideoSequence = () => {
           </div>
         )}
 
-        {/* Animated states - only for idle and playing scenes */}
+        {/* Animated states - playing scenes */}
         <AnimatePresence mode="wait">
-          {/* Idle state - Play button */}
-          {!isPlaying && currentScene === 0 && (
-            <motion.div
-              key="idle"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-col items-center gap-8"
-            >
-              <motion.div
-                className="w-32 h-32 rounded-full border-2 border-primary/50 flex items-center justify-center cursor-pointer group"
-                whileHover={{ scale: 1.1, borderColor: "hsl(var(--primary))" }}
-                whileTap={{ scale: 0.95 }}
-                onClick={startSequence}
-              >
-                <motion.div
-                  className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center"
-                  animate={{ 
-                    boxShadow: [
-                      "0 0 0 0 hsl(var(--primary) / 0.4)",
-                      "0 0 0 20px hsl(var(--primary) / 0)",
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <Play className="w-10 h-10 text-primary ml-1" />
-                </motion.div>
-              </motion.div>
-              <p className="text-muted-foreground font-body text-sm uppercase tracking-widest">
-                Click to experience
-              </p>
-            </motion.div>
-          )}
-
           {/* Scene 0: Mission Part 1 */}
           {isPlaying && currentScene === 0 && (
             <motion.div
