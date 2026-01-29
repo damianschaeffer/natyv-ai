@@ -8,11 +8,9 @@ const VideoSequence = () => {
   const [currentScene, setCurrentScene] = useState(0);
 
   const scenes = [
-    { id: 0, duration: 2000 }, // Logo reveal
-    { id: 1, duration: 2500 }, // Tagline 1
-    { id: 2, duration: 2500 }, // Tagline 2
-    { id: 3, duration: 2500 }, // Stats
-    { id: 4, duration: 3000 }, // Final landing
+    { id: 0, duration: 2500 }, // Tagline 1
+    { id: 1, duration: 2500 }, // Tagline 2
+    { id: 2, duration: 2500 }, // Stats
   ];
 
   useEffect(() => {
@@ -123,59 +121,8 @@ const VideoSequence = () => {
             </motion.div>
           )}
 
-          {/* Scene 0: Logo Reveal */}
+          {/* Scene 0: Tagline 1 */}
           {isPlaying && currentScene === 0 && (
-            <motion.div
-              key="scene0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 1.1 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col items-center"
-            >
-              <motion.div
-                initial={{ scale: 0, rotate: -180, y: 50 }}
-                animate={{ 
-                  scale: [0, 0.3, 0.6, 1.15, 0.95, 1],
-                  rotate: [-180, -120, -60, -10, 5, 0],
-                  y: [50, 30, 15, -5, 2, 0]
-                }}
-                transition={{ 
-                  duration: 1.4,
-                  delay: 0.2,
-                  times: [0, 0.2, 0.4, 0.7, 0.85, 1],
-                  ease: [0.34, 1.56, 0.64, 1]
-                }}
-              >
-                <motion.img
-                  src={natyvLogoFull}
-                  alt="Natyv AI"
-                  className="h-20 md:h-28 w-auto"
-                  initial={{ opacity: 0 }}
-                  animate={{ 
-                    opacity: [0, 0.4, 0.7, 1, 1, 1],
-                    filter: [
-                      "drop-shadow(0 0 0px hsl(var(--primary)))",
-                      "drop-shadow(0 0 5px hsl(var(--primary)))",
-                      "drop-shadow(0 0 15px hsl(var(--primary)))",
-                      "drop-shadow(0 0 40px hsl(var(--primary)))",
-                      "drop-shadow(0 0 25px hsl(var(--primary)))",
-                      "drop-shadow(0 0 12px hsl(var(--primary)))",
-                    ]
-                  }}
-                  transition={{ 
-                    duration: 1.6, 
-                    delay: 0.3,
-                    times: [0, 0.15, 0.35, 0.6, 0.8, 1],
-                    ease: "easeOut"
-                  }}
-                />
-              </motion.div>
-            </motion.div>
-          )}
-
-          {/* Scene 1: Tagline 1 */}
-          {isPlaying && currentScene === 1 && (
             <motion.div
               key="scene1"
               initial={{ opacity: 0 }}
@@ -203,8 +150,8 @@ const VideoSequence = () => {
             </motion.div>
           )}
 
-          {/* Scene 2: Tagline 2 */}
-          {isPlaying && currentScene === 2 && (
+          {/* Scene 1: Tagline 2 */}
+          {isPlaying && currentScene === 1 && (
             <motion.div
               key="scene2"
               initial={{ opacity: 0 }}
@@ -236,8 +183,8 @@ const VideoSequence = () => {
             </motion.div>
           )}
 
-          {/* Scene 3: Stats */}
-          {isPlaying && currentScene === 3 && (
+          {/* Scene 2: Stats */}
+          {isPlaying && currentScene === 2 && (
             <motion.div
               key="scene3"
               initial={{ opacity: 0 }}
@@ -275,35 +222,6 @@ const VideoSequence = () => {
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
-          )}
-
-          {/* Scene 4: Final - Large Logo Landing */}
-          {isPlaying && currentScene === 4 && (
-            <motion.div
-              key="scene4"
-              initial={{ opacity: 0, scale: 2, y: -100 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ 
-                duration: 1.5,
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}
-              className="flex flex-col items-center"
-            >
-              <motion.img
-                src={natyvLogoFull}
-                alt="Natyv AI"
-                className="max-w-2xl w-full mx-auto"
-                animate={{ 
-                  filter: [
-                    "drop-shadow(0 0 40px hsl(var(--primary)))",
-                    "drop-shadow(0 0 20px hsl(var(--primary)))",
-                  ]
-                }}
-                transition={{ duration: 1.5, delay: 0.5 }}
-              />
             </motion.div>
           )}
 
