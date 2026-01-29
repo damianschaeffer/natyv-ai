@@ -121,7 +121,7 @@ const VideoSequence = () => {
             </motion.div>
           )}
 
-          {/* Scene 0: Tagline 1 */}
+          {/* Scene 0: Mission Part 1 */}
           {isPlaying && currentScene === 0 && (
             <motion.div
               key="scene1"
@@ -137,7 +137,7 @@ const VideoSequence = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                The Future of
+                Building AI systems
               </motion.h2>
               <motion.h2
                 className="text-4xl md:text-6xl font-display text-primary"
@@ -145,12 +145,12 @@ const VideoSequence = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                Autonomous Intelligence
+                that free humans
               </motion.h2>
             </motion.div>
           )}
 
-          {/* Scene 1: Tagline 2 */}
+          {/* Scene 1: Mission Part 2 */}
           {isPlaying && currentScene === 1 && (
             <motion.div
               key="scene2"
@@ -168,17 +168,56 @@ const VideoSequence = () => {
               >
                 <div className="h-px w-20 bg-gradient-to-r from-transparent to-primary" />
                 <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-body">
-                  Enterprise Grade
+                  To live as they're meant to
                 </span>
                 <div className="h-px w-20 bg-gradient-to-l from-transparent to-primary" />
               </motion.div>
               <motion.p
-                className="text-xl md:text-3xl font-body text-muted-foreground max-w-2xl mx-auto"
+                className="text-xl md:text-3xl font-display text-foreground max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                AI agents that understand, decide, and execute with precision
+                <motion.span
+                  className="text-primary"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                >
+                  Present
+                </motion.span>
+                <motion.span
+                  className="text-muted-foreground mx-3"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 1.0 }}
+                >
+                  ·
+                </motion.span>
+                <motion.span
+                  className="text-primary"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 1.2 }}
+                >
+                  Fulfilled
+                </motion.span>
+                <motion.span
+                  className="text-muted-foreground mx-3"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 1.4 }}
+                >
+                  ·
+                </motion.span>
+                <motion.span
+                  className="text-primary"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 1.6 }}
+                >
+                  Connected
+                </motion.span>
               </motion.p>
             </motion.div>
           )}
