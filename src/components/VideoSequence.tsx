@@ -6,6 +6,16 @@ import natyvLogoFull from "@/assets/natyv-logo-full.png";
 const VideoSequence = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentScene, setCurrentScene] = useState(0);
+  const [typewriterText, setTypewriterText] = useState("");
+  const [typewriterIndex, setTypewriterIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const typewriterPhrases = [
+    "na·tyv /ˈnādiv/",
+    "adjective",
+    "innate; belonging naturally",
+    "AI that feels human",
+  ];
 
   const scenes = [
     { id: 0, duration: 5000 }, // Mission Part 1
@@ -26,6 +36,34 @@ const VideoSequence = () => {
 
     return () => clearTimeout(timer);
   }, [isPlaying, currentScene]);
+
+  // Typewriter effect for end state
+  useEffect(() => {
+    if (isPlaying || currentScene < scenes.length) return;
+
+    const currentPhrase = typewriterPhrases[typewriterIndex];
+    const typeSpeed = isDeleting ? 30 : 80;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        if (typewriterText.length < currentPhrase.length) {
+          setTypewriterText(currentPhrase.slice(0, typewriterText.length + 1));
+        } else {
+          // Pause before deleting
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        if (typewriterText.length > 0) {
+          setTypewriterText(typewriterText.slice(0, -1));
+        } else {
+          setIsDeleting(false);
+          setTypewriterIndex((prev) => (prev + 1) % typewriterPhrases.length);
+        }
+      }
+    }, typeSpeed);
+
+    return () => clearTimeout(timer);
+  }, [typewriterText, isDeleting, typewriterIndex, isPlaying, currentScene]);
 
   const startSequence = () => {
     setCurrentScene(0);
@@ -178,7 +216,7 @@ const VideoSequence = () => {
             </motion.div>
           )}
 
-          {/* End state - Large Logo */}
+          {/* End state - Large Logo with Typewriter */}
           {!isPlaying && currentScene >= scenes.length && (
             <motion.div
               key="end"
@@ -189,7 +227,7 @@ const VideoSequence = () => {
                 ease: [0.25, 0.1, 0.25, 1],
                 scale: { type: "spring", stiffness: 100, damping: 20 }
               }}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center gap-8"
             >
               <motion.img
                 src={natyvLogoFull}
@@ -199,6 +237,23 @@ const VideoSequence = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, delay: 0.2 }}
               />
+              
+              {/* Typewriter effect */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+                className="h-8 flex items-center justify-center"
+              >
+                <span className="font-body text-lg md:text-xl text-muted-foreground tracking-wide font-light italic">
+                  {typewriterText}
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
+                    className="inline-block w-0.5 h-5 bg-primary ml-1 align-middle"
+                  />
+                </span>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
