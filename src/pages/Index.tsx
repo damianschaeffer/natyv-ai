@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import MyAgentSection from "@/components/MyAgentSection";
 import ProductMatrixPreview from "@/components/ProductMatrixPreview";
+import VideoSequence from "@/components/VideoSequence";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -11,6 +12,7 @@ const Index = () => {
       <main>
         <HeroSection />
         <MyAgentSection />
+        <VideoSequence />
         <ProductMatrixPreview />
       </main>
       <Footer />
