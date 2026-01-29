@@ -123,19 +123,9 @@ const MyAgentSection = () => {
             transition={{ 
               duration: 1.2, 
               delay: 2.2,
-              ease: [0.16, 1, 0.3, 1] // Custom spring-like easing
+              ease: [0.16, 1, 0.3, 1]
             }}
           >
-            {/* Glow backdrop that appears first */}
-            <motion.div
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={hasRevealed ? { opacity: [0, 0.8, 0.4] } : {}}
-              transition={{ duration: 1.5, delay: 2.0 }}
-            >
-              <div className="w-64 h-32 bg-primary/20 blur-3xl rounded-full" />
-            </motion.div>
-            
             {/* The logo with reveal effect */}
             <motion.div
               className="relative"
@@ -155,10 +145,7 @@ const MyAgentSection = () => {
                 src={myAgentLogo} 
                 alt="MY AGENT" 
                 className="h-28 md:h-36 w-auto mx-auto cursor-pointer" 
-                whileHover={{ 
-                  scale: 1.08,
-                  filter: "drop-shadow(0 0 25px hsl(var(--primary) / 0.5))"
-                }}
+                whileHover={{ scale: 1.08 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               />
             </motion.div>
