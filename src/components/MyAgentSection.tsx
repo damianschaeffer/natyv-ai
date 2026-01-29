@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Eye, Ear, Brain, FileText, Image, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import myAgentLogo from "@/assets/myagent-logo.png";
+import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 const MyAgentSection = () => {
   const [isActive, setIsActive] = useState(false);
   const [currentLine, setCurrentLine] = useState(0);
@@ -72,6 +73,19 @@ const MyAgentSection = () => {
       }} transition={{
         duration: 0.6
       }}>
+          {/* Natyv Logo Header */}
+          <img 
+            src={natyvLogoTopline} 
+            alt="Natyv AI" 
+            className="w-full max-w-md mx-auto mb-2" 
+          />
+          {/* White separator line */}
+          <div className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-4" />
+          {/* STUDIO label */}
+          <span className="text-foreground font-body text-sm md:text-base tracking-[0.3em] uppercase mb-8 block">
+            Studio
+          </span>
+          
           <span className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-4 block">
             Flagship Product
           </span>
