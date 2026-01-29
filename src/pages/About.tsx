@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Award, Users, Heart, Linkedin, Twitter, Youtube } from "lucide-react";
+import { MapPin, Award, Users, Heart, Linkedin, Twitter, Youtube, Instagram, Facebook } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import damianProfile from "@/assets/damian-profile.jpg";
@@ -106,6 +106,30 @@ const About = () => {
                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
                       <Youtube className="w-4 h-4 text-primary" />
+                    </motion.a>
+                    <motion.a
+                      href="https://instagram.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
+                      aria-label="Follow on Instagram"
+                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
+                      <Instagram className="w-4 h-4 text-primary" />
+                    </motion.a>
+                    <motion.a
+                      href="https://facebook.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
+                      aria-label="Follow on Facebook"
+                      whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
+                      <Facebook className="w-4 h-4 text-primary" />
                     </motion.a>
                   </div>
                 </div>
