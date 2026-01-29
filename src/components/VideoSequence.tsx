@@ -244,14 +244,7 @@ const VideoSequence = () => {
 
           {/* End state - Dictionary Logo with Typewriter */}
           {!isPlaying && currentScene >= scenes.length && (
-            <motion.div
-              key="end"
-              initial={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              transition={{ 
-                duration: 1.2, 
-                ease: [0.25, 0.1, 0.25, 1],
-              }}
+            <div
               className="flex flex-col items-center w-full max-w-3xl mx-auto"
             >
               {/* Static Header - Using actual logo image */}
@@ -300,7 +293,7 @@ const VideoSequence = () => {
                 alt="Studio | Solutions | Advisory"
                 className="w-full max-w-2xl mt-6"
               />
-            </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </div>
