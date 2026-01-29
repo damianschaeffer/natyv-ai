@@ -123,7 +123,7 @@ const Navbar = () => {
               transition={{ delay: 0.4, duration: 0.4 }}
             >
               <Button
-                className="font-body text-sm tracking-wide bg-primary hover:bg-primary/90 text-primary-foreground px-6"
+                className="font-body text-base tracking-wide bg-primary hover:bg-primary/90 text-primary-foreground p-2"
               >
                 Book Advisory Session
               </Button>
