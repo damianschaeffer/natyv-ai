@@ -1,77 +1,19 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
+import { Play, RotateCcw } from "lucide-react";
 import natyvLogoFull from "@/assets/natyv-logo-full.png";
-import { useAudioSynth } from "@/hooks/useAudioSynth";
 
 const VideoSequence = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentScene, setCurrentScene] = useState(0);
-  const [isMuted, setIsMuted] = useState(false);
-  const droneRef = useRef<{ oscillators: OscillatorNode[]; gainNode: GainNode } | null>(null);
-  const prevSceneRef = useRef(-1);
-
-  const {
-    playAmbientDrone,
-    playWhoosh,
-    playChime,
-    playRise,
-    playBlip,
-    playImpact,
-    fadeOutDrone,
-  } = useAudioSynth({ masterVolume: isMuted ? 0 : 0.3 });
 
   const scenes = [
     { id: 0, duration: 2000 }, // Logo reveal
     { id: 1, duration: 2500 }, // Tagline 1
     { id: 2, duration: 2500 }, // Tagline 2
     { id: 3, duration: 2500 }, // Stats
-    { id: 4, duration: 3000 }, // Final CTA
+    { id: 4, duration: 3000 }, // Final landing
   ];
-
-  // Play sounds based on scene changes
-  useEffect(() => {
-    if (!isPlaying || isMuted || prevSceneRef.current === currentScene) return;
-    prevSceneRef.current = currentScene;
-
-    switch (currentScene) {
-      case 0:
-        // Start ambient drone and play rise for logo reveal
-        droneRef.current = playAmbientDrone() || null;
-        setTimeout(() => playRise(), 300);
-        setTimeout(() => playChime(660), 800);
-        break;
-      case 1:
-        // Whoosh for text transition
-        playWhoosh();
-        setTimeout(() => playChime(880), 500);
-        break;
-      case 2:
-        // Another whoosh with different chime
-        playWhoosh();
-        setTimeout(() => playChime(1100), 400);
-        break;
-      case 3:
-        // Blips for each stat
-        playBlip(1);
-        setTimeout(() => playBlip(1.25), 200);
-        setTimeout(() => playBlip(1.5), 400);
-        break;
-      case 4:
-        // Impact for final CTA
-        playImpact();
-        setTimeout(() => playChime(440), 800);
-        break;
-    }
-  }, [isPlaying, currentScene, isMuted, playAmbientDrone, playWhoosh, playChime, playRise, playBlip, playImpact]);
-
-  // Handle sequence end - fade out drone
-  useEffect(() => {
-    if (!isPlaying && currentScene >= scenes.length && droneRef.current) {
-      fadeOutDrone(droneRef.current);
-      droneRef.current = null;
-    }
-  }, [isPlaying, currentScene, scenes.length, fadeOutDrone]);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -89,23 +31,13 @@ const VideoSequence = () => {
   }, [isPlaying, currentScene]);
 
   const startSequence = () => {
-    prevSceneRef.current = -1;
     setCurrentScene(0);
     setIsPlaying(true);
   };
 
   const resetSequence = () => {
-    if (droneRef.current) {
-      fadeOutDrone(droneRef.current);
-      droneRef.current = null;
-    }
-    prevSceneRef.current = -1;
     setIsPlaying(false);
     setCurrentScene(0);
-  };
-
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
   };
 
   return (
@@ -134,8 +66,8 @@ const VideoSequence = () => {
               key={i}
               className="absolute w-1 h-1 bg-primary rounded-full"
               initial={{
-                x: Math.random() * window.innerWidth,
-                y: window.innerHeight + 10,
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
+                y: (typeof window !== 'undefined' ? window.innerHeight : 800) + 10,
                 opacity: 0,
               }}
               animate={{
@@ -332,57 +264,49 @@ const VideoSequence = () => {
             </motion.div>
           )}
 
-          {/* Scene 4: Final CTA */}
+          {/* Scene 4: Final - Large Logo Landing */}
           {isPlaying && currentScene === 4 && (
             <motion.div
               key="scene4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8"
+              initial={{ opacity: 0, scale: 2, y: -100 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ 
+                duration: 1.5,
+                type: "spring",
+                stiffness: 100,
+                damping: 15
+              }}
+              className="flex flex-col items-center"
             >
-              <motion.h2
-                className="text-3xl md:text-5xl font-display text-foreground"
-                initial={{ opacity: 0, letterSpacing: "0.5em" }}
-                animate={{ opacity: 1, letterSpacing: "0.05em" }}
-                transition={{ duration: 1.2 }}
-              >
-                Initialize Your Future
-              </motion.h2>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
-                <motion.a
-                  href="https://get-myagent.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-10 py-4 bg-primary text-primary-foreground font-body text-sm uppercase tracking-widest rounded-sm"
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 30px hsl(var(--primary) / 0.5)" }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Get Started
-                </motion.a>
-              </motion.div>
+              <motion.img
+                src={natyvLogoFull}
+                alt="Natyv AI"
+                className="max-w-2xl w-full mx-auto"
+                animate={{ 
+                  filter: [
+                    "drop-shadow(0 0 40px hsl(var(--primary)))",
+                    "drop-shadow(0 0 20px hsl(var(--primary)))",
+                  ]
+                }}
+                transition={{ duration: 1.5, delay: 0.5 }}
+              />
             </motion.div>
           )}
 
-          {/* End state - Replay button */}
+          {/* End state - Large Logo with Replay */}
           {!isPlaying && currentScene >= scenes.length && (
             <motion.div
               key="end"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               className="flex flex-col items-center gap-8"
             >
-              <motion.h2
-                className="text-3xl md:text-5xl font-display text-foreground mb-4"
-              >
-                Initialize Your Future
-              </motion.h2>
+              <motion.img
+                src={natyvLogoFull}
+                alt="Natyv AI"
+                className="max-w-2xl w-full mx-auto mb-8"
+              />
               <div className="flex gap-4">
                 <motion.a
                   href="https://get-myagent.com"
@@ -409,7 +333,7 @@ const VideoSequence = () => {
         </AnimatePresence>
       </div>
 
-      {/* Progress bar and audio control */}
+      {/* Progress bar */}
       {isPlaying && (
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-48">
           <div className="h-0.5 bg-border rounded-full overflow-hidden">
@@ -424,19 +348,6 @@ const VideoSequence = () => {
             {currentScene + 1} / {scenes.length}
           </p>
         </div>
-      )}
-
-      {/* Mute/Unmute button */}
-      {(isPlaying || currentScene >= scenes.length) && (
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          onClick={toggleMute}
-          className="absolute bottom-10 right-10 p-3 rounded-full border border-border bg-background/50 backdrop-blur-sm text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
-          aria-label={isMuted ? "Unmute" : "Mute"}
-        >
-          {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-        </motion.button>
       )}
     </section>
   );
