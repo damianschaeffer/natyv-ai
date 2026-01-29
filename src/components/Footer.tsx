@@ -60,7 +60,7 @@ const Footer = () => {
             {/* PARTNERS label with blue vertical separators */}
             <div className="flex items-center justify-center gap-6">
               <span className="w-[9px] h-9 bg-primary" />
-            <span className="text-foreground font-body text-4xl md:text-5xl tracking-[0.3em] uppercase">
+            <span className="text-foreground font-body text-3xl md:text-4xl tracking-[0.3em] uppercase">
               Partners
             </span>
               <span className="w-[9px] h-9 bg-primary" />
