@@ -24,6 +24,13 @@ const Footer = () => {
     { label: "Security", href: "#" },
   ];
 
+  const partners = [
+    { name: "Google Cloud", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" },
+    { name: "Supabase", logo: "https://seeklogo.com/images/S/supabase-logo-DCC676FFE2-seeklogo.com.png" },
+    { name: "Twilio", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Twilio-logo-red.svg" },
+    { name: "OpenAI", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" },
+  ];
+
   return (
     <footer className="py-6 border-t border-border relative overflow-hidden">
       <div className="container mx-auto px-6">
@@ -111,6 +118,35 @@ const Footer = () => {
             ))}
           </div>
         </div>
+
+        {/* Partner Ribbon */}
+        <motion.div
+          className="mt-8 pt-6 border-t border-border"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="flex flex-wrap justify-center items-center gap-12">
+            {partners.map((partner, index) => (
+              <motion.div
+                key={partner.name}
+                className="h-6 opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 0.4 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
+                whileHover={{ opacity: 0.7 }}
+              >
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-full w-auto object-contain filter brightness-0 invert"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </footer>
   );
