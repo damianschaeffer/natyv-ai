@@ -80,29 +80,7 @@ const Footer = () => {
           
 
           {/* Navigation Links */}
-          <motion.div className="md:col-span-1" initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          delay: 0.1,
-          duration: 0.6
-        }}>
-            <h4 className="text-xs font-body uppercase tracking-[0.2em] text-muted-foreground mb-4">
-              Navigation
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.map(link => <li key={link.label}>
-                  <a href={link.href} className="text-sm font-body text-foreground/70 hover:text-primary transition-colors duration-300">
-                    {link.label}
-                  </a>
-                </li>)}
-            </ul>
-          </motion.div>
+          
 
           {/* CTA */}
           <motion.div className="md:col-span-1" initial={{
