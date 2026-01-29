@@ -56,7 +56,7 @@ const MyAgentSection = () => {
           <span className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4 block">
             Flagship Product
           </span>
-          <img src={myAgentLogo} alt="MY AGENT" className="h-48 md:h-60 w-auto mx-auto mb-4" />
+          <img src={myAgentLogo} alt="MY AGENT" className="h-40 md:h-48 w-auto mx-auto mb-4" />
           <p className="text-muted-foreground font-body text-lg max-w-xl mx-auto">
             Multi-modal Voice AI that can see, hear, and analyze simultaneously
           </p>
