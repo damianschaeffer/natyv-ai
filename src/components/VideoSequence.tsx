@@ -155,8 +155,11 @@ const VideoSequence = () => {
             <img
               src={natyvLogoTopline}
               alt="Natyv AI"
-              className="w-full max-w-2xl mb-6"
+              className="w-full max-w-2xl"
             />
+
+            {/* Top horizontal separator line - LOCKED */}
+            <div className="w-full max-w-2xl h-px bg-foreground/40 my-4" />
 
             {/* Dictionary Content - Typewriter builds up line by line - FIXED height so footer doesn't move */}
             <div className="h-[280px] flex flex-col items-start justify-start py-4 w-full max-w-2xl overflow-hidden">
@@ -186,11 +189,14 @@ const VideoSequence = () => {
               })}
             </div>
 
+            {/* Bottom horizontal separator line - LOCKED */}
+            <div className="w-full max-w-2xl h-px bg-foreground/40 my-4" />
+
             {/* Static Footer - Using actual logo image */}
             <img
               src={natyvLogoFooter}
               alt="Studio | Solutions | Advisory"
-              className="w-full max-w-2xl mt-6"
+              className="w-full max-w-2xl"
             />
           </div>
         )}
