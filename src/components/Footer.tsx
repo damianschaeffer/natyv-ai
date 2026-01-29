@@ -53,8 +53,8 @@ const Footer = () => {
               alt="Natyv AI"
               className="h-8 w-auto"
             />
-            <h2 className="text-center text-2xl font-bold font-body tracking-[0.2em] text-primary">
-              NATYV AI INTEGRATIONS
+            <h2 className="text-center text-2xl font-bold font-display tracking-[0.2em] text-primary">
+              INTEGRATIONS
             </h2>
           </motion.div>
           <motion.div
