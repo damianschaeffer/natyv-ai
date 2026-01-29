@@ -125,7 +125,7 @@ const Navbar = () => {
               <Button
                 className="font-body text-sm tracking-wide bg-primary hover:bg-primary/90 text-primary-foreground px-6"
               >
-                Initialize Access
+                Book Advisory Session
               </Button>
             </motion.div>
           </div>
