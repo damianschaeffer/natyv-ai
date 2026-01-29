@@ -148,6 +148,54 @@ const VideoSequence = () => {
 
       {/* Main content area */}
       <div className="relative z-10 container mx-auto px-6 text-center">
+        {/* End state - Static Logo Sandwich (always rendered when sequence complete) */}
+        {!isPlaying && currentScene >= scenes.length && (
+          <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
+            {/* Static Header - Using actual logo image */}
+            <img
+              src={natyvLogoTopline}
+              alt="Natyv AI"
+              className="w-full max-w-2xl mb-6"
+            />
+
+            {/* Dictionary Content - Typewriter builds up line by line */}
+            <div className="min-h-[200px] flex flex-col items-center justify-start py-4 w-full max-w-2xl">
+              {dictionaryContent.map((line, index) => {
+                const isCompleted = completedLines.includes(index);
+                const isCurrentlyTyping = index === currentLineIndex && !isTypingComplete;
+                const shouldShow = isCompleted || isCurrentlyTyping;
+
+                if (!shouldShow) return null;
+
+                return (
+                  <div key={index} className={`${getLineStyle(line.style)} w-full mb-2`}>
+                    {isCompleted ? (
+                      line.text
+                    ) : (
+                      <>
+                        {line.text.slice(0, currentCharIndex)}
+                        <motion.span
+                          animate={{ opacity: [1, 0] }}
+                          transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+                          className="inline-block w-0.5 h-5 bg-primary ml-0.5 align-middle"
+                        />
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Static Footer - Using actual logo image */}
+            <img
+              src={natyvLogoFooter}
+              alt="Studio | Solutions | Advisory"
+              className="w-full max-w-2xl mt-6"
+            />
+          </div>
+        )}
+
+        {/* Animated states - only for idle and playing scenes */}
         <AnimatePresence mode="wait">
           {/* Idle state - Play button */}
           {!isPlaying && currentScene === 0 && (
@@ -240,60 +288,6 @@ const VideoSequence = () => {
                 present, fulfilled, connected
               </motion.h2>
             </motion.div>
-          )}
-
-          {/* End state - Dictionary Logo with Typewriter */}
-          {!isPlaying && currentScene >= scenes.length && (
-            <div
-              className="flex flex-col items-center w-full max-w-3xl mx-auto"
-            >
-              {/* Static Header - Using actual logo image */}
-              <img
-                src={natyvLogoTopline}
-                alt="Natyv AI"
-                className="w-full max-w-2xl mb-6"
-              />
-
-              {/* Dictionary Content - Typewriter builds up line by line */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="min-h-[200px] flex flex-col items-center justify-start py-4 w-full max-w-2xl"
-              >
-                {dictionaryContent.map((line, index) => {
-                  const isCompleted = completedLines.includes(index);
-                  const isCurrentlyTyping = index === currentLineIndex && !isTypingComplete;
-                  const shouldShow = isCompleted || isCurrentlyTyping;
-
-                  if (!shouldShow) return null;
-
-                  return (
-                    <div key={index} className={`${getLineStyle(line.style)} w-full mb-2`}>
-                      {isCompleted ? (
-                        line.text
-                      ) : (
-                        <>
-                          {line.text.slice(0, currentCharIndex)}
-                          <motion.span
-                            animate={{ opacity: [1, 0] }}
-                            transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-                            className="inline-block w-0.5 h-5 bg-primary ml-0.5 align-middle"
-                          />
-                        </>
-                      )}
-                    </div>
-                  );
-                })}
-              </motion.div>
-
-              {/* Static Footer - Using actual logo image */}
-              <img
-                src={natyvLogoFooter}
-                alt="Studio | Solutions | Advisory"
-                className="w-full max-w-2xl mt-6"
-              />
-            </div>
           )}
         </AnimatePresence>
       </div>
