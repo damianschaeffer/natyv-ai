@@ -62,10 +62,7 @@ const MyAgentSection = () => {
             Multi-modal Voice AI that can see, hear, and analyze simultaneously
           </p>
           <a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer">
-            <Button 
-              variant="outline" 
-              className="font-accent uppercase tracking-[0.2em] border-primary text-foreground hover:bg-primary/10"
-            >
+            <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90">
               Experience the Magic
             </Button>
           </a>
