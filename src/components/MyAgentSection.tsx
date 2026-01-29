@@ -62,7 +62,7 @@ const MyAgentSection = () => {
             Google Gemini Live Powered Multi-Modal Conversation Voice AI Agents that See, Hear, Reason, Learn, and Remember...Just Like You...
           </p>
           <a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer">
-            <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90 p-2">
               Experience the Magic
             </Button>
           </a>
