@@ -63,7 +63,7 @@ const Navbar = () => {
             {navLinks.map((link, index) => (
               <div key={link.label} className="flex items-center gap-6">
                 {index > 0 && (
-                  <div className="w-[2px] h-4 bg-primary rounded-full" />
+                  <div className="w-[4px] h-4 bg-primary rounded-full" />
                 )}
                 {link.isRoute ? (
                   <motion.div
