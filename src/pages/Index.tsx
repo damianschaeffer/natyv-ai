@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import MyAgentSection from "@/components/MyAgentSection";
+import PartnersSection from "@/components/PartnersSection";
 import AdvisorySection from "@/components/AdvisorySection";
 import AboutSection from "@/components/AboutSection";
 import ProductMatrixPreview from "@/components/ProductMatrixPreview";
@@ -57,6 +58,16 @@ const Index = () => {
           variants={sectionVariants}
         >
           <MyAgentSection />
+        </motion.div>
+
+        {/* Partners Section with fade-in transition */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <PartnersSection />
         </motion.div>
 
         {/* Advisory Section with fade-in transition */}
