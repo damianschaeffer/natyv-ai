@@ -46,7 +46,7 @@ const MyAgentSection = () => {
           {/* White separator line */}
           <div className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-3" />
           {/* STUDIO label with blue vertical separators */}
-          <div className="flex items-center justify-center gap-6 mb-12">
+          <div className="flex items-center justify-center gap-6 mb-16">
             <span className="w-[9px] h-9 bg-primary" />
             <span className="text-foreground font-body text-4xl md:text-5xl tracking-[0.3em] uppercase ml-1 font-bold">
               Studio
@@ -54,7 +54,7 @@ const MyAgentSection = () => {
             <span className="w-[9px] h-9 bg-primary" />
           </div>
           
-          <div className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-10 flex flex-col items-center gap-3">
+          <div className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-14 flex flex-col items-center gap-3">
             <span className="text-foreground">Presents</span>
             <div className="w-16 h-px bg-primary/50" />
             <span className="text-foreground">Our Flagship Product</span>
