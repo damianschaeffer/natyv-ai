@@ -1,10 +1,32 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Eye, Ear, Brain, FileText, Image, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import myAgentLogo from "@/assets/myagent-logo.png";
 const MyAgentSection = () => {
   const [isActive, setIsActive] = useState(false);
+  const [currentLine, setCurrentLine] = useState(0);
+
+  const taglines = [
+    {
+      content: (
+        <>
+          Multi-Modal Google <img src="/logos/google-gemini.svg" alt="Gemini" className="h-5 inline-block mx-1" /> Gemini-Live Voice AI Agents
+        </>
+      ),
+    },
+    {
+      content: "that Understand, Reason, Learn, and Remember...Just Like You...",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLine((prev) => (prev + 1) % taglines.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
   const capabilities = [{
     icon: Eye,
     label: "See",
@@ -58,9 +80,20 @@ const MyAgentSection = () => {
             Flagship Product
           </span>
           <img src={myAgentLogo} alt="MY AGENT" className="h-28 md:h-32 w-auto mx-auto mb-4 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] cursor-pointer" />
-          <p className="text-muted-foreground font-body text-lg max-w-3xl mx-auto mb-6 flex items-center justify-center flex-wrap gap-1">
-            Multi-Modal Google <img src="/logos/google-gemini.svg" alt="Gemini" className="h-5 inline-block" /> Gemini-Live Voice AI Agents that Understand Context, Reason, Learn, and Remember...Just Like You...
-          </p>
+          <div className="h-12 mb-6 flex items-center justify-center overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={currentLine}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="text-muted-foreground font-body text-lg max-w-3xl mx-auto flex items-center justify-center flex-wrap gap-1"
+              >
+                {taglines[currentLine].content}
+              </motion.p>
+            </AnimatePresence>
+          </div>
           <a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer">
             <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90 p-2">
               Experience the Magic
