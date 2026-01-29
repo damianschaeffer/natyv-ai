@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, RotateCcw } from "lucide-react";
+import { Play } from "lucide-react";
 import natyvLogoFull from "@/assets/natyv-logo-full.png";
 
 const VideoSequence = () => {
@@ -178,7 +178,7 @@ const VideoSequence = () => {
             </motion.div>
           )}
 
-          {/* End state - Large Logo with Replay */}
+          {/* End state - Large Logo */}
           {!isPlaying && currentScene >= scenes.length && (
             <motion.div
               key="end"
@@ -189,12 +189,12 @@ const VideoSequence = () => {
                 ease: [0.25, 0.1, 0.25, 1],
                 scale: { type: "spring", stiffness: 100, damping: 20 }
               }}
-              className="flex flex-col items-center gap-8"
+              className="flex flex-col items-center"
             >
               <motion.img
                 src={natyvLogoFull}
                 alt="Natyv AI"
-                className="max-w-3xl w-full mx-auto mb-8"
+                className="max-w-3xl w-full mx-auto"
                 initial={{ 
                   opacity: 0, 
                   y: 30,
@@ -215,38 +215,6 @@ const VideoSequence = () => {
                   filter: { duration: 2, times: [0, 0.5, 1] }
                 }}
               />
-              <motion.div 
-                className="flex gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-              >
-                <motion.a
-                  href="https://get-myagent.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-8 py-3 bg-primary text-primary-foreground font-body text-sm uppercase tracking-widest rounded-sm"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 1.0 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Get Started
-                </motion.a>
-                <motion.button
-                  onClick={resetSequence}
-                  className="px-8 py-3 border border-border text-muted-foreground font-body text-sm uppercase tracking-widest rounded-sm flex items-center gap-2"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 1.2 }}
-                  whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary))" }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  Replay
-                </motion.button>
-              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
