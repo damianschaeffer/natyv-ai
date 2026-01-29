@@ -59,7 +59,7 @@ const MyAgentSection = () => {
           </span>
           <img src={myAgentLogo} alt="MY AGENT" className="h-40 md:h-48 w-auto mx-auto mb-4" />
           <p className="text-muted-foreground font-body text-lg max-w-xl mx-auto mb-6">
-            Multi-modal Voice AI that can see, hear, and analyze simultaneously
+            Google Gemini Live Powered Multi-Modal Conversation Voice AI Agents that See, Hear, Reason, Learn, and Remember...Just Like You...
           </p>
           <a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer">
             <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90">
