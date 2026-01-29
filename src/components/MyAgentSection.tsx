@@ -25,7 +25,7 @@ const MyAgentSection = () => {
   }, []);
 
   return (
-    <section className="py-48 min-h-screen flex items-center relative overflow-hidden" id="my-agent">
+    <section className="py-48 min-h-screen flex items-center relative overflow-hidden" id="myagent-section">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
 
