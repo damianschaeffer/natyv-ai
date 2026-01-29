@@ -127,6 +127,10 @@
   .font-body {
     font-family: 'Inter', sans-serif;
   }
+
+  .font-accent {
+    font-family: 'Poppins', sans-serif;
+  }
 }
 
 @layer components {
