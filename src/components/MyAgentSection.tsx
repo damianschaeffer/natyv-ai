@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, Ear, Brain, FileText, Image, Mic } from "lucide-react";
+import myAgentLogo from "@/assets/myagent-logo.png";
 
 const MyAgentSection = () => {
   const [isActive, setIsActive] = useState(false);
@@ -41,9 +42,11 @@ const MyAgentSection = () => {
           <span className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4 block">
             Flagship Product
           </span>
-          <h2 className="font-display text-4xl md:text-6xl text-foreground mb-4">
-            MY AGENT
-          </h2>
+          <img 
+            src={myAgentLogo} 
+            alt="MY AGENT" 
+            className="h-16 md:h-20 w-auto mx-auto mb-4"
+          />
           <p className="text-muted-foreground font-body text-lg max-w-xl mx-auto">
             Multi-modal Voice AI that can see, hear, and analyze simultaneously
           </p>
