@@ -1,11 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, RotateCcw } from "lucide-react";
+import { Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
 import natyvLogoFull from "@/assets/natyv-logo-full.png";
+import { useAudioSynth } from "@/hooks/useAudioSynth";
 
 const VideoSequence = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentScene, setCurrentScene] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
+  const droneRef = useRef<{ oscillators: OscillatorNode[]; gainNode: GainNode } | null>(null);
+  const prevSceneRef = useRef(-1);
+
+  const {
+    playAmbientDrone,
+    playWhoosh,
+    playChime,
+    playRise,
+    playBlip,
+    playImpact,
+    fadeOutDrone,
+  } = useAudioSynth({ masterVolume: isMuted ? 0 : 0.3 });
 
   const scenes = [
     { id: 0, duration: 2000 }, // Logo reveal
@@ -14,6 +28,50 @@ const VideoSequence = () => {
     { id: 3, duration: 2500 }, // Stats
     { id: 4, duration: 3000 }, // Final CTA
   ];
+
+  // Play sounds based on scene changes
+  useEffect(() => {
+    if (!isPlaying || isMuted || prevSceneRef.current === currentScene) return;
+    prevSceneRef.current = currentScene;
+
+    switch (currentScene) {
+      case 0:
+        // Start ambient drone and play rise for logo reveal
+        droneRef.current = playAmbientDrone() || null;
+        setTimeout(() => playRise(), 300);
+        setTimeout(() => playChime(660), 800);
+        break;
+      case 1:
+        // Whoosh for text transition
+        playWhoosh();
+        setTimeout(() => playChime(880), 500);
+        break;
+      case 2:
+        // Another whoosh with different chime
+        playWhoosh();
+        setTimeout(() => playChime(1100), 400);
+        break;
+      case 3:
+        // Blips for each stat
+        playBlip(1);
+        setTimeout(() => playBlip(1.25), 200);
+        setTimeout(() => playBlip(1.5), 400);
+        break;
+      case 4:
+        // Impact for final CTA
+        playImpact();
+        setTimeout(() => playChime(440), 800);
+        break;
+    }
+  }, [isPlaying, currentScene, isMuted, playAmbientDrone, playWhoosh, playChime, playRise, playBlip, playImpact]);
+
+  // Handle sequence end - fade out drone
+  useEffect(() => {
+    if (!isPlaying && currentScene >= scenes.length && droneRef.current) {
+      fadeOutDrone(droneRef.current);
+      droneRef.current = null;
+    }
+  }, [isPlaying, currentScene, scenes.length, fadeOutDrone]);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -31,13 +89,23 @@ const VideoSequence = () => {
   }, [isPlaying, currentScene]);
 
   const startSequence = () => {
+    prevSceneRef.current = -1;
     setCurrentScene(0);
     setIsPlaying(true);
   };
 
   const resetSequence = () => {
+    if (droneRef.current) {
+      fadeOutDrone(droneRef.current);
+      droneRef.current = null;
+    }
+    prevSceneRef.current = -1;
     setIsPlaying(false);
     setCurrentScene(0);
+  };
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
   };
 
   return (
@@ -341,7 +409,7 @@ const VideoSequence = () => {
         </AnimatePresence>
       </div>
 
-      {/* Progress bar */}
+      {/* Progress bar and audio control */}
       {isPlaying && (
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-48">
           <div className="h-0.5 bg-border rounded-full overflow-hidden">
@@ -356,6 +424,19 @@ const VideoSequence = () => {
             {currentScene + 1} / {scenes.length}
           </p>
         </div>
+      )}
+
+      {/* Mute/Unmute button */}
+      {(isPlaying || currentScene >= scenes.length) && (
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          onClick={toggleMute}
+          className="absolute bottom-10 right-10 p-3 rounded-full border border-border bg-background/50 backdrop-blur-sm text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
+          aria-label={isMuted ? "Unmute" : "Mute"}
+        >
+          {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+        </motion.button>
       )}
     </section>
   );
