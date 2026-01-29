@@ -8,9 +8,8 @@ const VideoSequence = () => {
   const [currentScene, setCurrentScene] = useState(0);
 
   const scenes = [
-    { id: 0, duration: 2500 }, // Tagline 1
-    { id: 1, duration: 2500 }, // Tagline 2
-    { id: 2, duration: 2500 }, // Stats
+    { id: 0, duration: 2500 }, // Mission Part 1
+    { id: 1, duration: 2500 }, // Mission Part 2
   ];
 
   useEffect(() => {
@@ -156,111 +155,26 @@ const VideoSequence = () => {
               key="scene2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              exit={{ opacity: 0, y: -50 }}
               transition={{ duration: 0.6 }}
-              className="space-y-6"
+              className="space-y-4"
             >
-              <motion.div
-                className="flex items-center justify-center gap-4"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
+              <motion.h2
+                className="text-4xl md:text-6xl font-display text-foreground"
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <div className="h-px w-20 bg-gradient-to-r from-transparent to-primary" />
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-body">
-                  To live as they're meant to
-                </span>
-                <div className="h-px w-20 bg-gradient-to-l from-transparent to-primary" />
-              </motion.div>
-              <motion.p
-                className="text-xl md:text-3xl font-display text-foreground max-w-2xl mx-auto"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
+                to live as they're meant to —
+              </motion.h2>
+              <motion.h2
+                className="text-4xl md:text-6xl font-display text-primary"
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                <motion.span
-                  className="text-primary"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.8 }}
-                >
-                  Present
-                </motion.span>
-                <motion.span
-                  className="text-muted-foreground mx-3"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 1.0 }}
-                >
-                  ·
-                </motion.span>
-                <motion.span
-                  className="text-primary"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 1.2 }}
-                >
-                  Fulfilled
-                </motion.span>
-                <motion.span
-                  className="text-muted-foreground mx-3"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 1.4 }}
-                >
-                  ·
-                </motion.span>
-                <motion.span
-                  className="text-primary"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 1.6 }}
-                >
-                  Connected
-                </motion.span>
-              </motion.p>
-            </motion.div>
-          )}
-
-          {/* Scene 2: Stats */}
-          {isPlaying && currentScene === 2 && (
-            <motion.div
-              key="scene3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6 }}
-              className="grid grid-cols-3 gap-8 md:gap-16"
-            >
-              {[
-                { value: "99.9%", label: "Uptime" },
-                { value: "< 50ms", label: "Response" },
-                { value: "∞", label: "Scale" },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="text-center"
-                >
-                  <motion.div
-                    className="text-3xl md:text-5xl font-display text-primary mb-2"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ 
-                      type: "spring", 
-                      stiffness: 300, 
-                      delay: 0.3 + index * 0.2 
-                    }}
-                  >
-                    {stat.value}
-                  </motion.div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground font-body">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
+                present, fulfilled, connected
+              </motion.h2>
             </motion.div>
           )}
 
