@@ -42,28 +42,28 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
+        <div className="flex items-center justify-between gap-2">
           {/* Logo */}
           <motion.a 
             href="/" 
-            className="flex items-center"
+            className="flex items-center flex-shrink-0"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
             <img
               src={natyvLogoTopline}
               alt="Natyv AI"
-              className="h-6 w-auto"
+              className="h-5 lg:h-6 w-auto"
             />
           </motion.a>
 
           {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex items-center justify-center gap-6 flex-1">
+          <div className="hidden lg:flex items-center justify-center gap-4 xl:gap-6 flex-1 min-w-0">
             {navLinks.map((link, index) => (
-              <div key={link.label} className="flex items-center gap-6">
+              <div key={link.label} className="flex items-center gap-4 xl:gap-6">
                 {index > 0 && (
-                  <div className="w-[8px] h-5 bg-primary" />
+                  <div className="w-[6px] xl:w-[8px] h-4 xl:h-5 bg-primary flex-shrink-0" />
                 )}
                 {link.isRoute ? (
                   <motion.div
@@ -74,7 +74,7 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.href}
-                      className="text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em]"
+                      className="text-base lg:text-lg xl:text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.15em] xl:tracking-[0.2em] whitespace-nowrap"
                     >
                       {link.label}
                     </Link>
@@ -84,7 +84,7 @@ const Navbar = () => {
                     href={link.href}
                     target={link.isExternal ? "_blank" : undefined}
                     rel={link.isExternal ? "noopener noreferrer" : undefined}
-                    className="text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em]"
+                    className="text-base lg:text-lg xl:text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.15em] xl:tracking-[0.2em] whitespace-nowrap"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * index, duration: 0.4 }}
@@ -97,25 +97,25 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Right Section - Social Links & Protocol Status - Fixed width for balance */}
-          <div className="hidden md:flex items-center justify-end gap-3 w-32 flex-shrink-0">
+          {/* Right Section - Social Links & Protocol Status */}
+          <div className="hidden lg:flex items-center justify-end gap-1 xl:gap-2 flex-shrink-0">
             {socialLinks.map((social, index) => (
               <motion.a
                 key={social.label}
                 href={social.href}
                 target={social.href.startsWith("http") ? "_blank" : undefined}
                 rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
+                className="p-1.5 xl:p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
                 whileHover={{ scale: 1.1 }}
                 aria-label={social.label}
               >
-                <social.icon className="w-5 h-5" />
+                <social.icon className="w-4 h-4 xl:w-5 xl:h-5" />
               </motion.a>
             ))}
-            <div className="hidden lg:block">
+            <div className="hidden xl:block">
               <ProtocolStatus />
             </div>
           </div>
