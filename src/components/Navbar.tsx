@@ -122,20 +122,6 @@ const Navbar = () => {
             <div className="hidden lg:block">
               <ProtocolStatus />
             </div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.4 }}
-            >
-              <Link to="/advisory">
-                <Button 
-                  variant="outline" 
-                  className="font-accent uppercase tracking-[0.2em] border-primary text-foreground hover:bg-primary/10"
-                >
-                  Book Advisory Session
-                </Button>
-              </Link>
-            </motion.div>
           </div>
         </div>
       </div>
