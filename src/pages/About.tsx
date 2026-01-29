@@ -175,7 +175,7 @@ const About = () => {
                   spikes 300%. We had to be flawless or we'd drown...
                 </p>
                 
-                <p className="text-xl text-foreground font-display italic">
+                <p className="text-xl text-primary font-accent font-bold">
                   So I became maniacally obsessed with systems.
                 </p>
                 
