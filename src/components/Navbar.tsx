@@ -112,7 +112,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.1 }}
                 aria-label={social.label}
               >
-                <social.icon className="w-4 h-4" />
+                <social.icon className="w-5 h-5" />
               </motion.a>
             ))}
             <div className="hidden lg:block">
