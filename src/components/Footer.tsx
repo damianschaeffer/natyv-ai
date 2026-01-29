@@ -42,7 +42,7 @@ const Footer = () => {
       <section className="py-16 border-t border-border">
         <div className="container mx-auto px-6">
           <motion.h2
-            className="text-center text-sm font-body tracking-[0.3em] text-muted-foreground mb-12"
+            className="text-center text-2xl font-bold font-body tracking-[0.2em] text-primary mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
