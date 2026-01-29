@@ -158,8 +158,8 @@ const VideoSequence = () => {
               className="w-full max-w-2xl mb-6"
             />
 
-            {/* Dictionary Content - Typewriter builds up line by line */}
-            <div className="min-h-[200px] flex flex-col items-center justify-start py-4 w-full max-w-2xl">
+            {/* Dictionary Content - Typewriter builds up line by line - FIXED height so footer doesn't move */}
+            <div className="h-[280px] flex flex-col items-start justify-start py-4 w-full max-w-2xl overflow-hidden">
               {dictionaryContent.map((line, index) => {
                 const isCompleted = completedLines.includes(index);
                 const isCurrentlyTyping = index === currentLineIndex && !isTypingComplete;
