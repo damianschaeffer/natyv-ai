@@ -101,7 +101,7 @@ const Footer = () => {
               <ProtocolStatus />
             </div>
             <Link to="/advisory">
-              <Button className="font-body text-base tracking-wide bg-primary hover:bg-primary/90 text-primary-foreground p-2">
+              <Button className="font-body tracking-wide">
                 Book Advisory Session
               </Button>
             </Link>
