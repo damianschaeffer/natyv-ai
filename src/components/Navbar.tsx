@@ -123,7 +123,10 @@ const Navbar = () => {
               transition={{ delay: 0.4, duration: 0.4 }}
             >
               <Link to="/advisory">
-                <Button className="font-accent uppercase tracking-wide">
+                <Button 
+                  variant="outline" 
+                  className="font-accent uppercase tracking-[0.2em] border-primary text-foreground hover:bg-primary/10"
+                >
                   Book Advisory Session
                 </Button>
               </Link>
