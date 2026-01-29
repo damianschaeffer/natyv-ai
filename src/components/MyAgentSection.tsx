@@ -130,45 +130,6 @@ const MyAgentSection = () => {
           
         </motion.div>
 
-        {/* CTA */}
-        <motion.div className="text-center mt-12" initial={{
-        opacity: 0
-      }} whileInView={{
-        opacity: 1
-      }} viewport={{
-        once: true
-      }} transition={{
-        delay: 0.4,
-        duration: 0.6
-      }}>
-          <motion.a 
-            href="https://get-myagent.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="inline-block px-8 py-4 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300" 
-            animate={{
-              scale: [1, 1.03, 1],
-              boxShadow: [
-                "0 0 0 0 hsl(var(--primary) / 0)",
-                "0 0 20px 4px hsl(var(--primary) / 0.3)",
-                "0 0 0 0 hsl(var(--primary) / 0)",
-              ],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            whileHover={{
-              scale: 1.05
-            }} 
-            whileTap={{
-              scale: 0.98
-            }}
-          >
-            Initialize MY AGENT
-          </motion.a>
-        </motion.div>
       </div>
     </section>;
 };
