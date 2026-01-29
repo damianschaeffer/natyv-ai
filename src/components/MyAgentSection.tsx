@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Eye, Ear, Brain, FileText, Image, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import myAgentLogo from "@/assets/myagent-logo.png";
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
+import MyAgentShowcase from "./MyAgentShowcase";
+
 const MyAgentSection = () => {
   const [isActive, setIsActive] = useState(false);
   const [currentLine, setCurrentLine] = useState(0);
@@ -24,38 +25,6 @@ const MyAgentSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const capabilities = [{
-    icon: Eye,
-    label: "See",
-    description: "Visual Analysis"
-  }, {
-    icon: Ear,
-    label: "Hear",
-    description: "Audio Processing"
-  }, {
-    icon: Brain,
-    label: "Analyze",
-    description: "Multi-modal Synthesis"
-  }];
-  const fileTypes = [{
-    icon: FileText,
-    label: "Documents"
-  }, {
-    icon: Image,
-    label: "Images"
-  }, {
-    icon: Mic,
-    label: "Audio"
-  }];
-
-  // Generate waveform bars with staggered delays
-  const waveformBars = Array.from({
-    length: 40
-  }, (_, i) => ({
-    id: i,
-    delay: i * 0.05,
-    height: Math.random() * 60 + 20
-  }));
   return <section className="py-40 min-h-screen flex items-center relative overflow-hidden" id="my-agent">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
@@ -133,8 +102,8 @@ const MyAgentSection = () => {
           </a>
         </motion.div>
 
-        {/* Interactive Mockup */}
-        <motion.div className="max-w-4xl mx-auto" initial={{
+        {/* Interactive Showcase */}
+        <motion.div className="mt-16" initial={{
         opacity: 0,
         y: 40
       }} whileInView={{
@@ -146,7 +115,7 @@ const MyAgentSection = () => {
         duration: 0.8,
         delay: 0.2
       }}>
-          
+          <MyAgentShowcase />
         </motion.div>
 
       </div>
