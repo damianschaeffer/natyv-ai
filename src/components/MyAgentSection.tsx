@@ -77,7 +77,7 @@ const MyAgentSection = () => {
           <img 
             src={natyvLogoTopline} 
             alt="Natyv AI" 
-            className="w-full max-w-md mx-auto mb-2" 
+            className="w-full max-w-md mx-auto mb-4" 
           />
           {/* White separator line */}
           <div className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-4" />
