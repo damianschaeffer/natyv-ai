@@ -250,33 +250,33 @@ const About = () => {
               
               <div className="relative space-y-8">
                 <h2 className="font-display text-3xl md:text-4xl text-foreground">
-                  Why "Natyv"?
+                  Why "<span className="font-display italic text-primary">Natyv</span>"?
                 </h2>
                 
-                <div className="max-w-2xl mx-auto space-y-6 text-muted-foreground font-body leading-relaxed">
+                <div className="max-w-2xl mx-auto space-y-6 text-muted-foreground font-accent leading-relaxed">
                   <p>
-                    The name comes from "native" — as in, <span className="text-foreground">native to how humans 
+                    The name comes from "native" — as in, <span className="text-primary font-medium">native to how humans 
                     are supposed to live</span>. I try to live a more "human" lifestyle by eating natural foods 
                     and being active in the sunlight to feel my best.
                   </p>
                   
                   <p>
                     My belief is that we've drifted too far from our nature — stuck behind screens, doing 
-                    repetitive work that drains us, missing the people and moments that actually matter.
+                    repetitive work that drains us, missing the people and <span className="text-primary">moments that actually matter</span>.
                   </p>
                   
-                  <p className="text-xl text-foreground font-display">
-                    AI should fix that. Not by replacing us, but by freeing us.
+                  <p className="text-xl text-foreground font-display italic">
+                    AI should fix that. Not by replacing us, but by <span className="text-primary">freeing us</span>.
                   </p>
                   
-                  <p className="text-lg">
+                  <p className="text-lg font-accent">
                     That's what we're building here.
                   </p>
                 </div>
 
                 <div className="pt-8">
-                  <p className="font-display text-lg text-foreground">— Damian Schaeffer</p>
-                  <p className="text-sm text-muted-foreground font-body">Founder, Natyv AI</p>
+                  <p className="font-display italic text-lg text-foreground">— Damian Schaeffer</p>
+                  <p className="text-sm text-muted-foreground font-accent">Founder, <span className="font-display italic">Natyv</span> AI</p>
                 </div>
               </div>
             </div>
