@@ -89,15 +89,15 @@ const VideoSequence = () => {
   const getLineStyle = (style: string) => {
     switch (style) {
       case "pronunciation":
-        return "text-primary font-display text-xl md:text-2xl tracking-wide";
+        return "text-primary font-display text-2xl md:text-3xl tracking-wide text-center";
       case "definition":
-        return "text-foreground font-display text-base md:text-lg text-left";
+        return "text-foreground font-display text-lg md:text-xl text-left";
       case "example":
-        return "text-muted-foreground font-display text-sm md:text-base italic text-left pl-4";
+        return "text-muted-foreground font-display text-base md:text-lg italic text-left pl-6";
       case "seealso":
-        return "text-foreground font-display text-sm md:text-base text-center mt-4";
+        return "text-foreground font-display text-base md:text-lg text-center mt-4";
       default:
-        return "text-foreground font-display text-base";
+        return "text-foreground font-display text-lg";
     }
   };
 
@@ -162,7 +162,7 @@ const VideoSequence = () => {
             <div className="w-full max-w-2xl h-px bg-foreground/40 mt-2 mb-6" />
 
             {/* Dictionary Content - Typewriter builds up line by line - FIXED height so footer doesn't move */}
-            <div className="h-[240px] flex flex-col items-start justify-start w-full max-w-2xl overflow-hidden">
+            <div className="h-[260px] flex flex-col items-start justify-start w-full max-w-2xl overflow-hidden pl-12 md:pl-24">
               {dictionaryContent.map((line, index) => {
                 const isCompleted = completedLines.includes(index);
                 const isCurrentlyTyping = index === currentLineIndex && !isTypingComplete;
