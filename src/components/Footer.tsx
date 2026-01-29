@@ -58,32 +58,44 @@ const Footer = () => {
               INTEGRATIONS
             </h2>
           </motion.div>
-          <motion.div
-            className="flex flex-wrap justify-center items-center gap-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {partners.map((partner, index) => (
-              <motion.div
-                key={partner.name}
-                className="h-6 opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 0.4 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                whileHover={{ opacity: 0.7 }}
-                style={partner.scale ? { transform: `scale(${partner.scale})` } : undefined}
-              >
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="h-full w-auto object-contain filter brightness-0 invert"
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+          <div className="overflow-hidden">
+            <motion.div
+              className="flex items-center gap-12 animate-scroll"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              {/* First set of logos */}
+              {partners.map((partner, index) => (
+                <div
+                  key={`first-${partner.name}`}
+                  className="h-6 opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale flex-shrink-0"
+                  style={partner.scale ? { transform: `scale(${partner.scale})` } : undefined}
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-full w-auto object-contain filter brightness-0 invert"
+                  />
+                </div>
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {partners.map((partner, index) => (
+                <div
+                  key={`second-${partner.name}`}
+                  className="h-6 opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale flex-shrink-0"
+                  style={partner.scale ? { transform: `scale(${partner.scale})` } : undefined}
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-full w-auto object-contain filter brightness-0 invert"
+                  />
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
