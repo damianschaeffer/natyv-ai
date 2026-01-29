@@ -108,34 +108,34 @@ const Footer = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-4 border-t border-border relative overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between">
+      <footer className="py-3 md:py-4 border-t border-border relative overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex items-center justify-between gap-2">
             {/* Logo */}
             <motion.a
               href="/"
-              className="flex items-center"
+              className="flex items-center flex-shrink-0"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
               <img
                 src={natyvLogoTopline}
                 alt="Natyv AI"
-                className="h-6 w-auto"
+                className="h-5 lg:h-6 w-auto"
               />
             </motion.a>
 
             {/* Navigation Links - Centered with blue separators like navbar */}
-            <div className="hidden md:flex items-center justify-center gap-6 flex-1">
+            <div className="hidden lg:flex items-center justify-center gap-4 xl:gap-6 flex-1 min-w-0">
               {navLinks.map((link, index) => (
-                <div key={link.label} className="flex items-center gap-6">
+                <div key={link.label} className="flex items-center gap-4 xl:gap-6">
                   {index > 0 && (
-                    <div className="w-[8px] h-5 bg-primary" />
+                    <div className="w-[6px] xl:w-[8px] h-4 xl:h-5 bg-primary flex-shrink-0" />
                   )}
                   {link.isRoute ? (
                     <Link
                       to={link.href}
-                      className="text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em]"
+                      className="text-base lg:text-lg xl:text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.15em] xl:tracking-[0.2em] whitespace-nowrap"
                     >
                       {link.label}
                     </Link>
@@ -144,7 +144,7 @@ const Footer = () => {
                       href={link.href}
                       target={link.isExternal ? "_blank" : undefined}
                       rel={link.isExternal ? "noopener noreferrer" : undefined}
-                      className="text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em]"
+                      className="text-base lg:text-lg xl:text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.15em] xl:tracking-[0.2em] whitespace-nowrap"
                     >
                       {link.label}
                     </a>
@@ -154,20 +154,20 @@ const Footer = () => {
             </div>
 
             {/* Right Section - Social Links & Protocol Status */}
-            <div className="hidden md:flex items-center justify-end gap-3 w-32 flex-shrink-0">
+            <div className="hidden lg:flex items-center justify-end gap-1 xl:gap-2 flex-shrink-0">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target={social.href.startsWith("http") ? "_blank" : undefined}
                   rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  className="p-1.5 xl:p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
                   aria-label={social.label}
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4 xl:w-5 xl:h-5" />
                 </a>
               ))}
-              <div className="hidden lg:block">
+              <div className="hidden xl:block">
                 <ProtocolStatus />
               </div>
             </div>
