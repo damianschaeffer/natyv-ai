@@ -195,25 +195,9 @@ const VideoSequence = () => {
                 src={natyvLogoFull}
                 alt="Natyv AI"
                 className="max-w-3xl w-full mx-auto"
-                initial={{ 
-                  opacity: 0, 
-                  y: 30,
-                  filter: "drop-shadow(0 0 0px hsl(var(--primary)))" 
-                }}
-                animate={{ 
-                  opacity: 1, 
-                  y: 0,
-                  filter: [
-                    "drop-shadow(0 0 0px hsl(var(--primary)))",
-                    "drop-shadow(0 0 30px hsl(var(--primary)))",
-                    "drop-shadow(0 0 15px hsl(var(--primary)))",
-                  ]
-                }}
-                transition={{ 
-                  duration: 1.5, 
-                  delay: 0.2,
-                  filter: { duration: 2, times: [0, 0.5, 1] }
-                }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, delay: 0.2 }}
               />
             </motion.div>
           )}
