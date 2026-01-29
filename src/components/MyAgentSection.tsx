@@ -57,7 +57,7 @@ const MyAgentSection = () => {
           <span className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-4 block">
             Flagship Product
           </span>
-          <img src={myAgentLogo} alt="MY AGENT" className="h-40 md:h-48 w-auto mx-auto mb-4" />
+          <img src={myAgentLogo} alt="MY AGENT" className="h-28 md:h-32 w-auto mx-auto mb-4 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] cursor-pointer" />
           <p className="text-muted-foreground font-body text-lg max-w-3xl mx-auto mb-6 flex items-center justify-center flex-wrap gap-1">
             Multi-Modal Google <img src="/logos/google-gemini.svg" alt="Gemini" className="h-5 inline-block" /> Gemini-Live Voice AI Agents that Understand Context, Reason, Learn, and Remember...Just Like You...
           </p>
