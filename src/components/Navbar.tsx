@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Linkedin, Twitter, Youtube } from "lucide-react";
+import { Linkedin, Twitter, Youtube, Facebook, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProtocolStatus from "./ProtocolStatus";
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
@@ -27,6 +27,8 @@ const Navbar = () => {
     { icon: Linkedin, href: "https://linkedin.com/in/damianschaeffer", label: "LinkedIn" },
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Youtube, href: "#", label: "YouTube" },
+    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Instagram, href: "#", label: "Instagram" },
   ];
 
   return (
