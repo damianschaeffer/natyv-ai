@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Linkedin, Twitter, Youtube, Facebook, Instagram } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import ProtocolStatus from "./ProtocolStatus";
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 
@@ -75,7 +74,7 @@ const Footer = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               {/* First set of logos */}
-              {partners.map((partner, index) => (
+              {partners.map((partner) => (
                 <div
                   key={`first-${partner.name}`}
                   className="h-6 opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale flex-shrink-0"
@@ -89,7 +88,7 @@ const Footer = () => {
                 </div>
               ))}
               {/* Duplicate set for seamless loop */}
-              {partners.map((partner, index) => (
+              {partners.map((partner) => (
                 <div
                   key={`second-${partner.name}`}
                   className="h-6 opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale flex-shrink-0"
@@ -108,10 +107,10 @@ const Footer = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-3 md:py-4 border-t border-border relative overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex items-center justify-between gap-2">
-            {/* Logo */}
+      <footer className="py-[clamp(0.5rem,1.5vw,1rem)] border-t border-border relative overflow-hidden">
+        <div className="container mx-auto px-[clamp(0.75rem,2vw,1.5rem)]">
+          <div className="flex items-center justify-between gap-[clamp(0.5rem,2vw,1rem)]">
+            {/* Logo - fluid sizing */}
             <motion.a
               href="/"
               className="flex items-center flex-shrink-0"
@@ -121,21 +120,31 @@ const Footer = () => {
               <img
                 src={natyvLogoTopline}
                 alt="Natyv AI"
-                className="h-5 lg:h-6 w-auto"
+                className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto"
               />
             </motion.a>
 
-            {/* Navigation Links - Centered with blue separators like navbar */}
-            <div className="hidden lg:flex items-center justify-center gap-4 xl:gap-6 flex-1 min-w-0">
+            {/* Navigation Links - Fluid sizing with clamp */}
+            <div className="hidden md:flex items-center justify-center gap-[clamp(0.5rem,2vw,1.5rem)] flex-1 min-w-0">
               {navLinks.map((link, index) => (
-                <div key={link.label} className="flex items-center gap-4 xl:gap-6">
+                <div key={link.label} className="flex items-center gap-[clamp(0.5rem,2vw,1.5rem)]">
                   {index > 0 && (
-                    <div className="w-[6px] xl:w-[8px] h-4 xl:h-5 bg-primary flex-shrink-0" />
+                    <div 
+                      className="bg-primary flex-shrink-0" 
+                      style={{ 
+                        width: 'clamp(4px, 0.5vw, 8px)', 
+                        height: 'clamp(12px, 1.5vw, 20px)' 
+                      }} 
+                    />
                   )}
                   {link.isRoute ? (
                     <Link
                       to={link.href}
-                      className="text-base lg:text-lg xl:text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.15em] xl:tracking-[0.2em] whitespace-nowrap"
+                      className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap"
+                      style={{ 
+                        fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
+                        letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
+                      }}
                     >
                       {link.label}
                     </Link>
@@ -144,7 +153,11 @@ const Footer = () => {
                       href={link.href}
                       target={link.isExternal ? "_blank" : undefined}
                       rel={link.isExternal ? "noopener noreferrer" : undefined}
-                      className="text-base lg:text-lg xl:text-xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.15em] xl:tracking-[0.2em] whitespace-nowrap"
+                      className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap"
+                      style={{ 
+                        fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
+                        letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
+                      }}
                     >
                       {link.label}
                     </a>
@@ -153,21 +166,22 @@ const Footer = () => {
               ))}
             </div>
 
-            {/* Right Section - Social Links & Protocol Status */}
-            <div className="hidden lg:flex items-center justify-end gap-1 xl:gap-2 flex-shrink-0">
+            {/* Right Section - Social Links - Fluid sizing */}
+            <div className="hidden md:flex items-center justify-end gap-[clamp(0.125rem,0.5vw,0.5rem)] flex-shrink-0">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target={social.href.startsWith("http") ? "_blank" : undefined}
                   rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="p-1.5 xl:p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  style={{ padding: 'clamp(0.25rem, 0.5vw, 0.5rem)' }}
                   aria-label={social.label}
                 >
-                  <social.icon className="w-4 h-4 xl:w-5 xl:h-5" />
+                  <social.icon style={{ width: 'clamp(0.875rem, 1.25vw, 1.25rem)', height: 'clamp(0.875rem, 1.25vw, 1.25rem)' }} />
                 </a>
               ))}
-              <div className="hidden xl:block">
+              <div className="hidden lg:block">
                 <ProtocolStatus />
               </div>
             </div>
