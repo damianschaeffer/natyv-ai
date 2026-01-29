@@ -122,11 +122,13 @@ const Navbar = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.4 }}
             >
-              <Button
-                className="font-body text-base tracking-wide bg-primary hover:bg-primary/90 text-primary-foreground p-2"
-              >
-                Book Advisory Session
-              </Button>
+              <Link to="/advisory">
+                <Button
+                  className="font-body text-base tracking-wide bg-primary hover:bg-primary/90 text-primary-foreground p-2"
+                >
+                  Book Advisory Session
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </div>
