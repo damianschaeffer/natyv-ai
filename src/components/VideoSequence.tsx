@@ -134,27 +134,41 @@ const VideoSequence = () => {
               className="flex flex-col items-center"
             >
               <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
+                initial={{ scale: 0, rotate: -180, y: 50 }}
+                animate={{ 
+                  scale: [0, 0.3, 0.6, 1.15, 0.95, 1],
+                  rotate: [-180, -120, -60, -10, 5, 0],
+                  y: [50, 30, 15, -5, 2, 0]
+                }}
                 transition={{ 
-                  type: "spring", 
-                  stiffness: 200, 
-                  damping: 20,
-                  delay: 0.3 
+                  duration: 1.4,
+                  delay: 0.2,
+                  times: [0, 0.2, 0.4, 0.7, 0.85, 1],
+                  ease: [0.34, 1.56, 0.64, 1]
                 }}
               >
                 <motion.img
                   src={natyvLogoFull}
                   alt="Natyv AI"
                   className="h-20 md:h-28 w-auto"
+                  initial={{ opacity: 0 }}
                   animate={{ 
+                    opacity: [0, 0.4, 0.7, 1, 1, 1],
                     filter: [
                       "drop-shadow(0 0 0px hsl(var(--primary)))",
-                      "drop-shadow(0 0 30px hsl(var(--primary)))",
-                      "drop-shadow(0 0 10px hsl(var(--primary)))",
+                      "drop-shadow(0 0 5px hsl(var(--primary)))",
+                      "drop-shadow(0 0 15px hsl(var(--primary)))",
+                      "drop-shadow(0 0 40px hsl(var(--primary)))",
+                      "drop-shadow(0 0 25px hsl(var(--primary)))",
+                      "drop-shadow(0 0 12px hsl(var(--primary)))",
                     ]
                   }}
-                  transition={{ duration: 1.5, delay: 0.5 }}
+                  transition={{ 
+                    duration: 1.6, 
+                    delay: 0.3,
+                    times: [0, 0.15, 0.35, 0.6, 0.8, 1],
+                    ease: "easeOut"
+                  }}
                 />
               </motion.div>
             </motion.div>
