@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, Ear, Brain, FileText, Image, Mic } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import myAgentLogo from "@/assets/myagent-logo.png";
 const MyAgentSection = () => {
   const [isActive, setIsActive] = useState(false);
@@ -57,9 +58,17 @@ const MyAgentSection = () => {
             Flagship Product
           </span>
           <img src={myAgentLogo} alt="MY AGENT" className="h-40 md:h-48 w-auto mx-auto mb-4" />
-          <p className="text-muted-foreground font-body text-lg max-w-xl mx-auto">
+          <p className="text-muted-foreground font-body text-lg max-w-xl mx-auto mb-6">
             Multi-modal Voice AI that can see, hear, and analyze simultaneously
           </p>
+          <a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer">
+            <Button 
+              variant="outline" 
+              className="font-accent uppercase tracking-[0.2em] border-primary text-foreground hover:bg-primary/10"
+            >
+              Experience the Magic
+            </Button>
+          </a>
         </motion.div>
 
         {/* Interactive Mockup */}
