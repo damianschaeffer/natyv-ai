@@ -67,19 +67,12 @@ const HeroSection = () => {
           duration: 0.6,
           delay: 0.8
         }}>
-            <motion.a 
-              href="https://get-myagent.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-primary text-primary-foreground font-body tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300 blue-glow text-center px-[8px] py-[8px] text-base inline-block" 
-              whileHover={{
-                scale: 1.02,
-                y: -2
-              }} 
-              whileTap={{
-                scale: 0.98
-              }}
-            >
+            <motion.a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer" className="bg-primary text-primary-foreground font-body tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300 blue-glow text-center px-[8px] py-[8px] text-base inline-block" whileHover={{
+            scale: 1.02,
+            y: -2
+          }} whileTap={{
+            scale: 0.98
+          }}>
               Go to products     
             </motion.a>
             <motion.button className="border border-border text-foreground font-body tracking-widest uppercase rounded-sm transition-all duration-300 text-center bg-primary text-base px-[8px] py-[8px]" whileHover={{
@@ -101,15 +94,7 @@ const HeroSection = () => {
           delay: 1.2,
           duration: 0.6
         }}>
-            <motion.div className="w-6 h-10 border border-border rounded-full flex items-start justify-center p-2" animate={{
-            y: [0, 8, 0]
-          }} transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}>
-              <div className="w-1 h-2 bg-primary rounded-full" />
-            </motion.div>
+            
           </motion.div>
         </motion.div>
       </div>
