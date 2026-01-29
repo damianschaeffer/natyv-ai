@@ -61,7 +61,7 @@ const MyAgentSection = () => {
           <img 
             src={myAgentLogo} 
             alt="MY AGENT" 
-            className="h-28 md:h-32 w-auto mx-auto mb-8 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] cursor-pointer" 
+            className="h-24 md:h-28 w-auto mx-auto mb-8 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] cursor-pointer" 
           />
           <div className="h-12 mb-10 flex items-center justify-center overflow-hidden">
             <AnimatePresence mode="wait">
