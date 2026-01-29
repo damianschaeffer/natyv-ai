@@ -67,7 +67,7 @@ const HeroSection = () => {
           duration: 0.6,
           delay: 0.8
         }}>
-            <motion.button className="bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300 blue-glow px-[12px] py-[12px] text-center" whileHover={{
+            <motion.button className="bg-primary text-primary-foreground font-body tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300 blue-glow text-center px-[8px] py-[8px] text-base" whileHover={{
             scale: 1.02,
             y: -2
           }} whileTap={{
