@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Linkedin, Twitter, Youtube, Facebook, Instagram, Menu, X } from "lucide-react";
 import ProtocolStatus from "./ProtocolStatus";
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
@@ -8,6 +8,8 @@ import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,8 +19,19 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToMyAgent = () => {
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollToMyAgent: true } });
+    } else {
+      const element = document.getElementById("myagent-section");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   const navLinks = [
-    { label: "Products", href: "https://get-myagent.com", isExternal: true },
+    { label: "Products", href: "#myagent-section", isScrollLink: true },
     { label: "About", href: "/about", isRoute: true },
     { label: "Advisory", href: "/advisory", isRoute: true },
   ];
@@ -90,11 +103,26 @@ const Navbar = () => {
                         {link.label}
                       </Link>
                     </motion.div>
+                  ) : link.isScrollLink ? (
+                    <motion.button
+                      onClick={() => {
+                        scrollToMyAgent();
+                      }}
+                      className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap cursor-pointer"
+                      style={{ 
+                        fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
+                        letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
+                      }}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * index, duration: 0.4 }}
+                      whileHover={{ y: -2 }}
+                    >
+                      {link.label}
+                    </motion.button>
                   ) : (
                     <motion.a
                       href={link.href}
-                      target={link.isExternal ? "_blank" : undefined}
-                      rel={link.isExternal ? "noopener noreferrer" : undefined}
                       className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap"
                       style={{ 
                         fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
@@ -188,11 +216,19 @@ const Navbar = () => {
                     >
                       {link.label}
                     </Link>
+                  ) : link.isScrollLink ? (
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        scrollToMyAgent();
+                      }}
+                      className="text-2xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em] cursor-pointer"
+                    >
+                      {link.label}
+                    </button>
                   ) : (
                     <a
                       href={link.href}
-                      target={link.isExternal ? "_blank" : undefined}
-                      rel={link.isExternal ? "noopener noreferrer" : undefined}
                       onClick={() => setMobileMenuOpen(false)}
                       className="text-2xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em]"
                     >

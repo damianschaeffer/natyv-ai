@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import MyAgentSection from "@/components/MyAgentSection";
 import AdvisorySection from "@/components/AdvisorySection";
@@ -25,6 +27,21 @@ const sectionVariants = {
 };
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollToMyAgent) {
+      setTimeout(() => {
+        const element = document.getElementById("myagent-section");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      // Clear the state so it doesn't scroll again on re-render
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
