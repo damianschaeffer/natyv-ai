@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
 const ProtocolStatus = () => {
-  return;
+  return null;
 };
 export default ProtocolStatus;

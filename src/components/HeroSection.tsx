@@ -67,14 +67,21 @@ const HeroSection = () => {
           duration: 0.6,
           delay: 0.8
         }}>
-            <motion.button className="bg-primary text-primary-foreground font-body tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300 blue-glow text-center px-[8px] py-[8px] text-base" whileHover={{
-            scale: 1.02,
-            y: -2
-          }} whileTap={{
-            scale: 0.98
-          }}>
-              ​Go to products     
-            </motion.button>
+            <motion.a 
+              href="https://get-myagent.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-primary text-primary-foreground font-body tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300 blue-glow text-center px-[8px] py-[8px] text-base inline-block" 
+              whileHover={{
+                scale: 1.02,
+                y: -2
+              }} 
+              whileTap={{
+                scale: 0.98
+              }}
+            >
+              Go to products     
+            </motion.a>
             <motion.button className="border border-border text-foreground font-body tracking-widest uppercase rounded-sm transition-all duration-300 text-center bg-primary text-base px-[8px] py-[8px]" whileHover={{
             scale: 1.02,
             y: -2
