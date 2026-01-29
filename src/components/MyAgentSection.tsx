@@ -48,7 +48,7 @@ const MyAgentSection = () => {
           {/* STUDIO label with blue vertical separators */}
           <div className="flex items-center justify-center gap-6 mb-16">
             <span className="w-[9px] h-9 bg-primary" />
-            <span className="text-foreground font-body text-4xl md:text-5xl tracking-[0.3em] uppercase ml-1 font-bold">
+            <span className="text-foreground font-body text-4xl md:text-5xl tracking-[0.3em] uppercase ml-1">
               Studio
             </span>
             <span className="w-[9px] h-9 bg-primary" />
