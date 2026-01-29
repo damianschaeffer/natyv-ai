@@ -163,14 +163,6 @@ const Footer = () => {
               <div className="hidden lg:block">
                 <ProtocolStatus />
               </div>
-              <Link to="/advisory">
-                <Button 
-                  variant="outline" 
-                  className="font-accent uppercase tracking-[0.2em] border-primary text-foreground hover:bg-primary/10"
-                >
-                  Book Advisory Session
-                </Button>
-              </Link>
             </div>
           </div>
 
