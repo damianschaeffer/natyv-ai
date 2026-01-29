@@ -63,7 +63,7 @@ const Navbar = () => {
             {navLinks.map((link, index) => (
               <div key={link.label} className="flex items-center gap-6">
                 {index > 0 && (
-                  <div className="w-[4px] h-4 bg-primary rounded-full" />
+                  <div className="w-[8px] h-5 bg-primary rounded-full" />
                 )}
                 {link.isRoute ? (
                   <motion.div
@@ -74,7 +74,7 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.href}
-                      className="text-lg font-accent uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em]"
+                      className="text-lg font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.15em]"
                     >
                       {link.label}
                     </Link>
@@ -84,7 +84,7 @@ const Navbar = () => {
                     href={link.href}
                     target={link.isExternal ? "_blank" : undefined}
                     rel={link.isExternal ? "noopener noreferrer" : undefined}
-                    className="text-lg font-accent uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em]"
+                    className="text-lg font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.15em]"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * index, duration: 0.4 }}
