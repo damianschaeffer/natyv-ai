@@ -81,10 +81,14 @@ const MyAgentSection = () => {
           />
           {/* White separator line */}
           <div className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-4" />
-          {/* STUDIO label */}
-          <span className="text-foreground font-body text-sm md:text-base tracking-[0.3em] uppercase mb-8 block">
-            Studio
-          </span>
+          {/* STUDIO label with blue vertical separators */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <span className="w-[3px] h-5 bg-primary" />
+            <span className="text-foreground font-body text-lg md:text-xl tracking-[0.3em] uppercase">
+              Studio
+            </span>
+            <span className="w-[3px] h-5 bg-primary" />
+          </div>
           
           <span className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-4 block">
             Flagship Product
