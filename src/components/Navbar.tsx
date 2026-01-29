@@ -97,8 +97,8 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Social Links */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Right Section - Social Links & Protocol Status */}
+          <div className="hidden md:flex items-center gap-6 ml-auto">
             {socialLinks.map((social, index) => (
               <motion.a
                 key={social.label}
@@ -115,10 +115,6 @@ const Navbar = () => {
                 <social.icon className="w-4 h-4" />
               </motion.a>
             ))}
-          </div>
-
-          {/* Right Section */}
-          <div className="flex items-center gap-6">
             <div className="hidden lg:block">
               <ProtocolStatus />
             </div>
