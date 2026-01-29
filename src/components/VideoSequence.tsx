@@ -155,7 +155,7 @@ const VideoSequence = () => {
               key="scene2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0, y: -50 }}
+              exit={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
               transition={{ duration: 1.2 }}
               className="space-y-4"
             >
@@ -182,22 +182,53 @@ const VideoSequence = () => {
           {!isPlaying && currentScene >= scenes.length && (
             <motion.div
               key="end"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{ 
+                duration: 1.2, 
+                ease: [0.25, 0.1, 0.25, 1],
+                scale: { type: "spring", stiffness: 100, damping: 20 }
+              }}
               className="flex flex-col items-center gap-8"
             >
               <motion.img
                 src={natyvLogoFull}
                 alt="Natyv AI"
                 className="max-w-2xl w-full mx-auto mb-8"
+                initial={{ 
+                  opacity: 0, 
+                  y: 30,
+                  filter: "drop-shadow(0 0 0px hsl(var(--primary)))" 
+                }}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0,
+                  filter: [
+                    "drop-shadow(0 0 0px hsl(var(--primary)))",
+                    "drop-shadow(0 0 30px hsl(var(--primary)))",
+                    "drop-shadow(0 0 15px hsl(var(--primary)))",
+                  ]
+                }}
+                transition={{ 
+                  duration: 1.5, 
+                  delay: 0.2,
+                  filter: { duration: 2, times: [0, 0.5, 1] }
+                }}
               />
-              <div className="flex gap-4">
+              <motion.div 
+                className="flex gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
                 <motion.a
                   href="https://get-myagent.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block px-8 py-3 bg-primary text-primary-foreground font-body text-sm uppercase tracking-widest rounded-sm"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 1.0 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -206,13 +237,16 @@ const VideoSequence = () => {
                 <motion.button
                   onClick={resetSequence}
                   className="px-8 py-3 border border-border text-muted-foreground font-body text-sm uppercase tracking-widest rounded-sm flex items-center gap-2"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 1.2 }}
                   whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary))" }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <RotateCcw className="w-4 h-4" />
                   Replay
                 </motion.button>
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
