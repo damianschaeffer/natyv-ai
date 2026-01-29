@@ -41,15 +41,22 @@ const Footer = () => {
       {/* Integrations Section */}
       <section className="py-16 border-t border-border">
         <div className="container mx-auto px-6">
-          <motion.h2
-            className="text-center text-2xl font-bold font-body tracking-[0.2em] text-primary mb-12"
+          <motion.div
+            className="flex flex-col items-center gap-4 mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            NATYV AI INTEGRATIONS
-          </motion.h2>
+            <img
+              src={natyvLogoTopline}
+              alt="Natyv AI"
+              className="h-8 w-auto"
+            />
+            <h2 className="text-center text-2xl font-bold font-body tracking-[0.2em] text-primary">
+              NATYV AI INTEGRATIONS
+            </h2>
+          </motion.div>
           <motion.div
             className="flex flex-wrap justify-center items-center gap-12"
             initial={{ opacity: 0, y: 20 }}
