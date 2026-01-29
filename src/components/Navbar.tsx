@@ -43,11 +43,11 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center">
-          {/* Logo - Fixed width for balance */}
+        <div className="flex items-center justify-between">
+          {/* Logo */}
           <motion.a 
             href="/" 
-            className="flex items-center w-32 flex-shrink-0"
+            className="flex items-center"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
