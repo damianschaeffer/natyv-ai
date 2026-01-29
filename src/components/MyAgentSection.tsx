@@ -90,9 +90,10 @@ const MyAgentSection = () => {
             <span className="w-[8px] h-8 bg-primary" />
           </div>
           
-          <span className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-6 block">
-            Presents Our Flagship Product
-          </span>
+          <div className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-6 flex flex-col items-center gap-2">
+            <span>Presents</span>
+            <span>Our Flagship Product</span>
+          </div>
           <img src={myAgentLogo} alt="MY AGENT" className="h-28 md:h-32 w-auto mx-auto mb-8 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] cursor-pointer" />
           <div className="h-12 mb-10 flex items-center justify-center overflow-hidden">
             <AnimatePresence mode="wait">
