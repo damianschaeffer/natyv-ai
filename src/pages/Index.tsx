@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import MyAgentSection from "@/components/MyAgentSection";
+import AdvisorySection from "@/components/AdvisorySection";
 import ProductMatrixPreview from "@/components/ProductMatrixPreview";
 import VideoSequence from "@/components/VideoSequence";
 import Footer from "@/components/Footer";
@@ -39,8 +40,18 @@ const Index = () => {
         >
           <MyAgentSection />
         </motion.div>
+
+        {/* Advisory Section with fade-in transition */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <AdvisorySection />
+        </motion.div>
         
-        {/* Advisory/Products Section with fade-in transition */}
+        {/* Products Section with fade-in transition */}
         <motion.div
           initial="hidden"
           whileInView="visible"
