@@ -39,24 +39,32 @@ const Footer = () => {
 
   return (
     <>
-      {/* Integrations Section */}
+      {/* Partners Section */}
       <section className="py-16 border-t border-border">
         <div className="container mx-auto px-6">
           <motion.div
-            className="flex flex-col items-center gap-4 mb-12"
+            className="flex flex-col items-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
+            {/* Natyv Logo Header */}
             <img
               src={natyvLogoTopline}
               alt="Natyv AI"
-              className="h-8 w-auto"
+              className="w-full max-w-md mx-auto mb-3"
             />
-            <h2 className="text-center text-2xl font-accent uppercase tracking-[0.2em] text-primary">
-              INTEGRATIONS
-            </h2>
+            {/* White separator line */}
+            <div className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-3" />
+            {/* PARTNERS label with blue vertical separators */}
+            <div className="flex items-center justify-center gap-6">
+              <span className="w-[9px] h-9 bg-primary" />
+              <span className="text-foreground font-body text-4xl md:text-5xl tracking-[0.3em] uppercase font-bold">
+                Partners
+              </span>
+              <span className="w-[9px] h-9 bg-primary" />
+            </div>
           </motion.div>
           <div className="overflow-hidden">
             <motion.div
