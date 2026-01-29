@@ -164,7 +164,10 @@ const Footer = () => {
                 <ProtocolStatus />
               </div>
               <Link to="/advisory">
-                <Button className="font-accent uppercase tracking-wide">
+                <Button 
+                  variant="outline" 
+                  className="font-accent uppercase tracking-[0.2em] border-primary text-foreground hover:bg-primary/10"
+                >
                   Book Advisory Session
                 </Button>
               </Link>
