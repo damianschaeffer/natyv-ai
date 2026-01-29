@@ -37,56 +37,37 @@ const About = () => {
       <Navbar />
       
       <main className="pt-32 pb-24">
-        {/* Hero Section - Editorial Style */}
+        {/* Hero Section - Compact Editorial Style */}
         <section className="container mx-auto px-6 mb-24">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
-              {/* Profile Image - Left Column */}
-              <motion.div
-                className="lg:col-span-2"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <div className="relative">
-                  <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/50">
-                    <img 
-                      src={damianProfile} 
-                      alt="Damian Schaeffer, Founder of Natyv AI"
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-                  {/* Accent decoration */}
-                  <div className="absolute -bottom-4 -right-4 w-32 h-32 border border-primary/20 rounded-2xl -z-10" />
-                  <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/5 rounded-2xl -z-10" />
+          <div className="max-w-4xl mx-auto">
+            {/* Top Row - Photo + Name + Social */}
+            <motion.div
+              className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-10"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Small Profile Image */}
+              <div className="relative flex-shrink-0">
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-border/50">
+                  <img 
+                    src={damianProfile} 
+                    alt="Damian Schaeffer, Founder of Natyv AI"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
-                
-                {/* Quick stats below image */}
-                <div className="mt-8 grid grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-card/30 border border-border/50 text-center">
-                    <div className="font-display text-2xl text-primary">20+</div>
-                    <div className="text-xs text-muted-foreground font-body mt-1">Years in Operations</div>
-                  </div>
-                  <div className="p-4 rounded-xl bg-card/30 border border-border/50 text-center">
-                    <div className="font-display text-2xl text-primary">150+</div>
-                    <div className="text-xs text-muted-foreground font-body mt-1">Communities Served</div>
-                  </div>
-                </div>
-              </motion.div>
+                {/* Accent decoration */}
+                <div className="absolute -bottom-2 -right-2 w-12 h-12 border border-primary/20 rounded-xl -z-10" />
+              </div>
 
-              {/* Content - Right Column */}
-              <motion.div
-                className="lg:col-span-3"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <span className="inline-block px-4 py-1.5 mb-6 text-xs font-body tracking-widest uppercase text-primary border border-primary/30 rounded-full">
+              {/* Name + Title + Social */}
+              <div className="text-center md:text-left flex-1">
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-body tracking-widest uppercase text-primary border border-primary/30 rounded-full">
                   Founder
                 </span>
                 
-                <div className="flex flex-wrap items-center gap-4 mb-6">
-                  <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight">
+                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 mb-4">
+                  <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight">
                     Damian Schaeffer
                   </h1>
                   <div className="flex items-center gap-2">
@@ -94,62 +75,82 @@ const About = () => {
                       href="https://linkedin.com/in/damianschaeffer"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"
+                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
                       aria-label="Connect on LinkedIn"
                       whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
                       whileTap={{ scale: 0.95 }}
                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
-                      <Linkedin className="w-5 h-5 text-primary" />
+                      <Linkedin className="w-4 h-4 text-primary" />
                     </motion.a>
                     <motion.a
                       href="https://x.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"
+                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
                       aria-label="Follow on X"
                       whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
                       whileTap={{ scale: 0.95 }}
                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
-                      <Twitter className="w-5 h-5 text-primary" />
+                      <Twitter className="w-4 h-4 text-primary" />
                     </motion.a>
                     <motion.a
                       href="https://youtube.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"
+                      className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
                       aria-label="Subscribe on YouTube"
                       whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
                       whileTap={{ scale: 0.95 }}
                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
-                      <Youtube className="w-5 h-5 text-primary" />
+                      <Youtube className="w-4 h-4 text-primary" />
                     </motion.a>
                   </div>
                 </div>
-                
-                <p className="text-xl text-muted-foreground font-body leading-relaxed mb-8 italic border-l-2 border-primary/30 pl-6">
-                  "I've spent 20+ years in business operations — the unsexy, behind-the-scenes work of making businesses actually run."
-                </p>
 
-                <div className="prose prose-invert max-w-none space-y-6">
-                  <p className="text-muted-foreground font-body leading-relaxed">
-                    After graduating from The Ohio State University, I started my career in Cleveland, Ohio, 
-                    helping the real estate development firm <span className="text-foreground">K&D Management</span> grow 
-                    from a few properties to over 40+ properties over an amazing 10-year span, making it one of the largest in the region.
-                  </p>
-                  
-                  <p className="text-muted-foreground font-body leading-relaxed">
-                    I then moved to the Naples, Florida area for a new challenge, continuing in real estate by 
-                    starting my own brokerage firm <span className="text-foreground">Gulf Pointe Real Estate Group</span>, 
-                    as well as working in property management at <span className="text-foreground">Sandcastle Community Management</span>, 
-                    focusing primarily on HOA management — an industry with brutal seasonality, high-consequence financial 
-                    reporting requirements, razor-thin margins, and Board of Director clients who expect perfection.
-                  </p>
+                {/* Quick stats inline */}
+                <div className="flex items-center justify-center md:justify-start gap-6">
+                  <div className="text-center">
+                    <div className="font-display text-xl text-primary">20+</div>
+                    <div className="text-xs text-muted-foreground font-body">Years in Ops</div>
+                  </div>
+                  <div className="w-px h-8 bg-border" />
+                  <div className="text-center">
+                    <div className="font-display text-xl text-primary">150+</div>
+                    <div className="text-xs text-muted-foreground font-body">Communities</div>
+                  </div>
                 </div>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
+
+            {/* Bio Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <p className="text-lg text-muted-foreground font-body leading-relaxed mb-6 italic border-l-2 border-primary/30 pl-6">
+                "I've spent 20+ years in business operations — the unsexy, behind-the-scenes work of making businesses actually run."
+              </p>
+
+              <div className="prose prose-invert max-w-none space-y-5">
+                <p className="text-muted-foreground font-body leading-relaxed">
+                  After graduating from The Ohio State University, I started my career in Cleveland, Ohio, 
+                  helping the real estate development firm <span className="text-foreground">K&D Management</span> grow 
+                  from a few properties to over 40+ properties over an amazing 10-year span, making it one of the largest in the region.
+                </p>
+                
+                <p className="text-muted-foreground font-body leading-relaxed">
+                  I then moved to the Naples, Florida area for a new challenge, continuing in real estate by 
+                  starting my own brokerage firm <span className="text-foreground">Gulf Pointe Real Estate Group</span>, 
+                  as well as working in property management at <span className="text-foreground">Sandcastle Community Management</span>, 
+                  focusing primarily on HOA management — an industry with brutal seasonality, high-consequence financial 
+                  reporting requirements, razor-thin margins, and Board of Director clients who expect perfection.
+                </p>
+              </div>
+            </motion.div>
           </div>
         </section>
 
