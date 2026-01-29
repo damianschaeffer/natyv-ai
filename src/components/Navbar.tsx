@@ -69,7 +69,7 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.href}
-                    className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
+                    className="text-sm font-accent uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em]"
                   >
                     {link.label}
                   </Link>
@@ -80,7 +80,7 @@ const Navbar = () => {
                   href={link.href}
                   target={link.isExternal ? "_blank" : undefined}
                   rel={link.isExternal ? "noopener noreferrer" : undefined}
-                  className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
+                  className="text-sm font-accent uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em]"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * index, duration: 0.4 }}
