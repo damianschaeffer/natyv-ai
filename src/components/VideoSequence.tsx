@@ -255,12 +255,9 @@ const VideoSequence = () => {
               className="flex flex-col items-center w-full max-w-3xl mx-auto"
             >
               {/* Static Header - Using actual logo image */}
-              <motion.img
+              <img
                 src={natyvLogoTopline}
                 alt="Natyv AI"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
                 className="w-full max-w-2xl mb-6"
               />
 
@@ -298,12 +295,9 @@ const VideoSequence = () => {
               </motion.div>
 
               {/* Static Footer - Using actual logo image */}
-              <motion.img
+              <img
                 src={natyvLogoFooter}
                 alt="Studio | Solutions | Advisory"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
                 className="w-full max-w-2xl mt-6"
               />
             </motion.div>
