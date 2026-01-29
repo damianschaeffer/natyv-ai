@@ -1,25 +1,26 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play } from "lucide-react";
-import natyvLogoFull from "@/assets/natyv-logo-full.png";
 
 const VideoSequence = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentScene, setCurrentScene] = useState(0);
   const [typewriterText, setTypewriterText] = useState("");
-  const [typewriterIndex, setTypewriterIndex] = useState(0);
+  const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const typewriterPhrases = [
-    "na·tyv /ˈnādiv/",
-    "adjective",
-    "innate; belonging naturally",
-    "AI that feels human",
+  const dictionaryLines = [
+    { text: "/ˈnātiv/ • adj.", style: "pronunciation" },
+    { text: "1.  Innate; belonging to a person by nature.", style: "definition" },
+    { text: '"The natyv creativity of the human spirit."', style: "example" },
+    { text: "2.  Original; not artificial or derivative.", style: "definition" },
+    { text: '"Returning to our natyv state of abundance."', style: "example" },
+    { text: "[ See also: Human, Liberation, Origin ]", style: "seealso" },
   ];
 
   const scenes = [
-    { id: 0, duration: 5000 }, // Mission Part 1
-    { id: 1, duration: 5000 }, // Mission Part 2
+    { id: 0, duration: 5000 },
+    { id: 1, duration: 5000 },
   ];
 
   useEffect(() => {
@@ -37,42 +38,51 @@ const VideoSequence = () => {
     return () => clearTimeout(timer);
   }, [isPlaying, currentScene]);
 
-  // Typewriter effect for end state
+  // Typewriter effect for dictionary section
   useEffect(() => {
     if (isPlaying || currentScene < scenes.length) return;
 
-    const currentPhrase = typewriterPhrases[typewriterIndex];
-    const typeSpeed = isDeleting ? 30 : 80;
+    const currentLine = dictionaryLines[currentLineIndex];
+    const typeSpeed = isDeleting ? 20 : 50;
 
     const timer = setTimeout(() => {
       if (!isDeleting) {
-        if (typewriterText.length < currentPhrase.length) {
-          setTypewriterText(currentPhrase.slice(0, typewriterText.length + 1));
+        if (typewriterText.length < currentLine.text.length) {
+          setTypewriterText(currentLine.text.slice(0, typewriterText.length + 1));
         } else {
-          // Pause before deleting
-          setTimeout(() => setIsDeleting(true), 2000);
+          setTimeout(() => setIsDeleting(true), 2500);
         }
       } else {
         if (typewriterText.length > 0) {
           setTypewriterText(typewriterText.slice(0, -1));
         } else {
           setIsDeleting(false);
-          setTypewriterIndex((prev) => (prev + 1) % typewriterPhrases.length);
+          setCurrentLineIndex((prev) => (prev + 1) % dictionaryLines.length);
         }
       }
     }, typeSpeed);
 
     return () => clearTimeout(timer);
-  }, [typewriterText, isDeleting, typewriterIndex, isPlaying, currentScene]);
+  }, [typewriterText, isDeleting, currentLineIndex, isPlaying, currentScene]);
 
   const startSequence = () => {
     setCurrentScene(0);
     setIsPlaying(true);
   };
 
-  const resetSequence = () => {
-    setIsPlaying(false);
-    setCurrentScene(0);
+  const getLineStyle = (style: string) => {
+    switch (style) {
+      case "pronunciation":
+        return "text-primary font-body text-2xl md:text-3xl tracking-wide";
+      case "definition":
+        return "text-foreground font-body text-lg md:text-xl";
+      case "example":
+        return "text-muted-foreground font-body text-base md:text-lg italic";
+      case "seealso":
+        return "text-foreground font-body text-base md:text-lg";
+      default:
+        return "text-foreground font-body text-lg";
+    }
   };
 
   return (
@@ -216,7 +226,7 @@ const VideoSequence = () => {
             </motion.div>
           )}
 
-          {/* End state - Large Logo with Typewriter */}
+          {/* End state - Dictionary Logo with Typewriter */}
           {!isPlaying && currentScene >= scenes.length && (
             <motion.div
               key="end"
@@ -227,32 +237,66 @@ const VideoSequence = () => {
                 ease: [0.25, 0.1, 0.25, 1],
                 scale: { type: "spring", stiffness: 100, damping: 20 }
               }}
-              className="flex flex-col items-center gap-8"
+              className="flex flex-col items-center w-full max-w-4xl mx-auto"
             >
-              <motion.img
-                src={natyvLogoFull}
-                alt="Natyv AI"
-                className="max-w-3xl w-full mx-auto"
-                initial={{ opacity: 0, y: 30 }}
+              {/* Static Header - NATYV AI */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.5, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mb-6"
+              >
+                <h1 className="text-6xl md:text-8xl font-display tracking-[0.15em] font-light">
+                  <span className="text-foreground">NATYV</span>
+                  <span className="text-primary ml-4">AI</span>
+                </h1>
+              </motion.div>
+
+              {/* Top horizontal line */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="w-full h-[1px] bg-foreground/60 mb-8"
               />
-              
-              {/* Typewriter effect */}
+
+              {/* Typewriter Dictionary Section */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 0.8 }}
-                className="h-8 flex items-center justify-center"
+                transition={{ delay: 0.8, duration: 0.8 }}
+                className="min-h-[100px] flex flex-col items-center justify-center py-6"
               >
-                <span className="font-body text-lg md:text-xl text-muted-foreground tracking-wide font-light italic">
+                <span className={`${getLineStyle(dictionaryLines[currentLineIndex].style)} whitespace-pre-wrap`}>
                   {typewriterText}
                   <motion.span
                     animate={{ opacity: [1, 0] }}
-                    transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
-                    className="inline-block w-0.5 h-5 bg-primary ml-1 align-middle"
+                    transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+                    className="inline-block w-0.5 h-6 bg-primary ml-1 align-middle"
                   />
                 </span>
+              </motion.div>
+
+              {/* Bottom horizontal line */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="w-full h-[1px] bg-foreground/60 mt-8 mb-6"
+              />
+
+              {/* Static Footer Navigation */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="flex items-center justify-center gap-8 text-foreground font-body text-sm md:text-base tracking-[0.3em] uppercase"
+              >
+                <span>Studio</span>
+                <span className="w-[3px] h-4 bg-primary" />
+                <span>Solutions</span>
+                <span className="w-[3px] h-4 bg-primary" />
+                <span>Advisory</span>
               </motion.div>
             </motion.div>
           )}
