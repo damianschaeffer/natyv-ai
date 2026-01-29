@@ -3,10 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import myAgentLogo from "@/assets/myagent-logo.png";
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
-import MyAgentShowcase from "./MyAgentShowcase";
 
 const MyAgentSection = () => {
-  const [isActive, setIsActive] = useState(false);
   const [currentLine, setCurrentLine] = useState(0);
 
   const taglines = [
@@ -25,23 +23,20 @@ const MyAgentSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <section className="py-40 min-h-screen flex items-center relative overflow-hidden" id="my-agent">
+  return (
+    <section className="py-40 min-h-screen flex items-center relative overflow-hidden" id="my-agent">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <motion.div className="text-center" initial={{
-        opacity: 0,
-        y: 30
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.6
-      }}>
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           {/* Natyv Logo Header */}
           <img 
             src={natyvLogoTopline} 
@@ -63,7 +58,11 @@ const MyAgentSection = () => {
             <span>Presents</span>
             <span>Our Flagship Product</span>
           </div>
-          <img src={myAgentLogo} alt="MY AGENT" className="h-28 md:h-32 w-auto mx-auto mb-8 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] cursor-pointer" />
+          <img 
+            src={myAgentLogo} 
+            alt="MY AGENT" 
+            className="h-28 md:h-32 w-auto mx-auto mb-8 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(var(--primary),0.3)] cursor-pointer" 
+          />
           <div className="h-12 mb-10 flex items-center justify-center overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.p
@@ -101,24 +100,9 @@ const MyAgentSection = () => {
             </motion.div>
           </a>
         </motion.div>
-
-        {/* Interactive Showcase */}
-        <motion.div className="mt-16" initial={{
-        opacity: 0,
-        y: 40
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.8,
-        delay: 0.2
-      }}>
-          <MyAgentShowcase />
-        </motion.div>
-
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default MyAgentSection;
