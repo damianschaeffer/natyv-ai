@@ -57,7 +57,7 @@ const MyAgentSection = () => {
           <div className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-6 flex flex-col items-center gap-3">
             <span>Presents</span>
             <div className="w-16 h-px bg-primary/50" />
-            <span>Our Flagship Product</span>
+            <span className="text-foreground">Our Flagship Product</span>
           </div>
           <img 
             src={myAgentLogo} 
