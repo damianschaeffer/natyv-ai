@@ -43,11 +43,11 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
+        <div className="flex items-center">
+          {/* Logo - Fixed width for balance */}
           <motion.a 
             href="/" 
-            className="flex items-center"
+            className="flex items-center w-32 flex-shrink-0"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
@@ -58,7 +58,7 @@ const Navbar = () => {
             />
           </motion.a>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex items-center justify-center gap-6 flex-1">
             {navLinks.map((link, index) => (
               <div key={link.label} className="flex items-center gap-6">
@@ -97,8 +97,8 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Right Section - Social Links & Protocol Status */}
-          <div className="hidden md:flex items-center gap-6 ml-auto">
+          {/* Right Section - Social Links & Protocol Status - Fixed width for balance */}
+          <div className="hidden md:flex items-center justify-end gap-6 w-32 flex-shrink-0">
             {socialLinks.map((social, index) => (
               <motion.a
                 key={social.label}
