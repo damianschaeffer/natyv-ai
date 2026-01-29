@@ -159,10 +159,10 @@ const VideoSequence = () => {
             />
 
             {/* Top horizontal separator line - flush with header */}
-            <div className="w-full max-w-2xl h-px bg-foreground/40 mt-2 mb-6" />
+            <div className="w-full max-w-2xl h-px bg-foreground/40 mt-2 mb-4" />
 
             {/* Dictionary Content - Typewriter builds up line by line - FIXED height so footer doesn't move */}
-            <div className="h-[260px] flex flex-col items-center justify-start w-full max-w-2xl overflow-hidden">
+            <div className="h-[260px] flex flex-col items-center justify-start w-full max-w-2xl overflow-hidden pt-2">
               {dictionaryContent.map((line, index) => {
                 const isCompleted = completedLines.includes(index);
                 const isCurrentlyTyping = index === currentLineIndex && !isTypingComplete;
@@ -190,7 +190,7 @@ const VideoSequence = () => {
             </div>
 
             {/* Bottom horizontal separator line - flush with footer */}
-            <div className="w-full max-w-2xl h-px bg-foreground/40 mt-6 mb-2" />
+            <div className="w-full max-w-2xl h-px bg-foreground/40 mt-4 mb-2" />
 
             {/* Static Footer - Using actual logo image */}
             <img
