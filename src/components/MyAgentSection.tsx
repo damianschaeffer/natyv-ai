@@ -54,7 +54,7 @@ const MyAgentSection = () => {
       }} transition={{
         duration: 0.6
       }}>
-          <span className="text-primary font-body text-base tracking-[0.3em] uppercase mb-4 block">
+          <span className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-4 block">
             Flagship Product
           </span>
           <img src={myAgentLogo} alt="MY AGENT" className="h-40 md:h-48 w-auto mx-auto mb-4" />
