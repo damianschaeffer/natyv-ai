@@ -98,7 +98,7 @@ const Navbar = () => {
           </div>
 
           {/* Right Section - Social Links & Protocol Status - Fixed width for balance */}
-          <div className="hidden md:flex items-center justify-end gap-6 w-32 flex-shrink-0">
+          <div className="hidden md:flex items-center justify-end gap-3 w-32 flex-shrink-0">
             {socialLinks.map((social, index) => (
               <motion.a
                 key={social.label}
