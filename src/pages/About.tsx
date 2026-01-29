@@ -66,7 +66,7 @@ const About = () => {
                   Founder
                 </span>
                 
-                <h1 className="font-accent text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-4">
+                <h1 className="font-roboto text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-4 font-medium">
                   Damian Schaeffer
                 </h1>
                 
