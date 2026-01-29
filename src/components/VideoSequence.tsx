@@ -8,8 +8,8 @@ const VideoSequence = () => {
   const [currentScene, setCurrentScene] = useState(0);
 
   const scenes = [
-    { id: 0, duration: 2500 }, // Mission Part 1
-    { id: 1, duration: 2500 }, // Mission Part 2
+    { id: 0, duration: 5000 }, // Mission Part 1
+    { id: 1, duration: 5000 }, // Mission Part 2
   ];
 
   useEffect(() => {
@@ -127,14 +127,14 @@ const VideoSequence = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 1.2 }}
               className="space-y-4"
             >
               <motion.h2
                 className="text-4xl md:text-6xl font-display text-foreground"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 1.4, delay: 0.3 }}
               >
                 Building AI systems
               </motion.h2>
@@ -142,7 +142,7 @@ const VideoSequence = () => {
                 className="text-4xl md:text-6xl font-display text-primary"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                transition={{ duration: 1.4, delay: 0.8 }}
               >
                 that free humans
               </motion.h2>
@@ -156,22 +156,22 @@ const VideoSequence = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 1.2 }}
               className="space-y-4"
             >
               <motion.h2
                 className="text-4xl md:text-6xl font-display text-foreground"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 1.4, delay: 0.3 }}
               >
-                to live as they're meant to —
+                to live as we are meant to —
               </motion.h2>
               <motion.h2
                 className="text-4xl md:text-6xl font-display text-primary"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                transition={{ duration: 1.4, delay: 0.8 }}
               >
                 present, fulfilled, connected
               </motion.h2>
