@@ -166,13 +166,16 @@ const MyAgentSection = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <motion.button
-            className="px-8 py-4 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300"
+          <motion.a
+            href="https://get-myagent.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-4 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
             Initialize MY AGENT
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
     </section>
