@@ -123,7 +123,7 @@ const Navbar = () => {
               transition={{ delay: 0.4, duration: 0.4 }}
             >
               <Link to="/advisory">
-                <Button className="font-body tracking-wide">
+                <Button className="font-accent uppercase tracking-wide">
                   Book Advisory Session
                 </Button>
               </Link>

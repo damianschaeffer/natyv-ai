@@ -151,11 +151,11 @@ const Footer = () => {
               <div className="hidden lg:block">
                 <ProtocolStatus />
               </div>
-              <Link to="/advisory">
-                <Button className="font-body tracking-wide">
-                  Book Advisory Session
-                </Button>
-              </Link>
+            <Link to="/advisory">
+              <Button className="font-accent uppercase tracking-wide">
+                Book Advisory Session
+              </Button>
+            </Link>
             </div>
           </div>
 
