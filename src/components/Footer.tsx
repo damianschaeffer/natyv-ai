@@ -34,6 +34,7 @@ const Footer = () => {
     { name: "Google Gemini", logo: "/logos/google-gemini.svg" },
     { name: "GoHighLevel", logo: "/logos/gohighlevel.png" },
     { name: "Anthropic", logo: "/logos/anthropic.svg", scale: 0.75 },
+    { name: "ElevenLabs", logo: "/logos/elevenlabs.svg" },
   ];
 
   return (
