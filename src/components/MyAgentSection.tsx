@@ -91,9 +91,26 @@ const MyAgentSection = () => {
             </AnimatePresence>
           </div>
           <a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer">
-            <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90 p-2">
-              Experience the Magic
-            </Button>
+            <motion.div
+              animate={{
+                scale: [1, 1.03, 1],
+                boxShadow: [
+                  "0 0 0 0 hsl(var(--primary) / 0)",
+                  "0 0 20px 4px hsl(var(--primary) / 0.3)",
+                  "0 0 0 0 hsl(var(--primary) / 0)",
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="inline-block rounded-sm"
+            >
+              <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90 p-2">
+                Experience the Magic
+              </Button>
+            </motion.div>
           </a>
         </motion.div>
 
@@ -124,11 +141,31 @@ const MyAgentSection = () => {
         delay: 0.4,
         duration: 0.6
       }}>
-          <motion.a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-4 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300" whileHover={{
-          scale: 1.02
-        }} whileTap={{
-          scale: 0.98
-        }}>
+          <motion.a 
+            href="https://get-myagent.com" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="inline-block px-8 py-4 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase rounded-sm hover:bg-primary/90 transition-all duration-300" 
+            animate={{
+              scale: [1, 1.03, 1],
+              boxShadow: [
+                "0 0 0 0 hsl(var(--primary) / 0)",
+                "0 0 20px 4px hsl(var(--primary) / 0.3)",
+                "0 0 0 0 hsl(var(--primary) / 0)",
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            whileHover={{
+              scale: 1.05
+            }} 
+            whileTap={{
+              scale: 0.98
+            }}
+          >
             Initialize MY AGENT
           </motion.a>
         </motion.div>
