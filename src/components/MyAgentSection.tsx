@@ -58,8 +58,8 @@ const MyAgentSection = () => {
             Flagship Product
           </span>
           <img src={myAgentLogo} alt="MY AGENT" className="h-40 md:h-48 w-auto mx-auto mb-4" />
-          <p className="text-muted-foreground font-body text-lg max-w-3xl mx-auto mb-6">
-            Google Gemini Live Powered Multi-Modal Conversation Voice AI Agents that See, Hear, Reason, Learn, and Remember...Just Like You...
+          <p className="text-muted-foreground font-body text-lg max-w-3xl mx-auto mb-6 flex items-center justify-center flex-wrap gap-1">
+            <img src="/logos/google-gemini.svg" alt="Gemini" className="h-5 inline-block" /> Live Powered Multi-Modal Conversation Voice AI Agents that See, Hear, Reason, Learn, and Remember...Just Like You...
           </p>
           <a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer">
             <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90 p-2">
