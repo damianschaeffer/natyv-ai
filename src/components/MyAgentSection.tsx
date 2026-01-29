@@ -9,11 +9,7 @@ const MyAgentSection = () => {
 
   const taglines = [
     {
-      content: (
-        <>
-          Multi-Modal Google <img src="/logos/google-gemini.svg" alt="Gemini" className="h-5 inline-block mx-1" /> Gemini-Live Voice AI Agents
-        </>
-      ),
+      content: "Multi-Modal Google Gemini-Live Voice AI Agents",
     },
     {
       content: "that Understand, Reason, Learn, and Remember...Just Like You...",
