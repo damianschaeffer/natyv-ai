@@ -41,10 +41,10 @@ const MyAgentSection = () => {
           <img 
             src={natyvLogoTopline} 
             alt="Natyv AI" 
-            className="w-full max-w-md mx-auto mb-6" 
+            className="w-full max-w-md mx-auto mb-3" 
           />
           {/* White separator line */}
-          <div className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-6" />
+          <div className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-3" />
           {/* STUDIO label with blue vertical separators */}
           <div className="flex items-center justify-center gap-6 mb-12">
             <span className="w-[8px] h-8 bg-primary" />
