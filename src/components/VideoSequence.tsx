@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play } from "lucide-react";
+import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
+import natyvLogoFooter from "@/assets/natyv-logo-footer.png";
 
 const VideoSequence = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -252,33 +254,22 @@ const VideoSequence = () => {
               }}
               className="flex flex-col items-center w-full max-w-3xl mx-auto"
             >
-              {/* Static Header - NATYV AI */}
-              <motion.div
+              {/* Static Header - Using actual logo image */}
+              <motion.img
+                src={natyvLogoTopline}
+                alt="Natyv AI"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="mb-4"
-              >
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-body font-extralight tracking-[0.2em] uppercase">
-                  <span className="text-foreground">NATYV</span>
-                  <span className="text-primary ml-2 md:ml-4">AI</span>
-                </h1>
-              </motion.div>
-
-              {/* Top horizontal line */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="w-full h-[1px] bg-foreground/40 mb-6"
+                className="w-full max-w-2xl mb-6"
               />
 
               {/* Dictionary Content - Typewriter builds up line by line */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.8 }}
-                className="min-h-[280px] flex flex-col items-center justify-start py-4 w-full"
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="min-h-[200px] flex flex-col items-center justify-start py-4 w-full max-w-2xl"
               >
                 {dictionaryContent.map((line, index) => {
                   const isCompleted = completedLines.includes(index);
@@ -306,27 +297,15 @@ const VideoSequence = () => {
                 })}
               </motion.div>
 
-              {/* Bottom horizontal line */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="w-full h-[1px] bg-foreground/40 mt-4 mb-6"
-              />
-
-              {/* Static Footer Navigation */}
-              <motion.div
+              {/* Static Footer - Using actual logo image */}
+              <motion.img
+                src={natyvLogoFooter}
+                alt="Studio | Solutions | Advisory"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
-                className="flex items-center justify-center gap-6 md:gap-10 text-foreground font-body text-xs md:text-sm tracking-[0.3em] uppercase"
-              >
-                <span>Studio</span>
-                <span className="w-[3px] h-4 bg-primary" />
-                <span>Solutions</span>
-                <span className="w-[3px] h-4 bg-primary" />
-                <span>Advisory</span>
-              </motion.div>
+                className="w-full max-w-2xl mt-6"
+              />
             </motion.div>
           )}
         </AnimatePresence>
