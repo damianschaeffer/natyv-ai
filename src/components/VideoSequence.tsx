@@ -89,15 +89,15 @@ const VideoSequence = () => {
   const getLineStyle = (style: string) => {
     switch (style) {
       case "pronunciation":
-        return "text-primary font-body text-xl md:text-2xl tracking-wide";
+        return "text-primary font-display text-xl md:text-2xl tracking-wide";
       case "definition":
-        return "text-foreground font-body text-base md:text-lg text-left";
+        return "text-foreground font-display text-base md:text-lg text-left";
       case "example":
-        return "text-muted-foreground font-body text-sm md:text-base italic text-left pl-4";
+        return "text-muted-foreground font-display text-sm md:text-base italic text-left pl-4";
       case "seealso":
-        return "text-foreground font-body text-sm md:text-base text-center mt-4";
+        return "text-foreground font-display text-sm md:text-base text-center mt-4";
       default:
-        return "text-foreground font-body text-base";
+        return "text-foreground font-display text-base";
     }
   };
 
