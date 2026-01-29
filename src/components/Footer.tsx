@@ -33,7 +33,7 @@ const Footer = () => {
     { name: "OpenAI", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" },
     { name: "Google Gemini", logo: "/logos/google-gemini.svg" },
     { name: "GoHighLevel", logo: "/logos/gohighlevel.png" },
-    { name: "Anthropic", logo: "/logos/anthropic.svg" },
+    { name: "Anthropic", logo: "/logos/anthropic.svg", scale: 0.75 },
   ];
 
   return (
@@ -144,6 +144,7 @@ const Footer = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.4 }}
                 whileHover={{ opacity: 0.7 }}
+                style={partner.scale ? { transform: `scale(${partner.scale})` } : undefined}
               >
                 <img
                   src={partner.logo}
