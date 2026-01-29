@@ -59,38 +59,41 @@ const Navbar = () => {
           </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link, index) => (
-              link.isRoute ? (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index, duration: 0.4 }}
-                  whileHover={{ y: -2 }}
-                >
-                  <Link
-                    to={link.href}
-                    className="text-sm font-accent uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em]"
+              <div key={link.label} className="flex items-center gap-6">
+                {index > 0 && (
+                  <div className="w-[2px] h-4 bg-primary rounded-full" />
+                )}
+                {link.isRoute ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index, duration: 0.4 }}
+                    whileHover={{ y: -2 }}
+                  >
+                    <Link
+                      to={link.href}
+                      className="text-base font-accent uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em]"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.a
+                    href={link.href}
+                    target={link.isExternal ? "_blank" : undefined}
+                    rel={link.isExternal ? "noopener noreferrer" : undefined}
+                    className="text-base font-accent uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em]"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index, duration: 0.4 }}
+                    whileHover={{ y: -2 }}
                   >
                     {link.label}
-                  </Link>
-                </motion.div>
-              ) : (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={link.isExternal ? "_blank" : undefined}
-                  rel={link.isExternal ? "noopener noreferrer" : undefined}
-                  className="text-sm font-accent uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em]"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index, duration: 0.4 }}
-                  whileHover={{ y: -2 }}
-                >
-                  {link.label}
-                </motion.a>
-              )
+                  </motion.a>
+                )}
+              </div>
             ))}
           </div>
 
