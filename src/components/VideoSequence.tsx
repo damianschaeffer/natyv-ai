@@ -194,7 +194,7 @@ const VideoSequence = () => {
               <motion.img
                 src={natyvLogoFull}
                 alt="Natyv AI"
-                className="max-w-2xl w-full mx-auto mb-8"
+                className="max-w-3xl w-full mx-auto mb-8"
                 initial={{ 
                   opacity: 0, 
                   y: 30,
