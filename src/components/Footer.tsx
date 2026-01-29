@@ -174,7 +174,7 @@ const Footer = () => {
           </div>
 
           {/* Bottom Bar with Legal Links */}
-          <div className="mt-6 pt-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="mt-2 pt-2 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-muted-foreground font-body">
               © {new Date().getFullYear()} Natyv AI. All rights reserved.
             </p>
