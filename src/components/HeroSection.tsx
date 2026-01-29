@@ -75,7 +75,7 @@ const HeroSection = () => {
           }}>
               ​Go to products     
             </motion.button>
-            <motion.button className="px-8 py-4 border border-border text-foreground font-body text-sm tracking-widest uppercase rounded-sm hover:bg-secondary transition-all duration-300" whileHover={{
+            <motion.button className="border border-border text-foreground font-body tracking-widest uppercase rounded-sm transition-all duration-300 text-center bg-primary text-base px-[8px] py-[8px]" whileHover={{
             scale: 1.02,
             y: -2
           }} whileTap={{
