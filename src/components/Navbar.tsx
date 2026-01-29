@@ -18,7 +18,7 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: "Products", href: "#products" },
+    { label: "Products", href: "https://get-myagent.com", isExternal: true },
     { label: "About", href: "/about", isRoute: true },
     { label: "Advisory", href: "/advisory", isRoute: true },
   ];
@@ -78,6 +78,8 @@ const Navbar = () => {
                 <motion.a
                   key={link.label}
                   href={link.href}
+                  target={link.isExternal ? "_blank" : undefined}
+                  rel={link.isExternal ? "noopener noreferrer" : undefined}
                   className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
