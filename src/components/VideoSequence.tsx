@@ -126,23 +126,23 @@ const VideoSequence = () => {
               key="scene1"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 1.2 }}
-              className="space-y-4"
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6"
             >
               <motion.h2
                 className="text-4xl md:text-6xl font-display text-foreground"
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.4, delay: 0.3 }}
+                initial={{ y: 40, opacity: 0, filter: "blur(4px)" }}
+                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
               >
                 Building AI systems
               </motion.h2>
               <motion.h2
                 className="text-4xl md:text-6xl font-display text-primary"
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.4, delay: 0.8 }}
+                initial={{ y: 40, opacity: 0, filter: "blur(4px)" }}
+                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                transition={{ duration: 1.0, delay: 1.8, ease: "easeOut" }}
               >
                 that free humans
               </motion.h2>
@@ -156,22 +156,22 @@ const VideoSequence = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
-              transition={{ duration: 1.2 }}
-              className="space-y-4"
+              transition={{ duration: 0.8 }}
+              className="space-y-6"
             >
               <motion.h2
                 className="text-4xl md:text-6xl font-display text-foreground"
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.4, delay: 0.3 }}
+                initial={{ y: 40, opacity: 0, filter: "blur(4px)" }}
+                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
               >
                 to live as we are meant to —
               </motion.h2>
               <motion.h2
                 className="text-4xl md:text-6xl font-display text-primary"
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.4, delay: 0.8 }}
+                initial={{ y: 40, opacity: 0, filter: "blur(4px)" }}
+                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                transition={{ duration: 1.0, delay: 1.8, ease: "easeOut" }}
               >
                 present, fulfilled, connected
               </motion.h2>
