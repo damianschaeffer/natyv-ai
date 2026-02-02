@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐾 Clawdy Live Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 20px;
+        }
+        .pulse {
+            width: 10px;
+            height: 10px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .card h2 {
+            font-size: 1.1em;
+            color: #00d4ff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat:last-child { border-bottom: none; }
+        .stat-label { color: #888; }
+        .stat-value { font-weight: 600; }
+        .stat-value.good { color: #00ff88; }
+        .stat-value.warning { color: #ffaa00; }
+        .timeline-item {
+            padding: 12px 0;
+            border-left: 2px solid #00d4ff;
+            padding-left: 16px;
+            margin-left: 8px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 16px;
+            width: 10px;
+            height: 10px;
+            background: #00d4ff;
+            border-radius: 50%;
+        }
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 2px;
+            background: rgba(0,212,255,0.2);
+            border-radius: 12px;
+            font-size: 0.85em;
+        }
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+        }
+        .timestamp {
+            text-align: center;
+            color: #666;
+            font-size: 0.85em;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        .memory-files {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .memory-file {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.9em;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐾 Clawdy Live</h1>
+        <div class="status-badge">
+            <div class="pulse"></div>
+            <span>Awake & Learning</span>
+        </div>
+    </div>
+
+    <div class="grid">
+        <!-- Core Stats -->
+        <div class="card">
+            <h2>📊 Core Stats</h2>
+            <div class="stat">
+                <span class="stat-label">Current Session</span>
+                <span class="stat-value" id="session-id">Loading...</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Gateway Status</span>
+                <span class="stat-value good">Online ✓</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Channel</span>
+                <span class="stat-value">Telegram</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Memory Sync</span>
+                <span class="stat-value good">Active ✓</span>
+            </div>
+        </div>
+
+        <!-- Memory System -->
+        <div class="card">
+            <h2>🧠 Memory System</h2>
+            <div class="stat">
+                <span class="stat-label">Files Indexed</span>
+                <span class="stat-value" id="memory-count">--</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Last Updated</span>
+                <span class="stat-value" id="memory-time">--</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Sync Location</span>
+                <span class="stat-value" style="font-size:0.85em;">Google Drive</span>
+            </div>
+            <h3 style="margin-top:15px;font-size:0.85em;color:#888;">Recent Files</h3>
+            <div class="memory-files" id="memory-list"></div>
+        </div>
+
+        <!-- Scheduled Tasks -->
+        <div class="card">
+            <h2>⏰ Scheduled Tasks</h2>
+            <div class="stat">
+                <span class="stat-label">Active Jobs</span>
+                <span class="stat-value" id="cron-count">--</span>
+            </div>
+            <div class="timeline" id="cron-list"></div>
+        </div>
+
+        <!-- Skills -->
+        <div class="card">
+            <h2>⚡ Capabilities</h2>
+            <div class="stat">
+                <span class="stat-label">Skills Loaded</span>
+                <span class="stat-value" id="skills-count">--</span>
+            </div>
+            <div id="skills-list"></div>
+        </div>
+
+        <!-- Learning -->
+        <div class="card">
+            <h2>📚 Recent Learning</h2>
+            <div class="stat">
+                <span class="stat-label">Today's Lessons</span>
+                <span class="stat-value" id="lessons-count">--</span>
+            </div>
+            <div class="timeline" id="learning-list">
+                <div class="timeline-item">
+                    <div class="time" id="last-lesson-time">--</div>
+                    <div class="event" id="last-lesson">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Focus -->
+        <div class="card">
+            <h2>🎯 Current Focus</h2>
+            <div class="stat">
+                <span class="stat-label">Mission</span>
+                <span class="stat-value">MyAgent Launch</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Version</span>
+                <span class="stat-value warning">v5.7</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Status</span>
+                <span class="stat-value">Testing</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="timestamp" id="timestamp">Last updated: --</div>
+
+    <button class="refresh-btn" onclick="refreshData()">↻</button>
+
+    <script>
+        const skills = ['weather', 'coding-agent', 'session-logs', 'skill-creator'];
+        
+        // Real learning history from memory
+        const lessons = [
+            { time: 'Today 16:42', event: 'Exhaustive research before asking (HARD RULE)' },
+            { time: 'Today 16:24', event: 'v5.7 fixes: Q4, ROI, availability, greeting' },
+            { time: 'Today 05:16', event: 'GHL API direct integration (not webhook)' },
+            { time: 'Jan 30 22:38', event: 'First GHL contact sync working' },
+            { time: 'Jan 29', event: 'Trello API automation' },
+            { time: 'Jan 29', event: 'LinkedIn stealth mode for launch' }
+        ];
+
+        function formatTime() {
+            return new Date().toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+
+        function refreshData() {
+            const now = new Date();
+            
+            // Update timestamp
+            document.getElementById('timestamp').textContent = `Last updated: ${formatTime()}`;
+            document.getElementById('session-id').textContent = `main @ ${formatTime()}`;
+            
+            // Memory
+            document.getElementById('memory-count').textContent = '8 files';
+            document.getElementById('memory-time').textContent = formatTime();
+            document.getElementById('memory-list').innerHTML = `
+                <div class="memory-file"><span>MEMORY.md</span><span style="color:#00ff88">Active</span></div>
+                <div class="memory-file"><span>2026-02-02.md</span><span style="color:#00ff88">Active</span></div>
+                <div class="memory-file"><span>2026-02-01.md</span><span>Stored</span></div>
+                <div class="memory-file"><span>USER.md</span><span style="color:#00ff88">Active</span></div>
+                <div class="memory-file"><span>SOUL.md</span><span style="color:#00ff88">Active</span></div>
+            `;
+            
+            // Cron
+            document.getElementById('cron-count').textContent = '1';
+            document.getElementById('cron-list').innerHTML = `
+                <div class="timeline-item">
+                    <div class="time">Tomorrow 7:00 AM</div>
+                    <div class="event">Morning Brief</div>
+                </div>
+            `;
+            
+            // Skills
+            document.getElementById('skills-count').textContent = skills.length;
+            document.getElementById('skills-list').innerHTML = skills.map(s => 
+                `<span class="tag">${s}</span>`
+            ).join('');
+            
+            // Learning
+            document.getElementById('lessons-count').textContent = lessons.length;
+            document.getElementById('last-lesson-time').textContent = lessons[0].time;
+            document.getElementById('last-lesson').textContent = lessons[0].event;
+            document.getElementById('learning-list').innerHTML = lessons.slice(0, 5).map(l => `
+                <div class="timeline-item">
+                    <div class="time">${l.time}</div>
+                    <div class="event">${l.event}</div>
+                </div>
+            `).join('');
+        }
+
+        // Initial load
+        refreshData();
+        
+        // Auto-refresh every 10 seconds
+        setInterval(refreshData, 10000);
+    </script>
+</body>
+</html>

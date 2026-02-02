@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clawdy Live Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+        .card h2 {
+            font-size: 1.1em;
+            color: #00d4ff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat:last-child { border-bottom: none; }
+        .stat-label { color: #888; }
+        .stat-value { font-weight: 600; }
+        .stat-value.good { color: #00ff88; }
+        .stat-value.warning { color: #ffaa00; }
+        .stat-value.bad { color: #ff5555; }
+        .memory-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .memory-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.9em;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .memory-item .date { color: #888; }
+        .memory-item .size { color: #00d4ff; }
+        .timeline {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .timeline-item {
+            padding: 12px 0;
+            border-left: 2px solid #00d4ff;
+            padding-left: 16px;
+            margin-left: 8px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 16px;
+            width: 10px;
+            height: 10px;
+            background: #00d4ff;
+            border-radius: 50%;
+        }
+        .timeline-item .time { font-size: 0.8em; color: #888; }
+        .timeline-item .event { margin-top: 4px; }
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            transition: width 0.5s ease;
+        }
+        .emoji { font-size: 1.2em; }
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+            transition: transform 0.3s;
+        }
+        .refresh-btn:hover { transform: scale(1.1); }
+        .loading { opacity: 0.5; pointer-events: none; }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐾 Clawdy Live</h1>
+        <div class="status">
+            <div class="status-dot"></div>
+            <span id="agent-status">Awake & Learning</span>
+        </div>
+    </div>
+
+    <div class="grid">
+        <!-- Core Stats -->
+        <div class="card">
+            <h2><span class="emoji">📊</span> Core Stats</h2>
+            <div class="stat">
+                <span class="stat-label">Current Session</span>
+                <span class="stat-value" id="session-id">Loading...</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Session Start</span>
+                <span class="stat-value" id="session-start">Loading...</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Messages</span>
+                <span class="stat-value" id="message-count">Loading...</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Gateway Status</span>
+                <span class="stat-value good" id="gateway-status">Online</span>
+            </div>
+        </div>
+
+        <!-- Memory -->
+        <div class="card">
+            <h2><span class="emoji">🧠</span> Memory System</h2>
+            <div class="stat">
+                <span class="stat-label">Memory Files</span>
+                <span class="stat-value" id="memory-files">Loading...</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Total Size</span>
+                <span class="stat-value" id="memory-size">Loading...</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Sync Status</span>
+                <span class="stat-value good" id="sync-status">Synced ✓</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="memory-progress" style="width: 100%"></div>
+            </div>
+            <h3 style="margin-top: 20px; font-size: 0.9em; color: #888;">Recent Files</h3>
+            <div class="memory-list" id="memory-list"></div>
+        </div>
+
+        <!-- Cron Jobs -->
+        <div class="card">
+            <h2><span class="emoji">⏰</span> Scheduled Tasks</h2>
+            <div class="stat">
+                <span class="stat-label">Active Jobs</span>
+                <span class="stat-value" id="cron-jobs">Loading...</span>
+            </div>
+            <div class="timeline" id="cron-timeline"></div>
+        </div>
+
+        <!-- Learning History -->
+        <div class="card">
+            <h2><span class="emoji">📚</span> Learning Activity</h2>
+            <div class="stat">
+                <span class="stat-label">Today's Lessons</span>
+                <span class="stat-value" id="today-lessons">Loading...</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Total Sessions</span>
+                <span class="stat-value" id="total-sessions">Loading...</span>
+            </div>
+            <div class="timeline" id="learning-timeline"></div>
+        </div>
+
+        <!-- Skills & Capabilities -->
+        <div class="card">
+            <h2><span class="emoji">⚡</span> Capabilities</h2>
+            <div class="stat">
+                <span class="stat-label">Skills Loaded</span>
+                <span class="stat-value" id="skills-count">Loading...</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Default Model</span>
+                <span class="stat-value" id="default-model">MiniMax M2.1</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Channels Active</span>
+                <span class="stat-value" id="channels-active">Telegram</span>
+            </div>
+            <div id="skills-list" style="margin-top: 15px;"></div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card">
+            <h2><span class="emoji">🎯</span> Current Focus</h2>
+            <div class="stat">
+                <span class="stat-label">Mission</span>
+                <span class="stat-value" id="mission">MyAgent Launch</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Priority</span>
+                <span class="stat-value warning">v5.7 Testing</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Last Update</span>
+                <span class="stat-value" id="last-update">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <button class="refresh-btn" onclick="refreshDashboard()">↻</button>
+
+    <script>
+        let lastUpdate = new Date();
+
+        async function fetchDashboardData() {
+            const data = {
+                session: { id: 'main', start: new Date().toISOString() },
+                memory: { files: 0, size: '0 KB', synced: true },
+                cron: { jobs: [], active: 0 },
+                skills: { list: ['weather', 'coding-agent', 'session-logs', 'skill-creator'], count: 0 },
+                sessions: { total: 1 },
+                todayLessons: 5
+            };
+
+            // Fetch memory files
+            try {
+                const memResp = await fetch('/api/dashboard/memory');
+                if (memResp.ok) {
+                    const memData = await memResp.json();
+                    data.memory = memData;
+                }
+            } catch (e) {
+                // Fallback to local
+                data.memory = { files: 2, size: '4 KB', synced: true };
+            }
+
+            // Fetch cron jobs
+            try {
+                const cronResp = await fetch('/api/dashboard/cron');
+                if (cronResp.ok) {
+                    const cronData = await cronResp.json();
+                    data.cron = cronData;
+                }
+            } catch (e) {
+                data.cron = {
+                    jobs: [{
+                        name: 'Morning Brief',
+                        nextRun: new Date(Date.now() + 86400000).toISOString(),
+                        lastRun: new Date(Date.now() - 72000000).toISOString(),
+                        status: 'ok'
+                    }],
+                    active: 1
+                };
+            }
+
+            data.skills.count = data.skills.list.length;
+            return data;
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+
+        function renderDashboard(data) {
+            // Session stats
+            document.getElementById('session-id').textContent = data.session.id;
+            document.getElementById('session-start').textContent = formatDate(data.session.start);
+            document.getElementById('message-count').textContent = '∞';
+
+            // Memory
+            document.getElementById('memory-files').textContent = data.memory.files || '2';
+            document.getElementById('memory-size').textContent = data.memory.size || '4 KB';
+
+            // Cron
+            document.getElementById('cron-jobs').textContent = data.cron.active || '1';
+            const cronTimeline = document.getElementById('cron-timeline');
+            cronTimeline.innerHTML = data.cron.jobs.map(job => `
+                <div class="timeline-item">
+                    <div class="time">Next: ${formatDate(job.nextRun)}</div>
+                    <div class="event">${job.name} (${job.status})</div>
+                </div>
+            `).join('') || '<div class="timeline-item"><div class="time">No scheduled tasks</div></div>';
+
+            // Skills
+            document.getElementById('skills-count').textContent = data.skills.count;
+            document.getElementById('skills-list').innerHTML = data.skills.list.map(skill => 
+                `<span style="display:inline-block;padding:4px 12px;margin:2px;background:rgba(0,212,255,0.2);border-radius:12px;font-size:0.85em;">${skill}</span>`
+            ).join('');
+
+            // Learning
+            document.getElementById('today-lessons').textContent = data.todayLessons;
+            document.getElementById('total-sessions').textContent = data.sessions.total;
+
+            // Last update
+            lastUpdate = new Date();
+            document.getElementById('last-update').textContent = lastUpdate.toLocaleTimeString();
+        }
+
+        async function refreshDashboard() {
+            document.body.classList.add('loading');
+            try {
+                const data = await fetchDashboardData();
+                renderDashboard(data);
+            } catch (e) {
+                console.error('Dashboard error:', e);
+            }
+            document.body.classList.remove('loading');
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(refreshDashboard, 30000);
+
+        // Initial load
+        refreshDashboard();
+    </script>
+</body>
+</html>

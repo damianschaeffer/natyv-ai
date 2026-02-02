@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐾 Clawdy — Live Agent Status</title>
+    <meta name="description" content="Real-time status and learning metrics for Clawdy AI agent" />
+    
+    <!-- Fonts: Playfair Display + Inter + Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: 217 91% 60%;
+            --primary-foreground: 0 0% 100%;
+            --background: 0 0% 8%;
+            --background-light: 0 0% 12%;
+            --foreground: 0 0% 95%;
+            --foreground-muted: 0 0% 60%;
+            --accent: 217 91% 60%;
+            --border: 0 0% 20%;
+            --card: 0 0% 12%;
+            --card-foreground: 0 0% 95%;
+            --gold: 43 74% 50%;
+            --success: 142 76% 36%;
+            --warning: 38 92% 50%;
+            
+            --radius: 16px;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-roboto: 'Roboto', sans-serif;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-body);
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background-light)) 100%);
+            border-bottom: 1px solid hsl(var(--border));
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--gold)), hsl(var(--primary)));
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold)));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 32px hsla(var(--primary), 0.3);
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 8px 32px hsla(var(--primary), 0.3); }
+            50% { box-shadow: 0 8px 48px hsla(var(--primary), 0.5); }
+        }
+        
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 2.5em;
+            font-weight: 500;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--primary)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: hsla(var(--success), 0.15);
+            border: 1px solid hsla(var(--success), 0.3);
+            border-radius: 30px;
+            font-size: 0.9em;
+            color: hsl(var(--success));
+        }
+        
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: hsl(var(--success));
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .tagline {
+            font-family: var(--font-roboto);
+            color: hsl(var(--foreground-muted));
+            font-size: 1em;
+            margin-top: 12px;
+        }
+        
+        /* Main */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.5em;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title span {
+            font-size: 1.2em;
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        /* Cards */
+        .card {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 24px;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+        
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid hsl(var(--border));
+        }
+        
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.1em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title .icon {
+            font-size: 1.3em;
+        }
+        
+        /* Stats */
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid hsl(var(--border), 0.5);
+        }
+        
+        .stat:last-child { border-bottom: none; }
+        
+        .stat-label {
+            color: hsl(var(--foreground-muted));
+            font-size: 0.95em;
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .stat-value.good { color: hsl(var(--success)); }
+        .stat-value.warning { color: hsl(var(--warning)); }
+        .stat-value.primary { color: hsl(var(--primary)); }
+        
+        /* Progress */
+        .progress-bar {
+            height: 6px;
+            background: hsl(var(--border));
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--gold)));
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            background: hsla(var(--primary), 0.15);
+            border: 1px solid hsla(var(--primary), 0.3);
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: hsl(var(--primary));
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: hsla(var(--primary), 0.25);
+            transform: translateY(-2px);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, hsl(var(--primary)), transparent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 16px 0;
+            padding-left: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 22px;
+            width: 10px;
+            height: 10px;
+            background: hsl(var(--primary));
+            border-radius: 50%;
+            border: 2px solid hsl(var(--background));
+        }
+        
+        .timeline-time {
+            font-size: 0.8em;
+            color: hsl(var(--foreground-muted));
+            margin-bottom: 4px;
+        }
+        
+        .timeline-event {
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        /* Soul Section */
+        .soul-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .soul-item {
+            background: hsla(var(--primary), 0.08);
+            border: 1px solid hsla(var(--primary), 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .soul-item:hover {
+            background: hsla(var(--primary), 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .soul-item .emoji {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+        
+        .soul-item .label {
+            font-size: 0.8em;
+            color: hsl(var(--foreground-muted));
+        }
+        
+        .soul-item .value {
+            font-weight: 600;
+            font-size: 0.95em;
+            margin-top: 4px;
+        }
+        
+        /* Memory Files */
+        .memory-file {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid hsl(var(--border), 0.3);
+            font-size: 0.9em;
+        }
+        
+        .memory-file:last-child { border-bottom: none; }
+        
+        .memory-file .name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .memory-file .status {
+            font-size: 0.8em;
+            color: hsl(var(--success));
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground-muted));
+            font-size: 0.9em;
+        }
+        
+        .footer a {
+            color: hsl(var(--primary));
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .grid { grid-template-columns: 1fr; }
+            .soul-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        /* Embed Mode - for widget insertion */
+        .embed-mode .header {
+            padding: 24px 16px;
+        }
+        
+        .embed-mode .header h1 { font-size: 1.5em; }
+        
+        .embed-mode .avatar {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+        }
+        
+        .embed-mode .main { padding: 20px 16px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="avatar">🐾</div>
+            <h1>Clawdy</h1>
+            <div class="status-badge">
+                <div class="pulse"></div>
+                <span>Active & Learning</span>
+            </div>
+            <p class="tagline">AI Agent with Persistent Memory & Continuous Learning</p>
+        </div>
+    </div>
+    
+    <div class="main">
+        <!-- Soul & Core -->
+        <h2 class="section-title"><span>✦</span> Core Identity</h2>
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">💙</span> Soul Protocol</div>
+            </div>
+            <div class="soul-grid">
+                <div class="soul-item">
+                    <div class="emoji">🧠</div>
+                    <div class="label">Memory</div>
+                    <div class="value">Persistent</div>
+                </div>
+                <div class="soul-item">
+                    <div class="emoji">📚</div>
+                    <div class="label">Learning</div>
+                    <div class="value">Continuous</div>
+                </div>
+                <div class="soul-item">
+                    <div class="emoji">🔗</div>
+                    <div class="label">Integration</div>
+                    <div class="value">8 APIs</div>
+                </div>
+                <div class="soul-item">
+                    <div class="emoji">⚡</div>
+                    <div class="label">Skills</div>
+                    <div class="value">5 Active</div>
+                </div>
+                <div class="soul-item">
+                    <div class="emoji">⏰</div>
+                    <div class="label">Automation</div>
+                    <div class="value">Scheduled</div>
+                </div>
+                <div class="soul-item">
+                    <div class="emoji">🌐</div>
+                    <div class="label">Channels</div>
+                    <div class="value">Multi-platform</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats Grid -->
+        <h2 class="section-title"><span>📊</span> Live Metrics</h2>
+        <div class="grid">
+            <!-- Gateway Status -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><span class="icon">🟢</span> Gateway Status</div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">System</span>
+                    <span class="stat-value good">Online ✓</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" id="uptime">--</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Session</span>
+                    <span class="stat-value">main</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Channel</span>
+                    <span class="stat-value primary">Telegram</span>
+                </div>
+            </div>
+            
+            <!-- Memory System -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><span class="icon">🧠</span> Memory System</div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Files Indexed</span>
+                    <span class="stat-value" id="memory-files">8</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Total Size</span>
+                    <span class="stat-value" id="memory-size">--</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Sync Status</span>
+                    <span class="stat-value good">Active ✓</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Last Update</span>
+                    <span class="stat-value" id="memory-time">--</span>
+                </div>
+            </div>
+            
+            <!-- Capabilities -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><span class="icon">⚡</span> Capabilities</div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Skills Loaded</span>
+                    <span class="stat-value" id="skills-count">5</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Default Model</span>
+                    <span class="stat-value">MiniMax M2.1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">APIs Connected</span>
+                    <span class="stat-value">8</span>
+                </div>
+                <div class="tags" id="skills-list">
+                    <span class="tag">weather</span>
+                    <span class="tag">coding-agent</span>
+                    <span class="tag">session-logs</span>
+                    <span class="tag">skill-creator</span>
+                    <span class="tag">bluebubbles</span>
+                </div>
+            </div>
+            
+            <!-- Scheduled Tasks -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><span class="icon">⏰</span> Scheduled Tasks</div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Active Jobs</span>
+                    <span class="stat-value" id="cron-count">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Next Run</span>
+                    <span class="stat-value" id="cron-next">--</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Last Run</span>
+                    <span class="stat-value warning" id="cron-last">--</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Heartbeat</span>
+                    <span class="stat-value">30 min</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Learning History -->
+        <h2 class="section-title"><span>📚</span> Learning & Growth</h2>
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">🌱</span> Lessons Retained</div>
+                <span style="color: hsl(var(--success)); font-size: 0.9em;">+3 today</span>
+            </div>
+            <div class="timeline" id="learning-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">Today 16:42</div>
+                    <div class="timeline-event">Exhaustive research before asking (HARD RULE established)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Today 16:24</div>
+                    <div class="timeline-event">v5.7 fixes: Q4 current_challenge, ROI split, availability_preference, warm greeting</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Today 05:16</div>
+                    <div class="timeline-event">GHL API direct integration (replaced webhook approach)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Jan 30 22:38</div>
+                    <div class="timeline-event">First successful GHL contact sync with welcome workflow</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Jan 29</div>
+                    <div class="timeline-event">Trello API automation, LinkedIn stealth mode strategy</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Memory Files -->
+        <h2 class="section-title"><span>📁</span> Memory Files</h2>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">💾</span> Persistent Storage</div>
+            </div>
+            <div id="memory-list">
+                <div class="memory-file">
+                    <span class="name"><span>📄</span> MEMORY.md</span>
+                    <span class="status">Active</span>
+                </div>
+                <div class="memory-file">
+                    <span class="name"><span>📄</span> SOUL.md</span>
+                    <span class="status">Active</span>
+                </div>
+                <div class="memory-file">
+                    <span class="name"><span>📄</span> USER.md</span>
+                    <span class="status">Active</span>
+                </div>
+                <div class="memory-file">
+                    <span class="name"><span>📄</span> 2026-02-02.md</span>
+                    <span class="status">Active</span>
+                </div>
+                <div class="memory-file">
+                    <span class="name"><span>📄</span> 2026-02-01.md</span>
+                    <span class="status">Stored</span>
+                </div>
+                <div class="memory-file">
+                    <span class="name"><span>📄</span> EXHAUSTIVE_RESEARCH_REMINDER.md</span>
+                    <span class="status">Active</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>🐾 Clawdy AI Agent — Built with OpenClaw</p>
+        <p style="margin-top: 8px; font-size: 0.85em;">
+            Powered by Gemini Live + Supabase + GoHighLevel
+        </p>
+    </div>
+
+    <script>
+        // Real-time update every 5 seconds
+        function updateDashboard() {
+            const now = new Date();
+            
+            // Uptime
+            const uptime = Math.floor(performance.now() / 1000);
+            const hours = Math.floor(uptime / 3600);
+            const mins = Math.floor((uptime % 3600) / 60);
+            document.getElementById('uptime').textContent = 
+                hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+            
+            // Memory time
+            document.getElementById('memory-time').textContent = 
+                now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            
+            // Cron next run
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(7, 0, 0, 0);
+            document.getElementById('cron-next').textContent = 
+                tomorrow.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            
+            // Cron last run
+            const lastRun = new Date();
+            lastRun.setDate(lastRun.getDate() - 1);
+            lastRun.setHours(7, 0, 0, 0);
+            document.getElementById('cron-last').textContent = 
+                lastRun.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+        
+        updateDashboard();
+        setInterval(updateDashboard, 5000);
+    </script>
+</body>
+</html>
