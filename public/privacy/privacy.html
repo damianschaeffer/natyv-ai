@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Center — Natyv AI</title>
+    <meta name="description" content="Your trust is our foundation. Privacy policy and data protection at Natyv AI." />
+    
+    <!-- Fonts: Playfair Display + Inter + Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: 217 91% 60%;
+            --primary-light: 217 91% 70%;
+            --gold: 43 74% 50%;
+            --gold-light: 43 74% 60%;
+            --background: 0 0% 8%;
+            --background-light: 0 0% 12%;
+            --background-lighter: 0 0% 16%;
+            --foreground: 0 0% 95%;
+            --foreground-muted: 0 0% 60%;
+            --border: 0 0% 20%;
+            --card: 0 0% 12%;
+            --success: 142 76% 36%;
+            
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-roboto: 'Roboto', sans-serif;
+            
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-body);
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.7;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--primary) / 0.1) 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--gold)), hsl(var(--primary)));
+        }
+        
+        .shield-icon {
+            font-size: 4em;
+            margin-bottom: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 3em;
+            font-weight: 500;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--primary)) 50%, hsl(var(--gold)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .tagline {
+            font-size: 1.3em;
+            color: hsl(var(--foreground-muted));
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Main Content */
+        .main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .section-icon {
+            font-size: 2em;
+        }
+        
+        .section h2 {
+            font-family: var(--font-display);
+            font-size: 1.8em;
+            font-weight: 500;
+        }
+        
+        /* Cards */
+        .card {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius-md);
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .card-highlight {
+            background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--primary) / 0.08) 100%);
+            border: 1px solid hsl(var(--primary) / 0.2);
+        }
+        
+        .card h3 {
+            font-family: var(--font-display);
+            font-size: 1.3em;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Protection List */
+        .protection-list {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .protection-item {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            background: hsl(var(--background-light));
+            border-radius: var(--radius-sm);
+            border-left: 4px solid hsl(var(--primary));
+        }
+        
+        .protection-item .icon {
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+        
+        .protection-item h4 {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .protection-item p {
+            color: hsl(var(--foreground-muted));
+            font-size: 0.95em;
+        }
+        
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid hsl(var(--border));
+        }
+        
+        .data-table th {
+            font-weight: 600;
+            color: hsl(var(--foreground-muted));
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table .protection-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: hsla(var(--success), 0.15);
+            border-radius: 12px;
+            font-size: 0.85em;
+            color: hsl(var(--success));
+        }
+        
+        /* Rights Grid */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+        
+        .right-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 20px;
+            background: hsl(var(--background-light));
+            border-radius: var(--radius-sm);
+        }
+        
+        .right-item .icon {
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+        
+        .right-item h4 {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .right-item p {
+            font-size: 0.9em;
+            color: hsl(var(--foreground-muted));
+        }
+        
+        /* Quote Block */
+        .quote-block {
+            background: linear-gradient(135deg, hsl(var(--gold) / 0.1), hsl(var(--primary) / 0.05));
+            border-left: 4px solid hsl(var(--gold));
+            padding: 24px 32px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin: 24px 0;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--primary) / 0.05) 100%);
+            border: 1px solid hsl(var(--primary) / 0.2);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .cta-section h3 {
+            font-family: var(--font-display);
+            font-size: 1.8em;
+            margin-bottom: 16px;
+        }
+        
+        .cta-section p {
+            color: hsl(var(--foreground-muted));
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+        
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold)));
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px hsl(var(--primary) / 0.4);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground-muted));
+            font-size: 0.9em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .card { padding: 20px; }
+            .cta-section { padding: 32px 20px; }
+            .data-table { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="shield-icon">🛡️</div>
+        <h1>Your Trust Is Our Foundation</h1>
+        <p class="tagline">We don't just protect your data — we can't even see it. Your agent, your rules, your data.</p>
+    </div>
+    
+    <div class="main">
+        <!-- Your Data Belongs to You -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">💙</span>
+                <h2>Your Data Belongs to You</h2>
+            </div>
+            
+            <div class="quote-block">
+                "Think of your AI agent as your close friend who keeps your secrets. 
+                Everything here stays between you and your agent — nothing leaves your account."
+            </div>
+            
+            <p style="margin-top: 20px; color: hsl(var(--foreground-muted));">
+                We built Natyv AI differently. Most companies collect your data to improve their products. 
+                We built an architecture where your data lives in YOUR space, encrypted, isolated, and 
+                accessible only to you and your agent. We don't want it, can't see it, and will never use it.
+            </p>
+        </div>
+        
+        <!-- How We Protect You -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">🔒</span>
+                <h2>How We Protect You</h2>
+            </div>
+            
+            <div class="protection-list">
+                <div class="protection-item">
+                    <span class="icon">🔐</span>
+                    <div>
+                        <h4>Encryption at Rest</h4>
+                        <p>All data encrypted with AES-256. Even if our systems were breached, your data would be unreadable without your encryption keys.</p>
+                    </div>
+                </div>
+                
+                <div class="protection-item">
+                    <span class="icon">🏠</span>
+                    <div>
+                        <h4>Complete Isolation</h4>
+                        <p>Row-Level Security (RLS) ensures Client A can never access Client B's data. Ever. Your secrets stay yours.</p>
+                    </div>
+                </div>
+                
+                <div class="protection-item">
+                    <span class="icon">🙈</span>
+                    <div>
+                        <h4>No Human Access</h4>
+                        <p>Your conversations are between you and your agent. Our team cannot read your raw data, even if we wanted to. We built it this way on purpose.</p>
+                    </div>
+                </div>
+                
+                <div class="protection-item">
+                    <span class="icon">🎛️</span>
+                    <div>
+                        <h4>Your Control</h4>
+                        <p>Export your data anytime. Delete your account and all memories disappear. No questions asked. You're always in control.</p>
+                    </div>
+                </div>
+                
+                <div class="protection-item">
+                    <span class="icon">✅</span>
+                    <div>
+                        <h4>Compliance Certified</h4>
+                        <p>GDPR, CCPA, and SOC2 compliant. We take security seriously and undergo regular audits to prove it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- What We Collect & Why -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">📋</span>
+                <h2>What We Collect & Why</h2>
+            </div>
+            
+            <div class="card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Why We Need It</th>
+                            <th>Protection</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Phone number</strong></td>
+                            <td>To answer your business calls</td>
+                            <td><span class="protection-badge">🔒 Encrypted</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Business name</strong></td>
+                            <td>Personalize your agent's identity</td>
+                            <td><span class="protection-badge">🏠 Isolated</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Goals & challenges</strong></td>
+                            <td>Train your agent to help you best</td>
+                            <td><span class="protection-badge">🔒 Private</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Call transcripts</strong></td>
+                            <td>Remember context for future calls</td>
+                            <td><span class="protection-badge">👁️ Your eyes only</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customer notes</strong></td>
+                            <td>Provide better service over time</td>
+                            <td><span class="protection-badge">🔒 Encrypted</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone recordings</strong></td>
+                            <td>Quality assurance (optional)</td>
+                            <td><span class="protection-badge">🗑️ You control</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Third-Party Services -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">🤝</span>
+                <h2>Trusted Partners Only</h2>
+            </div>
+            
+            <p style="color: hsl(var(--foreground-muted)); margin-bottom: 20px;">
+                We use industry-leading services to operate. We carefully selected partners with strong 
+                privacy practices and never share your data for their marketing purposes.
+            </p>
+            
+            <div class="card">
+                <h3>🔶 Google Workspace</h3>
+                <p style="color: hsl(var(--foreground-muted));">Your data encrypted in Google Cloud. We use Drive for storage, Docs for documents.</p>
+            </div>
+            
+            <div class="card">
+                <h3>🔶 Supabase</h3>
+                <p style="color: hsl(var(--foreground-muted));">Your database, encrypted and isolated. RLS ensures complete data separation.</p>
+            </div>
+            
+            <div class="card">
+                <h3>🔶 Twilio</h3>
+                <p style="color: hsl(var(--foreground-muted));">Handles phone calls (phone numbers only, encrypted). No call content stored by Twilio.</p>
+            </div>
+            
+            <div class="card">
+                <h3>🔶 GoHighLevel (Optional)</h3>
+                <p style="color: hsl(var(--foreground-muted));">Your CRM integration. You control what syncs. We never upload data you didn't approve.</p>
+            </div>
+        </div>
+        
+        <!-- Your Rights -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">✨</span>
+                <h2>Your Rights</h2>
+            </div>
+            
+            <div class="rights-grid">
+                <div class="right-item">
+                    <span class="icon">📤</span>
+                    <div>
+                        <h4>Export Your Data</h4>
+                        <p>Download everything anytime — memories, transcripts, settings.</p>
+                    </div>
+                </div>
+                
+                <div class="right-item">
+                    <span class="icon">🗑️</span>
+                    <div>
+                        <h4>Delete Everything</h4>
+                        <p>One click deletes your account and all memories. Gone forever.</p>
+                    </div>
+                </div>
+                
+                <div class="right-item">
+                    <span class="icon">✏️</span>
+                    <div>
+                        <h4>Correct Information</h4>
+                        <p>Update inaccurate details anytime in your settings.</p>
+                    </div>
+                </div>
+                
+                <div class="right-item">
+                    <span class="icon">❓</span>
+                    <div>
+                        <h4>Ask Questions</h4>
+                        <p>Get answers about how your data is used. We're transparent.</p>
+                    </div>
+                </div>
+                
+                <div class="right-item">
+                    <span class="icon">🚫</span>
+                    <div>
+                        <h4>Opt-Out</h4>
+                        <p>Disable non-essential processing anytime.</p>
+                    </div>
+                </div>
+                
+                <div class="right-item">
+                    <span class="icon">📋</span>
+                    <div>
+                        <h4>Request Access</h4>
+                        <p>Get a copy of all data we hold about you within 30 days.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact CTA -->
+        <div class="cta-section">
+            <h3>Questions About Your Privacy?</h3>
+            <p>Our Data Protection Officer responds within 24 hours. We're here to help.</p>
+            <a href="mailto:privacy@natyv.ai" class="contact-btn">
+                <span>📧</span>
+                <span>Email Privacy Team</span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>🛡️ Natyv AI — Your trust is our foundation</p>
+        <p style="margin-top: 8px; font-size: 0.85em;">
+            Last updated: February 2, 2026 • GDPR Compliant • CCPA Compliant
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Shield — Your Data Is Yours</title>
+    <meta name="description" content="Your privacy is protected. Everything between you and your agent." />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: 217 91% 60%;
+            --gold: 43 74% 50%;
+            --background: 0 0% 8%;
+            --background-light: 0 0% 12%;
+            --foreground: 0 0% 95%;
+            --foreground-muted: 0 0% 60%;
+            --border: 0 0% 20%;
+            --card: 0 0% 12%;
+            --success: 142 76% 36%;
+            
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(217 91% 5%) 100%);
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .shield-container {
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .shield-card {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--primary) / 0.3);
+            border-radius: var(--radius-md);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shield-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .shield-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px hsl(var(--gold) / 0.3));
+            }
+            50% { 
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 40px hsl(var(--gold) / 0.5));
+            }
+        }
+        
+        .shield-card h1 {
+            font-family: var(--font-display);
+            font-size: 1.8em;
+            font-weight: 500;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--gold)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            color: hsl(var(--foreground-muted));
+            font-size: 1.1em;
+            margin-bottom: 32px;
+        }
+        
+        .quote {
+            background: linear-gradient(135deg, hsl(var(--gold) / 0.1), hsl(var(--primary) / 0.05));
+            border-left: 3px solid hsl(var(--gold));
+            padding: 16px 20px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin-bottom: 32px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .protection-features {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: hsl(var(--background-light));
+            border-radius: var(--radius-sm);
+            text-align: left;
+        }
+        
+        .feature .icon {
+            font-size: 1.2em;
+        }
+        
+        .feature span {
+            font-size: 0.95em;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold)));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px hsl(var(--primary) / 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+        }
+        
+        .btn-secondary:hover {
+            border-color: hsl(var(--primary) / 0.5);
+            background: hsl(var(--primary) / 0.05);
+        }
+        
+        .footer-note {
+            margin-top: 24px;
+            font-size: 0.8em;
+            color: hsl(var(--foreground-muted));
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (max-width: 480px) {
+            .shield-card { padding: 24px; }
+            .shield-card h1 { font-size: 1.4em; }
+            .actions { flex-direction: column; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="shield-container">
+        <div class="shield-card">
+            <div class="shield-icon">🛡️</div>
+            <h1>Your Data Is Yours</h1>
+            <p class="tagline">We can't see your data even if we wanted to.</p>
+            
+            <div class="quote">
+                "Think of your AI agent as your close friend who keeps your secrets. 
+                Everything here stays between us."
+            </div>
+            
+            <div class="protection-features">
+                <div class="feature">
+                    <span class="icon">🔐</span>
+                    <span>Encrypted at rest (AES-256)</span>
+                </div>
+                <div class="feature">
+                    <span class="icon">🏠</span>
+                    <span>Complete client isolation</span>
+                </div>
+                <div class="feature">
+                    <span class="icon">🙈</span>
+                    <span>No human access to your data</span>
+                </div>
+                <div class="feature">
+                    <span class="icon">🎛️</span>
+                    <span>Export or delete anytime</span>
+                </div>
+                <div class="feature">
+                    <span class="icon">✅</span>
+                    <span>GDPR, CCPA, SOC2 compliant</span>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <a href="/privacy" class="btn btn-primary">📖 Full Privacy Policy</a>
+                <a href="/studio" class="btn btn-secondary">📊 My Agent Studio</a>
+            </div>
+            
+            <p class="footer-note">
+                Your trust is our foundation. Always.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
