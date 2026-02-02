@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Your Agent is Born!</title>
+    <meta name="description" content="Welcome to your AI agent - watch it grow!" />
+    
+    <!-- Fonts: Playfair Display + Inter + Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: 217 91% 60%;
+            --primary-light: 217 91% 70%;
+            --gold: 43 74% 50%;
+            --gold-light: 43 74% 60%;
+            --background: 0 0% 8%;
+            --background-light: 0 0% 12%;
+            --background-lighter: 0 0% 16%;
+            --foreground: 0 0% 95%;
+            --foreground-muted: 0 0% 60%;
+            --border: 0 0% 20%;
+            --card: 0 0% 12%;
+            --success: 142 76% 36%;
+            --celebration: 43 74% 50%;
+            
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-roboto: 'Roboto', sans-serif;
+            
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-body);
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        /* Celebration Header */
+        .celebration-header {
+            background: linear-gradient(135deg, 
+                hsl(var(--background)) 0%, 
+                hsl(var(--primary) / 0.2) 50%, 
+                hsl(var(--gold) / 0.1) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .celebration-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .birth-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--primary)));
+            border-radius: 30px;
+            font-family: var(--font-roboto);
+            font-weight: 500;
+            font-size: 0.9em;
+            margin-bottom: 24px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 3em;
+            font-weight: 500;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--primary)) 50%, hsl(var(--gold)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.2em;
+            color: hsl(var(--foreground-muted));
+            margin-bottom: 32px;
+        }
+        
+        /* First Memory Card */
+        .first-memory {
+            background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--primary) / 0.1) 100%);
+            border: 1px solid hsl(var(--primary) / 0.3);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 700px;
+            margin: -40px auto 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .memory-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: hsl(var(--primary) / 0.2);
+            border: 1px solid hsl(var(--primary) / 0.4);
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: hsl(var(--primary));
+            margin-bottom: 20px;
+        }
+        
+        .first-memory h2 {
+            font-family: var(--font-display);
+            font-size: 1.8em;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+        
+        .memory-highlight {
+            background: linear-gradient(135deg, hsl(var(--gold) / 0.2), hsl(var(--primary) / 0.1));
+            border-left: 4px solid hsl(var(--gold));
+            padding: 20px 24px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin: 20px 0;
+        }
+        
+        .memory-highlight .label {
+            font-size: 0.8em;
+            color: hsl(var(--gold));
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .memory-highlight .value {
+            font-size: 1.3em;
+            font-weight: 500;
+        }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .stat-box {
+            background: hsl(var(--background-light));
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-box .number {
+            font-size: 2em;
+            font-weight: 600;
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold)));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-box .label {
+            font-size: 0.85em;
+            color: hsl(var(--foreground-muted));
+            margin-top: 4px;
+        }
+        
+        /* Main Content */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            margin-bottom: 48px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.5em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title .icon {
+            font-size: 1.3em;
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        
+        .card {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius-md);
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: hsl(var(--primary) / 0.4);
+            box-shadow: 0 12px 40px hsl(var(--primary) / 0.15);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--gold) / 0.2));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+        
+        .card h3 {
+            font-family: var(--font-display);
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        
+        .card p {
+            color: hsl(var(--foreground-muted));
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        /* Growth Timeline */
+        .timeline-container {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--gold)), transparent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 24px 0;
+            padding-left: 30px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: hsl(var(--primary));
+            border-radius: 50%;
+            border: 4px solid hsl(var(--background));
+        }
+        
+        .timeline-item.milestone::before {
+            background: hsl(var(--gold));
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 hsl(var(--gold) / 0.5); }
+            50% { box-shadow: 0 0 0 10px hsl(var(--gold) / 0); }
+        }
+        
+        .timeline-date {
+            font-size: 0.8em;
+            color: hsl(var(--foreground-muted));
+            margin-bottom: 4px;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-desc {
+            color: hsl(var(--foreground-muted));
+            font-size: 0.95em;
+        }
+        
+        /* Skills Tree */
+        .skills-tree {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 24px;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius-lg);
+        }
+        
+        .skill-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: hsl(var(--background-light));
+            border: 1px solid hsl(var(--border));
+            border-radius: 30px;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+        
+        .skill-badge.locked {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+        
+        .skill-badge.active {
+            background: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--gold) / 0.1));
+            border-color: hsl(var(--primary) / 0.4);
+        }
+        
+        .skill-badge.learning {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.3); }
+            50% { box-shadow: 0 0 20px 5px hsl(var(--primary) / 0.3); }
+        }
+        
+        /* Next Steps */
+        .next-steps {
+            background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--primary) / 0.05) 100%);
+            border: 1px solid hsl(var(--primary) / 0.2);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .next-steps h2 {
+            font-family: var(--font-display);
+            font-size: 1.8em;
+            margin-bottom: 16px;
+        }
+        
+        .next-steps p {
+            color: hsl(var(--foreground-muted));
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold)));
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px hsl(var(--primary) / 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+        }
+        
+        .btn-secondary:hover {
+            border-color: hsl(var(--primary) / 0.5);
+            background: hsl(var(--primary) / 0.05);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground-muted));
+            font-size: 0.9em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .first-memory { margin: -20px 16px 24px; padding: 24px; }
+            .stats-row { grid-template-columns: 1fr; }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Progress Ring */
+        .progress-ring {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+        
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 8;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        .progress-ring .bg {
+            stroke: hsl(var(--border));
+        }
+        
+        .progress-ring .progress {
+            stroke: url(#gradient);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease;
+        }
+        
+        .relationship-score {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .relationship-score .score {
+            font-size: 3em;
+            font-weight: 600;
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--gold)));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .relationship-score .label {
+            color: hsl(var(--foreground-muted));
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Celebration Header -->
+    <div class="celebration-header">
+        <div class="header-content">
+            <div class="birth-badge">
+                <span>🎉</span>
+                <span>Your Agent is Born!</span>
+            </div>
+            <h1>Welcome to Your AI Teammate</h1>
+            <p class="tagline">Your agent just had its first conversation with you. Watch it grow.</p>
+        </div>
+    </div>
+    
+    <!-- First Memory Card -->
+    <div class="first-memory">
+        <div class="memory-badge">
+            <span>🧠</span>
+            <span>First Memory Created</span>
+        </div>
+        <h2>"I want to help you succeed"</h2>
+        
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="number">7</div>
+                <div class="label">Questions Asked</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">∞</div>
+                <div class="label">Memories Stored</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">24/7</div>
+                <div class="label">Always On</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main">
+        <!-- What Your Agent Knows -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title"><span class="icon">💡</span> What Your Agent Knows About You</h2>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">👤</div>
+                    </div>
+                    <h3>You</h3>
+                    <p><strong>Name:</strong> <span id="contact-name">Loading...</span></p>
+                    <p style="margin-top: 8px;"><strong>Since:</strong> <span id="contact-date">Today</span></p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🏢</div>
+                    </div>
+                    <h3>Your Business</h3>
+                    <p><strong>Name:</strong> <span id="business-name">Loading...</span></p>
+                    <p style="margin-top: 8px;"><strong>Goals:</strong> <span id="business-goals">Loading...</span></p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🎯</div>
+                    </div>
+                    <h3>Your Challenges</h3>
+                    <p><strong>Main Challenge:</strong> <span id="main-challenge">Loading...</span></p>
+                    <p style="margin-top: 8px;"><strong>Phone Hours:</strong> <span id="phone-hours">Loading...</span></p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💰</div>
+                    </div>
+                    <h3>Your ROI Goal</h3>
+                    <p>Potential monthly value:</p>
+                    <p style="font-size: 1.5em; font-weight: 600; color: hsl(var(--gold)); margin-top: 8px;" id="roi-value">$3,750</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Relationship Strength -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title"><span class="icon">❤️</span> Relationship Strength</h2>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="relationship-score">
+                    <svg class="progress-ring" viewBox="0 0 120 120">
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="hsl(217, 91%, 60%)" />
+                                <stop offset="100%" stop-color="hsl(43, 74%, 50%)" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="bg" cx="60" cy="60" r="52" />
+                        <circle class="progress" cx="60" cy="60" r="52" 
+                            stroke-dasharray="327" stroke-dashoffset="65" />
+                    </svg>
+                    <div class="score">80%</div>
+                    <div class="label">Your agent knows you well, but there's more to learn!</div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item milestone">
+                        <div class="timeline-date">Today</div>
+                        <div class="timeline-title">🌟 First Conversation</div>
+                        <div class="timeline-desc">Your agent learned your name, business, goals, and challenges</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Ongoing</div>
+                        <div class="timeline-title">📚 Learning Mode</div>
+                        <div class="timeline-desc">Every call helps your agent understand your business better</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Coming Soon</div>
+                        <div class="timeline-title">🔓 New Skills Unlocked</div>
+                        <div class="timeline-desc">As your agent learns, it unlocks new capabilities for you</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Future</div>
+                        <div class="timeline-title">🎓 Mastery Achieved</div>
+                        <div class="timeline-desc">Your agent becomes an expert on your business</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Skills & Capabilities -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title"><span class="icon">⚡</span> Skills & Capabilities</h2>
+            </div>
+            
+            <div class="skills-tree">
+                <div class="skill-badge active">
+                    <span>📞</span>
+                    <span>Answer Calls</span>
+                </div>
+                <div class="skill-badge active">
+                    <span>📝</span>
+                    <span>Take Messages</span>
+                </div>
+                <div class="skill-badge active">
+                    <span>📅</span>
+                    <span>Book Appointments</span>
+                </div>
+                <div class="skill-badge active">
+                    <span>💬</span>
+                    <span>Natural Conversation</span>
+                </div>
+                <div class="skill-badge learning">
+                    <span>🧠</span>
+                    <span>Learn Your Business</span>
+                </div>
+                <div class="skill-badge locked">
+                    <span>🔒</span>
+                    <span>CRM Integration</span>
+                </div>
+                <div class="skill-badge locked">
+                    <span>🔒</span>
+                    <span>Custom Workflows</span>
+                </div>
+                <div class="skill-badge locked">
+                    <span>🔒</span>
+                    <span>Analytics Dashboard</span>
+                </div>
+                <div class="skill-badge locked">
+                    <span>🔒</span>
+                    <span>SMS Notifications</span>
+                </div>
+                <div class="skill-badge locked">
+                    <span>🔒</span>
+                    <span>Email Automation</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Next Steps -->
+        <div class="section">
+            <div class="next-steps">
+                <h2>Ready to Watch Your Agent Grow?</h2>
+                <p>Your AI teammate is ready to start answering calls. Every interaction makes it smarter.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">📞 Test a Call Now</a>
+                    <a href="#" class="btn btn-secondary">📊 View Activity</a>
+                    <a href="#" class="btn btn-secondary">⚙️ Customize Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>🎉 Welcome to the future of business ownership</p>
+        <p style="margin-top: 8px; font-size: 0.85em;">
+            Built with ❤️ by Natyv AI • Powered by Gemini Live
+        </p>
+    </div>
+
+    <script>
+        // Demo data - in production, fetch from API
+        const clientData = {
+            name: "John",
+            business: "John's Plumbing Services",
+            goals: "book more appointments and capture more leads",
+            challenge: "missing calls when we're on jobs",
+            phoneHours: "Extended Hours (8am-8pm)",
+            signupDate: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+        };
+        
+        // Populate the UI
+        document.getElementById('contact-name').textContent = clientData.name;
+        document.getElementById('contact-date').textContent = clientData.signupDate;
+        document.getElementById('business-name').textContent = clientData.business;
+        document.getElementById('business-goals').textContent = clientData.goals.length > 30 ? 
+            clientData.goals.substring(0, 30) + '...' : clientData.goals;
+        document.getElementById('main-challenge').textContent = clientData.challenge.length > 40 ? 
+            clientData.challenge.substring(0, 40) + '...' : clientData.challenge;
+        document.getElementById('phone-hours').textContent = clientData.phoneHours;
+        
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#2882F7', '#F59E0B', '#10B981', '#EC4899', '#8B5CF6'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                document.querySelector('.celebration-header').appendChild(confetti);
+            }
+        }
+        
+        createConfetti();
+        
+        // Animate progress ring
+        setTimeout(() => {
+            document.querySelector('.progress-ring .progress').style.strokeDashoffset = '65';
+        }, 500);
+    </script>
+</body>
+</html>
