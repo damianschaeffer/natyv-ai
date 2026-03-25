@@ -207,22 +207,22 @@ const VideoSequence = () => {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <motion.h2
-                className="text-4xl md:text-6xl font-display text-foreground"
+              <motion.h1
+                className="text-4xl md:text-6xl font-display"
                 initial={{ y: 40, opacity: 0, filter: "blur(4px)" }}
                 animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                 transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }}
               >
-                Building AI systems
-              </motion.h2>
-              <motion.h2
-                className="text-4xl md:text-6xl font-display text-primary"
-                initial={{ y: 40, opacity: 0, filter: "blur(4px)" }}
-                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                transition={{ duration: 1.0, delay: 1.8, ease: "easeOut" }}
-              >
-                that free humans
-              </motion.h2>
+                <span className="text-foreground block">Building AI systems</span>
+                <motion.span
+                  className="text-primary block mt-6"
+                  initial={{ y: 40, opacity: 0, filter: "blur(4px)" }}
+                  animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                  transition={{ duration: 1.0, delay: 1.8, ease: "easeOut" }}
+                >
+                  that free humans
+                </motion.span>
+              </motion.h1>
             </motion.div>
           )}
 
