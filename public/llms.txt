@@ -1,0 +1,47 @@
+# Natyv AI
+
+> Natyv AI builds autonomous AI systems that free humans from repetitive work so they can live more naturally — present, fulfilled, and connected.
+
+## Company
+
+Natyv AI (Natyv Ventures LLC) is an AI company founded by Damian Schaeffer, based in Cape Coral, Florida. The company specializes in multi-modal conversational voice AI agents for business automation.
+
+## Products
+
+### MyAgent (Flagship Product)
+- URL: https://get-myagent.com
+- Description: Multi-modal conversational voice AI agent that handles calls, books appointments, and manages business operations 24/7
+- Pricing: $99/mo (Starter) to $999/mo (Pro), with Enterprise custom pricing
+- Key features: Call answering, appointment booking, pipeline management, marketing automation, revenue operations
+- Agent name: Sophia
+- No setup fees, 14-day free trial, cancel anytime
+
+## Services
+
+### Strategic Advisory
+- URL: https://natyv.ai/advisory
+- Description: 1:1 AI strategy consultations for enterprise decision-makers
+- Format: 60-minute deep dive sessions
+- Focus: Autonomous system integration, operational architecture, high-impact automation opportunities
+
+## Founder
+
+### Damian Schaeffer
+- Role: Founder & CEO
+- LinkedIn: https://linkedin.com/in/damianschaeffer
+- Background: 20+ years in business operations
+  - Grew K&D Management from a few properties to 40+ properties in Cleveland, Ohio
+  - Led 65+ employees serving 150+ communities as President of Sandcastle Community Management
+  - Won "Best of 250+ companies" with measurable statistics
+- Philosophy: "AI should fix that. Not by replacing us, but by freeing us."
+
+## Technology Partners
+
+Google Cloud, Anthropic, OpenAI, Twilio, ElevenLabs, Supabase, Google Gemini, GoHighLevel
+
+## Pages
+
+- Homepage: https://natyv.ai
+- About: https://natyv.ai/about
+- Advisory: https://natyv.ai/advisory
+- MyAgent: https://get-myagent.com
