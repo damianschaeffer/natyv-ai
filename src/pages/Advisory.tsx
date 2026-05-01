@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Calendar, Clock, Video, Shield, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Calendar, Clock, Video, Shield } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -105,26 +104,27 @@ const Advisory = () => {
                 </h2>
               </div>
               
-              {/* Calendar Embed Placeholder */}
-              <div className="p-8 md:p-12">
-                <div className="aspect-video md:aspect-[16/10] w-full rounded-xl border border-dashed border-border bg-secondary/30 flex flex-col items-center justify-center">
-                  <Calendar className="w-16 h-16 text-muted-foreground/50 mb-4" />
-                  <p className="text-muted-foreground font-body text-center mb-2">
-                    Calendar Integration
-                  </p>
-                  <p className="text-sm text-muted-foreground/60 font-body text-center max-w-md">
-                    Cal.com or Calendly embed will be placed here
-                  </p>
-                  
-                  {/* Temporary CTA */}
-                  <Button
-                    className="mt-6 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 font-body"
-                    size="lg"
+              {/* Cal.com embed — Damian's consultation booking link */}
+              <div className="p-2 md:p-4">
+                <iframe
+                  src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark"
+                  title="Book a consultation with Damian Schaeffer"
+                  className="w-full rounded-xl border border-border bg-background"
+                  style={{ height: "720px", border: 0 }}
+                  loading="lazy"
+                  allow="camera; microphone; autoplay; encrypted-media; fullscreen; picture-in-picture"
+                />
+                <p className="text-center text-xs text-muted-foreground/60 font-body mt-3">
+                  Trouble loading the calendar?{" "}
+                  <a
+                    href="https://cal.com/damian-schaeffer/consultation"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
                   >
-                    Book Appointment
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </div>
+                    Book directly on Cal.com →
+                  </a>
+                </p>
               </div>
 
               {/* Footer Note */}

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Linkedin, Twitter, Youtube, Facebook, Instagram } from "lucide-react";
+import TikTokIcon from "./icons/TikTokIcon";
 import ProtocolStatus from "./ProtocolStatus";
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 
@@ -27,10 +28,11 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: Linkedin, href: "https://linkedin.com/in/damianschaeffer", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Youtube, href: "#", label: "YouTube" },
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Twitter, href: "https://x.com/Natyv_AI", label: "X / Twitter" },
+    { icon: Youtube, href: "https://www.youtube.com/@NatyvAI", label: "YouTube" },
+    { icon: Facebook, href: "https://facebook.com/natyv_ai", label: "Facebook" },
+    { icon: Instagram, href: "https://instagram.com/natyv_ai", label: "Instagram" },
+    { icon: TikTokIcon, href: "https://www.tiktok.com/@natyv_ai", label: "TikTok" },
   ];
 
   const legalLinks = [
