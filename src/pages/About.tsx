@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Head } from "vite-react-ssg";
 import { MapPin, Award, Users, Heart, Linkedin, Twitter, Youtube, Instagram, Facebook } from "lucide-react";
+import TikTokIcon from "@/components/icons/TikTokIcon";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import damianProfile from "@/assets/damian-profile.jpg";
@@ -117,11 +118,11 @@ const About = () => {
                     <Linkedin className="w-4 h-4 text-primary" />
                   </motion.a>
                   <motion.a
-                    href="https://x.com"
+                    href="https://x.com/Natyv_AI"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
-                    aria-label="Follow on X"
+                    aria-label="Follow Natyv AI on X"
                     whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -129,11 +130,11 @@ const About = () => {
                     <Twitter className="w-4 h-4 text-primary" />
                   </motion.a>
                   <motion.a
-                    href="https://youtube.com"
+                    href="https://www.youtube.com/@NatyvAI"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
-                    aria-label="Subscribe on YouTube"
+                    aria-label="Subscribe to Natyv AI on YouTube"
                     whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -141,11 +142,11 @@ const About = () => {
                     <Youtube className="w-4 h-4 text-primary" />
                   </motion.a>
                   <motion.a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/natyv_ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
-                    aria-label="Follow on Instagram"
+                    aria-label="Follow Natyv AI on Instagram"
                     whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -153,16 +154,28 @@ const About = () => {
                     <Instagram className="w-4 h-4 text-primary" />
                   </motion.a>
                   <motion.a
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/natyv_ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
-                    aria-label="Follow on Facebook"
+                    aria-label="Follow Natyv AI on Facebook"
                     whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     <Facebook className="w-4 h-4 text-primary" />
+                  </motion.a>
+                  <motion.a
+                    href="https://www.tiktok.com/@natyv_ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center"
+                    aria-label="Follow Natyv AI on TikTok"
+                    whileHover={{ scale: 1.15, backgroundColor: "hsl(var(--primary) / 0.25)" }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <TikTokIcon className="w-4 h-4 text-primary" />
                   </motion.a>
                 </div>
               </div>
