@@ -1,7 +1,7 @@
 name: Deploy to Cloudflare Pages
 on:
   push:
-    branches: [main]
+    branches: [main, legacy-pre-phase-1]
 
 jobs:
   deploy:
@@ -22,4 +22,4 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-        run: npx wrangler pages deploy dist/ --project-name=natyv-site
+        run: npx wrangler pages deploy dist/ --project-name=natyv-site --branch=${{ github.ref_name }}
