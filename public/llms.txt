@@ -1,0 +1,29 @@
+# Natyv AI
+
+> Natyv AI is an AI-native operations agency founded by Damian Schaeffer. We design and deploy voice AI, autonomous workflows, and bespoke agent systems for service businesses — med spas, dental practices, property management, fitness studios, home services, and restaurants. Our productized SaaS platform is MyAgent (separate site at get-myagent.com).
+
+## About
+
+- [About Damian Schaeffer](https://natyv.ai/about): Founder bio. 20+ years in business operations — scaled K&D Management (Cleveland, OH) to 40+ properties; led Sandcastle Community Management (Naples, FL) with 65 employees serving 150+ communities; founded Gulf Pointe Real Estate Group. Educated at The Ohio State University.
+
+## Services
+
+- [Strategic AI Advisory](https://natyv.ai/advisory): 1:1 strategy consultations on AI operations architecture, deployment roadmaps, and ROI modeling for service businesses.
+- More service surfaces are being published — check back for /services and /industries/* pages.
+
+## Products
+
+- [MyAgent](https://get-myagent.com/): Productized SaaS platform — AI voice agents, scheduling, lead intelligence, follow-up automation, payment workflows. Six packages from $99/mo to Enterprise. The platform Natyv AI deploys for white-glove agency engagements.
+
+## Contact
+
+- [Book a Consultation](https://natyv.ai/advisory): Schedule a 60-minute strategy session with Damian Schaeffer via Cal.com.
+
+## Optional
+
+- LinkedIn: https://www.linkedin.com/in/damianschaeffer
+- X/Twitter: https://x.com/Natyv_AI
+- YouTube: https://www.youtube.com/@NatyvAI
+- TikTok: https://www.tiktok.com/@natyv_ai
+- Instagram: https://www.instagram.com/natyv_ai
+- Facebook: https://www.facebook.com/natyv_ai

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { Head } from "vite-react-ssg";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import MyAgentSection from "@/components/MyAgentSection";
@@ -45,6 +46,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>Natyv AI — AI-Native Operations Agency for Service Businesses</title>
+        <meta
+          name="description"
+          content="Natyv AI is the AI-native operations agency. We design and deploy voice AI, autonomous workflows, and bespoke agent systems for service businesses — built on MyAgent, run by people who know your industry."
+        />
+        <link rel="canonical" href="https://natyv.ai/" />
+        <meta property="og:title" content="Natyv AI — AI-Native Operations Agency" />
+        <meta
+          property="og:description"
+          content="The agency that installs AI-native operations for service businesses. Built on MyAgent."
+        />
+        <meta property="og:url" content="https://natyv.ai/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://natyv.ai/og-image.png" />
+      </Head>
       <Navbar />
       <main>
         {/* Hero Section - VideoSequence */}
