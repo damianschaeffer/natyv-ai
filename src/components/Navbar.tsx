@@ -32,6 +32,7 @@ const Navbar = () => {
   };
 
   const navLinks = [
+    { label: "Products", href: "#myagent-section", isScrollLink: true },
     { label: "Services", href: "/services", isRoute: true },
     { label: "About", href: "/about", isRoute: true },
     { label: "Advisory", href: "/advisory", isRoute: true },

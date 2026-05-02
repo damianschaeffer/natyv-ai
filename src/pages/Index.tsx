@@ -3,10 +3,9 @@ import { motion } from "framer-motion";
 import { Head } from "vite-react-ssg";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import HeroAgency from "@/components/HeroAgency";
 import MyAgentSection from "@/components/MyAgentSection";
-import CaseStudies from "@/components/CaseStudies";
 import PartnersSection from "@/components/PartnersSection";
+import CaseStudies from "@/components/CaseStudies";
 import AdvisorySection from "@/components/AdvisorySection";
 import AboutSection from "@/components/AboutSection";
 import VideoSequence from "@/components/VideoSequence";
@@ -48,16 +47,16 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Head>
-        <title>Natyv AI — AI-Native Operations Agency for Service Businesses</title>
+        <title>Natyv AI · /ˈnātiv/ — Architecting Autonomy</title>
         <meta
           name="description"
-          content="Natyv AI is the AI-native operations agency. We design and deploy voice AI, autonomous workflows, and bespoke agent systems for service businesses — built on MyAgent, run by people who know your industry."
+          content="Natyv (adj. /ˈnātiv/) — innate, original, native. We architect AI-native operations for service businesses, returning owners to a state of abundance. Studio · Solutions · Strategic Advisory."
         />
         <link rel="canonical" href="https://natyv.ai/" />
-        <meta property="og:title" content="Natyv AI — AI-Native Operations Agency" />
+        <meta property="og:title" content="Natyv AI · /ˈnātiv/ — Architecting Autonomy" />
         <meta
           property="og:description"
-          content="The agency that installs AI-native operations for service businesses. Built on MyAgent."
+          content="Natyv (adj. /ˈnātiv/) — innate, original, native. AI-native operations for service businesses. Studio · Solutions · Strategic Advisory."
         />
         <meta property="og:url" content="https://natyv.ai/" />
         <meta property="og:type" content="website" />
@@ -65,10 +64,10 @@ const Index = () => {
       </Head>
       <Navbar />
       <main>
-        {/* Hero — outcome-first agency positioning */}
-        <HeroAgency />
-
-        {/* MyAgent Section — reframed dual-track (platform + agency) */}
+        {/* Hero Section - VideoSequence */}
+        <VideoSequence />
+        
+        {/* MyAgent Section with fade-in transition */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -78,17 +77,7 @@ const Index = () => {
           <MyAgentSection />
         </motion.div>
 
-        {/* Case Studies — proof of work (K&D + Sandcastle + open slot) */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
-          <CaseStudies />
-        </motion.div>
-
-        {/* Partners — tech stack + trust */}
+        {/* Partners Section with fade-in transition */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -98,7 +87,17 @@ const Index = () => {
           <PartnersSection />
         </motion.div>
 
-        {/* Advisory — strategic consultation hook */}
+        {/* Case Studies — proof of work */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <CaseStudies />
+        </motion.div>
+
+        {/* Advisory Section with fade-in transition */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -108,7 +107,7 @@ const Index = () => {
           <AdvisorySection />
         </motion.div>
 
-        {/* About — Damian intro */}
+        {/* About Section with fade-in transition */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -116,16 +115,6 @@ const Index = () => {
           variants={sectionVariants}
         >
           <AboutSection />
-        </motion.div>
-
-        {/* Mission moment — the "why" we close on */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
-          <VideoSequence />
         </motion.div>
       </main>
       <Footer />

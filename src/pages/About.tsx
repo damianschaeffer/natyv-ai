@@ -264,7 +264,7 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h2 className="font-display text-2xl text-center text-foreground mb-12">The Journey</h2>
+            <h2 className="font-accent uppercase tracking-[0.15em] text-xl md:text-2xl text-center text-foreground mb-12 font-medium">The Journey</h2>
             
             <div className="grid md:grid-cols-2 gap-6">
               {milestones.map((milestone, index) => (
@@ -280,7 +280,7 @@ const About = () => {
                       <milestone.icon className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-display text-lg text-foreground">{milestone.title}</h3>
+                      <h3 className="font-accent uppercase tracking-[0.1em] text-sm text-foreground font-medium">{milestone.title}</h3>
                       <p className="text-sm text-primary font-body mb-2">{milestone.subtitle}</p>
                       <p className="text-sm text-muted-foreground font-body leading-relaxed">
                         {milestone.description}
@@ -321,8 +321,8 @@ const About = () => {
                     repetitive work that drains us, missing the people and <span className="text-primary">moments that actually matter</span>.
                   </p>
                   
-                  <p className="text-xl text-foreground font-display italic">
-                    AI should fix that. Not by replacing us, but by <span className="text-primary">freeing us</span>.
+                  <p className="text-xl text-foreground font-accent italic">
+                    AI should fix that. Not by replacing us, but by <span className="text-primary not-italic font-medium">freeing us</span>.
                   </p>
                   
                   <p className="text-lg font-accent">
@@ -331,7 +331,7 @@ const About = () => {
                 </div>
 
                 <div className="pt-8">
-                  <p className="font-display italic text-lg text-foreground">— Damian Schaeffer</p>
+                  <p className="font-accent italic text-base text-foreground tracking-wide">— Damian Schaeffer</p>
                   <p className="text-sm text-muted-foreground font-accent">Founder, <span className="font-display italic">Natyv</span> AI</p>
                 </div>
               </div>
@@ -347,7 +347,7 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <h3 className="font-display text-xl text-foreground mb-3">
+            <h3 className="font-accent uppercase tracking-[0.15em] text-lg md:text-xl text-foreground mb-3 font-medium">
               Let's Connect
             </h3>
             <p className="text-muted-foreground font-body mb-6">

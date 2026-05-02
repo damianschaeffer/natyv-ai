@@ -1,181 +1,209 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Wrench } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 
 const MyAgentSection = () => {
+  const [currentLine, setCurrentLine] = useState(0);
+  const [hasRevealed, setHasRevealed] = useState(false);
+
+  const taglines = [
+    {
+      content: "The Latest Multi-Modal Conversational Voice AI Agents",
+    },
+    {
+      content: "that Understand, Reason, Learn, and Remember...Just Like You...",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLine((prev) => (prev + 1) % taglines.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section
-      id="myagent-section"
-      className="py-24 md:py-32 relative overflow-hidden border-t border-border/40"
-    >
-      {/* Background ambience */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
+    <section className="py-48 min-h-screen flex items-center relative overflow-hidden" id="myagent-section">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Section header — anchor MyAgent as platform, not the headline */}
+        {/* Section Header */}
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="inline-block px-4 py-1.5 mb-6 text-xs font-body tracking-widest uppercase text-primary border border-primary/30 rounded-full">
-            The Platform We Deploy
-          </span>
-
-          {/* MyAgent wordmark — clean text rendering */}
-          <h2 className="font-display mb-6 leading-tight">
-            <span className="block text-2xl md:text-3xl text-muted-foreground font-body uppercase tracking-[0.3em] mb-3">
-              Meet
-            </span>
-            <span className="block text-5xl md:text-7xl text-foreground tracking-tight">
-              <span className="text-primary">My</span>
-              <span>Agent</span>
-              <span className="inline-block ml-2 text-primary">
-                <Sparkles className="inline w-8 h-8 md:w-12 md:h-12" aria-hidden="true" />
-              </span>
-            </span>
-          </h2>
-
-          <p className="text-base md:text-lg text-muted-foreground font-body leading-relaxed">
-            <span className="text-foreground">MyAgent</span> is our productized AI platform —
-            a 24/7 voice and text agent purpose-built for service businesses.
-            <span className="block mt-2">
-              <strong className="text-foreground font-medium">80+ capabilities</strong> across
-              six packages, from $99/mo to Enterprise. Self-serve, or have us run it for you.
-            </span>
-          </p>
-        </motion.div>
-
-        {/* Dual-track split — the fix for the agency vs. product blind spot */}
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-          {/* Track A — Self-serve product (MyAgent direct) */}
-          <motion.div
-            className="group relative rounded-2xl border border-border bg-card/30 backdrop-blur-sm p-8 md:p-10 hover:border-primary/40 transition-colors duration-300 flex flex-col"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <header className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-primary" aria-hidden="true" />
-              </div>
-              <div>
-                <h3 className="font-display text-xl md:text-2xl text-foreground">
-                  Self-serve on MyAgent
-                </h3>
-                <p className="text-xs text-primary font-body uppercase tracking-wider mt-1">
-                  Direct platform · From $99/mo
-                </p>
-              </div>
-            </header>
-
-            <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed mb-6 flex-1">
-              You know what you need. Spin up your AI receptionist, follow-up
-              flows, scheduling, and capture systems on the same platform Natyv
-              deploys for white-glove engagements. Six packages from $99 to
-              Enterprise — pick the tier, configure the agents, ship.
-            </p>
-
-            <ul className="text-sm font-body space-y-2 mb-8 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">›</span>
-                <span>24/7 AI voice + text reception, 80+ capabilities</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">›</span>
-                <span>Six tiers: Starter · Foundation · Essential · Growth · Pro · Enterprise</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">›</span>
-                <span>Free trial · No credit card required</span>
-              </li>
-            </ul>
-
-            <a
-              href="https://get-myagent.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/cta inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-accent uppercase tracking-[0.15em] text-xs md:text-sm rounded-sm px-6 py-3 hover:bg-primary/90 transition-all duration-300"
-            >
-              See MyAgent
-              <ArrowRight
-                className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform"
-                aria-hidden="true"
-              />
-            </a>
-          </motion.div>
-
-          {/* Track B — Agency engagement (Natyv hands-on) */}
-          <motion.div
-            className="group relative rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/5 via-card/30 to-card/30 backdrop-blur-sm p-8 md:p-10 hover:border-primary/50 transition-colors duration-300 flex flex-col"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <header className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center">
-                <Wrench className="w-6 h-6 text-primary" aria-hidden="true" />
-              </div>
-              <div>
-                <h3 className="font-display text-xl md:text-2xl text-foreground">
-                  Or hire Natyv to run it
-                </h3>
-                <p className="text-xs text-primary font-body uppercase tracking-wider mt-1">
-                  White-glove agency engagement
-                </p>
-              </div>
-            </header>
-
-            <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed mb-6 flex-1">
-              Tell us your business, your seasonality, and what's burning hours.
-              We architect the AI layer, deploy MyAgent tuned for your industry,
-              and operate the system alongside your team. You stay focused on
-              the parts only humans should do.
-            </p>
-
-            <ul className="text-sm font-body space-y-2 mb-8 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">›</span>
-                <span>Audit · Architect · Implement · Optimize methodology</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">›</span>
-                <span>Industry-tuned configurations + integration with your stack</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1">›</span>
-                <span>Confidential. NDA available. Outcomes you can measure.</span>
-              </li>
-            </ul>
-
-            <Link
-              to="/advisory"
-              className="group/cta inline-flex items-center justify-center gap-2 border border-primary/40 bg-primary/10 text-foreground font-accent uppercase tracking-[0.15em] text-xs md:text-sm rounded-sm px-6 py-3 hover:bg-primary/20 hover:border-primary/60 transition-all duration-300"
-            >
-              Talk to Natyv
-              <ArrowRight
-                className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform"
-                aria-hidden="true"
-              />
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Reassurance footnote */}
-        <motion.p
-          className="text-center text-xs md:text-sm text-muted-foreground/70 font-body mt-12 max-w-2xl mx-auto"
+          className="text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.3 }}
+          onViewportEnter={() => setHasRevealed(true)}
         >
-          Same platform. Same 80 capabilities. The only difference is whether
-          you want to drive — or have us at the wheel.
-        </motion.p>
+          {/* Stage 1: Natyv Logo Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0 }}
+          >
+            <img 
+              src={natyvLogoTopline} 
+              alt="Natyv AI" 
+              className="w-full max-w-md mx-auto mb-4" 
+            />
+          </motion.div>
+
+          {/* Stage 2: Separator line draws in */}
+          <motion.div 
+            className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-4"
+            initial={{ scaleX: 0 }}
+            animate={hasRevealed ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          />
+
+          {/* Stage 3: STUDIO label */}
+          <motion.div 
+            className="flex items-center justify-center gap-6 mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <motion.span 
+              className="w-[9px] h-9 bg-primary"
+              initial={{ scaleY: 0 }}
+              animate={hasRevealed ? { scaleY: 1 } : {}}
+              transition={{ duration: 0.4, delay: 1.0 }}
+            />
+            <span className="text-foreground font-body text-4xl md:text-5xl tracking-[0.3em] uppercase ml-1">
+              Studio
+            </span>
+            <motion.span 
+              className="w-[9px] h-9 bg-primary"
+              initial={{ scaleY: 0 }}
+              animate={hasRevealed ? { scaleY: 1 } : {}}
+              transition={{ duration: 0.4, delay: 1.0 }}
+            />
+          </motion.div>
+          
+          {/* Stage 4: Presents text */}
+          <motion.div 
+            className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-20 flex flex-col items-center gap-4"
+            initial={{ opacity: 0 }}
+            animate={hasRevealed ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 1.3 }}
+          >
+            <motion.span 
+              className="text-foreground"
+              initial={{ opacity: 0, y: 10 }}
+              animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 1.4 }}
+            >
+              Presents
+            </motion.span>
+            <motion.div 
+              className="w-16 h-px bg-primary/50"
+              initial={{ scaleX: 0 }}
+              animate={hasRevealed ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.4, delay: 1.6 }}
+            />
+            <motion.span 
+              className="text-foreground"
+              initial={{ opacity: 0, y: 10 }}
+              animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 1.8 }}
+            >
+              Our Flagship Product
+            </motion.span>
+          </motion.div>
+
+          {/* Stage 5: The Grand Reveal - MyAgent wordmark */}
+          <motion.div
+            className="relative mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={hasRevealed ? { opacity: 1, scale: 1 } : {}}
+            transition={{
+              duration: 1.2,
+              delay: 2.2,
+              ease: [0.16, 1, 0.3, 1]
+            }}
+          >
+            <motion.div
+              className="relative inline-block"
+              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+              animate={hasRevealed ? {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+              } : {}}
+              transition={{
+                duration: 1.0,
+                delay: 2.4,
+                ease: "easeOut"
+              }}
+              whileHover={{ scale: 1.04 }}
+            >
+              <span className="font-body font-extrabold tracking-tight text-6xl md:text-8xl leading-none cursor-pointer">
+                <span className="text-primary">My</span><span className="text-foreground">Agent</span>
+              </span>
+            </motion.div>
+          </motion.div>
+
+          {/* Stage 6: Tagline */}
+          <motion.div 
+            className="h-14 mb-14 flex items-center justify-center overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={hasRevealed ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 3.2 }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={currentLine}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="text-muted-foreground font-body text-lg md:text-xl max-w-3xl mx-auto flex items-center justify-center flex-wrap gap-1"
+              >
+                {taglines[currentLine].content}
+              </motion.p>
+            </AnimatePresence>
+          </motion.div>
+
+          {/* Stage 7: CTA Button + secondary agency line */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 3.5 }}
+            className="flex flex-col items-center gap-5"
+          >
+            <a href="https://get-myagent.com" target="_blank" rel="noopener noreferrer">
+              <motion.div
+                animate={{
+                  scale: [1, 1.03, 1],
+                  boxShadow: [
+                    "0 0 0 0 hsl(var(--primary) / 0)",
+                    "0 0 20px 4px hsl(var(--primary) / 0.3)",
+                    "0 0 0 0 hsl(var(--primary) / 0)",
+                  ],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="inline-block rounded-sm"
+              >
+                <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 text-base">
+                  Visit MyAgent
+                </Button>
+              </motion.div>
+            </a>
+            <a
+              href="/advisory"
+              className="font-accent text-sm tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
+              Or have us install &amp; run it for you →
+            </a>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
