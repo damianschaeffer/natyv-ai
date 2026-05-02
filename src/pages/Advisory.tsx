@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Head } from "vite-react-ssg";
 import { Calendar, Clock, Video, Shield } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -24,8 +25,50 @@ const Advisory = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>Book a Strategy Consultation | Natyv AI</title>
+        <meta
+          name="description"
+          content="Book a 60-minute strategy consultation with Damian Schaeffer, founder of Natyv AI. Reserved for decision-makers exploring how AI-native operations can transform their service business. Confidential. NDA available."
+        />
+        <link rel="canonical" href="https://natyv.ai/advisory" />
+        <meta property="og:title" content="Strategic AI Advisory — Natyv AI" />
+        <meta
+          property="og:description"
+          content="60-minute 1:1 strategy session with the founder of Natyv AI. AI operations roadmap, ROI modeling, integration plan."
+        />
+        <meta property="og:url" content="https://natyv.ai/advisory" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://natyv.ai/og-image.png" />
+        <script type="application/ld+json">{`
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://natyv.ai/advisory#service",
+  "name": "Strategic AI Advisory",
+  "serviceType": "AI Operations Consulting",
+  "provider": { "@id": "https://natyv.ai/#organization" },
+  "areaServed": "US",
+  "url": "https://natyv.ai/advisory",
+  "description": "1:1 strategic AI advisory engagement. 60-minute consultation with Damian Schaeffer covering AI capabilities assessment, autonomous-system roadmap, and high-impact automation opportunities for service businesses.",
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Service business owners, founders, and operators"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://cal.com/damian-schaeffer/consultation",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "USD",
+    "price": "0",
+    "description": "Initial consultation at no cost. Engagement pricing follows scope assessment."
+  },
+  "termsOfService": "Confidential. Enterprise NDA available upon request."
+}
+        `}</script>
+      </Head>
       <Navbar />
-      
+
       <main className="pt-32 pb-24">
         {/* Hero Section */}
         <section className="container mx-auto px-6 mb-20">

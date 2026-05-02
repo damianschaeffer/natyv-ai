@@ -1,0 +1,6 @@
+# Canonicalize www -> apex (single domain)
+https://www.natyv.ai/* https://natyv.ai/:splat 301!
+
+# Note: SPA fallback for client-side routing is handled automatically by Cloudflare Pages
+# for unknown paths via the prerendered HTML files (index.html, about.html, advisory.html).
+# 404s for truly unknown paths fall through to NotFound (catch-all route in App.tsx).

@@ -3,27 +3,143 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Natyv AI — Architecting Autonomy</title>
-    <meta name="description" content="Natyv AI: Multi-modal Voice AI solutions for the enterprise. Studio, Solutions, and Strategic Advisory." />
     <meta name="author" content="Natyv AI" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <meta property="og:title" content="Natyv AI — Architecting Autonomy" />
-    <meta property="og:description" content="Multi-modal Voice AI solutions for the enterprise. Studio, Solutions, and Strategic Advisory." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
-
+    <!--
+      Per-page <title>, <meta name="description">, canonical, OpenGraph, and JSON-LD
+      are injected by vite-react-ssg's <Head> component (powered by react-helmet-async).
+      See src/pages/{Index,About,Advisory}.tsx for per-route overrides.
+      Twitter Card defaults below — overridden per-route where needed.
+    -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@NatyvAI" />
-    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:image" content="https://natyv.ai/og-image.png" />
 
     <!-- Fonts: Playfair Display (headlines) + Inter (body) + Poppins (accent) + Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD: Organization, WebSite, Person, ProfessionalService -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://natyv.ai/#organization",
+      "name": "Natyv AI",
+      "alternateName": ["Natyv", "Natyv Ventures"],
+      "url": "https://natyv.ai/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://natyv.ai/favicon.png",
+        "width": 456,
+        "height": 454
+      },
+      "image": "https://natyv.ai/og-image.png",
+      "description": "AI-native operations agency. We design and deploy multi-modal voice AI, autonomous workflows, and bespoke agent systems for service businesses.",
+      "founder": { "@id": "https://natyv.ai/about#damian-schaeffer" },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cape Coral",
+        "addressRegion": "FL",
+        "addressCountry": "US"
+      },
+      "areaServed": { "@type": "Country", "name": "United States" },
+      "knowsAbout": [
+        "Voice AI",
+        "Conversational AI",
+        "AI Agents",
+        "AI Operations",
+        "Workflow Automation",
+        "Generative AI",
+        "AI for Service Businesses",
+        "AI for Med Spas",
+        "AI for Dental Practices",
+        "AI for Property Management",
+        "AI for Fitness Studios",
+        "AI for Home Services",
+        "AI for Restaurants"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/damianschaeffer",
+        "https://x.com/Natyv_AI",
+        "https://www.youtube.com/@NatyvAI",
+        "https://www.facebook.com/natyv_ai",
+        "https://www.instagram.com/natyv_ai",
+        "https://www.tiktok.com/@natyv_ai"
+      ],
+      "subOrganization": {
+        "@type": "Organization",
+        "name": "MyAgent",
+        "url": "https://get-myagent.com/",
+        "description": "Productized SaaS platform for AI voice agents and operational workflows."
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://natyv.ai/#website",
+      "url": "https://natyv.ai/",
+      "name": "Natyv AI",
+      "publisher": { "@id": "https://natyv.ai/#organization" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://natyv.ai/about#damian-schaeffer",
+      "name": "Damian Schaeffer",
+      "jobTitle": "Founder & CEO",
+      "worksFor": { "@id": "https://natyv.ai/#organization" },
+      "url": "https://natyv.ai/about",
+      "image": "https://natyv.ai/og-image.png",
+      "description": "Founder of Natyv AI and MyAgent. 20+ years in business operations: scaled K&D Management to 40+ properties, led Sandcastle Community Management (65 employees, 150+ communities). Builds AI-native operating systems for service businesses.",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "The Ohio State University"
+      },
+      "knowsAbout": [
+        "Voice AI",
+        "AI Agents",
+        "Operations Automation",
+        "Property Management",
+        "Founder Operations",
+        "Service Business Operations"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/damianschaeffer"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://natyv.ai/#service",
+      "name": "Natyv AI",
+      "url": "https://natyv.ai/",
+      "image": "https://natyv.ai/og-image.png",
+      "priceRange": "$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cape Coral",
+        "addressRegion": "FL",
+        "addressCountry": "US"
+      },
+      "areaServed": { "@type": "Country", "name": "United States" },
+      "serviceType": [
+        "AI Agency",
+        "Voice AI Implementation",
+        "AI Operations Consulting",
+        "AI Workflow Automation",
+        "Strategic AI Advisory"
+      ],
+      "parentOrganization": { "@id": "https://natyv.ai/#organization" }
+    }
+  ]
+}
+    </script>
   </head>
 
   <body>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Head } from "vite-react-ssg";
 import { MapPin, Award, Users, Heart, Linkedin, Twitter, Youtube, Instagram, Facebook } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -34,8 +35,40 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>About Damian Schaeffer — Founder | Natyv AI</title>
+        <meta
+          name="description"
+          content="Damian Schaeffer, founder of Natyv AI. 20+ years in business operations: scaled K&D Management to 40+ properties, led Sandcastle Community Management with 65 employees serving 150+ communities. Building AI systems that free humans."
+        />
+        <link rel="canonical" href="https://natyv.ai/about" />
+        <meta property="og:title" content="About Damian Schaeffer — Founder of Natyv AI" />
+        <meta
+          property="og:description"
+          content="20+ years in business operations. Founder of Natyv AI and MyAgent. Builds AI-native operating systems for service businesses."
+        />
+        <meta property="og:url" content="https://natyv.ai/about" />
+        <meta property="og:type" content="profile" />
+        <meta property="og:image" content="https://natyv.ai/og-image.png" />
+        <script type="application/ld+json">{`
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://natyv.ai/about#profilepage",
+  "url": "https://natyv.ai/about",
+  "mainEntity": { "@id": "https://natyv.ai/about#damian-schaeffer" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://natyv.ai/" },
+      { "@type": "ListItem", "position": 2, "name": "About", "item": "https://natyv.ai/about" }
+    ]
+  }
+}
+        `}</script>
+      </Head>
       <Navbar />
-      
+
       <main className="pt-32 pb-24">
         {/* Hero Section - Compact Editorial Style */}
         <section className="container mx-auto px-6 mb-24">
