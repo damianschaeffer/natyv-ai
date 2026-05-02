@@ -3,14 +3,14 @@ import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 
 const PartnersSection = () => {
   const partners = [
-    { name: "Google Cloud", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" },
-    { name: "Supabase", logo: "https://seeklogo.com/images/S/supabase-logo-DCC676FFE2-seeklogo.com.png" },
-    { name: "Twilio", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Twilio-logo-red.svg" },
+    { name: "Anthropic", logo: "/logos/anthropic.svg", scale: 0.75 },
     { name: "OpenAI", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" },
     { name: "Google Gemini", logo: "/logos/google-gemini.svg" },
-    { name: "GoHighLevel", logo: "/logos/gohighlevel.png" },
-    { name: "Anthropic", logo: "/logos/anthropic.svg", scale: 0.75 },
     { name: "ElevenLabs", logo: "/logos/elevenlabs.svg" },
+    { name: "Telnyx", logo: "/logos/telnyx.svg" },
+    { name: "Supabase", logo: "https://seeklogo.com/images/S/supabase-logo-DCC676FFE2-seeklogo.com.png" },
+    { name: "Google Cloud", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" },
+    { name: "GoHighLevel", logo: "/logos/gohighlevel.png" },
   ];
 
   return (

@@ -8,8 +8,8 @@
 
 ## Services
 
+- [Service Catalog](https://natyv.ai/services): 80+ productized AI workflows organized across 6 business functions — Front Desk, Sales, Operations, Finance, Marketing, and Customer Experience.
 - [Strategic AI Advisory](https://natyv.ai/advisory): 1:1 strategy consultations on AI operations architecture, deployment roadmaps, and ROI modeling for service businesses.
-- More service surfaces are being published — check back for /services and /industries/* pages.
 
 ## Products
 

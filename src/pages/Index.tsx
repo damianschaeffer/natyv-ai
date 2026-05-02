@@ -3,11 +3,12 @@ import { motion } from "framer-motion";
 import { Head } from "vite-react-ssg";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import HeroAgency from "@/components/HeroAgency";
 import MyAgentSection from "@/components/MyAgentSection";
+import CaseStudies from "@/components/CaseStudies";
 import PartnersSection from "@/components/PartnersSection";
 import AdvisorySection from "@/components/AdvisorySection";
 import AboutSection from "@/components/AboutSection";
-import ProductMatrixPreview from "@/components/ProductMatrixPreview";
 import VideoSequence from "@/components/VideoSequence";
 import Footer from "@/components/Footer";
 
@@ -64,10 +65,10 @@ const Index = () => {
       </Head>
       <Navbar />
       <main>
-        {/* Hero Section - VideoSequence */}
-        <VideoSequence />
-        
-        {/* MyAgent Section with fade-in transition */}
+        {/* Hero — outcome-first agency positioning */}
+        <HeroAgency />
+
+        {/* MyAgent Section — reframed dual-track (platform + agency) */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -77,7 +78,17 @@ const Index = () => {
           <MyAgentSection />
         </motion.div>
 
-        {/* Partners Section with fade-in transition */}
+        {/* Case Studies — proof of work (K&D + Sandcastle + open slot) */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <CaseStudies />
+        </motion.div>
+
+        {/* Partners — tech stack + trust */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -87,7 +98,7 @@ const Index = () => {
           <PartnersSection />
         </motion.div>
 
-        {/* Advisory Section with fade-in transition */}
+        {/* Advisory — strategic consultation hook */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -97,7 +108,7 @@ const Index = () => {
           <AdvisorySection />
         </motion.div>
 
-        {/* About Section with fade-in transition */}
+        {/* About — Damian intro */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -106,15 +117,15 @@ const Index = () => {
         >
           <AboutSection />
         </motion.div>
-        
-        {/* Products Section with fade-in transition */}
+
+        {/* Mission moment — the "why" we close on */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
         >
-          <ProductMatrixPreview />
+          <VideoSequence />
         </motion.div>
       </main>
       <Footer />
