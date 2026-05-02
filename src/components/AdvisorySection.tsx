@@ -40,9 +40,9 @@ const AdvisorySection = () => {
             Strategic Advisory
           </span>
           
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-tight">
+          <h2 className="font-accent uppercase tracking-[0.15em] text-2xl md:text-3xl lg:text-4xl text-foreground mb-6 leading-tight font-medium">
             Book a Strategy
-            <span className="block text-primary">Consultation</span>
+            <span className="block text-primary mt-2">Consultation</span>
           </h2>
           
           <p className="text-base md:text-lg text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto">
@@ -71,7 +71,7 @@ const AdvisorySection = () => {
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                 <benefit.icon className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-display text-lg text-foreground mb-2">
+              <h3 className="font-accent uppercase tracking-[0.1em] text-sm text-foreground mb-2 font-medium">
                 {benefit.title}
               </h3>
               <p className="text-sm text-muted-foreground font-body">

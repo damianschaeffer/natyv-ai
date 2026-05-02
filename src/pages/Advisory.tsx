@@ -82,9 +82,9 @@ const Advisory = () => {
               Strategic Advisory
             </span>
             
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-tight">
+            <h1 className="font-accent uppercase tracking-[0.15em] text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-tight font-medium">
               Book a Strategy
-              <span className="block text-primary">Consultation</span>
+              <span className="block text-primary mt-3">Consultation</span>
             </h1>
             
             <p className="text-lg text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto">
@@ -114,7 +114,7 @@ const Advisory = () => {
                 <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                   <benefit.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="font-display text-lg text-foreground mb-2">
+                <h3 className="font-accent uppercase tracking-[0.1em] text-sm text-foreground mb-2 font-medium">
                   {benefit.title}
                 </h3>
                 <p className="text-sm text-muted-foreground font-body">
@@ -142,7 +142,7 @@ const Advisory = () => {
                     Schedule Your Session
                   </span>
                 </div>
-                <h2 className="font-display text-2xl md:text-3xl text-foreground">
+                <h2 className="font-accent uppercase tracking-[0.15em] text-xl md:text-2xl text-foreground font-medium">
                   Select a Time That Works for You
                 </h2>
               </div>
@@ -189,7 +189,7 @@ const Advisory = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <h3 className="font-display text-2xl text-foreground mb-6">
+            <h3 className="font-accent uppercase tracking-[0.15em] text-xl md:text-2xl text-foreground mb-6 font-medium">
               What to Expect
             </h3>
             <div className="space-y-4 text-left">
