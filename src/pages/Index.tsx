@@ -4,7 +4,7 @@ import { Head } from "vite-react-ssg";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HomepageServices from "@/components/HomepageServices";
-import MyAgentSection from "@/components/MyAgentSection";
+import MyAgentShowcase from "@/components/MyAgentShowcase";
 import PartnersSection from "@/components/PartnersSection";
 import AdvisorySection from "@/components/AdvisorySection";
 import AboutSection from "@/components/AboutSection";
@@ -77,14 +77,14 @@ const Index = () => {
           <HomepageServices />
         </motion.div>
 
-        {/* MyAgent Section with fade-in transition */}
+        {/* MyAgent Showcase — embedded preview of get-myagent.com */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
         >
-          <MyAgentSection />
+          <MyAgentShowcase />
         </motion.div>
 
         {/* Partners Section with fade-in transition */}
