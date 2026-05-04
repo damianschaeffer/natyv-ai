@@ -96,7 +96,7 @@ const About = () => {
 
               {/* Name + Title + Social */}
               <div className="text-center md:text-left flex-1">
-                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-body tracking-widest uppercase text-primary border border-primary/30 rounded-full">
+                <span className="inline-block px-4 py-1.5 mb-4 text-xs font-medium text-primary border border-primary/30 rounded-full">
                   Founder
                 </span>
                 
@@ -220,7 +220,7 @@ const About = () => {
           >
             <div className="relative p-8 md:p-12 rounded-2xl border border-border/50 bg-card/20 backdrop-blur-sm">
               <div className="absolute top-0 left-8 -translate-y-1/2 px-4 py-1 bg-background border border-border rounded-full">
-                <span className="text-xs font-body tracking-widest uppercase text-primary">The Leadership Years</span>
+                <span className="text-xs font-medium text-primary">The leadership years</span>
               </div>
               
               <div className="space-y-6 text-muted-foreground font-body leading-relaxed">
@@ -264,7 +264,7 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h2 className="font-accent uppercase tracking-[0.15em] text-xl md:text-2xl text-center text-foreground mb-12 font-medium">The Journey</h2>
+            <h2 className="font-body font-extrabold tracking-tight text-3xl md:text-4xl text-center text-foreground mb-12 leading-tight">The journey.</h2>
             
             <div className="grid md:grid-cols-2 gap-6">
               {milestones.map((milestone, index) => (
@@ -280,7 +280,7 @@ const About = () => {
                       <milestone.icon className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-accent uppercase tracking-[0.1em] text-sm text-foreground font-medium">{milestone.title}</h3>
+                      <h3 className="font-body font-semibold text-base md:text-lg text-foreground leading-snug">{milestone.title}</h3>
                       <p className="text-sm text-primary font-body mb-2">{milestone.subtitle}</p>
                       <p className="text-sm text-muted-foreground font-body leading-relaxed">
                         {milestone.description}
@@ -347,8 +347,8 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <h3 className="font-accent uppercase tracking-[0.15em] text-lg md:text-xl text-foreground mb-3 font-medium">
-              Let's Connect
+            <h3 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl text-foreground mb-3 leading-tight">
+              Let's connect.
             </h3>
             <p className="text-muted-foreground font-body mb-6">
               Interested in exploring strategic opportunities or advisory engagements?

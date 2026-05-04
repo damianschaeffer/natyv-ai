@@ -36,7 +36,7 @@ const AboutSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-body tracking-widest uppercase text-primary border border-primary/30 rounded-full">
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-medium text-primary border border-primary/30 rounded-full">
                 Founder
               </span>
               

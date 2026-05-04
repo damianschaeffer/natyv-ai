@@ -36,13 +36,13 @@ const AdvisorySection = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="inline-block px-4 py-1.5 mb-6 text-xs font-body tracking-widest uppercase text-primary border border-primary/30 rounded-full">
+          <span className="inline-block px-4 py-1.5 mb-6 text-xs font-medium text-primary border border-primary/30 rounded-full">
             Strategic Advisory
           </span>
-          
-          <h2 className="font-accent uppercase tracking-[0.15em] text-2xl md:text-3xl lg:text-4xl text-foreground mb-6 leading-tight font-medium">
-            Book a Strategy
-            <span className="block text-primary mt-2">Consultation</span>
+
+          <h2 className="font-body font-extrabold tracking-tight text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-[1.1]">
+            Book a strategy{" "}
+            <span className="text-primary">consultation.</span>
           </h2>
           
           <p className="text-base md:text-lg text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto">
@@ -71,7 +71,7 @@ const AdvisorySection = () => {
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                 <benefit.icon className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-accent uppercase tracking-[0.1em] text-sm text-foreground mb-2 font-medium">
+              <h3 className="font-body font-semibold text-base md:text-lg text-foreground mb-2 leading-snug">
                 {benefit.title}
               </h3>
               <p className="text-sm text-muted-foreground font-body">
@@ -92,7 +92,7 @@ const AdvisorySection = () => {
           <Link to="/advisory">
             <Button 
               size="lg"
-              className="font-accent uppercase tracking-[0.15em] bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
+              className="font-body font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
             >
               Schedule Consultation
               <ArrowRight className="ml-2 w-4 h-4" />

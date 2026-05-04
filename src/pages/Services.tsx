@@ -168,29 +168,26 @@ const Services = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-body tracking-widest uppercase text-primary border border-primary/30 rounded-full">
+            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-medium text-primary border border-primary/30 rounded-full">
               Services
             </span>
 
-            <h1 className="font-accent uppercase tracking-[0.15em] text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-tight font-medium">
-              Six business functions.
-              <span className="block text-primary mt-3">
-                Eighty-plus capabilities.
-              </span>
+            <h1 className="font-body font-extrabold tracking-tight text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-[1.05]">
+              Full agency AI integrated{" "}
+              <span className="text-primary">services.</span>
             </h1>
 
             <p className="text-base md:text-lg text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto mb-10">
               Every Natyv engagement deploys from the same catalog. Pick the
               functions that move your business — we install the AI workflows
-              that run them, or you self-serve on MyAgent. Below: 30
-              representative services. The full 80+ live inside the platform.
+              that run them, or you self-serve on MyAgent.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center">
               <Link to="/advisory">
                 <Button
                   size="lg"
-                  className="font-accent uppercase tracking-[0.15em] bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
+                  className="font-body font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
                 >
                   Talk to Natyv
                   <ArrowRight className="ml-2 w-4 h-4" />
@@ -200,7 +197,7 @@ const Services = () => {
                 href="https://get-myagent.com/services"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2 border border-border text-foreground font-accent uppercase tracking-[0.15em] text-sm rounded-md px-8 py-3 hover:bg-secondary/40 hover:border-primary/40 transition-all duration-300"
+                className="group inline-flex items-center justify-center gap-2 border border-border text-foreground font-body font-semibold text-sm md:text-base rounded-md px-8 py-3 hover:bg-secondary/40 hover:border-primary/40 transition-all duration-300"
               >
                 See the full 80+ on MyAgent
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -228,10 +225,10 @@ const Services = () => {
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                       <fn.icon className="w-6 h-6 text-primary" aria-hidden="true" />
                     </div>
-                    <p className="text-xs font-body tracking-widest uppercase text-primary">
+                    <p className="text-xs font-medium text-primary">
                       Function 0{fnIdx + 1}
                     </p>
-                    <h2 className="font-accent uppercase tracking-[0.15em] text-2xl md:text-3xl text-foreground font-medium">
+                    <h2 className="font-body font-extrabold tracking-tight text-3xl md:text-4xl text-foreground leading-tight">
                       {fn.title}
                     </h2>
                     <p className="text-sm md:text-base text-muted-foreground font-body italic max-w-xl">
@@ -251,10 +248,10 @@ const Services = () => {
                       viewport={{ once: true, amount: 0.2 }}
                       transition={{ duration: 0.4, delay: sIdx * 0.04 }}
                     >
-                      <h3 className="font-accent uppercase tracking-[0.08em] text-sm text-foreground mb-2 leading-snug font-medium">
+                      <h3 className="font-body font-semibold text-sm md:text-base text-foreground mb-2 leading-snug">
                         {service.name}
                       </h3>
-                      <p className="text-xs text-muted-foreground font-body leading-relaxed">
+                      <p className="text-xs md:text-sm text-muted-foreground font-body leading-relaxed">
                         {service.outcome}
                       </p>
                     </motion.article>
@@ -274,7 +271,7 @@ const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-accent uppercase tracking-[0.15em] text-xl md:text-2xl text-foreground mb-4 font-medium">
+            <h2 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl lg:text-4xl text-foreground mb-4 leading-tight">
               Not sure which functions to start with?
             </h2>
             <p className="text-base text-muted-foreground font-body leading-relaxed mb-8 max-w-2xl mx-auto">
@@ -285,7 +282,7 @@ const Services = () => {
             <Link to="/advisory">
               <Button
                 size="lg"
-                className="font-accent uppercase tracking-[0.15em] bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
+                className="font-body font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
               >
                 Book the strategy call
                 <ArrowRight className="ml-2 w-4 h-4" />

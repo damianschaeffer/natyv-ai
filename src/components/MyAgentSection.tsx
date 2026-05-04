@@ -72,7 +72,7 @@ const MyAgentSection = () => {
               animate={hasRevealed ? { scaleY: 1 } : {}}
               transition={{ duration: 0.4, delay: 1.0 }}
             />
-            <span className="text-foreground font-body text-4xl md:text-5xl tracking-[0.3em] uppercase ml-1">
+            <span className="text-foreground font-body font-extrabold tracking-tight text-4xl md:text-5xl ml-1">
               Studio
             </span>
             <motion.span 
@@ -84,33 +84,33 @@ const MyAgentSection = () => {
           </motion.div>
           
           {/* Stage 4: Presents text */}
-          <motion.div 
-            className="text-primary font-body text-lg tracking-[0.3em] uppercase mb-20 flex flex-col items-center gap-4"
+          <motion.div
+            className="text-primary font-body text-lg md:text-xl mb-20 flex flex-col items-center gap-4"
             initial={{ opacity: 0 }}
             animate={hasRevealed ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 1.3 }}
           >
-            <motion.span 
-              className="text-foreground"
+            <motion.span
+              className="text-muted-foreground italic"
               initial={{ opacity: 0, y: 10 }}
               animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 1.4 }}
             >
-              Presents
+              presents
             </motion.span>
-            <motion.div 
+            <motion.div
               className="w-16 h-px bg-primary/50"
               initial={{ scaleX: 0 }}
               animate={hasRevealed ? { scaleX: 1 } : {}}
               transition={{ duration: 0.4, delay: 1.6 }}
             />
-            <motion.span 
-              className="text-foreground"
+            <motion.span
+              className="text-foreground font-semibold"
               initial={{ opacity: 0, y: 10 }}
               animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 1.8 }}
             >
-              Our Flagship Product
+              Our flagship product
             </motion.span>
           </motion.div>
 
@@ -191,14 +191,14 @@ const MyAgentSection = () => {
                 }}
                 className="inline-block rounded-sm"
               >
-                <Button className="font-accent uppercase tracking-[0.2em] bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 text-base">
+                <Button className="font-body font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 text-base">
                   Visit MyAgent
                 </Button>
               </motion.div>
             </a>
             <a
               href="/advisory"
-              className="font-accent text-sm tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
+              className="font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
               Or have us install &amp; run it for you →
             </a>

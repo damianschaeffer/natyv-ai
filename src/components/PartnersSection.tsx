@@ -34,7 +34,7 @@ const PartnersSection = () => {
           {/* PARTNERS label with blue vertical separators */}
           <div className="flex items-center justify-center gap-9">
             <span className="w-[9px] h-9 bg-primary" />
-            <span className="text-foreground font-body text-2xl md:text-3xl tracking-[0.3em] uppercase">
+            <span className="text-foreground font-body font-extrabold tracking-tight text-2xl md:text-3xl">
               Partners
             </span>
             <span className="w-[9px] h-9 bg-primary" />
