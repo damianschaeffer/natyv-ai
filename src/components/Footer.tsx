@@ -21,9 +21,8 @@ const Footer = () => {
   };
 
   const navLinks = [
-    { label: "Products", href: "#myagent-section", isScrollLink: true },
-    { label: "Services", href: "/services", isRoute: true },
-    { label: "About", href: "/about", isRoute: true },
+    { label: "Studio", href: "#myagent-section", isScrollLink: true },
+    { label: "Solutions", href: "/services", isRoute: true },
     { label: "Advisory", href: "/advisory", isRoute: true },
   ];
 
@@ -37,6 +36,7 @@ const Footer = () => {
   ];
 
   const legalLinks = [
+    { label: "About", href: "/about" },
     { label: "Privacy", href: "#" },
     { label: "Terms", href: "#" },
     { label: "Security", href: "#" },
