@@ -105,39 +105,33 @@ const MyAgentShowcase = () => {
       {/* Ambient glow — same vibe as the source */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.04] blur-[150px] pointer-events-none" />
 
-      {/* MyAgent BrandLogo — clickable, with subtle external-link corner badge */}
-      <a
+      {/* MyAgent BrandLogo — large, takes the position the headline used to occupy */}
+      <motion.a
         href={MYAGENT_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative z-10 mb-3 group inline-flex items-center gap-2"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ delay: 0.1, duration: 0.7 }}
+        className="relative z-10 mb-8 md:mb-10 group inline-flex items-center gap-3"
         aria-label="Visit MyAgent (opens in a new tab)"
       >
-        <span className="group-hover:scale-105 transition-transform inline-flex">
-          <MyAgentBrandLogo height={36} />
+        <span className="group-hover:scale-[1.03] transition-transform inline-flex">
+          <span className="md:hidden inline-flex"><MyAgentBrandLogo height={56} /></span>
+          <span className="hidden md:inline-flex lg:hidden"><MyAgentBrandLogo height={84} /></span>
+          <span className="hidden lg:inline-flex"><MyAgentBrandLogo height={104} /></span>
         </span>
-        <ExternalLink className="w-3 h-3 text-muted-foreground/60 group-hover:text-foreground transition-colors" aria-hidden="true" />
-      </a>
+        <ExternalLink className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground/60 group-hover:text-foreground transition-colors" aria-hidden="true" />
+      </motion.a>
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ delay: 0.1, duration: 0.7 }}
+        transition={{ delay: 0.2, duration: 0.7 }}
         className="relative z-10 text-center max-w-5xl mx-auto"
       >
-        {/* H1 — MyLifeHero spec, slightly tighter at lg for natyv embed */}
-        <h2 className="font-poppins font-bold text-[36px] sm:text-5xl md:text-6xl lg:text-[60px] leading-[1.0] tracking-[-0.04em] mb-3">
-          Your life.{" "}
-          <span className="text-primary">Your way.</span>
-        </h2>
-
-        {/* Subhead */}
-        <p className="text-base md:text-lg lg:text-xl font-normal text-foreground mb-4 leading-tight">
-          Ever feel like AI doesn&rsquo;t work for you?<br className="sm:hidden" />{" "}
-          <span className="text-primary font-bold">We fixed that.</span>
-        </p>
-
         {/* Pills — exact markup from MyLifeHero.tsx */}
         <div className="grid grid-cols-2 justify-items-center sm:flex sm:flex-wrap items-center justify-center gap-x-1.5 gap-y-1 sm:gap-1.5 max-w-5xl mx-auto mb-4">
           {PILLS.map((p, i) => (
