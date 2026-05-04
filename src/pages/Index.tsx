@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import MyAgentSection from "@/components/MyAgentSection";
 import PartnersSection from "@/components/PartnersSection";
-import CaseStudies from "@/components/CaseStudies";
 import AdvisorySection from "@/components/AdvisorySection";
 import AboutSection from "@/components/AboutSection";
 import VideoSequence from "@/components/VideoSequence";
@@ -85,16 +84,6 @@ const Index = () => {
           variants={sectionVariants}
         >
           <PartnersSection />
-        </motion.div>
-
-        {/* Case Studies — proof of work */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
-          <CaseStudies />
         </motion.div>
 
         {/* Advisory Section with fade-in transition */}
