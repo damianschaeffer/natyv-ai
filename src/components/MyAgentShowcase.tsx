@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Network,
@@ -9,193 +8,235 @@ import {
   Gift,
   Clock,
   CreditCard,
-  CheckCircle2,
-  Shield,
+  CheckCircle,
+  ShieldCheck,
   Lock,
   Play,
   ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Mirror of get-myagent.com's hero, rendered natively on natyv.ai.
-// Every interactive element opens get-myagent.com in a new tab so
-// the visitor's natyv.ai navigation stays alive.
+// Faithful port of get-myagent.com's hero — using the actual <h1>/pill/video
+// markup from src/pages/MyLifeHero.tsx, the actual TrustBadgesPill markup,
+// and a static (non-rotating) port of the BrandLogo component. Every
+// interactive element opens https://get-myagent.com in a new tab so the
+// visitor's natyv.ai navigation stays alive.
 
-const pills = [
-  { icon: Network, label: "One ecosystem" },
-  { icon: Sparkles, label: "Customized for you" },
-  { icon: Heart, label: "Feels human" },
-  { icon: Brain, label: "Learns your life" },
-  { icon: Zap, label: "Handles real work" },
+// MyAgent BrandLogo, dark-mode only (natyv.ai is permanently dark). Source:
+// my-agent-ai/src/components/BrandLogo.tsx — rounded square in primary blue
+// with a 4-point North Star + "MyAgent" wordmark in Poppins 700.
+const NORTH_STAR_PATH =
+  "M100 34 Q108 88 166 100 Q108 112 100 166 Q92 112 34 100 Q92 88 100 34Z";
+
+const MyAgentBrandLogo = ({ height = 32 }: { height?: number }) => {
+  const iconSize = Math.round(height * 0.8);
+  const borderRadius = Math.round(height * 0.227);
+  return (
+    <span
+      role="img"
+      aria-label="MyAgent"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        height,
+        gap: `${Math.round(height * 0.25)}px`,
+      }}
+    >
+      <span
+        style={{
+          width: height,
+          height,
+          borderRadius,
+          background: "hsl(var(--primary))",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+        }}
+      >
+        <svg width={iconSize} height={iconSize} viewBox="24 24 152 152">
+          <path d={NORTH_STAR_PATH} fill="#ffffff" />
+        </svg>
+      </span>
+      <span
+        style={{
+          fontFamily: "Poppins, sans-serif",
+          fontWeight: 700,
+          fontSize: height,
+          lineHeight: 1,
+          whiteSpace: "nowrap",
+          letterSpacing: "-0.02em",
+        }}
+      >
+        <span style={{ color: "hsl(var(--primary))" }}>My</span>
+        <span style={{ color: "#ffffff" }}>Agent</span>
+      </span>
+    </span>
+  );
+};
+
+const PILLS = [
+  { Icon: Network, label: "One ecosystem" },
+  { Icon: Sparkles, label: "Customized for you" },
+  { Icon: Heart, label: "Feels human" },
+  { Icon: Brain, label: "Learns your life" },
+  { Icon: Zap, label: "Handles real work" },
 ];
 
-const trustBadges = [
+const TRUST_BADGES = [
   { icon: Gift, label: "No Setup Fees" },
   { icon: Clock, label: "14-Day Free Trial" },
   { icon: CreditCard, label: "No Credit Card" },
-  { icon: CheckCircle2, label: "Cancel Anytime" },
-  { icon: Shield, label: "SOC 2 Compliant" },
+  { icon: CheckCircle, label: "Cancel Anytime" },
+  { icon: ShieldCheck, label: "SOC 2 Compliant" },
   { icon: Lock, label: "Data Stays Yours" },
 ];
 
 const MYAGENT_URL = "https://get-myagent.com";
-const MYAGENT_VIDEO = "https://get-myagent.com/videos/sophia-intro.mp4";
+const HERO_VIDEO =
+  "https://get-myagent.com/videos/cinematic/salon-hero-fast-2026-04-17T14-53-47-171Z.mp4";
 
 const MyAgentShowcase = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [hovering, setHovering] = useState(false);
-
   return (
     <section
       id="myagent-section"
-      className="relative py-24 md:py-32 overflow-hidden border-t border-border/40"
+      className="relative flex flex-col items-center justify-center px-2 sm:px-6 pt-8 md:pt-10 pb-6 border-t border-border/40"
     >
-      {/* Embedded-preview ribbon */}
-      <div className="container mx-auto px-6 relative z-10 mb-8">
-        <div className="flex justify-center">
-          <a
-            href={MYAGENT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/60 bg-card/40 backdrop-blur-sm text-xs font-medium text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
-            <span>Embedded preview · click anywhere to explore MyAgent</span>
-            <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
-          </a>
+      {/* Ambient glow — same vibe as the source */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.04] blur-[150px] pointer-events-none" />
+
+      {/* MyAgent BrandLogo — clickable, with subtle external-link corner badge */}
+      <a
+        href={MYAGENT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative z-10 mb-3 group inline-flex items-center gap-2"
+        aria-label="Visit MyAgent (opens in a new tab)"
+      >
+        <span className="group-hover:scale-105 transition-transform inline-flex">
+          <MyAgentBrandLogo height={36} />
+        </span>
+        <ExternalLink className="w-3 h-3 text-muted-foreground/60 group-hover:text-foreground transition-colors" aria-hidden="true" />
+      </a>
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ delay: 0.1, duration: 0.7 }}
+        className="relative z-10 text-center max-w-5xl mx-auto"
+      >
+        {/* H1 — MyLifeHero spec, slightly tighter at lg for natyv embed */}
+        <h2 className="font-poppins font-bold text-[36px] sm:text-5xl md:text-6xl lg:text-[60px] leading-[1.0] tracking-[-0.04em] mb-3">
+          Your life.{" "}
+          <span className="text-primary">Your way.</span>
+        </h2>
+
+        {/* Subhead */}
+        <p className="text-base md:text-lg lg:text-xl font-normal text-foreground mb-4 leading-tight">
+          Ever feel like AI doesn&rsquo;t work for you?<br className="sm:hidden" />{" "}
+          <span className="text-primary font-bold">We fixed that.</span>
+        </p>
+
+        {/* Pills — exact markup from MyLifeHero.tsx */}
+        <div className="grid grid-cols-2 justify-items-center sm:flex sm:flex-wrap items-center justify-center gap-x-1.5 gap-y-1 sm:gap-1.5 max-w-5xl mx-auto mb-4">
+          {PILLS.map((p, i) => (
+            <a
+              key={p.label}
+              href={MYAGENT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-border/50 bg-background/40 backdrop-blur-md px-2.5 py-0.5 sm:px-3 sm:py-1 hover:bg-background/60 hover:border-primary/40 transition-colors${i === 4 ? " col-span-2" : ""}`}
+            >
+              <p.Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" strokeWidth={2} aria-hidden="true" />
+              <span className="text-sm sm:text-base font-semibold text-foreground/90 whitespace-nowrap">
+                {p.label}
+              </span>
+            </a>
+          ))}
         </div>
-      </div>
+      </motion.div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          className="max-w-5xl mx-auto text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
-        >
-          {/* MyAgent wordmark — clickable */}
-          <a
-            href={MYAGENT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mb-10 group"
-            aria-label="Visit MyAgent"
-          >
-            <Sparkles className="w-6 h-6 md:w-7 md:h-7 text-primary group-hover:scale-110 transition-transform" aria-hidden="true" />
-            <span className="font-body font-extrabold tracking-tight text-2xl md:text-3xl leading-none">
-              <span className="text-primary">My</span><span className="text-foreground">Agent</span>
-            </span>
-          </a>
-
-          {/* Headline */}
-          <h2 className="font-body font-extrabold tracking-tight text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 leading-[1.05]">
-            Your life.{" "}
-            <span className="text-primary">Your way.</span>
-          </h2>
-
-          {/* Subheadline */}
-          <p className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed mb-10 max-w-3xl mx-auto">
-            Ever feel like AI doesn't work for you?{" "}
-            <span className="text-primary font-semibold">We fixed that.</span>
-          </p>
-
-          {/* Pill nav */}
-          <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-12">
-            {pills.map((pill) => (
-              <a
-                key={pill.label}
-                href={MYAGENT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/60 backdrop-blur-sm hover:bg-card/80 hover:border-primary/40 transition-colors duration-200"
-              >
-                <pill.icon className="w-4 h-4 text-primary" aria-hidden="true" />
-                <span className="text-sm font-body font-medium text-foreground whitespace-nowrap">
-                  {pill.label}
-                </span>
-              </a>
-            ))}
-          </div>
-
-          {/* Video player — autoplay loop, click to open MyAgent in new tab */}
-          <a
-            href={MYAGENT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative block group rounded-2xl overflow-hidden border border-border/60 bg-card/30 backdrop-blur-sm mb-10 max-w-4xl mx-auto"
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-            aria-label="Watch MyAgent in action — opens get-myagent.com in a new tab"
-          >
+      {/* Hero video — exact framing from MyLifeHero.tsx */}
+      <motion.a
+        href={MYAGENT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
+        className="relative z-10 w-full max-w-4xl mx-auto block group"
+        aria-label="Watch MyAgent — opens get-myagent.com in a new tab"
+      >
+        <div className="rounded-2xl md:rounded-3xl overflow-hidden border border-border shadow-2xl shadow-black/80">
+          <div className="relative aspect-video bg-gradient-to-br from-[#0a0a0a] to-[#111]">
             <video
-              ref={videoRef}
-              src={MYAGENT_VIDEO}
+              src={HERO_VIDEO}
               autoPlay
-              loop
               muted
+              loop
               playsInline
               preload="metadata"
-              className="w-full aspect-video object-cover"
+              className="absolute inset-0 w-full h-full object-cover"
               aria-hidden="true"
             />
-            {/* Hover overlay with click affordance */}
-            <div
-              className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 pointer-events-none ${
-                hovering ? "bg-background/40 opacity-100" : "opacity-0"
-              }`}
-            >
-              <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-primary text-primary-foreground font-body font-semibold text-sm shadow-2xl">
+            {/* Vignette over video so headline overlay reads */}
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            {/* Hover affordance */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-background/30">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground font-poppins font-semibold text-sm shadow-2xl">
                 <Play className="w-4 h-4 fill-current" aria-hidden="true" />
                 <span>Open MyAgent</span>
                 <ExternalLink className="w-4 h-4" aria-hidden="true" />
               </div>
             </div>
-          </a>
-
-          {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center mb-10">
-            <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                variant="outline"
-                className="font-body font-semibold border-border bg-card/40 hover:bg-card/60 px-8 py-3 text-base rounded-full"
-              >
-                <Play className="mr-2 w-4 h-4 fill-current" aria-hidden="true" />
-                Demo
-              </Button>
-            </a>
-            <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                className="font-body font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 text-base rounded-full"
-              >
-                <Sparkles className="mr-2 w-4 h-4" aria-hidden="true" />
-                Start Free Trial
-              </Button>
-            </a>
           </div>
+        </div>
+      </motion.a>
 
-          {/* Trust badges */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs md:text-sm text-muted-foreground/80 font-body">
-            {trustBadges.map((badge) => (
-              <div key={badge.label} className="inline-flex items-center gap-1.5">
-                <badge.icon className="w-3.5 h-3.5 text-primary/70" aria-hidden="true" />
-                <span>{badge.label}</span>
-              </div>
-            ))}
-          </div>
+      {/* Demo + Start Free Trial buttons — same chrome as StickyFooterCTA */}
+      <div className="relative z-10 flex justify-center gap-2 sm:gap-3 mt-4">
+        <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
+          <Button
+            variant="outline"
+            className="h-9 sm:h-10 px-4 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full shadow-lg backdrop-blur-md bg-background/80 border-border/50 hover:bg-background/90 transition-all"
+          >
+            <Play className="w-3.5 h-3.5 mr-1.5 fill-current" aria-hidden="true" />
+            Demo
+          </Button>
+        </a>
+        <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
+          <Button
+            className="h-9 sm:h-10 px-4 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
+          >
+            <Sparkles className="w-3.5 h-3.5 mr-1.5" aria-hidden="true" />
+            Start Free Trial
+          </Button>
+        </a>
+      </div>
 
-          {/* Secondary line — agency option */}
-          <div className="mt-10">
-            <a
-              href="/advisory"
-              className="font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300"
-            >
-              Or have us install &amp; run it for you →
-            </a>
+      {/* Trust badges — exact markup from TrustBadgesPill.tsx */}
+      <div className="relative z-10 mt-3 grid grid-cols-3 md:flex items-center justify-center gap-x-2 gap-y-1 md:gap-4 lg:gap-5 rounded-xl md:rounded-full bg-background/80 backdrop-blur-md border border-border/50 px-3 py-1.5 md:px-5 md:py-2 shadow-lg w-full max-w-[min(100%,920px)] mx-auto">
+        {TRUST_BADGES.map((b) => (
+          <div
+            key={b.label}
+            className="flex items-center justify-center gap-1 md:gap-1.5 text-[10px] md:text-xs font-medium text-muted-foreground"
+          >
+            <b.icon className="w-3.5 h-3.5 text-primary flex-shrink-0" strokeWidth={2} aria-hidden="true" />
+            <span className="whitespace-nowrap">{b.label}</span>
           </div>
-        </motion.div>
+        ))}
+      </div>
+
+      {/* Secondary line — agency option */}
+      <div className="relative z-10 mt-4">
+        <a
+          href="/advisory"
+          className="font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300"
+        >
+          Or have us install &amp; run it for you →
+        </a>
       </div>
     </section>
   );

@@ -17,6 +17,7 @@ export default {
         display: ["Playfair Display", "serif"],
         body: ["Inter", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
