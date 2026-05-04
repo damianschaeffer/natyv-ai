@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Head } from "vite-react-ssg";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import HomepageServices from "@/components/HomepageServices";
 import MyAgentSection from "@/components/MyAgentSection";
 import PartnersSection from "@/components/PartnersSection";
 import AdvisorySection from "@/components/AdvisorySection";
@@ -65,7 +66,17 @@ const Index = () => {
       <main>
         {/* Hero Section - VideoSequence */}
         <VideoSequence />
-        
+
+        {/* Services preview — full agency AI integrated services */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <HomepageServices />
+        </motion.div>
+
         {/* MyAgent Section with fade-in transition */}
         <motion.div
           initial="hidden"
