@@ -142,11 +142,13 @@ export const MyAgentLockup = ({ height = 56 }: { height?: number }) => {
             lineHeight: 1.2,
             whiteSpace: "nowrap",
             // Text starts at the LEFT edge of its grid column, which is
-            // exactly the right edge of the star→wordmark gap = the
-            // x-position of the "M" in MyAgent above. Centering would
-            // float the text mid-column when its natural width is less
-            // than the column.
+            // the x-position of the "M" in MyAgent above. The negative
+            // marginLeft optically aligns Inter's slanted "Y" glyph with
+            // Poppins-Bold's straight "M" stroke — the bounding boxes
+            // are already aligned, but the visible glyphs need a small
+            // nudge to read as truly column-aligned.
             textAlign: "left",
+            marginLeft: "-0.1em",
             overflow: "hidden",
             textOverflow: "clip",
           }}
