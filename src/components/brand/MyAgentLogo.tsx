@@ -103,8 +103,12 @@ export const MyAgentLogo = ({ height = 56 }: { height?: number }) => {
 export const MyAgentLockup = ({ height = 56 }: { height?: number }) => {
   const starSize = height; // star container width
   const gap = Math.round(height * 0.25); // matches logo's internal gap
-  const taglineMarginTop = Math.round(height * 0.21); // ~12px at h=56
-  const taglineHeight = Math.round(height * 0.43); // ~24px at h=56
+  const taglineMarginTop = Math.round(height * 0.21);
+  // Tagline font-size is locked to a fixed ratio of the logo height so
+  // the lockup's proportions stay constant at any scale. 0.27 was tuned
+  // so the natural width of "Your Personal AI Agent" in Inter regular
+  // approximately fills the available column without stretching.
+  const taglineFontSize = Math.max(10, Math.round(height * 0.27));
 
   return (
     <span
@@ -128,32 +132,22 @@ export const MyAgentLockup = ({ height = 56 }: { height?: number }) => {
           aria-hidden="true"
         />
         <span aria-hidden="true" />
-        {/* SVG text auto-stretches to exactly fill the 1fr column at any
-            height. textLength + lengthAdjust="spacingAndGlyphs" lock the
-            rendered glyph width to the container width. */}
-        <svg
-          width="100%"
-          viewBox="0 0 100 18"
-          preserveAspectRatio="none"
-          style={{ height: `${taglineHeight}px`, display: "block" }}
-          aria-hidden="true"
+        <span
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: `${taglineFontSize}px`,
+            fontWeight: 400,
+            color: "hsl(var(--muted-foreground))",
+            letterSpacing: "0.005em",
+            lineHeight: 1.2,
+            whiteSpace: "nowrap",
+            textAlign: "center",
+            overflow: "hidden",
+            textOverflow: "clip",
+          }}
         >
-          <text
-            x="50"
-            y="14"
-            textAnchor="middle"
-            textLength="100"
-            lengthAdjust="spacingAndGlyphs"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              fontWeight: 400,
-              fill: "hsl(var(--muted-foreground))",
-            }}
-          >
-            {TAGLINE}
-          </text>
-        </svg>
+          {TAGLINE}
+        </span>
         <span aria-hidden="true" />
         <span
           style={{ height: 1, width: "100%", background: "hsl(var(--primary) / 0.4)" }}
