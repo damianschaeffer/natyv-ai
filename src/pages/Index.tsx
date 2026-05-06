@@ -7,18 +7,20 @@ import HomepageServices from "@/components/HomepageServices";
 import MyAgentShowcase from "@/components/MyAgentShowcase";
 import PartnersSection from "@/components/PartnersSection";
 import AdvisorySection from "@/components/AdvisorySection";
-import AboutSection from "@/components/AboutSection";
-import VideoSequence from "@/components/VideoSequence";
+import Hero from "@/components/Hero";
+import PivotBanner from "@/components/PivotBanner";
+import StickyDualCTA from "@/components/StickyDualCTA";
+import TwoPathsFooter from "@/components/TwoPathsFooter";
 import Footer from "@/components/Footer";
 
 const sectionVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 60,
     filter: "blur(8px)"
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: {
@@ -64,20 +66,10 @@ const Index = () => {
       </Head>
       <Navbar />
       <main>
-        {/* Hero Section - VideoSequence */}
-        <VideoSequence />
+        {/* Hero — entry, dual fork CTAs, salon video */}
+        <Hero />
 
-        {/* Services preview — full agency AI integrated services */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
-          <HomepageServices />
-        </motion.div>
-
-        {/* MyAgent Showcase — embedded preview of get-myagent.com */}
+        {/* Studio (Path A) — MyAgent product showcase */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -87,17 +79,20 @@ const Index = () => {
           <MyAgentShowcase />
         </motion.div>
 
-        {/* Partners Section with fade-in transition */}
+        {/* Pivot Banner — single biggest conversion lever; explicit Path A → Path B handoff */}
+        <PivotBanner />
+
+        {/* Solutions (Path B) — agency catalog */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
         >
-          <PartnersSection />
+          <HomepageServices />
         </motion.div>
 
-        {/* Advisory Section with fade-in transition */}
+        {/* Advisory — Path B endpoint (consultation booking) */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -107,16 +102,20 @@ const Index = () => {
           <AdvisorySection />
         </motion.div>
 
-        {/* About Section with fade-in transition */}
+        {/* Partners — trust signal */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
         >
-          <AboutSection />
+          <PartnersSection />
         </motion.div>
+
+        {/* Two-Paths pre-footer — final binary fork for any remaining un-converted scroller */}
+        <TwoPathsFooter />
       </main>
+      <StickyDualCTA />
       <Footer />
     </div>
   );
