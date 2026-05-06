@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, Mic, PhoneCall, Server, Shield, Layers } from "lucide-react";
+import SectionHeader from "@/components/SectionHeader";
 
 // Static headline — same pattern as Solutions / MyAgent.com section headers
 const HEADLINE_PRE = "Best-in-class AI.";
@@ -55,6 +56,17 @@ const PartnersSection = () => {
     >
       {/* Ambient glow — same primitive as MyAgentShowcase */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.04] blur-[150px] pointer-events-none" />
+
+      {/* Section entrance */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="relative z-10 mb-10 md:mb-14"
+      >
+        <SectionHeader section="PARTNERS" />
+      </motion.div>
 
       {/* Headline cluster — Poppins-bold mark with static headline + rotating subtitle */}
       <motion.div

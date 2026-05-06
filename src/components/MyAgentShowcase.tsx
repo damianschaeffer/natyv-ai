@@ -24,6 +24,7 @@ import { CallHandlingShowcase } from "@/components/voice-command-showcase/CallHa
 import AutopilotDashboardDemo from "@/components/voice-command-showcase/AutopilotDashboardDemo";
 import { WebsiteWidgetShowcase, WidgetTypewriterSub } from "@/components/voice-command-showcase/WebsiteWidgetShowcase";
 import { MyAgentLockup } from "@/components/brand/MyAgentLogo";
+import SectionHeader from "@/components/SectionHeader";
 
 // Faithful port of get-myagent.com's hero — using the actual <h1>/pill/video
 // markup from src/pages/MyLifeHero.tsx, the actual TrustBadgesPill markup,
@@ -120,19 +121,16 @@ const MyAgentShowcase = () => {
       {/* Ambient glow — same vibe as the source */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.04] blur-[150px] pointer-events-none" />
 
-      {/* Path A stamp — establishes "you're in product land" */}
+      {/* Section entrance — grand "you've arrived at NATYV AI · STUDIO"
+          announcement using the canonical SectionHeader primitive. */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 flex flex-col items-center gap-2 mb-8 md:mb-10"
+        className="relative z-10 mb-10 md:mb-14"
       >
-        <div className="flex items-center gap-3 text-[10px] md:text-xs uppercase tracking-[0.3em] text-foreground/80 font-accent">
-          <span className="h-px w-8 md:w-12 bg-primary/60" />
-          <span>NATYV AI · <span className="text-primary">STUDIO</span></span>
-          <span className="h-px w-8 md:w-12 bg-primary/60" />
-        </div>
+        <SectionHeader section="STUDIO" />
       </motion.div>
 
       {/* MyAgent BrandLogo — anchors the section visually */}

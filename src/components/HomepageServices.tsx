@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import SectionHeader from "@/components/SectionHeader";
 
 interface ServiceFunction {
   id: string;
@@ -132,19 +133,16 @@ const HomepageServices = () => {
       {/* Ambient glow — slightly warmer tint to subtly mark Path B (agency) territory */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-amber-500/[0.025] blur-[150px] pointer-events-none" />
 
-      {/* Path B stamp — establishes "you're in agency land" */}
+      {/* Section entrance — grand "you've arrived at NATYV AI · SERVICES"
+          announcement using the canonical SectionHeader primitive. */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 flex flex-col items-center gap-2 mb-8 md:mb-10"
+        className="relative z-10 mb-10 md:mb-14"
       >
-        <div className="flex items-center gap-3 text-[10px] md:text-xs uppercase tracking-[0.3em] text-foreground/80 font-accent">
-          <span className="h-px w-8 md:w-12 bg-primary/60" />
-          <span>NATYV AI · <span className="text-primary">AGENCY</span></span>
-          <span className="h-px w-8 md:w-12 bg-primary/60" />
-        </div>
+        <SectionHeader section="SERVICES" />
       </motion.div>
 
       {/* Headline cluster — Poppins-bold mark with rotating headline + subtitle */}
