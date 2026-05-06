@@ -141,7 +141,12 @@ export const MyAgentLockup = ({ height = 56 }: { height?: number }) => {
             letterSpacing: "0.005em",
             lineHeight: 1.2,
             whiteSpace: "nowrap",
-            textAlign: "center",
+            // Text starts at the LEFT edge of its grid column, which is
+            // exactly the right edge of the star→wordmark gap = the
+            // x-position of the "M" in MyAgent above. Centering would
+            // float the text mid-column when its natural width is less
+            // than the column.
+            textAlign: "left",
             overflow: "hidden",
             textOverflow: "clip",
           }}
