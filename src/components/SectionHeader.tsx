@@ -32,7 +32,8 @@ const SectionHeader = ({ section, className = "" }: { section: string; className
     >
       {/* Left rule — fills all space between viewport edge and lockup */}
       <span
-        className="flex-1 h-px bg-primary/40"
+        className="flex-1 bg-primary/40"
+        style={{ height: 3 }}
         aria-hidden="true"
       />
 
@@ -56,14 +57,14 @@ const SectionHeader = ({ section, className = "" }: { section: string; className
         />
 
         {/* Section label — sized so its cap-height visually matches the
-            NATYV AI logomark. font-size ≈ 1.4× logo height accounts for
-            Poppins's ~70% cap-height ratio. */}
+            NATYV AI logomark. Regular weight; the size carries the
+            visual weight, the stroke stays light to feel architectural. */}
         <span
           className="font-accent uppercase text-foreground whitespace-nowrap"
           style={{
             fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
             letterSpacing: "clamp(0.08em, 0.15vw, 0.18em)",
-            fontWeight: 600,
+            fontWeight: 400,
             lineHeight: 1,
           }}
         >
@@ -73,7 +74,8 @@ const SectionHeader = ({ section, className = "" }: { section: string; className
 
       {/* Right rule — mirror of the left rule */}
       <span
-        className="flex-1 h-px bg-primary/40"
+        className="flex-1 bg-primary/40"
+        style={{ height: 3 }}
         aria-hidden="true"
       />
     </div>

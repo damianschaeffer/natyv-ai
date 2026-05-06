@@ -128,7 +128,7 @@ export const MyAgentLockup = ({ height = 56 }: { height?: number }) => {
         }}
       >
         <span
-          style={{ height: 1, width: "100%", background: "hsl(var(--primary) / 0.4)" }}
+          style={{ height: 3, width: "100%", background: "hsl(var(--primary) / 0.4)" }}
           aria-hidden="true"
         />
         <span aria-hidden="true" />
@@ -150,7 +150,7 @@ export const MyAgentLockup = ({ height = 56 }: { height?: number }) => {
         </span>
         <span aria-hidden="true" />
         <span
-          style={{ height: 1, width: "100%", background: "hsl(var(--primary) / 0.4)" }}
+          style={{ height: 3, width: "100%", background: "hsl(var(--primary) / 0.4)" }}
           aria-hidden="true"
         />
       </span>
