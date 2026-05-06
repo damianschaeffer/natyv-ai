@@ -80,12 +80,12 @@ const Navbar = () => {
               {navLinks.map((link, index) => (
                 <div key={link.label} className="flex items-center gap-[clamp(0.5rem,2vw,1.5rem)]">
                   {index > 0 && (
-                    <div 
-                      className="bg-primary flex-shrink-0" 
-                      style={{ 
-                        width: 'clamp(4px, 0.5vw, 8px)', 
-                        height: 'clamp(12px, 1.5vw, 20px)' 
-                      }} 
+                    <div
+                      className="bg-primary flex-shrink-0"
+                      style={{
+                        width: 'clamp(4px, 0.5vw, 8px)',
+                        height: 'clamp(4px, 0.5vw, 8px)',
+                      }}
                     />
                   )}
                   {link.isRoute ? (
