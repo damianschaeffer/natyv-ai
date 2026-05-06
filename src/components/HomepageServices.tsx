@@ -19,16 +19,23 @@ interface ServiceFunction {
   title: string;
   tagline: string;
   icon: typeof Phone;
+  // Brand-aligned category color — used for the icon, the card's
+  // ambient glow, and the inner service pills so each functional area
+  // has its own visual identity instead of all six being uniform.
+  color: string;
   services: string[];
 }
 
-// Mirrors src/pages/Services.tsx — keep in sync when service catalog changes
+// Mirrors src/pages/Services.tsx — keep in sync when service catalog changes.
+// Service names are written as outcomes/services, not roles (so a visitor
+// reads "this is what gets done" instead of "this is who we're hiring").
 const functions: ServiceFunction[] = [
   {
     id: "front-desk",
     title: "Front Desk",
     tagline: "Never miss a call. Never lose a lead.",
     icon: Phone,
+    color: "#3C83F6", // blue (brand primary)
     services: [
       "24/7 AI Voice Receptionist",
       "Personal Call Concierge",
@@ -42,8 +49,9 @@ const functions: ServiceFunction[] = [
     title: "Sales",
     tagline: "Capture, qualify, and close — without the bottleneck.",
     icon: TrendingUp,
+    color: "#f59e0b", // amber
     services: [
-      "Lead Generation Specialist",
+      "Lead Generation",
       "Lead Qualification & Routing",
       "Quote Generator",
       "Abandoned Inquiry Recovery",
@@ -55,6 +63,7 @@ const functions: ServiceFunction[] = [
     title: "Operations",
     tagline: "Smart scheduling. Fewer no-shows. Hours back.",
     icon: Settings2,
+    color: "#8b5cf6", // violet
     services: [
       "Smart Scheduling",
       "No-Show Prevention",
@@ -68,9 +77,10 @@ const functions: ServiceFunction[] = [
     title: "Finance",
     tagline: "Get paid faster. Reconcile less. Sleep better.",
     icon: CreditCard,
+    color: "#10b981", // emerald
     services: [
       "Text-to-Pay Invoicing",
-      "A/R Recovery Specialist",
+      "Automated A/R Recovery",
       "Recurring Payment Setup",
       "Quote-to-Cash Automation",
       "Mobile Card Reader Setup",
@@ -81,9 +91,10 @@ const functions: ServiceFunction[] = [
     title: "Marketing",
     tagline: "Show up everywhere — without an agency for each channel.",
     icon: Megaphone,
+    color: "#f43f5e", // rose
     services: [
-      "Social Media Manager",
-      "Content Writing Assistant",
+      "Social Media Posting",
+      "Content Drafting",
       "DIY Facebook & Google Ads",
       "AI-Drafted Marketing Sequences",
       "Online Directory Sync",
@@ -94,6 +105,7 @@ const functions: ServiceFunction[] = [
     title: "Customer Experience",
     tagline: "Make every customer feel remembered — even at scale.",
     icon: Heart,
+    color: "#06b6d4", // cyan
     services: [
       "AI-Powered Follow-Ups",
       "New Client Welcome Sequences",
@@ -108,15 +120,11 @@ const functions: ServiceFunction[] = [
 const HEADLINE_PRE = "Your stack.";
 const HEADLINE_POST = "Built around you.";
 
-// Rotating subtitles — fold in the intent from the retired PivotBanner
-// ("Want it built around your operations?" / "Our team designs your stack,
-// integrates it deeply, and runs it end-to-end.") so the SERVICES section
-// itself carries the agency-engagement message without a separate banner.
+// Rotating subtitles — carry the agency-engagement message that the
+// retired PivotBanner used to deliver, now native to the SERVICES section.
 const SUBTITLES = [
-  "Built around your operations — not the other way around.",
-  "Designed, integrated, and run end-to-end by our team.",
-  "Six functional areas. One AI stack. Zero handoffs.",
-  "Built by operators who've shipped it 50× before.",
+  "Customized to your specific operations.",
+  "Designed and implemented by our team.",
 ];
 
 const HomepageServices = () => {
@@ -132,19 +140,21 @@ const HomepageServices = () => {
   return (
     <section
       id="homepage-services"
-      className="relative flex flex-col items-center justify-center px-2 sm:px-6 pt-20 md:pt-28 pb-20 md:pb-28 overflow-hidden border-t border-border/40"
+      className="relative flex flex-col items-center px-2 sm:px-6 pt-12 md:pt-16 pb-20 md:pb-28 overflow-hidden border-t border-border/40"
     >
       {/* Ambient glow — slightly warmer tint to subtly mark Path B (agency) territory */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-amber-500/[0.025] blur-[150px] pointer-events-none" />
 
-      {/* Section entrance — grand "you've arrived at NATYV AI · SERVICES"
-          announcement using the canonical SectionHeader primitive. */}
+      {/* Section entrance — sits near the TOP of the scroll-stop with
+          generous separation below before "Your stack. Built around
+          you." so the SectionHeader reads as the section's transition
+          marker, not the page's H1. */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 mb-10 md:mb-14"
+        className="relative z-10 mb-20 md:mb-32 lg:mb-40"
       >
         <SectionHeader section="SERVICES" />
       </motion.div>
@@ -194,21 +204,46 @@ const HomepageServices = () => {
         {functions.map((fn, index) => (
           <motion.article
             key={fn.id}
-            className="group flex flex-col p-6 rounded-2xl border border-border/60 bg-background/40 backdrop-blur-md hover:border-primary/40 hover:bg-background/60 transition-all duration-300"
+            className="group relative flex flex-col p-6 rounded-2xl backdrop-blur-md transition-all duration-300 overflow-hidden"
+            style={{
+              // Card border + subtle tint use the category color so each
+              // card has its own visual identity without losing the dark
+              // brand atmosphere.
+              border: `1px solid ${fn.color}33`,
+              background: `linear-gradient(145deg, ${fn.color}08 0%, hsl(var(--background) / 0.5) 60%)`,
+            }}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.35 + index * 0.06 }}
           >
+            {/* Ambient color glow in the card's top-right corner —
+                tints the card with the category color. */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-12 -right-12 w-40 h-40 rounded-full blur-3xl opacity-40 group-hover:opacity-60 transition-opacity"
+              style={{ background: fn.color }}
+            />
+
             <Link
               to={`/services#${fn.id}`}
-              className="flex flex-col h-full"
+              className="relative flex flex-col h-full"
               aria-label={`${fn.title} — view all services`}
             >
               {/* Card header */}
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                  <fn.icon className="w-5 h-5 text-primary" aria-hidden="true" />
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors"
+                  style={{
+                    background: `${fn.color}1a`,
+                    border: `1px solid ${fn.color}33`,
+                  }}
+                >
+                  <fn.icon
+                    className="w-5 h-5"
+                    style={{ color: fn.color }}
+                    aria-hidden="true"
+                  />
                 </div>
                 <h3 className="font-poppins font-bold text-lg md:text-xl text-foreground leading-tight">
                   {fn.title}
@@ -219,20 +254,33 @@ const HomepageServices = () => {
                 {fn.tagline}
               </p>
 
-              {/* Service chips — the 5 sub-services for this category */}
+              {/* Service chips — tinted with the category color so each
+                  set of services reads as one visual cluster. */}
               <ul className="flex flex-wrap gap-1.5 mb-4 flex-1">
                 {fn.services.map((service) => (
                   <li
                     key={service}
-                    className="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/[0.06] border border-primary/15 text-xs font-medium text-foreground/80 group-hover:bg-primary/10 group-hover:border-primary/30 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium text-foreground/90 transition-colors"
+                    style={{
+                      background: `${fn.color}14`,
+                      border: `1px solid ${fn.color}40`,
+                    }}
                   >
+                    <span
+                      aria-hidden="true"
+                      className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
+                      style={{ background: fn.color }}
+                    />
                     {service}
                   </li>
                 ))}
               </ul>
 
-              {/* Inline jump-link affordance */}
-              <div className="inline-flex items-center gap-1.5 text-xs font-poppins font-semibold text-primary/70 group-hover:text-primary transition-colors mt-auto">
+              {/* Inline jump-link affordance — uses the category color */}
+              <div
+                className="inline-flex items-center gap-1.5 text-xs font-poppins font-semibold transition-colors mt-auto"
+                style={{ color: fn.color }}
+              >
                 <span>See all {fn.title.toLowerCase()} services</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
