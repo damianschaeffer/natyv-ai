@@ -139,12 +139,14 @@ export const CallHandlingVideo = ({
         aria-label="Product demo: AI agent handling a real-estate call while the owner listens in and coaches the agent"
         className="absolute inset-0 w-full h-full object-cover"
       >
+        {/* kind="metadata" prevents Safari from rendering native
+            captions on top of our custom overlay below. cuechange
+            events still fire so our overlay works the same. */}
         <track
-          kind="captions"
+          kind="metadata"
           src={CALL_HANDLING_CAPTIONS}
           srcLang="en"
           label="English"
-          default
         />
       </video>
 
