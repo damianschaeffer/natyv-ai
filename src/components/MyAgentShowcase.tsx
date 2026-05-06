@@ -17,6 +17,7 @@ import {
   Phone,
   Headphones,
   MessageSquare,
+  ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VoiceCommandShowcase } from "@/components/voice-command-showcase/VoiceCommandShowcase";
@@ -116,78 +117,109 @@ const MyAgentShowcase = () => {
   return (
     <section
       id="myagent-section"
-      className="relative flex flex-col items-center justify-center px-2 sm:px-6 pt-24 md:pt-36 pb-16 md:pb-24 border-t border-border/40"
+      className="relative border-t border-border/40"
     >
-      {/* Ambient glow — same vibe as the source */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.04] blur-[150px] pointer-events-none" />
+      {/* Ambient glow — spans the full Studio section as one continuous
+          atmosphere across all the scroll-stop subsections below. */}
+      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.04] blur-[150px]" />
 
-      {/* Section entrance — grand "you've arrived at NATYV AI · STUDIO"
-          announcement using the canonical SectionHeader primitive. */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
-        className="relative z-10 mb-10 md:mb-14"
-      >
-        <SectionHeader section="STUDIO" />
-      </motion.div>
+      {/* ──────────────────────────────────────────────────────────
+          INTRO LANDING — its own scroll-stop. Section header +
+          MyAgent lockup + 5 pills, balanced vertically across the
+          viewport, with a subtle "scroll" indicator hinting at the
+          showcases below. */}
+      <div className="relative min-h-screen flex flex-col items-center px-2 sm:px-6 pt-24 md:pt-32 pb-10">
+        <div className="flex-1 flex flex-col items-center justify-center w-full gap-14 md:gap-20">
+          {/* Section entrance — grand "you've arrived at NATYV AI · STUDIO" */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="relative z-10 w-full"
+          >
+            <SectionHeader section="STUDIO" />
+          </motion.div>
 
-      {/* MyAgent BrandLogo — anchors the section visually */}
-      <motion.a
-        href={MYAGENT_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ delay: 0.1, duration: 0.7 }}
-        className="relative z-10 mb-6 md:mb-8 group inline-flex flex-col items-center"
-        aria-label="Visit MyAgent (opens in a new tab)"
-      >
-        <span className="group-hover:scale-[1.03] transition-transform inline-flex items-start gap-2">
-          {/* Single fluid lockup — the height clamp scales smoothly with
-              viewport width so the asset behaves as one cohesive image
-              instead of snapping between three discrete sizes. */}
-          <MyAgentLockup height="clamp(2.25rem, 5.5vw, 4.25rem)" />
-          <ExternalLink className="w-3.5 h-3.5 md:w-4 md:h-4 mt-1 text-muted-foreground/60 group-hover:text-foreground transition-colors flex-shrink-0" aria-hidden="true" />
-        </span>
-      </motion.a>
+          {/* MyAgent BrandLogo — anchors the intro */}
+          <motion.a
+            href={MYAGENT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: 0.1, duration: 0.7 }}
+            className="relative z-10 group inline-flex flex-col items-center"
+            aria-label="Visit MyAgent (opens in a new tab)"
+          >
+            <span className="group-hover:scale-[1.03] transition-transform inline-flex items-start gap-2">
+              <MyAgentLockup height="clamp(2.25rem, 5.5vw, 4.25rem)" />
+              <ExternalLink className="w-3.5 h-3.5 md:w-4 md:h-4 mt-1 text-muted-foreground/60 group-hover:text-foreground transition-colors flex-shrink-0" aria-hidden="true" />
+            </span>
+          </motion.a>
 
-
-      {/* Pills — exact markup from MyLifeHero.tsx */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ delay: 0.2, duration: 0.7 }}
-        className="relative z-10 text-center max-w-5xl mx-auto mb-20 md:mb-28"
-      >
-        <div className="grid grid-cols-2 justify-items-center sm:flex sm:flex-wrap items-center justify-center gap-x-1.5 gap-y-1 sm:gap-1.5 max-w-5xl mx-auto">
-          {PILLS.map((p, i) => (
-            <a
-              key={p.label}
-              href={MYAGENT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-border/50 bg-background/40 backdrop-blur-md px-2.5 py-0.5 sm:px-3 sm:py-1 hover:bg-background/60 hover:border-primary/40 transition-colors${i === 4 ? " col-span-2" : ""}`}
-            >
-              <p.Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" strokeWidth={2} aria-hidden="true" />
-              <span className="text-sm sm:text-base font-semibold text-foreground/90 whitespace-nowrap">
-                {p.label}
-              </span>
-            </a>
-          ))}
+          {/* Pills */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="relative z-10 text-center max-w-5xl mx-auto"
+          >
+            <div className="grid grid-cols-2 justify-items-center sm:flex sm:flex-wrap items-center justify-center gap-x-1.5 gap-y-1 sm:gap-1.5 max-w-5xl mx-auto">
+              {PILLS.map((p, i) => (
+                <a
+                  key={p.label}
+                  href={MYAGENT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-border/50 bg-background/40 backdrop-blur-md px-2.5 py-0.5 sm:px-3 sm:py-1 hover:bg-background/60 hover:border-primary/40 transition-colors${i === 4 ? " col-span-2" : ""}`}
+                >
+                  <p.Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" strokeWidth={2} aria-hidden="true" />
+                  <span className="text-sm sm:text-base font-semibold text-foreground/90 whitespace-nowrap">
+                    {p.label}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
 
-      {/* Showcase 1 — Call handling: "Full control. Zero effort." */}
+        {/* Scroll indicator — subtle "see all the ways MyAgent can
+            empower you" hint that prepares the eye for the next
+            scroll-stop section below. Mirrors the get-myagent.com
+            scroll cue. */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: 0.5, duration: 0.7 }}
+          className="relative z-10 flex flex-col items-center gap-2 mt-10 text-muted-foreground/60"
+          aria-hidden="true"
+        >
+          <span className="text-[10px] md:text-xs font-accent uppercase tracking-[0.3em]">
+            See how MyAgent works
+          </span>
+          <motion.span
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            className="inline-flex"
+          >
+            <ChevronDown className="w-4 h-4 md:w-5 md:h-5" />
+          </motion.span>
+        </motion.div>
+      </div>
+
+      {/* ──────────────────────────────────────────────────────────
+          SHOWCASE 1 — its own scroll-stop. "Full control. Zero effort." */}
+      <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.7 }}
-        className="relative z-10 w-full max-w-6xl mx-auto mb-24 md:mb-36"
+        className="relative z-10 w-full max-w-6xl mx-auto"
       >
         <div className="text-center mb-6 md:mb-8 px-4">
           <h3
@@ -232,14 +264,17 @@ const MyAgentShowcase = () => {
         </div>
         <CallHandlingShowcase />
       </motion.div>
+      </div>
 
-      {/* Showcase 2 — Voice commands 3-pack: "Live your life. Skip the rest." */}
+      {/* ──────────────────────────────────────────────────────────
+          SHOWCASE 2 — its own scroll-stop. "Live your life. Skip the rest." */}
+      <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.7 }}
-        className="relative z-10 w-full max-w-6xl mx-auto mb-24 md:mb-36"
+        className="relative z-10 w-full max-w-6xl mx-auto"
       >
         <div className="text-center mb-8 md:mb-10 px-4">
           <h3
@@ -275,14 +310,17 @@ const MyAgentShowcase = () => {
           ))}
         </div>
       </motion.div>
+      </div>
 
-      {/* Showcase 3 — Dashboard demo: "Your Life. One Dashboard" */}
+      {/* ──────────────────────────────────────────────────────────
+          SHOWCASE 3 — its own scroll-stop. "Your Life. One Dashboard" */}
+      <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.7 }}
-        className="relative z-10 w-full max-w-6xl mx-auto mb-24 md:mb-36"
+        className="relative z-10 w-full max-w-6xl mx-auto"
       >
         <div className="text-center mb-6 md:mb-8 px-4">
           <h3
@@ -298,8 +336,11 @@ const MyAgentShowcase = () => {
         </div>
         <AutopilotDashboardDemo />
       </motion.div>
+      </div>
 
-      {/* Showcase 4 — Website widget: "Your website. Always on." */}
+      {/* ──────────────────────────────────────────────────────────
+          SHOWCASE 4 — its own scroll-stop. "Your website. Always on." */}
+      <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -321,7 +362,7 @@ const MyAgentShowcase = () => {
       </motion.div>
 
       {/* Demo + Start Free Trial buttons — same chrome as StickyFooterCTA */}
-      <div className="relative z-10 flex justify-center gap-2 sm:gap-3 mt-12 md:mt-14">
+      <div className="relative z-10 flex justify-center gap-2 sm:gap-3 mt-12 md:mt-14 w-full">
         <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
           <Button
             variant="outline"
@@ -352,6 +393,7 @@ const MyAgentShowcase = () => {
             <span className="whitespace-nowrap">{b.label}</span>
           </div>
         ))}
+      </div>
       </div>
 
     </section>
