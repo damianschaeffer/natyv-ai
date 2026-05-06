@@ -69,11 +69,15 @@ const Index = () => {
         {/* Hero — entry, dual fork CTAs, salon video */}
         <Hero />
 
-        {/* Studio (Path A) — MyAgent product showcase */}
+        {/* Studio (Path A) — MyAgent product showcase.
+            amount: "some" triggers fade-in as soon as ANY pixel enters the
+            viewport. amount: 0.2 (the previous value) was unreachable for
+            tall sections — 20% of a 5000px section is larger than the
+            viewport, so the section never became visible. */}
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: "some" }}
           variants={sectionVariants}
         >
           <MyAgentShowcase />
@@ -86,7 +90,7 @@ const Index = () => {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: "some" }}
           variants={sectionVariants}
         >
           <HomepageServices />
@@ -96,7 +100,7 @@ const Index = () => {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: "some" }}
           variants={sectionVariants}
         >
           <AdvisorySection />
@@ -106,7 +110,7 @@ const Index = () => {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: "some" }}
           variants={sectionVariants}
         >
           <PartnersSection />
