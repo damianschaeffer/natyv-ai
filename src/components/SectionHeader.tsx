@@ -25,7 +25,11 @@ import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
  */
 const SectionHeader = ({
   section,
-  height = "clamp(1.25rem, 2.6vw, 2rem)",
+  // Default sized so the lockup width approximately matches the
+  // MyAgent lockup width below it (NATYV AI image is 8.21:1; MyAgent
+  // lockup is ~5.77:1 of its font-size; this clamp keeps the two
+  // assets at equal horizontal weight at every viewport).
+  height = "clamp(1.5rem, 3.87vw, 3rem)",
   className = "",
 }: {
   section: string;
@@ -55,27 +59,29 @@ const SectionHeader = ({
       />
 
       {/* Blue divider — thickness ≈ letter-stroke weight in the words
-          above and below. 0.13em reads cleanly at every scale without
-          overpowering the type. */}
+          above and below. */}
       <span
         aria-hidden="true"
         style={{
           height: "0.13em",
           background: "hsl(var(--primary))",
           width: "100%",
-          marginTop: "0.16em",
+          marginTop: "0.18em",
         }}
       />
 
-      {/* Line 2 — ■ section name ■.
-          justify-between anchors the squares to the lockup's left/right
-          edges; the section name centers in whatever space remains. */}
+      {/* Line 2 — [square] section-name [square], centered.
+          justify-center + fixed gap means the squares hug the section
+          name with consistent padding regardless of word length, so
+          STUDIO / SERVICES / ADVISORY / PARTNERS all read as the same
+          treatment instead of stretching to the lockup edges. */}
       <div
         style={{
-          marginTop: "0.32em",
+          marginTop: "0.18em",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
+          gap: "0.5em",
           width: "100%",
         }}
       >
@@ -92,7 +98,7 @@ const SectionHeader = ({
           style={{
             fontFamily: "Poppins, sans-serif",
             fontWeight: 400,
-            fontSize: "0.85em",
+            fontSize: "1em",
             letterSpacing: "0.22em",
             // Trailing tracking adds visual width to the right of the
             // last glyph so the optical center matches the geometric
