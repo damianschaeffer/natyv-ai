@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  // Category-level icons
   Phone,
   TrendingUp,
   Settings2,
@@ -9,39 +10,118 @@ import {
   Heart,
   ArrowRight,
   Sparkles,
+  // Service-level icons (mirrors my-agent-ai/src/config/serviceIcons.ts)
+  MessageSquare,
+  PhoneCall,
+  MapPin,
+  MessageCircle,
+  Inbox,
+  Calendar,
+  Bell,
+  Globe,
+  Star,
+  FolderSync,
+  Reply,
+  Users,
+  Zap,
+  Send,
+  Share2,
+  Pencil,
+  FileText,
+  HelpCircle,
+  LayoutGrid,
+  ClipboardList,
+  UserPlus,
+  FileCheck,
+  RotateCcw,
+  Wallet,
+  Receipt,
+  ShoppingCart,
+  Tag,
+  Smartphone,
+  CheckCircle,
+  MessagesSquare,
+  Bot,
+  Voicemail,
+  Target,
+  FileSignature,
+  Upload,
+  ListChecks,
+  BellRing,
+  Crown,
+  AppWindow,
+  Copy,
+  Layers,
+  Briefcase,
+  GraduationCap,
+  Gauge,
+  Eye,
+  Trophy,
+  AlertTriangle,
+  BarChart3,
+  Mic,
+  Cable,
+  Server,
+  Mail,
+  ShieldCheck,
+  Mailbox,
+  Lock,
+  Video,
+  Search,
+  ShieldAlert,
+  Store,
+  Clock,
+  Cake,
+  Languages,
+  Scale,
+  Wrench,
+  Headphones,
+  Lightbulb,
+  Palette,
+  Film,
+  MailCheck,
+  type LucideIcon,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/SectionHeader";
 
+interface Service {
+  name: string;
+  icon: LucideIcon;
+}
+
 interface ServiceFunction {
   id: string;
   title: string;
   tagline: string;
-  icon: typeof Phone;
-  // Brand-aligned category color — used for the icon, the card's
-  // ambient glow, and the inner service pills so each functional area
-  // has its own visual identity instead of all six being uniform.
-  color: string;
-  services: string[];
+  icon: LucideIcon;
+  services: Service[];
 }
 
-// Mirrors src/pages/Services.tsx — keep in sync when service catalog changes.
-// Service names are written as outcomes/services, not roles (so a visitor
-// reads "this is what gets done" instead of "this is who we're hiring").
+// Mirrors my-agent-ai/src/config/serviceIcons.ts — every service that
+// MyAgent ships, slotted into one of the six Natyv agency functions.
+// Keep in sync when MyAgent's catalog grows.
 const functions: ServiceFunction[] = [
   {
     id: "front-desk",
     title: "Front Desk",
     tagline: "Never miss a call. Never lose a lead.",
     icon: Phone,
-    color: "#3C83F6", // blue (brand primary)
     services: [
-      "24/7 AI Voice Receptionist",
-      "Personal Call Concierge",
-      "Instant Text Response",
-      "VIP Priority Routing",
-      "Call Sentiment Analysis",
+      { name: "24/7 Call Answering", icon: Phone },
+      { name: "Instant Text Response", icon: MessageSquare },
+      { name: "Personalized Phone Setup", icon: PhoneCall },
+      { name: "Local Business Number", icon: MapPin },
+      { name: "Website Chat Widget", icon: MessageCircle },
+      { name: "Unified Message Inbox", icon: Inbox },
+      { name: "Lead Conversation Assistant", icon: Bot },
+      { name: "Direct Voicemail Drop", icon: Voicemail },
+      { name: "Google Messages Connection", icon: MessagesSquare },
+      { name: "Call Recording & Quality", icon: Mic },
+      { name: "Call Sentiment Analysis", icon: Gauge },
+      { name: "VIP Priority Line", icon: Crown },
+      { name: "70+ Language Voice Support", icon: Languages },
     ],
   },
   {
@@ -49,27 +129,49 @@ const functions: ServiceFunction[] = [
     title: "Sales",
     tagline: "Capture, qualify, and close — without the bottleneck.",
     icon: TrendingUp,
-    color: "#f59e0b", // amber
     services: [
-      "Lead Generation",
-      "Lead Qualification & Routing",
-      "Quote Generator",
-      "Abandoned Inquiry Recovery",
-      "Instant Lead Connection",
+      { name: "Instant Lead Connection", icon: Zap },
+      { name: "Visual Sales Pipeline", icon: LayoutGrid },
+      { name: "Fair Lead Distribution", icon: UserPlus },
+      { name: "Custom Lead Forms", icon: FileText },
+      { name: "Interactive Quizzes", icon: HelpCircle },
+      { name: "Quote Generator", icon: Receipt },
+      { name: "Local Lead Finder", icon: Search },
+      { name: "Referral Partner Program", icon: Users },
     ],
   },
   {
     id: "operations",
     title: "Operations",
-    tagline: "Smart scheduling. Fewer no-shows. Hours back.",
+    tagline: "Smart scheduling. Real systems. Hours back.",
     icon: Settings2,
-    color: "#8b5cf6", // violet
     services: [
-      "Smart Scheduling",
-      "No-Show Prevention",
-      "Auto-Review Requests",
-      "Conversation Memory",
-      "Multi-Location Cloning",
+      { name: "Smart Scheduling", icon: Calendar },
+      { name: "No-Show Prevention", icon: Bell },
+      { name: "Team Task Assignment", icon: ClipboardList },
+      { name: "Team Notifications", icon: BellRing },
+      { name: "Branded Client Portal", icon: AppWindow },
+      { name: "Branded Installable Progressive Web App", icon: Smartphone },
+      { name: "Multi-Location System Clone", icon: Copy },
+      { name: "White-Label Platform Builder", icon: Layers },
+      { name: "Applicant Tracking System", icon: Briefcase },
+      { name: "Employee Training Portal", icon: GraduationCap },
+      { name: "Team Performance Leaderboard", icon: Trophy },
+      { name: "At-Risk Client Alerts", icon: AlertTriangle },
+      { name: "Advanced Performance Analytics", icon: BarChart3 },
+      { name: "Competitor Automation", icon: Eye },
+      { name: "Automation Connection Hub", icon: Cable },
+      { name: "Professional Website Hosting", icon: Server },
+      { name: "Privacy-First Data Handling", icon: Lock },
+      { name: "Accessibility Scans & Remediation", icon: ShieldAlert },
+      { name: "Secure Video Hosting", icon: Video },
+      { name: "Security Audit Service", icon: ShieldCheck },
+      { name: "AI-Drafted Policy Templates", icon: Scale },
+      { name: "Technical Setup Service", icon: Wrench },
+      { name: "Priority Support Access", icon: Headphones },
+      { name: "Strategy Consultation", icon: Lightbulb },
+      { name: "A2P 10DLC Registration Support", icon: ShieldCheck },
+      { name: "Waitlist Manager", icon: Clock },
     ],
   },
   {
@@ -77,13 +179,18 @@ const functions: ServiceFunction[] = [
     title: "Finance",
     tagline: "Get paid faster. Reconcile less. Sleep better.",
     icon: CreditCard,
-    color: "#10b981", // emerald
     services: [
-      "Text-to-Pay Invoicing",
-      "Automated A/R Recovery",
-      "Recurring Payment Setup",
-      "Quote-to-Cash Automation",
-      "Mobile Card Reader Setup",
+      { name: "Text-to-Pay Invoicing", icon: CreditCard },
+      { name: "Automatic Invoicing", icon: FileCheck },
+      { name: "Recurring Payments", icon: RotateCcw },
+      { name: "Deposit Collection", icon: Wallet },
+      { name: "Abandoned Cart Recovery", icon: ShoppingCart },
+      { name: "Discount Code Manager", icon: Tag },
+      { name: "Mobile Card Reader", icon: Smartphone },
+      { name: "Automatic Receipts", icon: CheckCircle },
+      { name: "Digital Signatures", icon: FileSignature },
+      { name: "Secure Document Upload", icon: Upload },
+      { name: "Merchandise Store Setup", icon: Store },
     ],
   },
   {
@@ -91,13 +198,20 @@ const functions: ServiceFunction[] = [
     title: "Marketing",
     tagline: "Show up everywhere — without an agency for each channel.",
     icon: Megaphone,
-    color: "#f43f5e", // rose
     services: [
-      "Social Media Posting",
-      "Content Drafting",
-      "DIY Facebook & Google Ads",
-      "AI-Drafted Marketing Sequences",
-      "Online Directory Sync",
+      { name: "Instant Website Launch", icon: Globe },
+      { name: "Auto-Review Requests", icon: Star },
+      { name: "Online Directory Sync", icon: FolderSync },
+      { name: "Auto-Review Responses", icon: Reply },
+      { name: "Social Post Scheduler", icon: Share2 },
+      { name: "Content Writing Assistant", icon: Pencil },
+      { name: "Do-It-Yourself Facebook Ads", icon: TrendingUp },
+      { name: "Do-It-Yourself Google Ads", icon: Target },
+      { name: "Automated Postcard Mailings", icon: Mailbox },
+      { name: "Dedicated Sending Domain", icon: Mail },
+      { name: "Email Delivery Optimization", icon: MailCheck },
+      { name: "Graphic Design Service", icon: Palette },
+      { name: "Video Production Service", icon: Film },
     ],
   },
   {
@@ -105,13 +219,11 @@ const functions: ServiceFunction[] = [
     title: "Customer Experience",
     tagline: "Make every customer feel remembered — even at scale.",
     icon: Heart,
-    color: "#06b6d4", // cyan
     services: [
-      "AI-Powered Follow-Ups",
-      "New Client Welcome Sequences",
-      "Past Customer Outreach",
-      "Branded Client Portal",
-      "Birthday & Loyalty Campaigns",
+      { name: "Automatic Follow-Up", icon: Send },
+      { name: "Past Customer Outreach", icon: Users },
+      { name: "New Client Welcome Sequence", icon: ListChecks },
+      { name: "Birthday Campaign Automation", icon: Cake },
     ],
   },
 ];
@@ -159,7 +271,7 @@ const HomepageServices = () => {
         <SectionHeader section="SERVICES" />
       </motion.div>
 
-      {/* Headline cluster — Poppins-bold mark with rotating headline + subtitle */}
+      {/* Headline cluster — Poppins-bold mark with rotating subtitle */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -167,7 +279,6 @@ const HomepageServices = () => {
         transition={{ delay: 0.1, duration: 0.7 }}
         className="relative z-10 text-center max-w-5xl mx-auto mb-8 md:mb-10"
       >
-        {/* Static headline — same pattern as MyAgent.com section headers */}
         <h2
           className="font-poppins font-bold tracking-tight text-foreground leading-[1.02] mb-6"
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
@@ -176,7 +287,6 @@ const HomepageServices = () => {
           <span className="text-primary inline-block whitespace-nowrap">{HEADLINE_POST}</span>
         </h2>
 
-        {/* Rotating subtitle — fixed height container so cards don't jump */}
         <div className="min-h-[3rem] md:min-h-[3.5rem] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.p
@@ -193,7 +303,11 @@ const HomepageServices = () => {
         </div>
       </motion.div>
 
-      {/* Service cards — each card lists its 5 sub-services as chips */}
+      {/* Service cards — every category lists every service it ships,
+          with the canonical MyAgent pill aesthetic (icon + name on a
+          brand-blue tinted chip). Categories use brand-consistent dark
+          chrome with a subtle primary-blue accent, not per-category
+          colors that drift away from the Natyv visual system. */}
       <motion.div
         className="relative z-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 w-full max-w-6xl mx-auto mb-10 px-2 sm:px-0"
         initial={{ opacity: 0, y: 20 }}
@@ -204,46 +318,21 @@ const HomepageServices = () => {
         {functions.map((fn, index) => (
           <motion.article
             key={fn.id}
-            className="group relative flex flex-col p-6 rounded-2xl backdrop-blur-md transition-all duration-300 overflow-hidden"
-            style={{
-              // Card border + subtle tint use the category color so each
-              // card has its own visual identity without losing the dark
-              // brand atmosphere.
-              border: `1px solid ${fn.color}33`,
-              background: `linear-gradient(145deg, ${fn.color}08 0%, hsl(var(--background) / 0.5) 60%)`,
-            }}
+            className="group flex flex-col p-6 rounded-2xl border border-border/60 bg-background/40 backdrop-blur-md hover:border-primary/40 hover:bg-background/60 transition-all duration-300"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.35 + index * 0.06 }}
           >
-            {/* Ambient color glow in the card's top-right corner —
-                tints the card with the category color. */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -top-12 -right-12 w-40 h-40 rounded-full blur-3xl opacity-40 group-hover:opacity-60 transition-opacity"
-              style={{ background: fn.color }}
-            />
-
             <Link
               to={`/services#${fn.id}`}
-              className="relative flex flex-col h-full"
+              className="flex flex-col h-full"
               aria-label={`${fn.title} — view all services`}
             >
               {/* Card header */}
               <div className="flex items-center gap-3 mb-2">
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors"
-                  style={{
-                    background: `${fn.color}1a`,
-                    border: `1px solid ${fn.color}33`,
-                  }}
-                >
-                  <fn.icon
-                    className="w-5 h-5"
-                    style={{ color: fn.color }}
-                    aria-hidden="true"
-                  />
+                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                  <fn.icon className="w-5 h-5 text-primary" aria-hidden="true" />
                 </div>
                 <h3 className="font-poppins font-bold text-lg md:text-xl text-foreground leading-tight">
                   {fn.title}
@@ -254,33 +343,26 @@ const HomepageServices = () => {
                 {fn.tagline}
               </p>
 
-              {/* Service chips — tinted with the category color so each
-                  set of services reads as one visual cluster. */}
+              {/* Service pills — exact aesthetic from get-myagent.com:
+                  rounded-full, icon on the left, brand-tinted chip. */}
               <ul className="flex flex-wrap gap-1.5 mb-4 flex-1">
                 {fn.services.map((service) => (
                   <li
-                    key={service}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium text-foreground/90 transition-colors"
-                    style={{
-                      background: `${fn.color}14`,
-                      border: `1px solid ${fn.color}40`,
-                    }}
+                    key={service.name}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/[0.08] border border-primary/30 text-xs font-medium text-foreground/90 group-hover:bg-primary/[0.12] group-hover:border-primary/50 transition-colors"
                   >
-                    <span
+                    <service.icon
+                      className="w-3.5 h-3.5 text-primary flex-shrink-0"
+                      strokeWidth={2}
                       aria-hidden="true"
-                      className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
-                      style={{ background: fn.color }}
                     />
-                    {service}
+                    <span>{service.name}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* Inline jump-link affordance — uses the category color */}
-              <div
-                className="inline-flex items-center gap-1.5 text-xs font-poppins font-semibold transition-colors mt-auto"
-                style={{ color: fn.color }}
-              >
+              {/* Inline jump-link affordance */}
+              <div className="inline-flex items-center gap-1.5 text-xs font-poppins font-semibold text-primary/70 group-hover:text-primary transition-colors mt-auto">
                 <span>See all {fn.title.toLowerCase()} services</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
@@ -309,14 +391,18 @@ const HomepageServices = () => {
       </motion.div>
 
       {/* Secondary line — carry Path B forward to consultation booking */}
-      <div className="relative z-10 mt-4">
-        <Link
-          to="/advisory"
-          className="font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300"
-        >
-          Want to talk first? Book a consultation →
+      <motion.p
+        className="relative z-10 mt-6 text-sm text-muted-foreground font-body text-center"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+      >
+        Or have us design it for you{" "}
+        <Link to="/advisory" className="text-primary hover:underline font-semibold">
+          → Talk to a strategist
         </Link>
-      </div>
+      </motion.p>
     </section>
   );
 };
