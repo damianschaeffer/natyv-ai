@@ -18,17 +18,13 @@
  *                      content where the product needs to introduce
  *                      itself.
  *
- * Geometry is locked at every size:
- *   • Star container width = wordmark height = lockup height (1:1:1)
- *   • Star → wordmark gap = 0.25 × height
- *   • Border-radius on star = 0.227 × height
- *   • Eyebrow rules under the lockup = star container width on each side
- *   • Text → eyebrow gap = same 0.25 × height (mirrored on both sides)
- *   • Text auto-fits via SVG `textLength` so it always fills the
- *     remaining column at any height.
- *
- * Both components accept a single `height` prop in pixels and scale
- * everything else off it.
+ * Architecture: every dimension is expressed in `em` units relative to
+ * the wrapper's font-size. Setting `font-size` (via the `height` prop)
+ * scales the entire asset as one cohesive unit — no element can drift
+ * independently. The `height` prop accepts:
+ *   • a number → interpreted as pixels (e.g., 56 → 56px)
+ *   • a CSS string → used verbatim, e.g., "clamp(36px, 6vw, 68px)" so
+ *     the lockup scales fluidly with the viewport.
  */
 
 const NORTH_STAR_PATH =
@@ -36,30 +32,36 @@ const NORTH_STAR_PATH =
 
 const TAGLINE = "Your Personal AI Agent";
 
+const toFontSize = (height: number | string) =>
+  typeof height === "number" ? `${height}px` : height;
+
 /**
  * MyAgent logo — blue rounded-square icon with the white North Star
  * mark + the "MyAgent" wordmark in Poppins 700 ("My" in primary blue,
  * "Agent" in white). Default height 56px.
  */
-export const MyAgentLogo = ({ height = 56 }: { height?: number }) => {
-  const iconSize = Math.round(height * 0.8);
-  const borderRadius = Math.round(height * 0.227);
+export const MyAgentLogo = ({ height = 56 }: { height?: number | string }) => {
   return (
     <span
       role="img"
       aria-label="MyAgent"
       style={{
+        // Setting font-size here makes 1em = the requested logo height
+        // throughout the children. Every dimension below is em-relative
+        // so the logo scales as one unit when this value changes.
+        fontSize: toFontSize(height),
         display: "inline-flex",
         alignItems: "center",
-        height,
-        gap: `${Math.round(height * 0.25)}px`,
+        height: "1em",
+        gap: "0.25em",
+        lineHeight: 1,
       }}
     >
       <span
         style={{
-          width: height,
-          height,
-          borderRadius,
+          width: "1em",
+          height: "1em",
+          borderRadius: "0.227em",
           background: "hsl(var(--primary))",
           display: "inline-flex",
           alignItems: "center",
@@ -67,7 +69,7 @@ export const MyAgentLogo = ({ height = 56 }: { height?: number }) => {
           flexShrink: 0,
         }}
       >
-        <svg width={iconSize} height={iconSize} viewBox="24 24 152 152">
+        <svg width="0.8em" height="0.8em" viewBox="24 24 152 152">
           <path d={NORTH_STAR_PATH} fill="#ffffff" />
         </svg>
       </span>
@@ -75,7 +77,7 @@ export const MyAgentLogo = ({ height = 56 }: { height?: number }) => {
         style={{
           fontFamily: "Poppins, sans-serif",
           fontWeight: 700,
-          fontSize: height,
+          fontSize: "1em",
           lineHeight: 1,
           whiteSpace: "nowrap",
           letterSpacing: "-0.02em",
@@ -92,63 +94,107 @@ export const MyAgentLogo = ({ height = 56 }: { height?: number }) => {
  * MyAgent full brand lockup — logo + eyebrow rules + the canonical
  * tagline "Your Personal AI Agent".
  *
- * Layout (geometry holds at every height):
+ * All proportions are em-relative to the wrapper's font-size, so the
+ * lockup scales uniformly. Pass `height="clamp(36px, 6vw, 68px)"` for
+ * fluid scaling with viewport width.
  *
- *   [STAR]  [My][Agent]
- *   ┌─────┐ ┌────────────────────────┐ ┌─────┐
- *   │ ─── │ │  Your Personal AI Agent │ │ ─── │
- *   └─────┘ └────────────────────────┘ └─────┘
- *      H      H/4       fill          H/4    H
+ * Geometry (constant at every scale):
+ *   • star container width / height = 1em (= logo height)
+ *   • star → wordmark gap = 0.25em
+ *   • star border-radius = 0.227em
+ *   • eyebrow rules thickness = 0.045em (scales with the rest)
+ *   • tagline font-size = 0.297em (sized so its natural width fills
+ *     the available column edge-to-edge)
+ *   • tagline → eyebrow padding = 0.25em on both sides (mirrored)
  */
-export const MyAgentLockup = ({ height = 56 }: { height?: number }) => {
-  const starSize = height; // star container width
-  const gap = Math.round(height * 0.25); // matches logo's internal gap
-  const taglineMarginTop = Math.round(height * 0.21);
-  // Tagline font-size is locked to a fixed ratio of the logo height so
-  // the lockup's proportions stay constant at any scale. 0.27 was tuned
-  // so the natural width of "Your Personal AI Agent" in Inter regular
-  // approximately fills the available column without stretching.
-  const taglineFontSize = Math.max(10, Math.round(height * 0.27));
-
+export const MyAgentLockup = ({ height = 56 }: { height?: number | string }) => {
   return (
     <span
       role="img"
       aria-label="MyAgent — Your Personal AI Agent"
-      style={{ display: "inline-flex", flexDirection: "column", alignItems: "stretch" }}
+      style={{
+        fontSize: toFontSize(height),
+        display: "inline-flex",
+        flexDirection: "column",
+        alignItems: "stretch",
+        lineHeight: 1,
+      }}
     >
-      <MyAgentLogo height={height} />
+      {/* Logo — re-uses MyAgentLogo's em-based geometry by setting
+          font-size: 1em (= the lockup's height). */}
       <span
         style={{
-          marginTop: `${taglineMarginTop}px`,
+          display: "inline-flex",
+          alignItems: "center",
+          height: "1em",
+          gap: "0.25em",
+          lineHeight: 1,
+        }}
+        aria-hidden="true"
+      >
+        <span
+          style={{
+            width: "1em",
+            height: "1em",
+            borderRadius: "0.227em",
+            background: "hsl(var(--primary))",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+          }}
+        >
+          <svg width="0.8em" height="0.8em" viewBox="24 24 152 152">
+            <path d={NORTH_STAR_PATH} fill="#ffffff" />
+          </svg>
+        </span>
+        <span
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 700,
+            fontSize: "1em",
+            lineHeight: 1,
+            whiteSpace: "nowrap",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          <span style={{ color: "hsl(var(--primary))" }}>My</span>
+          <span style={{ color: "#ffffff" }}>Agent</span>
+        </span>
+      </span>
+
+      {/* Tagline grid — line · gap · text · gap · line, all em-based. */}
+      <span
+        style={{
+          marginTop: "0.21em",
           display: "grid",
-          // 5 columns: line · gap · text · gap · line — symmetric padding
-          gridTemplateColumns: `${starSize}px ${gap}px minmax(0, 1fr) ${gap}px ${starSize}px`,
+          gridTemplateColumns: "1em 0.25em minmax(0, 1fr) 0.25em 1em",
           alignItems: "center",
           width: "100%",
         }}
       >
         <span
-          style={{ height: 3, width: "100%", background: "hsl(var(--primary) / 0.4)" }}
+          style={{
+            height: "0.045em",
+            width: "100%",
+            background: "hsl(var(--primary) / 0.4)",
+          }}
           aria-hidden="true"
         />
         <span aria-hidden="true" />
         <span
           style={{
             fontFamily: "Inter, sans-serif",
-            fontSize: `${taglineFontSize}px`,
+            // 0.297em was chosen so the natural width of "Your Personal
+            // AI Agent" in Inter regular fills the available column
+            // (column = 3.27em; text natural width ≈ fontSize × 11).
+            fontSize: "0.297em",
             fontWeight: 400,
             color: "hsl(var(--muted-foreground))",
             letterSpacing: "0.005em",
             lineHeight: 1.2,
             whiteSpace: "nowrap",
-            // Text starts at the LEFT edge of its grid column, which is
-            // the x-position of the "M" in MyAgent above. The negative
-            // marginLeft optically aligns Inter's slanted "Y" glyph with
-            // Poppins-Bold's straight "M" stroke — the bounding boxes
-            // are already aligned, but the visible glyphs need a small
-            // nudge to read as truly column-aligned.
             textAlign: "left",
-            marginLeft: "-0.1em",
             overflow: "hidden",
             textOverflow: "clip",
           }}
@@ -157,7 +203,11 @@ export const MyAgentLockup = ({ height = 56 }: { height?: number }) => {
         </span>
         <span aria-hidden="true" />
         <span
-          style={{ height: 3, width: "100%", background: "hsl(var(--primary) / 0.4)" }}
+          style={{
+            height: "0.045em",
+            width: "100%",
+            background: "hsl(var(--primary) / 0.4)",
+          }}
           aria-hidden="true"
         />
       </span>

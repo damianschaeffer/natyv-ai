@@ -146,9 +146,10 @@ const MyAgentShowcase = () => {
         aria-label="Visit MyAgent (opens in a new tab)"
       >
         <span className="group-hover:scale-[1.03] transition-transform inline-flex items-start gap-2">
-          <span className="md:hidden inline-flex"><MyAgentLockup height={36} /></span>
-          <span className="hidden md:inline-flex lg:hidden"><MyAgentLockup height={55} /></span>
-          <span className="hidden lg:inline-flex"><MyAgentLockup height={68} /></span>
+          {/* Single fluid lockup — the height clamp scales smoothly with
+              viewport width so the asset behaves as one cohesive image
+              instead of snapping between three discrete sizes. */}
+          <MyAgentLockup height="clamp(2.25rem, 5.5vw, 4.25rem)" />
           <ExternalLink className="w-3.5 h-3.5 md:w-4 md:h-4 mt-1 text-muted-foreground/60 group-hover:text-foreground transition-colors flex-shrink-0" aria-hidden="true" />
         </span>
       </motion.a>
