@@ -129,16 +129,30 @@ const MyAgentShowcase = () => {
           viewport, with a subtle "scroll" indicator hinting at the
           showcases below. */}
       <div className="relative min-h-screen flex flex-col items-center px-2 sm:px-6 pt-24 md:pt-32 pb-10">
-        <div className="flex-1 flex flex-col items-center justify-center w-full gap-14 md:gap-20">
-          {/* Section entrance — grand "you've arrived at NATYV AI · STUDIO" */}
+        <div className="flex-1 flex flex-col items-center justify-center w-full">
+          {/* Section entrance — NATYV AI · STUDIO brand lockup */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="relative z-10 w-full"
+            className="relative z-10"
           >
             <SectionHeader section="STUDIO" />
+          </motion.div>
+
+          {/* "presents" connector — elegant relational glue between the
+              Studio brand stamp above and the MyAgent product below.
+              Generous vertical breathing room on both sides. */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="relative z-10 my-12 md:my-16 lg:my-20 text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground/60 font-accent"
+            aria-hidden="true"
+          >
+            presents
           </motion.div>
 
           {/* MyAgent BrandLogo — anchors the intro */}
@@ -159,13 +173,13 @@ const MyAgentShowcase = () => {
             </span>
           </motion.a>
 
-          {/* Pills */}
+          {/* Pills — sit below the MyAgent logo with breathing room above */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: 0.2, duration: 0.7 }}
-            className="relative z-10 text-center max-w-5xl mx-auto"
+            className="relative z-10 text-center max-w-5xl mx-auto mt-8 md:mt-10"
           >
             <div className="grid grid-cols-2 justify-items-center sm:flex sm:flex-wrap items-center justify-center gap-x-1.5 gap-y-1 sm:gap-1.5 max-w-5xl mx-auto">
               {PILLS.map((p, i) => (

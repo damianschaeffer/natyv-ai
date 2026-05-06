@@ -1,83 +1,121 @@
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 
 /**
- * SectionHeader — section-entrance announcement.
+ * SectionHeader — section-entrance brand lockup.
  *
- * Visually echoes the navbar lockup so visitors instantly recognize
- * "I've arrived at the {section} part of the Natyv site." Reads as a
- * full-width page break: NATYV AI logomark + small blue square +
- * section name in white, all caps, sized to match the logo height,
- * flanked by horizontal rules that run to the viewport edges.
+ * Self-contained two-line stack that announces "you've arrived at the
+ * NATYV AI · {section} part of the site":
  *
- * Use one of these at the top of every major homepage section
- * (Studio, Services, Advisory, Partners, etc.) so the rhythm of the
- * page reads as "Natyv AI · {section name}" — same identity, different
- * room.
+ *   ┌─────────────────────┐
+ *   │     NATYV AI        │  ← top: canonical NATYV AI wordmark
+ *   ├─────────────────────┤  ← blue divider, thickness matches letter strokes
+ *   │  ■    STUDIO     ■  │  ← bottom: ■ section name ■
+ *   └─────────────────────┘
+ *
+ * The lockup width is set by the NATYV AI wordmark image's natural
+ * aspect ratio at height = 1em. The section row below uses
+ * justify-between so the small blue squares anchor the left/right
+ * edges and the section name sits centered between them — same width
+ * regardless of which section, so STUDIO / SERVICES / ADVISORY /
+ * PARTNERS all read as a consistent set.
+ *
+ * Every dimension is em-relative to the wrapper's font-size, so the
+ * lockup scales as one cohesive unit. Pass `height` as a CSS string
+ * (e.g., "clamp(1.25rem, 3vw, 2rem)") for fluid scaling.
  */
-const SectionHeader = ({ section, className = "" }: { section: string; className?: string }) => {
+const SectionHeader = ({
+  section,
+  height = "clamp(1.25rem, 2.6vw, 2rem)",
+  className = "",
+}: {
+  section: string;
+  height?: string | number;
+  className?: string;
+}) => {
+  const fontSize = typeof height === "number" ? `${height}px` : height;
+
   return (
     <div
-      className={`flex items-center ${className}`}
-      // Full-bleed: the wrapper escapes any padded parent so the flanking
-      // rules can run all the way to the viewport edges. `100vw` +
-      // `calc(-50vw + 50%)` is the standard "full-bleed inside a
-      // contained parent" technique.
+      className={`inline-flex flex-col items-stretch ${className}`}
       style={{
-        width: "100vw",
-        marginLeft: "calc(-50vw + 50%)",
-        marginRight: "calc(-50vw + 50%)",
+        fontSize,
+        lineHeight: 1,
       }}
       role="heading"
       aria-level={2}
+      aria-label={`Natyv AI · ${section}`}
     >
-      {/* Left rule — fills all space between viewport edge and lockup */}
-      <span
-        className="flex-1 bg-primary/40"
-        style={{ height: 3 }}
+      {/* Line 1 — NATYV AI wordmark. Height = 1em, width auto-derived
+          from the asset's aspect ratio. This sets the lockup width. */}
+      <img
+        src={natyvLogoTopline}
+        alt=""
         aria-hidden="true"
+        style={{ height: "1em", width: "auto", display: "block" }}
       />
 
-      {/* Center lockup — logo + square divider + section name */}
-      <div className="flex items-center gap-[clamp(0.75rem,2vw,1.5rem)] px-[clamp(1rem,3vw,2.5rem)]">
-        <img
-          src={natyvLogoTopline}
-          alt="Natyv AI"
-          className="h-[clamp(1.5rem,3.2vw,2.25rem)] w-auto"
-        />
+      {/* Blue divider — thickness ≈ letter-stroke weight in the words
+          above and below. 0.13em reads cleanly at every scale without
+          overpowering the type. */}
+      <span
+        aria-hidden="true"
+        style={{
+          height: "0.13em",
+          background: "hsl(var(--primary))",
+          width: "100%",
+          marginTop: "0.16em",
+        }}
+      />
 
-        {/* Small blue square divider — replaces the previous tall pill
-            so it can't be misread as a capital "I". */}
+      {/* Line 2 — ■ section name ■.
+          justify-between anchors the squares to the lockup's left/right
+          edges; the section name centers in whatever space remains. */}
+      <div
+        style={{
+          marginTop: "0.32em",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
         <span
-          className="bg-primary flex-shrink-0"
-          style={{
-            width: "clamp(6px, 0.7vw, 10px)",
-            height: "clamp(6px, 0.7vw, 10px)",
-          }}
           aria-hidden="true"
-        />
-
-        {/* Section label — sized so its cap-height visually matches the
-            NATYV AI logomark. Regular weight; the size carries the
-            visual weight, the stroke stays light to feel architectural. */}
-        <span
-          className="font-accent uppercase text-foreground whitespace-nowrap"
           style={{
-            fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
-            letterSpacing: "clamp(0.08em, 0.15vw, 0.18em)",
+            width: "0.32em",
+            height: "0.32em",
+            background: "hsl(var(--primary))",
+            flexShrink: 0,
+          }}
+        />
+        <span
+          style={{
+            fontFamily: "Poppins, sans-serif",
             fontWeight: 400,
+            fontSize: "0.85em",
+            letterSpacing: "0.22em",
+            // Trailing tracking adds visual width to the right of the
+            // last glyph so the optical center matches the geometric
+            // center between the two squares.
+            paddingLeft: "0.22em",
             lineHeight: 1,
+            textTransform: "uppercase",
+            color: "hsl(var(--foreground))",
+            whiteSpace: "nowrap",
           }}
         >
           {section}
         </span>
+        <span
+          aria-hidden="true"
+          style={{
+            width: "0.32em",
+            height: "0.32em",
+            background: "hsl(var(--primary))",
+            flexShrink: 0,
+          }}
+        />
       </div>
-
-      {/* Right rule — mirror of the left rule */}
-      <span
-        className="flex-1 bg-primary/40"
-        style={{ height: 3 }}
-        aria-hidden="true"
-      />
     </div>
   );
 };
