@@ -108,10 +108,14 @@ const functions: ServiceFunction[] = [
 const HEADLINE_PRE = "Your stack.";
 const HEADLINE_POST = "Built around you.";
 
-// Rotating subtitles — splice of MyAgentSection.tsx rotator pattern
+// Rotating subtitles — fold in the intent from the retired PivotBanner
+// ("Want it built around your operations?" / "Our team designs your stack,
+// integrates it deeply, and runs it end-to-end.") so the SERVICES section
+// itself carries the agency-engagement message without a separate banner.
 const SUBTITLES = [
+  "Built around your operations — not the other way around.",
+  "Designed, integrated, and run end-to-end by our team.",
   "Six functional areas. One AI stack. Zero handoffs.",
-  "Pick what moves the needle. We integrate it deeply with your operations.",
   "Built by operators who've shipped it 50× before.",
 ];
 

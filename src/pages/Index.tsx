@@ -8,7 +8,6 @@ import MyAgentShowcase from "@/components/MyAgentShowcase";
 import PartnersSection from "@/components/PartnersSection";
 import AdvisorySection from "@/components/AdvisorySection";
 import Hero from "@/components/Hero";
-import PivotBanner from "@/components/PivotBanner";
 import StickyDualCTA from "@/components/StickyDualCTA";
 import TwoPathsFooter from "@/components/TwoPathsFooter";
 import Footer from "@/components/Footer";
@@ -83,10 +82,11 @@ const Index = () => {
           <MyAgentShowcase />
         </motion.div>
 
-        {/* Pivot Banner — single biggest conversion lever; explicit Path A → Path B handoff */}
-        <PivotBanner />
-
-        {/* Solutions (Path B) — agency catalog */}
+        {/* Solutions (Path B) — agency catalog. The previous PivotBanner
+            ("Want it built around your operations?") was removed; its
+            intent is now folded into the rotating subtitle below the
+            SERVICES section header, so the SectionHeader itself is the
+            transition cue. */}
         <motion.div
           initial="hidden"
           whileInView="visible"
