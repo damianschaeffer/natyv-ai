@@ -31,12 +31,12 @@ interface Partner {
 
 const PARTNERS: Partner[] = [
   { name: "Anthropic", logo: "/logos/anthropic.svg", scale: 0.75 },
-  { name: "OpenAI", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg" },
+  { name: "OpenAI", logo: "/logos/openai.svg" },
   { name: "Google Gemini", logo: "/logos/google-gemini.svg" },
   { name: "ElevenLabs", logo: "/logos/elevenlabs.svg" },
   { name: "Telnyx", logo: "/logos/telnyx.svg" },
-  { name: "Supabase", logo: "https://seeklogo.com/images/S/supabase-logo-DCC676FFE2-seeklogo.com.png" },
-  { name: "Google Cloud", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" },
+  { name: "Supabase", logo: "/logos/supabase.svg" },
+  { name: "Google Cloud", logo: "/logos/google-cloud.svg" },
   { name: "GoHighLevel", logo: "/logos/gohighlevel.png" },
 ];
 
