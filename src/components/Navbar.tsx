@@ -108,9 +108,9 @@ const Navbar = () => {
         <div className="container mx-auto px-[clamp(0.75rem,2vw,1.5rem)] py-[clamp(0.5rem,1.5vw,1rem)]">
           <div className="flex items-center justify-between gap-[clamp(0.5rem,2vw,1rem)]">
             {/* Logo - fluid sizing */}
-            <motion.a 
-              href="/" 
-              className="flex items-center flex-shrink-0"
+            <motion.a
+              href="/"
+              className="inline-flex items-center min-h-[44px] sm:min-h-0 flex-shrink-0"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400 }}
             >

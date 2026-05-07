@@ -194,7 +194,7 @@ const AdvisorySection = () => {
       >
         <Link to="/advisory">
           <Button
-            className="h-10 sm:h-11 px-5 sm:px-6 text-sm font-poppins font-semibold rounded-full shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
+            className="h-11 px-5 sm:px-6 text-sm font-poppins font-semibold rounded-full shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
           >
             <Calendar className="w-4 h-4 mr-1.5" aria-hidden="true" />
             Schedule consultation
@@ -207,7 +207,7 @@ const AdvisorySection = () => {
       <div className="relative z-10 mt-4">
         <Link
           to="/services"
-          className="font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300"
+          className="inline-flex items-center min-h-[44px] sm:min-h-0 px-2 sm:px-0 font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300"
         >
           Or jump straight to deployment →
         </Link>
