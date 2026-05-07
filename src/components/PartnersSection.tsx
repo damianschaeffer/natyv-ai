@@ -183,7 +183,7 @@ const PartnersSection = () => {
       <div className="relative z-10 mt-10">
         <a
           href="/advisory"
-          className="font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300"
+          className="inline-flex items-center min-h-[44px] sm:min-h-0 px-2 sm:px-0 font-body text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors duration-300"
         >
           <Layers className="w-4 h-4 inline-block mr-1.5 -mt-0.5" aria-hidden="true" />
           Curious how we wire it together? Talk to a strategist →
