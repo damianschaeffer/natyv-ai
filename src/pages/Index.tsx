@@ -7,7 +7,6 @@ import MyAgentShowcase from "@/components/MyAgentShowcase";
 import PartnersSection from "@/components/PartnersSection";
 import AdvisorySection from "@/components/AdvisorySection";
 import Hero from "@/components/Hero";
-import StickyDualCTA from "@/components/StickyDualCTA";
 import TwoPathsFooter from "@/components/TwoPathsFooter";
 import Footer from "@/components/Footer";
 import { MotionSection } from "@/components/MotionSection";
@@ -74,7 +73,6 @@ const Index = () => {
         {/* Two-Paths pre-footer — final binary fork for any remaining un-converted scroller */}
         <TwoPathsFooter />
       </main>
-      <StickyDualCTA />
       <Footer />
     </div>
   );
