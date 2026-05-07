@@ -31,7 +31,7 @@ const StrategyCallCTA = () => {
         <Link to="/advisory">
           <Button
             size="lg"
-            className="font-body font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
+            className="min-h-[44px] font-body font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
           >
             Book the strategy call
             <ArrowRight className="ml-2 w-4 h-4" />
