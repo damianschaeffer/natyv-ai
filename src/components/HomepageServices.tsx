@@ -297,18 +297,26 @@ const HomepageServices = () => {
       {/* Ambient glow — slightly warmer tint to subtly mark Path B (agency) territory */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-amber-500/[0.025] blur-[150px] pointer-events-none" />
 
-      {/* Section entrance — sits near the TOP of the scroll-stop with
-          generous separation below before "Your stack. Built around
-          you." so the SectionHeader reads as the section's transition
-          marker, not the page's H1. */}
+      {/* Section entrance — small subtle pill in the navbar caps style.
+          Matches the existing /services page treatment so the homepage
+          and the dedicated services route read as one system. */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 mb-20 md:mb-32 lg:mb-40"
+        className="relative z-10 mb-8 md:mb-10"
       >
-        <SectionHeader section="SERVICES" />
+        <span
+          className="inline-block px-4 py-1.5 text-primary border border-primary/30 rounded-full font-accent uppercase"
+          style={{
+            fontSize: "clamp(0.65rem, 1.1vw, 0.85rem)",
+            letterSpacing: "0.18em",
+            fontWeight: 500,
+          }}
+        >
+          Services
+        </span>
       </motion.div>
 
       {/* Headline cluster — Poppins-bold mark with rotating subtitle */}
