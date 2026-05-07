@@ -28,7 +28,7 @@ const StrategyCallCTA = () => {
           60 minutes. Confidential. We map the highest-ROI services to your
           business and walk you out with a deployment plan.
         </p>
-        <Link to="/advisory">
+        <Link to="/advisory" className="inline-flex">
           <Button
             size="lg"
             className="min-h-[44px] font-body font-semibold bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
