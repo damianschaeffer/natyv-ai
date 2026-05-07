@@ -248,8 +248,14 @@ const SUBTITLES = [
   "Designed and implemented by our team.",
 ];
 
+// How many service pills are shown before the "Show all" expand kicks in.
+// 4 = the count of the smallest category (CX), so every card starts the
+// same length regardless of category size.
+const VISIBLE_PILLS = 4;
+
 const HomepageServices = () => {
   const [currentSubtitle, setCurrentSubtitle] = useState(0);
+  const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -257,6 +263,9 @@ const HomepageServices = () => {
     }, 4500);
     return () => clearInterval(interval);
   }, []);
+
+  const toggleExpanded = (id: string) =>
+    setExpandedCards((prev) => ({ ...prev, [id]: !prev[id] }));
 
   return (
     <section
@@ -324,103 +333,122 @@ const HomepageServices = () => {
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
-        {functions.map((fn, index) => (
-          <motion.article
-            key={fn.id}
-            className="group relative flex flex-col rounded-2xl backdrop-blur-md transition-all duration-300 overflow-hidden"
-            // Aesthetic mirrors the get-myagent.com tier cards:
-            //  - solid colored top accent bar
-            //  - 2px tinted border in the category color around the whole card
-            //  - gradient bg tinted with the category color
-            //  - soft outer glow in the category color
-            style={{
-              border: `2px solid ${fn.color}80`,
-              background: `linear-gradient(140deg, ${fn.color}1a 0%, hsl(var(--background) / 0.7) 55%, hsl(var(--background) / 0.85) 100%)`,
-              boxShadow: `0 0 0 1px ${fn.color}1a, 0 20px 50px -20px ${fn.color}40`,
-            }}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.35 + index * 0.06 }}
-          >
-            {/* Top accent bar — solid colored stripe across the full
-                card width, matching the get-myagent.com tier cards. */}
-            <div
-              aria-hidden="true"
-              className="absolute top-0 left-0 right-0"
-              style={{ height: 4, background: fn.color }}
-            />
+        {functions.map((fn, index) => {
+          const isExpanded = !!expandedCards[fn.id];
+          const visibleServices = isExpanded
+            ? fn.services
+            : fn.services.slice(0, VISIBLE_PILLS);
+          const hasMore = fn.services.length > VISIBLE_PILLS;
 
-            <Link
-              to={`/services#${fn.id}`}
-              className="flex flex-col h-full p-6 md:p-7 pt-7 md:pt-8"
-              aria-label={`${fn.title} — view all services`}
+          return (
+            <motion.article
+              key={fn.id}
+              className="group relative flex flex-col rounded-2xl backdrop-blur-md transition-all duration-300 overflow-hidden border border-border/40"
+              // No outside colored border (per Damian's feedback - it
+              // read as inconsistent). Just a subtle neutral border, a
+              // gradient bg tinted with the category color, and a soft
+              // outer glow.
+              style={{
+                background: `linear-gradient(140deg, ${fn.color}14 0%, hsl(var(--background) / 0.75) 55%, hsl(var(--background) / 0.9) 100%)`,
+                boxShadow: `0 20px 50px -20px ${fn.color}33`,
+              }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.35 + index * 0.06 }}
             >
-              {/* Card header — solid colored circle replaces the agent
-                  avatar from MyAgent's package cards. */}
-              <div className="flex items-center gap-4 mb-6">
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{
-                    background: fn.color,
-                    boxShadow: `0 8px 24px -8px ${fn.color}99`,
-                  }}
+              {/* Top accent stripe — solid colored bar across the full
+                  card width. The "subtle banner that separates the top
+                  of the card." */}
+              <div
+                aria-hidden="true"
+                className="absolute top-0 left-0 right-0"
+                style={{ height: 4, background: fn.color }}
+              />
+
+              <div className="flex flex-col h-full p-5 md:p-6 pt-5 md:pt-6">
+                {/* Card header — solid colored circle + title only.
+                    Tagline removed per request; the title carries the
+                    section by itself, the services below carry the
+                    rest. */}
+                <Link
+                  to={`/services#${fn.id}`}
+                  className="flex items-center gap-3 mb-4"
+                  aria-label={`${fn.title} - view all services`}
                 >
-                  <fn.icon className="w-7 h-7 text-white" strokeWidth={2.25} aria-hidden="true" />
-                </div>
-                <div className="flex flex-col min-w-0">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{
+                      background: fn.color,
+                      boxShadow: `0 8px 24px -8px ${fn.color}99`,
+                    }}
+                  >
+                    <fn.icon className="w-6 h-6 text-white" strokeWidth={2.25} aria-hidden="true" />
+                  </div>
                   <h3
                     className="font-poppins font-bold text-xl md:text-2xl leading-tight"
                     style={{ color: fn.color }}
                   >
                     {fn.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground font-body leading-snug mt-1">
-                    {fn.tagline}
-                  </p>
-                </div>
-              </div>
+                </Link>
 
-              {/* Service pills.
-                  - whitespace-nowrap on each pill prevents long names
-                    from wrapping to 2 lines (which was causing the
-                    "big oval" bug — a 2-line pill made siblings in the
-                    same row stretch to match height).
-                  - items-start on the UL keeps each pill at its natural
-                    height regardless of neighbors.
-                  - Uniform px-3 py-1.5 padding on every pill. */}
-              <ul className="flex flex-wrap items-start gap-2 mb-5 flex-1">
-                {fn.services.map((service) => (
-                  <li
-                    key={service.name}
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-foreground/95 whitespace-nowrap transition-colors"
-                    style={{
-                      background: `${fn.color}14`,
-                      border: `1px solid ${fn.color}55`,
-                    }}
+                {/* Subtle divider that separates header from pills. */}
+                <div
+                  aria-hidden="true"
+                  className="w-full mb-4"
+                  style={{
+                    height: 1,
+                    background: `${fn.color}33`,
+                  }}
+                />
+
+                {/* Service pills - one per row, single column. */}
+                <ul className="flex flex-col gap-1.5 flex-1">
+                  {visibleServices.map((service) => (
+                    <li
+                      key={service.name}
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-foreground/95"
+                      style={{
+                        background: `${fn.color}14`,
+                        border: `1px solid ${fn.color}55`,
+                      }}
+                    >
+                      <service.icon
+                        className="w-3.5 h-3.5 flex-shrink-0"
+                        style={{ color: fn.color }}
+                        strokeWidth={2.25}
+                        aria-hidden="true"
+                      />
+                      <span className="leading-none">{service.name}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Show all / show less expand affordance — only renders
+                    when the category has more than VISIBLE_PILLS items. */}
+                {hasMore && (
+                  <button
+                    type="button"
+                    onClick={() => toggleExpanded(fn.id)}
+                    className="mt-3 inline-flex items-center justify-center gap-1.5 text-xs font-poppins font-semibold transition-colors hover:opacity-80"
+                    style={{ color: fn.color }}
                   >
-                    <service.icon
-                      className="w-3.5 h-3.5 flex-shrink-0"
-                      style={{ color: fn.color }}
-                      strokeWidth={2.25}
-                      aria-hidden="true"
+                    {isExpanded
+                      ? "Show less"
+                      : `Show all ${fn.services.length} ${fn.title.toLowerCase()} services`}
+                    <ArrowRight
+                      className="w-3.5 h-3.5 transition-transform"
+                      style={{
+                        transform: isExpanded ? "rotate(-90deg)" : "rotate(90deg)",
+                      }}
                     />
-                    <span className="leading-none">{service.name}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Inline jump-link affordance — uses the category color. */}
-              <div
-                className="inline-flex items-center gap-1.5 text-xs font-poppins font-semibold transition-colors mt-auto"
-                style={{ color: fn.color }}
-              >
-                <span>See all {fn.title.toLowerCase()} services</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                )}
               </div>
-            </Link>
-          </motion.article>
-        ))}
+            </motion.article>
+          );
+        })}
       </motion.div>
 
       {/* CTA — pill-shaped to match Studio's button chrome */}
