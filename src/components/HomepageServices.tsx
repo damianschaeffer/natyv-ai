@@ -457,7 +457,7 @@ const HomepageServices = () => {
                           type="button"
                           onClick={() => togglePill(fn.id, service.name)}
                           aria-expanded={pillExpanded}
-                          className="w-full flex items-center gap-2 px-3 py-1.5 text-left text-xs font-medium text-foreground/95"
+                          className="w-full flex items-center gap-2 px-3 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-0 text-left text-xs font-medium text-foreground/95"
                         >
                           <service.icon
                             className="w-3.5 h-3.5 flex-shrink-0"
@@ -493,7 +493,7 @@ const HomepageServices = () => {
                   <button
                     type="button"
                     onClick={() => toggleExpanded(fn.id)}
-                    className="mt-3 inline-flex items-center justify-center gap-1.5 text-xs font-poppins font-semibold transition-colors hover:opacity-80"
+                    className="mt-3 inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] sm:min-h-0 text-xs font-poppins font-semibold transition-colors hover:opacity-80"
                     style={{ color: fn.color }}
                   >
                     {isExpanded

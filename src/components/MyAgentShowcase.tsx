@@ -377,7 +377,7 @@ const MyAgentShowcase = () => {
         <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
           <Button
             variant="outline"
-            className="h-9 sm:h-10 px-4 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full shadow-lg backdrop-blur-md bg-background/80 border-border/50 hover:bg-background/90 transition-all"
+            className="h-11 sm:h-10 px-4 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full shadow-lg backdrop-blur-md bg-background/80 border-border/50 hover:bg-background/90 transition-all"
           >
             <Play className="w-3.5 h-3.5 mr-1.5 fill-current" aria-hidden="true" />
             Demo
@@ -385,7 +385,7 @@ const MyAgentShowcase = () => {
         </a>
         <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
           <Button
-            className="h-9 sm:h-10 px-4 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
+            className="h-11 sm:h-10 px-4 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
           >
             <Sparkles className="w-3.5 h-3.5 mr-1.5" aria-hidden="true" />
             Start Free Trial

@@ -52,13 +52,15 @@ const Footer = () => {
             {/* Logo - fluid sizing */}
             <motion.a
               href="/"
-              className="flex items-center flex-shrink-0"
+              className="inline-flex items-center min-h-[44px] sm:min-h-0 flex-shrink-0"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
               <img
                 src={natyvLogoTopline}
                 alt="Natyv AI"
+                loading="lazy"
+                decoding="async"
                 className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto"
               />
             </motion.a>
