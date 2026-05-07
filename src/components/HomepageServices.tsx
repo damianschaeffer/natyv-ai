@@ -86,6 +86,7 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/SectionHeader";
+import StrategyCallCTA from "@/components/StrategyCallCTA";
 
 interface Service {
   name: string;
@@ -512,38 +513,12 @@ const HomepageServices = () => {
         })}
       </motion.div>
 
-      {/* CTA — pill-shaped to match Studio's button chrome */}
-      <motion.div
-        className="relative z-10 flex justify-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-      >
-        <Link to="/services">
-          <Button
-            className="h-10 sm:h-11 px-5 sm:px-6 text-sm font-poppins font-semibold rounded-full shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
-          >
-            <Sparkles className="w-4 h-4 mr-1.5" aria-hidden="true" />
-            Explore all services
-            <ArrowRight className="ml-1.5 w-4 h-4" />
-          </Button>
-        </Link>
-      </motion.div>
-
-      {/* Secondary line — carry Path B forward to consultation booking */}
-      <motion.p
-        className="relative z-10 mt-6 text-sm text-muted-foreground font-body text-center"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-      >
-        Or have us design it for you{" "}
-        <Link to="/advisory" className="text-primary hover:underline font-semibold">
-          → Talk to a strategist
-        </Link>
-      </motion.p>
+      {/* Closing CTA — same "Not sure which functions to start with?"
+          block used at the bottom of /services so both pages read as
+          one closing handoff. */}
+      <div className="relative z-10 w-full">
+        <StrategyCallCTA />
+      </div>
     </section>
   );
 };

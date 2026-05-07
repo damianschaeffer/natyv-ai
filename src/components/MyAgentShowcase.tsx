@@ -130,7 +130,8 @@ const MyAgentShowcase = () => {
           showcases below. */}
       <div className="relative min-h-screen flex flex-col items-center px-2 sm:px-6 pt-24 md:pt-32 pb-10">
         <div className="flex-1 flex flex-col items-center justify-center w-full">
-          {/* Section entrance — NATYV AI · STUDIO brand lockup */}
+          {/* Section entrance — small subtle pill matching the
+              /services-page treatment for visual unification. */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -138,7 +139,16 @@ const MyAgentShowcase = () => {
             transition={{ duration: 0.6 }}
             className="relative z-10"
           >
-            <SectionHeader section="STUDIO" />
+            <span
+              className="inline-block px-4 py-1.5 text-primary border border-primary/30 rounded-full font-accent uppercase"
+              style={{
+                fontSize: "clamp(0.65rem, 1.1vw, 0.85rem)",
+                letterSpacing: "0.18em",
+                fontWeight: 500,
+              }}
+            >
+              Studio
+            </span>
           </motion.div>
 
           {/* "presents" connector — elegant relational glue between the
