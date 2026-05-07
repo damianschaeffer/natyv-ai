@@ -96,6 +96,9 @@ interface ServiceFunction {
   title: string;
   tagline: string;
   icon: LucideIcon;
+  // Brand-aligned category color used for the card's tinted border,
+  // gradient, glow, the solid icon circle, AND the inner pill chips.
+  color: string;
   services: Service[];
 }
 
@@ -108,6 +111,7 @@ const functions: ServiceFunction[] = [
     title: "Front Desk",
     tagline: "Never miss a call. Never lose a lead.",
     icon: Phone,
+    color: "#06B6D4", // cyan
     services: [
       { name: "24/7 Call Answering", icon: Phone },
       { name: "Instant Text Response", icon: MessageSquare },
@@ -129,6 +133,7 @@ const functions: ServiceFunction[] = [
     title: "Sales",
     tagline: "Capture, qualify, and close — without the bottleneck.",
     icon: TrendingUp,
+    color: "#10B981", // green (emerald)
     services: [
       { name: "Instant Lead Connection", icon: Zap },
       { name: "Visual Sales Pipeline", icon: LayoutGrid },
@@ -145,6 +150,7 @@ const functions: ServiceFunction[] = [
     title: "Operations",
     tagline: "Smart scheduling. Real systems. Hours back.",
     icon: Settings2,
+    color: "#3C83F6", // blue (brand primary)
     services: [
       { name: "Smart Scheduling", icon: Calendar },
       { name: "No-Show Prevention", icon: Bell },
@@ -179,6 +185,7 @@ const functions: ServiceFunction[] = [
     title: "Finance",
     tagline: "Get paid faster. Reconcile less. Sleep better.",
     icon: CreditCard,
+    color: "#EF4444", // red
     services: [
       { name: "Text-to-Pay Invoicing", icon: CreditCard },
       { name: "Automatic Invoicing", icon: FileCheck },
@@ -198,6 +205,7 @@ const functions: ServiceFunction[] = [
     title: "Marketing",
     tagline: "Show up everywhere — without an agency for each channel.",
     icon: Megaphone,
+    color: "#FB923C", // orange
     services: [
       { name: "Instant Website Launch", icon: Globe },
       { name: "Auto-Review Requests", icon: Star },
@@ -219,6 +227,7 @@ const functions: ServiceFunction[] = [
     title: "Customer Experience",
     tagline: "Make every customer feel remembered — even at scale.",
     icon: Heart,
+    color: "#8B5CF6", // violet
     services: [
       { name: "Automatic Follow-Up", icon: Send },
       { name: "Past Customer Outreach", icon: Users },
@@ -318,7 +327,16 @@ const HomepageServices = () => {
         {functions.map((fn, index) => (
           <motion.article
             key={fn.id}
-            className="group flex flex-col p-6 rounded-2xl border border-border/60 bg-background/40 backdrop-blur-md hover:border-primary/40 hover:bg-background/60 transition-all duration-300"
+            className="group relative flex flex-col p-6 md:p-7 rounded-2xl backdrop-blur-md transition-all duration-300"
+            // Aesthetic mirrors the package cards on get-myagent.com:
+            //  - 2px tinted border in the category color
+            //  - gradient bg tinted with the category color
+            //  - soft outer glow in the category color
+            style={{
+              border: `2px solid ${fn.color}66`,
+              background: `linear-gradient(140deg, ${fn.color}1a 0%, hsl(var(--background) / 0.7) 55%, hsl(var(--background) / 0.85) 100%)`,
+              boxShadow: `0 0 0 1px ${fn.color}14, 0 20px 50px -20px ${fn.color}33`,
+            }}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -329,40 +347,60 @@ const HomepageServices = () => {
               className="flex flex-col h-full"
               aria-label={`${fn.title} — view all services`}
             >
-              {/* Card header */}
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                  <fn.icon className="w-5 h-5 text-primary" aria-hidden="true" />
+              {/* Card header — solid colored circle replaces the agent
+                  avatar from MyAgent's package cards. */}
+              <div className="flex items-center gap-4 mb-5">
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg"
+                  style={{
+                    background: fn.color,
+                    boxShadow: `0 8px 24px -8px ${fn.color}99`,
+                  }}
+                >
+                  <fn.icon className="w-7 h-7 text-white" strokeWidth={2.25} aria-hidden="true" />
                 </div>
-                <h3 className="font-poppins font-bold text-lg md:text-xl text-foreground leading-tight">
-                  {fn.title}
-                </h3>
+                <div className="flex flex-col min-w-0">
+                  <h3
+                    className="font-poppins font-bold text-xl md:text-2xl text-foreground leading-tight"
+                    style={{ color: fn.color }}
+                  >
+                    {fn.title}
+                  </h3>
+                  <p className="text-xs md:text-sm text-muted-foreground font-body leading-snug mt-0.5">
+                    {fn.tagline}
+                  </p>
+                </div>
               </div>
 
-              <p className="text-sm text-muted-foreground font-body leading-relaxed mb-4">
-                {fn.tagline}
-              </p>
-
-              {/* Service pills — exact aesthetic from get-myagent.com:
-                  rounded-full, icon on the left, brand-tinted chip. */}
-              <ul className="flex flex-wrap gap-1.5 mb-4 flex-1">
+              {/* Service pills — same aesthetic as get-myagent.com tier
+                  cards: rounded-full, icon on the left, category-color
+                  border + tinted bg. Padding is uniform across all pills. */}
+              <ul className="flex flex-wrap gap-2 mb-5 flex-1">
                 {fn.services.map((service) => (
                   <li
                     key={service.name}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/[0.08] border border-primary/30 text-xs font-medium text-foreground/90 group-hover:bg-primary/[0.12] group-hover:border-primary/50 transition-colors"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-foreground/95 transition-colors"
+                    style={{
+                      background: `${fn.color}14`,
+                      border: `1px solid ${fn.color}55`,
+                    }}
                   >
                     <service.icon
-                      className="w-3.5 h-3.5 text-primary flex-shrink-0"
-                      strokeWidth={2}
+                      className="w-3.5 h-3.5 flex-shrink-0"
+                      style={{ color: fn.color }}
+                      strokeWidth={2.25}
                       aria-hidden="true"
                     />
-                    <span>{service.name}</span>
+                    <span className="leading-none">{service.name}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* Inline jump-link affordance */}
-              <div className="inline-flex items-center gap-1.5 text-xs font-poppins font-semibold text-primary/70 group-hover:text-primary transition-colors mt-auto">
+              {/* Inline jump-link affordance — uses the category color. */}
+              <div
+                className="inline-flex items-center gap-1.5 text-xs font-poppins font-semibold transition-colors mt-auto"
+                style={{ color: fn.color }}
+              >
                 <span>See all {fn.title.toLowerCase()} services</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
