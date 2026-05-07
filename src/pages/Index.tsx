@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { motion } from "framer-motion";
 import { Head } from "vite-react-ssg";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -11,23 +10,7 @@ import Hero from "@/components/Hero";
 import StickyDualCTA from "@/components/StickyDualCTA";
 import TwoPathsFooter from "@/components/TwoPathsFooter";
 import Footer from "@/components/Footer";
-
-const sectionVariants = {
-  hidden: {
-    opacity: 0,
-    y: 60,
-    filter: "blur(8px)"
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.8,
-      ease: "easeOut" as const,
-    }
-  }
-};
+import { MotionSection } from "@/components/MotionSection";
 
 const Index = () => {
   const location = useLocation();
@@ -68,53 +51,25 @@ const Index = () => {
         {/* Hero — entry, dual fork CTAs, salon video */}
         <Hero />
 
-        {/* Studio (Path A) — MyAgent product showcase.
-            amount: "some" triggers fade-in as soon as ANY pixel enters the
-            viewport. amount: 0.2 (the previous value) was unreachable for
-            tall sections — 20% of a 5000px section is larger than the
-            viewport, so the section never became visible. */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: "some" }}
-          variants={sectionVariants}
-        >
+        {/* Studio (Path A) — MyAgent product showcase. */}
+        <MotionSection>
           <MyAgentShowcase />
-        </motion.div>
+        </MotionSection>
 
-        {/* Solutions (Path B) — agency catalog. The previous PivotBanner
-            ("Want it built around your operations?") was removed; its
-            intent is now folded into the rotating subtitle below the
-            SERVICES section header, so the SectionHeader itself is the
-            transition cue. */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: "some" }}
-          variants={sectionVariants}
-        >
+        {/* Solutions (Path B) — agency catalog. */}
+        <MotionSection>
           <HomepageServices />
-        </motion.div>
+        </MotionSection>
 
         {/* Advisory — Path B endpoint (consultation booking) */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: "some" }}
-          variants={sectionVariants}
-        >
+        <MotionSection>
           <AdvisorySection />
-        </motion.div>
+        </MotionSection>
 
         {/* Partners — trust signal */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: "some" }}
-          variants={sectionVariants}
-        >
+        <MotionSection>
           <PartnersSection />
-        </motion.div>
+        </MotionSection>
 
         {/* Two-Paths pre-footer — final binary fork for any remaining un-converted scroller */}
         <TwoPathsFooter />

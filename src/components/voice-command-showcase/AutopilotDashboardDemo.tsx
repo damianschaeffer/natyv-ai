@@ -341,7 +341,7 @@ function LeftSidebar({
               onClick={() => onSelect(space.id)}
               aria-current={isActive ? "true" : undefined}
               aria-label={`Switch to ${space.name} space`}
-              className={`flex items-center gap-1.5 px-2 py-1 lg:py-2 rounded-lg text-sm transition-all lg:w-full ${
+              className={`flex items-center gap-1.5 px-2 py-2.5 lg:py-2 min-h-[44px] lg:min-h-0 rounded-lg text-sm transition-all lg:w-full ${
                 isActive
                   ? "bg-white shadow-sm border border-slate-200 text-slate-900 font-semibold"
                   : "text-slate-600 hover:bg-white/60"
@@ -540,8 +540,8 @@ function GoalsCard({
                 <span className="text-slate-700 font-medium">{g.label}</span>
                 <span className="text-slate-500 tabular-nums">
                   {g.unit === "$"
-                    ? `$${g.current.toLocaleString()} / $${g.target.toLocaleString()}`
-                    : `${g.current.toLocaleString()} / ${g.target.toLocaleString()}${
+                    ? `$${g.current.toLocaleString("en-US")} / $${g.target.toLocaleString("en-US")}`
+                    : `${g.current.toLocaleString("en-US")} / ${g.target.toLocaleString("en-US")}${
                         g.unit ? " " + g.unit : ""
                       }`}
                 </span>
@@ -833,7 +833,7 @@ function FloatingAvaBubble() {
           transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
         />
         <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-xl shadow-blue-500/30 ring-2 ring-white">
-          <img src={SOPHIA_AVATAR} alt="" className="w-full h-full object-cover" />
+          <img src={SOPHIA_AVATAR} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
         </div>
         <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white">
           <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-60" />

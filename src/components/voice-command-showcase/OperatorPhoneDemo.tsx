@@ -162,6 +162,8 @@ export default function OperatorPhoneDemo({ videoTimeMs }: { videoTimeMs?: numbe
           <img
             src={AGENT_AVATAR}
             alt=""
+            loading="lazy"
+            decoding="async"
             className="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm"
             style={{ backgroundColor: AGENT_COLOR }}
           />

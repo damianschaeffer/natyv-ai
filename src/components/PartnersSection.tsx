@@ -153,6 +153,8 @@ const PartnersSection = () => {
               <img
                 src={partner.logo}
                 alt={partner.name}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-auto object-contain filter brightness-0 invert"
               />
             </div>
@@ -168,6 +170,8 @@ const PartnersSection = () => {
               <img
                 src={partner.logo}
                 alt={partner.name}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-auto object-contain filter brightness-0 invert"
               />
             </div>

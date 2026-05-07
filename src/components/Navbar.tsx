@@ -219,7 +219,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <motion.button
-              className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+              className="md:hidden inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2 text-foreground hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle menu"
@@ -304,7 +304,7 @@ const Navbar = () => {
                     href={social.href}
                     target={social.href.startsWith("http") ? "_blank" : undefined}
                     rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
+                    className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
                     aria-label={social.label}
                   >
                     <social.icon className="w-5 h-5" />
