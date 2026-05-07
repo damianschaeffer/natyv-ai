@@ -124,14 +124,15 @@ const MyAgentShowcase = () => {
       <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.04] blur-[150px]" />
 
       {/* ──────────────────────────────────────────────────────────
-          INTRO LANDING — its own scroll-stop. Section header +
-          MyAgent lockup + 5 pills, balanced vertically across the
-          viewport, with a subtle "scroll" indicator hinting at the
-          showcases below. */}
-      <div className="relative min-h-screen flex flex-col items-center px-2 sm:px-6 pt-24 md:pt-32 pb-10">
-        <div className="flex-1 flex flex-col items-center justify-center w-full">
+          INTRO LANDING — compact mini-transition page. Studio pill
+          attached directly above the MyAgent lockup, no "presents"
+          connector. Reads as a brief brand stamp before the four
+          showcase scroll-stops below. */}
+      <div className="relative min-h-[60vh] md:min-h-[70vh] flex flex-col items-center px-2 sm:px-6 pt-20 md:pt-24 pb-10">
+        <div className="flex-1 flex flex-col items-center justify-center w-full gap-3 md:gap-4">
           {/* Section entrance — small subtle pill matching the
-              /services-page treatment for visual unification. */}
+              /services-page treatment for visual unification.
+              Sits tight above the MyAgent lockup. */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -149,20 +150,6 @@ const MyAgentShowcase = () => {
             >
               Studio
             </span>
-          </motion.div>
-
-          {/* "presents" connector — elegant relational glue between the
-              Studio brand stamp above and the MyAgent product below.
-              Generous vertical breathing room on both sides. */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="relative z-10 my-12 md:my-16 lg:my-20 text-[10px] md:text-xs uppercase tracking-[0.4em] text-muted-foreground/60 font-accent"
-            aria-hidden="true"
-          >
-            presents
           </motion.div>
 
           {/* MyAgent BrandLogo — anchors the intro */}
@@ -189,7 +176,7 @@ const MyAgentShowcase = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: 0.2, duration: 0.7 }}
-            className="relative z-10 text-center max-w-5xl mx-auto mt-8 md:mt-10"
+            className="relative z-10 text-center max-w-5xl mx-auto mt-4 md:mt-6"
           >
             <div className="grid grid-cols-2 justify-items-center sm:flex sm:flex-wrap items-center justify-center gap-x-1.5 gap-y-1 sm:gap-1.5 max-w-5xl mx-auto">
               {PILLS.map((p, i) => (
