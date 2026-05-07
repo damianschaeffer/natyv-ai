@@ -58,7 +58,7 @@ const StickyDualCTA = () => {
             {/* Persistent two-paths eyebrow — moved out of the page sections
                 so the wayfinder is always visible above the buttons. */}
             <div
-              className="flex items-center justify-center gap-2 sm:gap-3 text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-foreground/70 font-accent"
+              className="flex items-center justify-center gap-2 sm:gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-foreground/70 font-accent"
               aria-hidden="true"
             >
               <span className="h-px w-6 sm:w-10 bg-primary/40" />
@@ -78,7 +78,7 @@ const StickyDualCTA = () => {
               >
                 <Button
                   variant="outline"
-                  className="w-full h-10 px-3 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full bg-background/90 hover:bg-background border border-foreground/30 hover:border-foreground/50 text-foreground transition-all"
+                  className="w-full h-11 sm:h-10 px-3 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full bg-background/90 hover:bg-background border border-foreground/30 hover:border-foreground/50 text-foreground transition-all"
                 >
                   {/* "[lockup] Free Trial" wrapped as a SINGLE flex child
                       so Button's gap-2 only applies between this block
@@ -167,7 +167,7 @@ const StickyDualCTA = () => {
                 to="/services"
                 className="flex-1 sm:flex-initial max-w-[220px] sm:max-w-none"
               >
-                <Button className="w-full h-10 px-3 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all">
+                <Button className="w-full h-11 sm:h-10 px-3 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all">
                   <span className="hidden sm:inline">Agency Services</span>
                   <span className="sm:hidden">Services</span>
                   <ArrowRight className="ml-1 sm:ml-1.5 w-3.5 h-3.5" />

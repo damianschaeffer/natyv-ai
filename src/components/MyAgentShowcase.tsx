@@ -185,7 +185,7 @@ const MyAgentShowcase = () => {
                   href={MYAGENT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-border/50 bg-background/40 backdrop-blur-md px-2.5 py-0.5 sm:px-3 sm:py-1 hover:bg-background/60 hover:border-primary/40 transition-colors${i === 4 ? " col-span-2" : ""}`}
+                  className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-border/50 bg-background/40 backdrop-blur-md px-2.5 py-2 sm:px-3 sm:py-1 min-h-[44px] sm:min-h-0 hover:bg-background/60 hover:border-primary/40 transition-colors${i === 4 ? " col-span-2" : ""}`}
                 >
                   <p.Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" strokeWidth={2} aria-hidden="true" />
                   <span className="text-sm sm:text-base font-semibold text-foreground/90 whitespace-nowrap">

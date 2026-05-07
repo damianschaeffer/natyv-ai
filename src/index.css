@@ -112,11 +112,16 @@
 
   html {
     scroll-behavior: smooth;
+    /* Mobile: prevent decorative orbs (w-[800px]/w-[900px]) from extending the
+       scrollable width. `clip` is preferred over `hidden` because it preserves
+       position: sticky on descendant elements. */
+    overflow-x: clip;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
+    overflow-x: clip;
   }
 
   /* Typography utility classes */

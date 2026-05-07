@@ -2,7 +2,7 @@
 // Verbatim port of the my-agent-ai composite. Desktop: 60/40 side-by-side.
 // Mobile (<768px): stacks clip-above-dashboard. Clip emits timelinePosition →
 // dashboard animates in sync.
-import { useId, useState } from "react";
+import { useState } from "react";
 import { CinematicClip } from "./CinematicClip";
 import { CalendarAddScene } from "./CalendarAddScene";
 import { JobRescheduleScene } from "./JobRescheduleScene";
@@ -28,6 +28,12 @@ export interface VoiceCommandShowcaseProps {
   onClipEnd?: () => void;
 }
 
+function hash32(str: string): string {
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h) ^ str.charCodeAt(i);
+  return (h >>> 0).toString(36);
+}
+
 export function VoiceCommandShowcase({
   videoSrc,
   dashboardScene,
@@ -39,9 +45,12 @@ export function VoiceCommandShowcase({
   onClipEnd,
 }: VoiceCommandShowcaseProps) {
   const [timelinePosition, setTimelinePosition] = useState(0);
-  // Per-instance ID so multiple showcases on the same page each get scoped media queries
-  const reactId = useId().replace(/[:]/g, "");
-  const dataId = `vcs-${reactId}`;
+  // Per-instance ID so multiple showcases on the same page each get scoped
+  // media queries. Derived deterministically from props (videoSrc + scene)
+  // instead of useId() — useId can drift between SSR and client when the
+  // parent tree's render order varies, producing React #425 hydration
+  // text-content mismatches inside the inline <style> below.
+  const dataId = `vcs-${dashboardScene}-${hash32(videoSrc)}`;
 
   return (
     <div
