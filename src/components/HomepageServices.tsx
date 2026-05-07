@@ -327,31 +327,40 @@ const HomepageServices = () => {
         {functions.map((fn, index) => (
           <motion.article
             key={fn.id}
-            className="group relative flex flex-col p-6 md:p-7 rounded-2xl backdrop-blur-md transition-all duration-300"
-            // Aesthetic mirrors the package cards on get-myagent.com:
-            //  - 2px tinted border in the category color
+            className="group relative flex flex-col rounded-2xl backdrop-blur-md transition-all duration-300 overflow-hidden"
+            // Aesthetic mirrors the get-myagent.com tier cards:
+            //  - solid colored top accent bar
+            //  - 2px tinted border in the category color around the whole card
             //  - gradient bg tinted with the category color
             //  - soft outer glow in the category color
             style={{
-              border: `2px solid ${fn.color}66`,
+              border: `2px solid ${fn.color}80`,
               background: `linear-gradient(140deg, ${fn.color}1a 0%, hsl(var(--background) / 0.7) 55%, hsl(var(--background) / 0.85) 100%)`,
-              boxShadow: `0 0 0 1px ${fn.color}14, 0 20px 50px -20px ${fn.color}33`,
+              boxShadow: `0 0 0 1px ${fn.color}1a, 0 20px 50px -20px ${fn.color}40`,
             }}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.35 + index * 0.06 }}
           >
+            {/* Top accent bar — solid colored stripe across the full
+                card width, matching the get-myagent.com tier cards. */}
+            <div
+              aria-hidden="true"
+              className="absolute top-0 left-0 right-0"
+              style={{ height: 4, background: fn.color }}
+            />
+
             <Link
               to={`/services#${fn.id}`}
-              className="flex flex-col h-full"
+              className="flex flex-col h-full p-6 md:p-7 pt-7 md:pt-8"
               aria-label={`${fn.title} — view all services`}
             >
               {/* Card header — solid colored circle replaces the agent
                   avatar from MyAgent's package cards. */}
-              <div className="flex items-center gap-4 mb-5">
+              <div className="flex items-center gap-4 mb-6">
                 <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg"
+                  className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0"
                   style={{
                     background: fn.color,
                     boxShadow: `0 8px 24px -8px ${fn.color}99`,
@@ -361,25 +370,30 @@ const HomepageServices = () => {
                 </div>
                 <div className="flex flex-col min-w-0">
                   <h3
-                    className="font-poppins font-bold text-xl md:text-2xl text-foreground leading-tight"
+                    className="font-poppins font-bold text-xl md:text-2xl leading-tight"
                     style={{ color: fn.color }}
                   >
                     {fn.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground font-body leading-snug mt-0.5">
+                  <p className="text-xs md:text-sm text-muted-foreground font-body leading-snug mt-1">
                     {fn.tagline}
                   </p>
                 </div>
               </div>
 
-              {/* Service pills — same aesthetic as get-myagent.com tier
-                  cards: rounded-full, icon on the left, category-color
-                  border + tinted bg. Padding is uniform across all pills. */}
-              <ul className="flex flex-wrap gap-2 mb-5 flex-1">
+              {/* Service pills.
+                  - whitespace-nowrap on each pill prevents long names
+                    from wrapping to 2 lines (which was causing the
+                    "big oval" bug — a 2-line pill made siblings in the
+                    same row stretch to match height).
+                  - items-start on the UL keeps each pill at its natural
+                    height regardless of neighbors.
+                  - Uniform px-3 py-1.5 padding on every pill. */}
+              <ul className="flex flex-wrap items-start gap-2 mb-5 flex-1">
                 {fn.services.map((service) => (
                   <li
                     key={service.name}
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-foreground/95 transition-colors"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-foreground/95 whitespace-nowrap transition-colors"
                     style={{
                       background: `${fn.color}14`,
                       border: `1px solid ${fn.color}55`,
