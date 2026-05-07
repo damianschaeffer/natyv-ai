@@ -80,6 +80,7 @@ import {
   Palette,
   Film,
   MailCheck,
+  ChevronDown,
   type LucideIcon,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -89,6 +90,10 @@ import SectionHeader from "@/components/SectionHeader";
 interface Service {
   name: string;
   icon: LucideIcon;
+  // Short outcome-based selling line. Shown when the user clicks the
+  // pill to expand it. Aim for 8-15 words, lead with the result the
+  // business owner buys, not the feature.
+  outcome: string;
 }
 
 interface ServiceFunction {
@@ -113,19 +118,19 @@ const functions: ServiceFunction[] = [
     icon: Phone,
     color: "#06B6D4", // cyan
     services: [
-      { name: "24/7 Call Answering", icon: Phone },
-      { name: "Instant Text Response", icon: MessageSquare },
-      { name: "Personalized Phone Setup", icon: PhoneCall },
-      { name: "Local Business Number", icon: MapPin },
-      { name: "Website Chat Widget", icon: MessageCircle },
-      { name: "Unified Message Inbox", icon: Inbox },
-      { name: "Lead Conversation Assistant", icon: Bot },
-      { name: "Direct Voicemail Drop", icon: Voicemail },
-      { name: "Google Messages Connection", icon: MessagesSquare },
-      { name: "Call Recording & Quality", icon: Mic },
-      { name: "Call Sentiment Analysis", icon: Gauge },
-      { name: "VIP Priority Line", icon: Crown },
-      { name: "70+ Language Voice Support", icon: Languages },
+      { name: "24/7 Call Answering", icon: Phone, outcome: "Every call answered, even at 2am or during your busiest hour." },
+      { name: "Instant Text Response", icon: MessageSquare, outcome: "Sub-30-second SMS reply to any missed call, web form, or DM." },
+      { name: "Personalized Phone Setup", icon: PhoneCall, outcome: "Custom voice, branded greeting, and call flow tuned to your operations." },
+      { name: "Local Business Number", icon: MapPin, outcome: "Local-area-code line that builds trust with neighborhood callers." },
+      { name: "Website Chat Widget", icon: MessageCircle, outcome: "Convert site visitors before they leave — answers in seconds." },
+      { name: "Unified Message Inbox", icon: Inbox, outcome: "Calls, texts, DMs, and web chat in one shared inbox." },
+      { name: "Lead Conversation Assistant", icon: Bot, outcome: "AI co-pilot that drafts the right reply for every inbound message." },
+      { name: "Direct Voicemail Drop", icon: Voicemail, outcome: "Leave a perfect voicemail without ringing the phone — 80%+ listen rates." },
+      { name: "Google Messages Connection", icon: MessagesSquare, outcome: "Customers text your Google Business Profile and you respond instantly." },
+      { name: "Call Recording & Quality", icon: Mic, outcome: "Every call recorded, transcribed, and scored for coaching." },
+      { name: "Call Sentiment Analysis", icon: Gauge, outcome: "Catch frustrated callers before they churn — flagged for owner review." },
+      { name: "VIP Priority Line", icon: Crown, outcome: "Top clients reach a human path; everyone else is handled cleanly." },
+      { name: "70+ Language Voice Support", icon: Languages, outcome: "Multilingual call answering powered by Gemini Live — every caller in their language." },
     ],
   },
   {
@@ -135,14 +140,14 @@ const functions: ServiceFunction[] = [
     icon: TrendingUp,
     color: "#10B981", // green (emerald)
     services: [
-      { name: "Instant Lead Connection", icon: Zap },
-      { name: "Visual Sales Pipeline", icon: LayoutGrid },
-      { name: "Fair Lead Distribution", icon: UserPlus },
-      { name: "Custom Lead Forms", icon: FileText },
-      { name: "Interactive Quizzes", icon: HelpCircle },
-      { name: "Quote Generator", icon: Receipt },
-      { name: "Local Lead Finder", icon: Search },
-      { name: "Referral Partner Program", icon: Users },
+      { name: "Instant Lead Connection", icon: Zap, outcome: "Pair every new lead with a live channel inside two minutes." },
+      { name: "Visual Sales Pipeline", icon: LayoutGrid, outcome: "Every deal's stage at a glance — no leads slip through the cracks." },
+      { name: "Fair Lead Distribution", icon: UserPlus, outcome: "Round-robin or skill-based routing so no rep gets all the leads." },
+      { name: "Custom Lead Forms", icon: FileText, outcome: "Branded forms that capture exactly what you need — and trigger the next step." },
+      { name: "Interactive Quizzes", icon: HelpCircle, outcome: "On-site quizzes that double inbound conversion vs. static forms." },
+      { name: "Quote Generator", icon: Receipt, outcome: "Branded quotes drafted from a 30-second client conversation." },
+      { name: "Local Lead Finder", icon: Search, outcome: "Surface high-fit prospects in your service area — refreshed weekly." },
+      { name: "Referral Partner Program", icon: Users, outcome: "Trackable referral links + automated payouts that turn fans into a sales force." },
     ],
   },
   {
@@ -152,32 +157,32 @@ const functions: ServiceFunction[] = [
     icon: Settings2,
     color: "#3C83F6", // blue (brand primary)
     services: [
-      { name: "Smart Scheduling", icon: Calendar },
-      { name: "No-Show Prevention", icon: Bell },
-      { name: "Team Task Assignment", icon: ClipboardList },
-      { name: "Team Notifications", icon: BellRing },
-      { name: "Branded Client Portal", icon: AppWindow },
-      { name: "Branded Installable Progressive Web App", icon: Smartphone },
-      { name: "Multi-Location System Clone", icon: Copy },
-      { name: "White-Label Platform Builder", icon: Layers },
-      { name: "Applicant Tracking System", icon: Briefcase },
-      { name: "Employee Training Portal", icon: GraduationCap },
-      { name: "Team Performance Leaderboard", icon: Trophy },
-      { name: "At-Risk Client Alerts", icon: AlertTriangle },
-      { name: "Advanced Performance Analytics", icon: BarChart3 },
-      { name: "Competitor Automation", icon: Eye },
-      { name: "Automation Connection Hub", icon: Cable },
-      { name: "Professional Website Hosting", icon: Server },
-      { name: "Privacy-First Data Handling", icon: Lock },
-      { name: "Accessibility Scans & Remediation", icon: ShieldAlert },
-      { name: "Secure Video Hosting", icon: Video },
-      { name: "Security Audit Service", icon: ShieldCheck },
-      { name: "AI-Drafted Policy Templates", icon: Scale },
-      { name: "Technical Setup Service", icon: Wrench },
-      { name: "Priority Support Access", icon: Headphones },
-      { name: "Strategy Consultation", icon: Lightbulb },
-      { name: "A2P 10DLC Registration Support", icon: ShieldCheck },
-      { name: "Waitlist Manager", icon: Clock },
+      { name: "Smart Scheduling", icon: Calendar, outcome: "Book the right service in the right window — without back-and-forth." },
+      { name: "No-Show Prevention", icon: Bell, outcome: "Reminder + reschedule sequences that recover 25–40% of no-shows." },
+      { name: "Team Task Assignment", icon: ClipboardList, outcome: "Auto-route work items to the right person based on skill, load, and location." },
+      { name: "Team Notifications", icon: BellRing, outcome: "Real-time alerts so the right info reaches the right person — no missed handoffs." },
+      { name: "Branded Client Portal", icon: AppWindow, outcome: "A self-service hub where clients book, pay, and get answers 24/7." },
+      { name: "Branded Installable Progressive Web App", icon: Smartphone, outcome: "iOS + Android home-screen app for your business — no app store required." },
+      { name: "Multi-Location System Clone", icon: Copy, outcome: "Replicate your best location's playbook across the next ten." },
+      { name: "White-Label Platform Builder", icon: Layers, outcome: "Resell the entire stack under your own brand to your own clients." },
+      { name: "Applicant Tracking System", icon: Briefcase, outcome: "Job listings, applicant screening, and interview scheduling in one workflow." },
+      { name: "Employee Training Portal", icon: GraduationCap, outcome: "Onboarding videos, SOPs, and quizzes that get new hires productive faster." },
+      { name: "Team Performance Leaderboard", icon: Trophy, outcome: "Real-time scoreboard that gamifies the metrics that move revenue." },
+      { name: "At-Risk Client Alerts", icon: AlertTriangle, outcome: "AI-flagged churn risks before they cancel — with the right intervention queued up." },
+      { name: "Advanced Performance Analytics", icon: BarChart3, outcome: "Cohort, funnel, and unit-economics views the off-the-shelf dashboards skip." },
+      { name: "Competitor Automation", icon: Eye, outcome: "Weekly intel on what your competitors are pricing, posting, and changing." },
+      { name: "Automation Connection Hub", icon: Cable, outcome: "One-click connections to QuickBooks, HubSpot, Stripe, and 200+ tools." },
+      { name: "Professional Website Hosting", icon: Server, outcome: "Fast, secure, SOC-2 hosting tuned for service-business workloads." },
+      { name: "Privacy-First Data Handling", icon: Lock, outcome: "GDPR/CCPA-ready data pipelines so client data stays where it belongs." },
+      { name: "Accessibility Scans & Remediation", icon: ShieldAlert, outcome: "WCAG 2.1 AA scans + fixes — meet ADA without the lawsuit risk." },
+      { name: "Secure Video Hosting", icon: Video, outcome: "Branded, password-protected video library for trainings and case studies." },
+      { name: "Security Audit Service", icon: ShieldCheck, outcome: "Quarterly pentest + remediation plan from a real human security team." },
+      { name: "AI-Drafted Policy Templates", icon: Scale, outcome: "First-draft Terms, Privacy, and NDA — attorney review recommended, friction removed." },
+      { name: "Technical Setup Service", icon: Wrench, outcome: "Hands-on white-glove setup of every tool, integration, and workflow." },
+      { name: "Priority Support Access", icon: Headphones, outcome: "Dedicated Slack channel + 4-hour response SLA from real engineers." },
+      { name: "Strategy Consultation", icon: Lightbulb, outcome: "Quarterly working session with a Natyv operator who's done it 50x before." },
+      { name: "A2P 10DLC Registration Support", icon: ShieldCheck, outcome: "Full carrier registration so your business texts actually deliver." },
+      { name: "Waitlist Manager", icon: Clock, outcome: "Cap demand at the right price — auto-promote when slots open." },
     ],
   },
   {
@@ -187,17 +192,17 @@ const functions: ServiceFunction[] = [
     icon: CreditCard,
     color: "#EF4444", // red
     services: [
-      { name: "Text-to-Pay Invoicing", icon: CreditCard },
-      { name: "Automatic Invoicing", icon: FileCheck },
-      { name: "Recurring Payments", icon: RotateCcw },
-      { name: "Deposit Collection", icon: Wallet },
-      { name: "Abandoned Cart Recovery", icon: ShoppingCart },
-      { name: "Discount Code Manager", icon: Tag },
-      { name: "Mobile Card Reader", icon: Smartphone },
-      { name: "Automatic Receipts", icon: CheckCircle },
-      { name: "Digital Signatures", icon: FileSignature },
-      { name: "Secure Document Upload", icon: Upload },
-      { name: "Merchandise Store Setup", icon: Store },
+      { name: "Text-to-Pay Invoicing", icon: CreditCard, outcome: "Send a payable link by SMS — most clients pay inside 4 hours." },
+      { name: "Automatic Invoicing", icon: FileCheck, outcome: "Recurring or trigger-based invoices that go out without you remembering." },
+      { name: "Recurring Payments", icon: RotateCcw, outcome: "Move clients onto autopay without the awkward conversation." },
+      { name: "Deposit Collection", icon: Wallet, outcome: "Capture deposits at booking — protect your calendar from no-pay holds." },
+      { name: "Abandoned Cart Recovery", icon: ShoppingCart, outcome: "Recover the 60–70% of carts that ghost — branded follow-up sequence." },
+      { name: "Discount Code Manager", icon: Tag, outcome: "Trackable codes per channel + per partner so you know what drives revenue." },
+      { name: "Mobile Card Reader", icon: Smartphone, outcome: "Accept card payments anywhere — properly integrated with your books." },
+      { name: "Automatic Receipts", icon: CheckCircle, outcome: "Branded receipts emailed (or texted) the moment a payment clears." },
+      { name: "Digital Signatures", icon: FileSignature, outcome: "Send, sign, and store contracts in one branded flow — no DocuSign markup." },
+      { name: "Secure Document Upload", icon: Upload, outcome: "Clients drop sensitive docs into a branded, encrypted vault — no email attachments." },
+      { name: "Merchandise Store Setup", icon: Store, outcome: "Branded online store + fulfillment integration — open a new revenue line in days." },
     ],
   },
   {
@@ -207,19 +212,19 @@ const functions: ServiceFunction[] = [
     icon: Megaphone,
     color: "#FB923C", // orange
     services: [
-      { name: "Instant Website Launch", icon: Globe },
-      { name: "Auto-Review Requests", icon: Star },
-      { name: "Online Directory Sync", icon: FolderSync },
-      { name: "Auto-Review Responses", icon: Reply },
-      { name: "Social Post Scheduler", icon: Share2 },
-      { name: "Content Writing Assistant", icon: Pencil },
-      { name: "Do-It-Yourself Facebook Ads", icon: TrendingUp },
-      { name: "Do-It-Yourself Google Ads", icon: Target },
-      { name: "Automated Postcard Mailings", icon: Mailbox },
-      { name: "Dedicated Sending Domain", icon: Mail },
-      { name: "Email Delivery Optimization", icon: MailCheck },
-      { name: "Graphic Design Service", icon: Palette },
-      { name: "Video Production Service", icon: Film },
+      { name: "Instant Website Launch", icon: Globe, outcome: "Publish a polished, conversion-tuned site in days, not months." },
+      { name: "Auto-Review Requests", icon: Star, outcome: "Trigger Google / Yelp / industry review asks at the perfect moment." },
+      { name: "Online Directory Sync", icon: FolderSync, outcome: "Your name, address, and hours stay correct across 50+ directories." },
+      { name: "Auto-Review Responses", icon: Reply, outcome: "Every review answered with the right tone — even the bad ones." },
+      { name: "Social Post Scheduler", icon: Share2, outcome: "Daily on-brand posting across the channels your customers actually use." },
+      { name: "Content Writing Assistant", icon: Pencil, outcome: "Blog posts, email sequences, and ad copy in your voice — drafted, you approve." },
+      { name: "Do-It-Yourself Facebook Ads", icon: TrendingUp, outcome: "Campaigns built, launched, and optimized without an ad-agency markup." },
+      { name: "Do-It-Yourself Google Ads", icon: Target, outcome: "Search and display campaigns tuned for service-business intent." },
+      { name: "Automated Postcard Mailings", icon: Mailbox, outcome: "Trigger physical mail from CRM events — birthdays, anniversaries, win-backs." },
+      { name: "Dedicated Sending Domain", icon: Mail, outcome: "Reputation-warmed domain so your campaigns land in the inbox, not Promotions." },
+      { name: "Email Delivery Optimization", icon: MailCheck, outcome: "Continual deliverability monitoring + IP warming + reputation defense." },
+      { name: "Graphic Design Service", icon: Palette, outcome: "On-brand creative for ads, social, decks, and signage — turnaround in days." },
+      { name: "Video Production Service", icon: Film, outcome: "Scripted, shot, edited videos for ads, training, and social — branded throughout." },
     ],
   },
   {
@@ -229,10 +234,10 @@ const functions: ServiceFunction[] = [
     icon: Heart,
     color: "#8B5CF6", // violet
     services: [
-      { name: "Automatic Follow-Up", icon: Send },
-      { name: "Past Customer Outreach", icon: Users },
-      { name: "New Client Welcome Sequence", icon: ListChecks },
-      { name: "Birthday Campaign Automation", icon: Cake },
+      { name: "Automatic Follow-Up", icon: Send, outcome: "Personalized check-ins after every appointment, purchase, or interaction." },
+      { name: "Past Customer Outreach", icon: Users, outcome: "Reactivate dormant clients with relevance-scored, high-conversion touches." },
+      { name: "New Client Welcome Sequence", icon: ListChecks, outcome: "First-90-days journey that turns new customers into long-term ones." },
+      { name: "Birthday Campaign Automation", icon: Cake, outcome: "Automated milestone touches that make every customer feel like the only one." },
     ],
   },
 ];
@@ -266,6 +271,19 @@ const HomepageServices = () => {
 
   const toggleExpanded = (id: string) =>
     setExpandedCards((prev) => ({ ...prev, [id]: !prev[id] }));
+
+  // Per-pill expand state — clicking a pill reveals its outcome line.
+  // Multiple pills can be expanded simultaneously across cards.
+  const [expandedPills, setExpandedPills] = useState<Set<string>>(new Set());
+  const togglePill = (categoryId: string, serviceName: string) => {
+    const key = `${categoryId}::${serviceName}`;
+    setExpandedPills((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
 
   return (
     <section
@@ -403,26 +421,57 @@ const HomepageServices = () => {
                   }}
                 />
 
-                {/* Service pills - one per row, single column. */}
+                {/* Service pills — one per row. Click a pill to reveal
+                    its outcome line; click again to collapse. */}
                 <ul className="flex flex-col gap-1.5 flex-1">
-                  {visibleServices.map((service) => (
-                    <li
-                      key={service.name}
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-foreground/95"
-                      style={{
-                        background: `${fn.color}14`,
-                        border: `1px solid ${fn.color}55`,
-                      }}
-                    >
-                      <service.icon
-                        className="w-3.5 h-3.5 flex-shrink-0"
-                        style={{ color: fn.color }}
-                        strokeWidth={2.25}
-                        aria-hidden="true"
-                      />
-                      <span className="leading-none">{service.name}</span>
-                    </li>
-                  ))}
+                  {visibleServices.map((service) => {
+                    const pillKey = `${fn.id}::${service.name}`;
+                    const pillExpanded = expandedPills.has(pillKey);
+                    return (
+                      <li
+                        key={service.name}
+                        className="overflow-hidden transition-all"
+                        style={{
+                          background: `${fn.color}14`,
+                          border: `1px solid ${fn.color}55`,
+                          // rounded-full when collapsed, rounded-xl when
+                          // expanded so the multi-line shape doesn't read
+                          // as a stretched ellipse.
+                          borderRadius: pillExpanded ? "0.75rem" : "9999px",
+                        }}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => togglePill(fn.id, service.name)}
+                          aria-expanded={pillExpanded}
+                          className="w-full flex items-center gap-2 px-3 py-1.5 text-left text-xs font-medium text-foreground/95"
+                        >
+                          <service.icon
+                            className="w-3.5 h-3.5 flex-shrink-0"
+                            style={{ color: fn.color }}
+                            strokeWidth={2.25}
+                            aria-hidden="true"
+                          />
+                          <span className="leading-none flex-1">{service.name}</span>
+                          <ChevronDown
+                            className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${
+                              pillExpanded ? "rotate-180" : ""
+                            }`}
+                            style={{ color: `${fn.color}cc` }}
+                            aria-hidden="true"
+                          />
+                        </button>
+                        {pillExpanded && (
+                          <div
+                            className="px-3 pb-2 pt-1.5 text-[11px] text-foreground/80 leading-relaxed"
+                            style={{ borderTop: `1px solid ${fn.color}26` }}
+                          >
+                            {service.outcome}
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
 
                 {/* Show all / show less expand affordance — only renders

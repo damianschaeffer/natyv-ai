@@ -9,6 +9,9 @@ import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // Scroll-spy: which homepage section the visitor is currently in.
+  // null when on a non-homepage route or above all tracked sections.
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,6 +22,49 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Scroll-spy: track which homepage section is in view. STUDIO is
+  // active while the visitor is anywhere inside myagent-section
+  // (which ends at "Your Website. Always on."), then hands off to
+  // SERVICES, ADVISORY, etc. as the visitor scrolls past each
+  // section's bottom edge.
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setActiveSection(null);
+      return;
+    }
+
+    const sectionMap: Record<string, string> = {
+      "myagent-section": "Studio",
+      "homepage-services": "Services",
+    };
+    const sectionIds = Object.keys(sectionMap);
+
+    const compute = () => {
+      // The "current" section is the one whose top edge is closest to,
+      // but still above, the navbar's bottom edge (~80px from viewport top).
+      const probeY = 100;
+      let current: string | null = null;
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= probeY && rect.bottom > probeY) {
+          current = sectionMap[id];
+          break;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    compute();
+    window.addEventListener("scroll", compute, { passive: true });
+    window.addEventListener("resize", compute);
+    return () => {
+      window.removeEventListener("scroll", compute);
+      window.removeEventListener("resize", compute);
+    };
+  }, [location.pathname]);
 
   const scrollToMyAgent = () => {
     if (location.pathname !== "/") {
@@ -97,8 +143,10 @@ const Navbar = () => {
                     >
                       <Link
                         to={link.href}
-                        className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap"
-                        style={{ 
+                        className={`font-accent uppercase transition-colors duration-300 whitespace-nowrap hover:text-primary ${
+                          activeSection === link.label ? "text-primary" : "text-foreground"
+                        }`}
+                        style={{
                           fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
                           letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
                         }}
@@ -111,8 +159,10 @@ const Navbar = () => {
                       onClick={() => {
                         scrollToMyAgent();
                       }}
-                      className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap cursor-pointer"
-                      style={{ 
+                      className={`font-accent uppercase transition-colors duration-300 whitespace-nowrap cursor-pointer hover:text-primary ${
+                        activeSection === link.label ? "text-primary" : "text-foreground"
+                      }`}
+                      style={{
                         fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
                         letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
                       }}
