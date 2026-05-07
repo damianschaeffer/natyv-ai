@@ -4,7 +4,6 @@ import Index from "./pages/Index";
 import Advisory from "./pages/Advisory";
 import About from "./pages/About";
 import Services from "./pages/Services";
-import ServicesSubtitleMockups from "./pages/ServicesSubtitleMockups";
 import NotFound from "./pages/NotFound";
 
 export const routes: RouteRecord[] = [
@@ -17,7 +16,6 @@ export const routes: RouteRecord[] = [
       { path: "services", Component: Services, entry: "src/pages/Services.tsx" },
       { path: "about", Component: About, entry: "src/pages/About.tsx" },
       { path: "advisory", Component: Advisory, entry: "src/pages/Advisory.tsx" },
-      { path: "services-subtitle-mockups", Component: ServicesSubtitleMockups, entry: "src/pages/ServicesSubtitleMockups.tsx" },
       { path: "*", Component: NotFound, entry: "src/pages/NotFound.tsx" },
     ],
   },

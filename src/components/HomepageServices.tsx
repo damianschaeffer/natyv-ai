@@ -242,13 +242,17 @@ const functions: ServiceFunction[] = [
   },
 ];
 
-// Static headline — agency promise framed around customization (not effort)
-const HEADLINE_PRE = "Your stack.";
-const HEADLINE_POST = "Built around you.";
+// Static headline — explicitly frames this section as the traditional
+// agency path (vs. the MyAgent product). "Full-Service Agency." in
+// white is the unmistakable agency signal; "AI-Powered" in primary
+// blue is the modern differentiator from a 1995 ad agency.
+const HEADLINE_PRE = "Full-Service Agency.";
+const HEADLINE_POST = "AI-Powered.";
 
 // Rotating subtitles — carry the agency-engagement message that the
 // retired PivotBanner used to deliver, now native to the SERVICES section.
 const SUBTITLES = [
+  "Pick from 75 proven functions that move the needle.",
   "Customized to your specific operations.",
   "Designed and implemented by our team.",
 ];
@@ -331,7 +335,7 @@ const HomepageServices = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="text-base md:text-lg text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto px-4"
+              className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto px-4"
             >
               {SUBTITLES[currentSubtitle]}
             </motion.p>
