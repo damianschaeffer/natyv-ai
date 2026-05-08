@@ -78,15 +78,20 @@ const TwoPathsFooter = () => {
         </span>
       </motion.div>
 
-      {/* Headline */}
+      {/* Headline — canonical homepage h2 typography (matches Services /
+          Advisory / Partners) so the pill→headline rhythm reads identical
+          across the four homepage sections. */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ delay: 0.1, duration: 0.6 }}
-        className="relative z-10 max-w-3xl mx-auto text-center mb-10 md:mb-14"
+        className="relative z-10 max-w-5xl mx-auto text-center mb-8 md:mb-10"
       >
-        <h2 className="font-poppins font-bold text-3xl md:text-4xl lg:text-5xl text-foreground tracking-tight leading-[1.1]">
+        <h2
+          className="font-poppins font-bold tracking-tight text-foreground leading-[1.02]"
+          style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
+        >
           Pick what fits your business today.
         </h2>
       </motion.div>
