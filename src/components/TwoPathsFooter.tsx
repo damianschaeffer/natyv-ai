@@ -15,7 +15,7 @@ import {
   Target,
   Compass,
 } from "lucide-react";
-import { MyAgentLogo } from "@/components/brand/MyAgentLogo";
+import { MYAGENT_NORTH_STAR_PATH } from "@/components/brand/MyAgentLogo";
 
 // Final binary fork — anyone who scrolled to the bottom without clicking
 // gets one last clean choice between the two offers. Cards intentionally
@@ -23,8 +23,8 @@ import { MyAgentLogo } from "@/components/brand/MyAgentLogo";
 // reads as "preferred"; identity comes from the brand mark inside the
 // button + the proof-point row beneath it.
 
-// Standard MyAgent trust badges — verbatim from MyAgentShowcase.tsx so the
-// product brand promise stays consistent everywhere it appears.
+// Standard MyAgent trust badges — verbatim from MyAgentShowcase.tsx so
+// the product brand promise stays consistent everywhere it appears.
 const MYAGENT_BADGES = [
   { Icon: Gift, label: "No Setup Fees" },
   { Icon: Clock, label: "14-Day Free Trial" },
@@ -55,17 +55,37 @@ const TwoPathsFooter = () => {
       {/* Neutral ambient glow — sits dead-center so it doesn't bias either card */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-primary/[0.03] blur-[140px] pointer-events-none" />
 
-      {/* Section header */}
+      {/* Section entrance — same blue-pill eyebrow used by every other
+          homepage section, so visitors get a consistent "this is a new
+          section" cue. Pill + headline gap matches Advisory / Partners
+          (mb-10 md:mb-14) for cross-section vertical rhythm. */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="relative z-10 text-center mb-10 md:mb-14"
+      >
+        <span
+          className="inline-block px-4 py-1.5 text-primary border border-primary/30 rounded-full font-accent uppercase"
+          style={{
+            fontSize: "clamp(0.65rem, 1.1vw, 0.85rem)",
+            letterSpacing: "0.18em",
+            fontWeight: 500,
+          }}
+        >
+          Two Ways Forward
+        </span>
+      </motion.div>
+
+      {/* Headline */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
+        transition={{ delay: 0.1, duration: 0.6 }}
         className="relative z-10 max-w-3xl mx-auto text-center mb-10 md:mb-14"
       >
-        <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 font-accent">
-          Two ways forward
-        </div>
         <h2 className="font-poppins font-bold text-3xl md:text-4xl lg:text-5xl text-foreground tracking-tight leading-[1.1]">
           Pick what fits your business today.
         </h2>
@@ -79,10 +99,9 @@ const TwoPathsFooter = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="group rounded-2xl border border-border/60 hover:border-border bg-card/40 backdrop-blur-md p-6 md:p-8 flex flex-col transition-colors"
+          className="group rounded-2xl border border-primary/30 hover:border-primary/50 bg-card/40 backdrop-blur-md p-6 md:p-8 flex flex-col transition-colors"
         >
-          {/* Heading + body */}
-          <h3 className="font-poppins font-bold text-2xl md:text-3xl text-foreground text-center mb-3 leading-tight">
+          <h3 className="font-poppins font-bold text-2xl md:text-3xl text-primary text-center mb-3 leading-tight">
             Meet your agent
           </h3>
           <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed text-center mb-7 max-w-sm mx-auto">
@@ -90,9 +109,10 @@ const TwoPathsFooter = () => {
             handles real work — live in 60 seconds.
           </p>
 
-          {/* CTA — the canonical "MyAgent Free Trial" button (verbatim
-              chrome from StickyDualCTA, with the sealed MyAgentLogo lockup
-              providing the brand identity inside the pill). */}
+          {/* CTA — the canonical "MyAgent Free Trial" pill. Lockup is
+              rendered INLINE (not via <MyAgentLogo>'s fixed-em wrapper)
+              so the diamond + "MyAgent" + "Free Trial" all read at the
+              parent button's font-size as one uniform typographic line. */}
           <a
             href="https://get-myagent.com"
             target="_blank"
@@ -102,12 +122,41 @@ const TwoPathsFooter = () => {
           >
             <button
               type="button"
-              className="w-full inline-flex items-center justify-center gap-2 h-12 px-5 rounded-full bg-background/90 hover:bg-background border border-foreground/30 hover:border-foreground/50 text-foreground shadow-lg transition-all"
+              className="w-full inline-flex items-center justify-center gap-2 h-12 px-5 rounded-full bg-background/90 hover:bg-background border border-foreground/30 hover:border-foreground/50 text-foreground shadow-lg transition-all text-sm sm:text-base"
             >
-              <MyAgentLogo height={20} />
-              <span className="text-sm sm:text-base font-poppins font-semibold">
-                Free Trial
+              <span
+                className="inline-flex items-center"
+                style={{
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 700,
+                  gap: "0.25em",
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1,
+                }}
+                aria-label="MyAgent"
+              >
+                <span
+                  className="inline-flex items-center justify-center bg-primary flex-shrink-0"
+                  style={{
+                    width: "1em",
+                    height: "1em",
+                    borderRadius: "0.227em",
+                  }}
+                  aria-hidden="true"
+                >
+                  <svg
+                    viewBox="24 24 152 152"
+                    style={{ width: "0.8em", height: "0.8em" }}
+                  >
+                    <path d={MYAGENT_NORTH_STAR_PATH} fill="#ffffff" />
+                  </svg>
+                </span>
+                <span style={{ whiteSpace: "nowrap" }}>
+                  <span style={{ color: "hsl(var(--primary))" }}>My</span>
+                  <span>Agent</span>
+                </span>
               </span>
+              <span className="font-poppins font-semibold">Free Trial</span>
               <ArrowRight
                 className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"
@@ -139,10 +188,9 @@ const TwoPathsFooter = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="group rounded-2xl border border-border/60 hover:border-border bg-card/40 backdrop-blur-md p-6 md:p-8 flex flex-col transition-colors"
+          className="group rounded-2xl border border-primary/30 hover:border-primary/50 bg-card/40 backdrop-blur-md p-6 md:p-8 flex flex-col transition-colors"
         >
-          {/* Heading + body */}
-          <h3 className="font-poppins font-bold text-2xl md:text-3xl text-foreground text-center mb-3 leading-tight">
+          <h3 className="font-poppins font-bold text-2xl md:text-3xl text-primary text-center mb-3 leading-tight">
             Architect with our team
           </h3>
           <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed text-center mb-7 max-w-sm mx-auto">
@@ -152,8 +200,9 @@ const TwoPathsFooter = () => {
           </p>
 
           {/* CTA — equal-weight chrome to MyAgent's button. Calendar
-              accent-color icon mirrors the role the MyAgent diamond plays
-              on the other side, so both pills feel symmetrical. */}
+              icon sized w-4 h-4 (= text-base ≈ 16px) so it matches the
+              "Strategy Consultation" type-size, mirroring the inline
+              MyAgent diamond's relationship to "Free Trial". */}
           <Link
             to="/advisory"
             className="inline-flex w-full"
@@ -161,14 +210,14 @@ const TwoPathsFooter = () => {
           >
             <button
               type="button"
-              className="w-full inline-flex items-center justify-center gap-2 h-12 px-5 rounded-full bg-background/90 hover:bg-background border border-foreground/30 hover:border-foreground/50 text-foreground shadow-lg transition-all"
+              className="w-full inline-flex items-center justify-center gap-2 h-12 px-5 rounded-full bg-background/90 hover:bg-background border border-foreground/30 hover:border-foreground/50 text-foreground shadow-lg transition-all text-sm sm:text-base"
             >
               <Calendar
-                className="w-5 h-5 text-primary"
+                className="w-4 h-4 text-primary flex-shrink-0"
                 strokeWidth={2.25}
                 aria-hidden="true"
               />
-              <span className="text-sm sm:text-base font-poppins font-semibold">
+              <span className="font-poppins font-semibold">
                 Strategy Consultation
               </span>
               <ArrowRight

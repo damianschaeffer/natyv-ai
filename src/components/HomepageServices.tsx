@@ -306,7 +306,7 @@ const HomepageServices = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 mb-8 md:mb-10"
+        className="relative z-10 mb-10 md:mb-14"
       >
         <span
           className="inline-block px-4 py-1.5 text-primary border border-primary/30 rounded-full font-accent uppercase"
