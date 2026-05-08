@@ -22,7 +22,7 @@ const HEADLINE_POST = "Build second.";
 
 // Rotating subtitles — splice of MyAgentSection.tsx rotator pattern
 const SUBTITLES = [
-  "60-minute 1:1 with a senior AI operations strategist.",
+  "30-minute 1:1 with a senior AI operations strategist.",
   "Confidential. NDA available. Action plan delivered.",
   "We map your operations before we touch your stack.",
 ];
@@ -30,7 +30,7 @@ const SUBTITLES = [
 // Supporting pills — same primitive as MyAgentShowcase PILLS row
 const PILLS = [
   { Icon: UserCheck, label: "Senior strategist" },
-  { Icon: Clock, label: "60-minute session" },
+  { Icon: Clock, label: "30-minute session" },
   { Icon: Shield, label: "Confidential / NDA" },
   { Icon: Compass, label: "Operations + AI" },
   { Icon: FileText, label: "Action plan delivered" },

@@ -25,7 +25,7 @@ const StrategyCallCTA = () => {
         </h2>
         <p className="text-base text-muted-foreground font-body leading-relaxed mb-8 max-w-2xl mx-auto">
           That's literally the conversation we have on the strategy call.
-          60 minutes. Confidential. We map the highest-ROI services to your
+          30 minutes. Confidential. We map the highest-ROI services to your
           business and walk you out with a deployment plan.
         </p>
         <Link to="/advisory" className="inline-flex">
