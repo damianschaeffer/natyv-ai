@@ -86,7 +86,6 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/SectionHeader";
-import StrategyCallCTA from "@/components/StrategyCallCTA";
 
 interface Service {
   name: string;
@@ -513,12 +512,6 @@ const HomepageServices = () => {
         })}
       </motion.div>
 
-      {/* Closing CTA — same "Not sure which functions to start with?"
-          block used at the bottom of /services so both pages read as
-          one closing handoff. */}
-      <div className="relative z-10 w-full">
-        <StrategyCallCTA />
-      </div>
     </section>
   );
 };

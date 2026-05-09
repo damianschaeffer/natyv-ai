@@ -6,9 +6,8 @@ import HomepageServices from "@/components/HomepageServices";
 // /services route uses the same HomepageServices block that the
 // homepage renders, so the dedicated route and the homepage section
 // are byte-identical. Visitors who land on /services see the same
-// "Full-Service Agency. AI-Powered." H2, the same six colored
-// category cards (with click-to-expand outcome lines on every pill),
-// and the same "Not sure which functions to start with?" closing CTA.
+// "Full-Service Agency. AI-Powered." H2 and the same six colored
+// category cards (with click-to-expand outcome lines on every pill).
 const Services = () => {
   return (
     <div className="min-h-screen bg-background">
