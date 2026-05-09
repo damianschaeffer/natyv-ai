@@ -1,19 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Calendar,
-  Clock,
-  Video,
-  Shield,
-  UserCheck,
-  FileText,
-  MessageSquare,
-  Compass,
-} from "lucide-react";
+import { Video, Shield, MessageSquare } from "lucide-react";
 
-// Static headline — same pattern as Solutions / MyAgent.com section headers
-const HEADLINE_PRE = "Strategy first.";
-const HEADLINE_POST = "Build second.";
+// Static headline — punchy transition from the 75-item services catalog
+// into the consultation booking. The first half names the problem
+// (visitor doesn't know which services to pick), the blue-accent
+// second half makes the offer (we deliver the plan).
+const HEADLINE_PRE = "Skip guessing.";
+const HEADLINE_POST = "Get the plan.";
 
 // "What to expect" bullets — ported from /advisory page during the
 // duplication-review pass (Damian, 2026-05-09).
@@ -29,15 +23,6 @@ const SUBTITLES = [
   "30-minute 1:1 with a senior AI operations strategist.",
   "Confidential. NDA available. Action plan delivered.",
   "We map your operations before we touch your stack.",
-];
-
-// Supporting pills — same primitive as MyAgentShowcase PILLS row
-const PILLS = [
-  { Icon: UserCheck, label: "Senior strategist" },
-  { Icon: Clock, label: "30-minute session" },
-  { Icon: Shield, label: "Confidential / NDA" },
-  { Icon: Compass, label: "Operations + AI" },
-  { Icon: FileText, label: "Action plan delivered" },
 ];
 
 interface Benefit {
@@ -135,29 +120,6 @@ const AdvisorySection = () => {
         </div>
       </motion.div>
 
-      {/* Supporting pills — exact splice from MyAgentShowcase PILLS */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ delay: 0.2, duration: 0.7 }}
-        className="relative z-10 text-center max-w-5xl mx-auto mb-12 md:mb-16"
-      >
-        <div className="grid grid-cols-2 justify-items-center sm:flex sm:flex-wrap items-center justify-center gap-x-1.5 gap-y-1 sm:gap-1.5 max-w-5xl mx-auto">
-          {PILLS.map((p, i) => (
-            <span
-              key={p.label}
-              className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-border/50 bg-background/40 backdrop-blur-md px-2.5 py-0.5 sm:px-3 sm:py-1${i === 4 ? " col-span-2" : ""}`}
-            >
-              <p.Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" strokeWidth={2} aria-hidden="true" />
-              <span className="text-sm sm:text-base font-semibold text-foreground/90 whitespace-nowrap">
-                {p.label}
-              </span>
-            </span>
-          ))}
-        </div>
-      </motion.div>
-
       {/* 3 benefit cards — restyled to match Studio aesthetic */}
       <motion.div
         className="relative z-10 grid sm:grid-cols-3 gap-4 md:gap-5 w-full max-w-4xl mx-auto mb-10 px-2 sm:px-0"
@@ -188,9 +150,15 @@ const AdvisorySection = () => {
         ))}
       </motion.div>
 
-      {/* Inline booking — Cal.com iframe replaces the prior pill-shaped
-          "Schedule consultation" CTA so the entire booking flow lives
-          in this section instead of routing the visitor to /advisory. */}
+      {/* Inline booking — Cal.com iframe sits directly under the
+          benefit cards, no chrome wrapper or "Select a time" header
+          above it. Visual silence around the iframe lets the
+          calendar grid be the primary action. URL params suppress
+          Cal.com's event-type details panel for a tighter embed.
+          Note: the "Overlay my calendar" toggle inside the iframe
+          is controlled by Damian's Cal.com event-type settings, not
+          from this URL — disable it from the Cal.com dashboard if
+          unwanted. */}
       <div className="relative z-10 w-full mt-12 md:mt-16">
         <div className="container mx-auto px-6">
           <motion.div
@@ -200,79 +168,53 @@ const AdvisorySection = () => {
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="rounded-2xl border border-border bg-card/30 backdrop-blur-xl overflow-hidden">
-              {/* Header */}
-              <div className="p-8 border-b border-border text-center">
-                <div className="inline-flex items-center gap-2 text-primary mb-4">
-                  <Calendar className="w-5 h-5" />
-                  <span className="text-sm font-medium">
-                    Schedule your session
-                  </span>
-                </div>
-                <h3 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl lg:text-4xl text-foreground leading-tight">
-                  Select a time that works for you.
-                </h3>
-              </div>
-
-              {/* Cal.com embed — Damian's consultation booking link */}
-              <div className="p-2 md:p-4">
-                <iframe
-                  src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark"
-                  title="Book a consultation with Damian Schaeffer"
-                  className="w-full rounded-xl border border-border bg-background"
-                  style={{ height: "720px", border: 0 }}
-                  loading="lazy"
-                  allow="camera; microphone; autoplay; encrypted-media; fullscreen; picture-in-picture"
-                />
-                <p className="text-center text-xs text-muted-foreground/60 font-body mt-3">
-                  Trouble loading the calendar?{" "}
-                  <a
-                    href="https://cal.com/damian-schaeffer/consultation"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    Book directly on Cal.com →
-                  </a>
-                </p>
-              </div>
-
-              {/* Footer Note */}
-              <div className="px-8 pb-8 text-center">
-                <p className="text-xs text-muted-foreground font-body">
-                  All consultations are conducted under strict
-                  confidentiality. Enterprise NDA available upon request.
-                </p>
-              </div>
-            </div>
+            <iframe
+              src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark&hideEventTypeDetails=true"
+              title="Book a consultation with Damian Schaeffer"
+              className="w-full rounded-2xl border border-border bg-background"
+              style={{ height: "720px", border: 0 }}
+              loading="lazy"
+              allow="camera; microphone; autoplay; encrypted-media; fullscreen; picture-in-picture"
+            />
+            <p className="text-center text-xs text-muted-foreground/60 font-body mt-3">
+              Trouble loading the calendar?{" "}
+              <a
+                href="https://cal.com/damian-schaeffer/consultation"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                Book directly on Cal.com →
+              </a>
+            </p>
           </motion.div>
         </div>
 
-      {/* What to Expect */}
-      <div className="container mx-auto px-6 mt-20">
-        <motion.div
-          className="max-w-2xl mx-auto text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <h3 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl text-foreground mb-6 leading-tight">
-            What to expect.
-          </h3>
-          <div className="space-y-4 text-left">
-            {WHAT_TO_EXPECT.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-3 text-muted-foreground font-body"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
+        {/* What to Expect */}
+        <div className="container mx-auto px-6 mt-16">
+          <motion.div
+            className="max-w-2xl mx-auto text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <h3 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl text-foreground mb-6 leading-tight">
+              What to expect.
+            </h3>
+            <div className="space-y-4 text-left">
+              {WHAT_TO_EXPECT.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex items-start gap-3 text-muted-foreground font-body"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
