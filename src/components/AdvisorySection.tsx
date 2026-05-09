@@ -20,6 +20,46 @@ import { Link } from "react-router-dom";
 const HEADLINE_PRE = "Strategy first.";
 const HEADLINE_POST = "Build second.";
 
+// ─────────────────────────────────────────────────────────────────
+// DUPLICATION-VISIBLE BLOCK: content below this line is a verbatim
+// port of the standalone /advisory page (src/pages/Advisory.tsx),
+// inserted here per Damian 2026-05-09 so both versions render
+// together on the homepage for side-by-side editing. Only animation
+// triggers were changed: `animate` → `whileInView` so the inserted
+// section scroll-reveals like the rest of the homepage. Once the
+// review pass is done, prune the duplication and (if desired) hoist
+// what survives into a shared component used by both surfaces.
+// ─────────────────────────────────────────────────────────────────
+
+// Verbatim from /advisory — note: the homepage AdvisorySection has
+// its own BENEFITS array (above) with slightly longer descriptions.
+// Both kept side-by-side intentionally so the duplication is visible.
+const ADVISORY_PAGE_BENEFITS = [
+  {
+    icon: Video,
+    title: "1:1 Strategy Session",
+    description: "Direct consultation with senior AI strategist",
+  },
+  {
+    icon: Clock,
+    title: "60-Minute Deep Dive",
+    description: "Comprehensive analysis of your operational landscape",
+  },
+  {
+    icon: Shield,
+    title: "Confidential Brief",
+    description: "Enterprise-grade discretion and NDA available",
+  },
+];
+
+// Verbatim from /advisory "What to expect" list.
+const WHAT_TO_EXPECT = [
+  "Strategic assessment of your current AI capabilities and gaps",
+  "Custom roadmap for autonomous system integration",
+  "Identification of high-impact automation opportunities",
+  "Clear next steps with actionable recommendations",
+];
+
 // Rotating subtitles — splice of MyAgentSection.tsx rotator pattern
 const SUBTITLES = [
   "30-minute 1:1 with a senior AI operations strategist.",
@@ -212,6 +252,161 @@ const AdvisorySection = () => {
           Or jump straight to deployment →
         </Link>
       </div>
+
+      {/* ═════════════════════════════════════════════════════════════
+          DUPLICATION-VISIBLE BLOCK (inserted 2026-05-09 per Damian).
+          Everything below is a verbatim port of the /advisory page
+          rendered inline so both versions are visible together for
+          edit-pass. Mark this block as `data-duplication="advisory"`
+          for easy DOM lookup during the cleanup pass.
+          ═════════════════════════════════════════════════════════════ */}
+      <div
+        data-duplication="advisory"
+        className="relative z-10 w-full mt-24 md:mt-32"
+      >
+        {/* /advisory: Hero */}
+        <div className="container mx-auto px-6 mb-20">
+          <motion.div
+            className="max-w-3xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-medium text-primary border border-primary/30 rounded-full">
+              Strategic Advisory
+            </span>
+
+            <h2 className="font-body font-extrabold tracking-tight text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-[1.05]">
+              Book a strategy{" "}
+              <span className="text-primary">consultation.</span>
+            </h2>
+
+            <p className="text-lg text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto">
+              Schedule a confidential session to explore how autonomous AI
+              systems can transform your operational architecture. Reserved
+              for decision-makers ready to lead the next wave of enterprise
+              intelligence.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* /advisory: Benefits Grid */}
+        <div className="container mx-auto px-6 mb-20">
+          <motion.div
+            className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {ADVISORY_PAGE_BENEFITS.map((benefit, index) => (
+              <motion.div
+                key={benefit.title}
+                className="p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+              >
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                  <benefit.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-body font-semibold text-base md:text-lg text-foreground mb-2 leading-snug">
+                  {benefit.title}
+                </h3>
+                <p className="text-sm text-muted-foreground font-body">
+                  {benefit.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* /advisory: Booking Section */}
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <div className="rounded-2xl border border-border bg-card/30 backdrop-blur-xl overflow-hidden">
+              {/* Header */}
+              <div className="p-8 border-b border-border text-center">
+                <div className="inline-flex items-center gap-2 text-primary mb-4">
+                  <Calendar className="w-5 h-5" />
+                  <span className="text-sm font-medium">
+                    Schedule your session
+                  </span>
+                </div>
+                <h3 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl lg:text-4xl text-foreground leading-tight">
+                  Select a time that works for you.
+                </h3>
+              </div>
+
+              {/* Cal.com embed — Damian's consultation booking link */}
+              <div className="p-2 md:p-4">
+                <iframe
+                  src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark"
+                  title="Book a consultation with Damian Schaeffer"
+                  className="w-full rounded-xl border border-border bg-background"
+                  style={{ height: "720px", border: 0 }}
+                  loading="lazy"
+                  allow="camera; microphone; autoplay; encrypted-media; fullscreen; picture-in-picture"
+                />
+                <p className="text-center text-xs text-muted-foreground/60 font-body mt-3">
+                  Trouble loading the calendar?{" "}
+                  <a
+                    href="https://cal.com/damian-schaeffer/consultation"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    Book directly on Cal.com →
+                  </a>
+                </p>
+              </div>
+
+              {/* Footer Note */}
+              <div className="px-8 pb-8 text-center">
+                <p className="text-xs text-muted-foreground font-body">
+                  All consultations are conducted under strict
+                  confidentiality. Enterprise NDA available upon request.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* /advisory: What to Expect */}
+        <div className="container mx-auto px-6 mt-20">
+          <motion.div
+            className="max-w-2xl mx-auto text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <h3 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl text-foreground mb-6 leading-tight">
+              What to expect.
+            </h3>
+            <div className="space-y-4 text-left">
+              {WHAT_TO_EXPECT.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex items-start gap-3 text-muted-foreground font-body"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      {/* ═════════════════════════ END DUPLICATION-VISIBLE BLOCK ═════════════════════════ */}
     </section>
   );
 };
