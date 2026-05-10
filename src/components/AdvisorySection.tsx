@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Video, Shield, MessageSquare } from "lucide-react";
+import { User, Map, ShieldCheck } from "lucide-react";
 
 // Static headline — punchy transition from the 75-item services catalog
 // into the consultation booking. The first half names the problem
@@ -18,34 +18,47 @@ const WHAT_TO_EXPECT = [
   "Clear next steps with actionable recommendations",
 ];
 
-// Rotating subtitles — splice of MyAgentSection.tsx rotator pattern
+// Rotating subtitles — splice of MyAgentSection.tsx rotator pattern.
+// No duration framing — visitors pick the length that fits the
+// conversation (30m or 1h options live in Cal.com).
 const SUBTITLES = [
-  "30-minute 1:1 with a senior AI operations strategist.",
+  "Live 1:1 with a senior AI operations strategist.",
   "Confidential. NDA available. Action plan delivered.",
   "We map your operations before we touch your stack.",
 ];
 
 interface Benefit {
-  icon: typeof Video;
+  icon: typeof User;
   title: string;
   description: string;
 }
 
+// Three benefit tiles — benefit-first, not feature-first. Each tile
+// answers a different question the skeptical visitor has:
+//   1. WHO am I talking to?  → Founder-Led
+//   2. WHAT do I walk away with?  → Action Plan, Yours
+//   3. WHAT'S THE CATCH?  → Zero Sales Pressure
+// Replaces the earlier feature-tiles ("1:1 Strategy Session" /
+// "60-Minute Deep Dive" / "Confidential Brief") which described the
+// meeting format rather than the value of attending.
 const BENEFITS: Benefit[] = [
   {
-    icon: Video,
-    title: "1:1 Strategy Session",
-    description: "Direct consultation with a senior AI strategist. No junior account managers.",
+    icon: User,
+    title: "Founder-Led",
+    description:
+      "Direct line to the founder. The person designing your AI system answers your questions live — no junior account managers, no handoffs.",
   },
   {
-    icon: MessageSquare,
-    title: "60-Minute Deep Dive",
-    description: "Comprehensive analysis of your operational landscape and AI opportunities.",
+    icon: Map,
+    title: "Action Plan, Yours",
+    description:
+      "You leave with a prioritized roadmap mapped to your operations and ROI. Yours to keep, even if you don't engage further.",
   },
   {
-    icon: Shield,
-    title: "Confidential Brief",
-    description: "Enterprise-grade discretion. NDA available before the first conversation.",
+    icon: ShieldCheck,
+    title: "Zero Sales Pressure",
+    description:
+      "Confidential by default, NDA available. If our agency or MyAgent isn't the right fit, we'll tell you fast.",
   },
 ];
 

@@ -1,25 +1,30 @@
 import { motion } from "framer-motion";
 import { Head } from "vite-react-ssg";
-import { Calendar, Clock, Video, Shield } from "lucide-react";
+import { Calendar, User, Map, ShieldCheck } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Advisory = () => {
+  // Benefit tiles — mirror of the homepage AdvisorySection's BENEFITS
+  // array. Benefit-first (Who / What / Catch), no duration framing.
   const benefits = [
     {
-      icon: Video,
-      title: "1:1 Strategy Session",
-      description: "Direct consultation with senior AI strategist"
+      icon: User,
+      title: "Founder-Led",
+      description:
+        "Direct line to the founder. The person designing your AI system answers your questions live — no handoffs."
     },
     {
-      icon: Clock,
-      title: "60-Minute Deep Dive",
-      description: "Comprehensive analysis of your operational landscape"
+      icon: Map,
+      title: "Action Plan, Yours",
+      description:
+        "You leave with a prioritized roadmap mapped to your operations and ROI. Yours to keep."
     },
     {
-      icon: Shield,
-      title: "Confidential Brief",
-      description: "Enterprise-grade discretion and NDA available"
+      icon: ShieldCheck,
+      title: "Zero Sales Pressure",
+      description:
+        "Confidential by default, NDA available. If we're not the right fit, we'll tell you fast."
     }
   ];
 
@@ -29,13 +34,13 @@ const Advisory = () => {
         <title>Book a Strategy Consultation | Natyv AI</title>
         <meta
           name="description"
-          content="Book a 30-minute strategy consultation with Damian Schaeffer, founder of Natyv AI. Reserved for decision-makers exploring how AI-native operations can transform their service business. Confidential. NDA available."
+          content="Book a strategy consultation with Damian Schaeffer, founder of Natyv AI. Reserved for decision-makers exploring how AI-native operations can transform their service business. Confidential. NDA available."
         />
         <link rel="canonical" href="https://natyv.ai/advisory" />
         <meta property="og:title" content="Strategic AI Advisory — Natyv AI" />
         <meta
           property="og:description"
-          content="30-minute 1:1 strategy session with the founder of Natyv AI. AI operations roadmap, ROI modeling, integration plan."
+          content="Live 1:1 strategy session with the founder of Natyv AI. AI operations roadmap, ROI modeling, integration plan."
         />
         <meta property="og:url" content="https://natyv.ai/advisory" />
         <meta property="og:type" content="website" />
@@ -50,7 +55,7 @@ const Advisory = () => {
   "provider": { "@id": "https://natyv.ai/#organization" },
   "areaServed": "US",
   "url": "https://natyv.ai/advisory",
-  "description": "1:1 strategic AI advisory engagement. 30-minute consultation with Damian Schaeffer covering AI capabilities assessment, autonomous-system roadmap, and high-impact automation opportunities for service businesses.",
+  "description": "1:1 strategic AI advisory engagement with Damian Schaeffer covering AI capabilities assessment, autonomous-system roadmap, and high-impact automation opportunities for service businesses.",
   "audience": {
     "@type": "BusinessAudience",
     "audienceType": "Service business owners, founders, and operators"

@@ -39,7 +39,7 @@ const MYAGENT_BADGES = [
 // disjoint from MYAGENT_BADGES to avoid looking duplicated.
 const AGENCY_BADGES = [
   { Icon: User, label: "Founder-Led" },
-  { Icon: Calendar, label: "30-Min Session" },
+  { Icon: Calendar, label: "Live 1:1" },
   { Icon: Briefcase, label: "NDA Available" },
   { Icon: FileText, label: "Custom Roadmap" },
   { Icon: Target, label: "ROI-Modeled" },
@@ -199,7 +199,7 @@ const TwoPathsFooter = () => {
             Architect with our team
           </h3>
           <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed text-center mb-7 max-w-sm mx-auto">
-            30-minute strategy session with the founder. We map the
+            Live strategy session with the founder. We map the
             highest-ROI automations to your business and walk you out
             with a custom action plan.
           </p>
@@ -211,7 +211,7 @@ const TwoPathsFooter = () => {
           <Link
             to="/advisory"
             className="inline-flex w-full"
-            aria-label="Book a 30-minute strategy consultation"
+            aria-label="Book a strategy consultation with the founder"
           >
             <button
               type="button"
