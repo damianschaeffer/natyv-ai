@@ -9,22 +9,17 @@ import { User, Map, ShieldCheck } from "lucide-react";
 const HEADLINE_PRE = "Skip guessing.";
 const HEADLINE_POST = "Get the plan.";
 
-// "What to expect" bullets — ported from /advisory page during the
-// duplication-review pass (Damian, 2026-05-09).
-const WHAT_TO_EXPECT = [
-  "Strategic assessment of your current AI capabilities and gaps",
-  "Custom roadmap for autonomous system integration",
-  "Identification of high-impact automation opportunities",
-  "Clear next steps with actionable recommendations",
-];
-
-// Rotating subtitles — splice of MyAgentSection.tsx rotator pattern.
-// No duration framing — visitors pick the length that fits the
-// conversation (30m or 1h options live in Cal.com).
+// Rotating subtitles — each line surfaces UNIQUE info that the three
+// tiles below don't already cover. The previous rotation duplicated
+// tile content (founder-led / confidential / action plan) so the
+// section was saying the same things twice. The new rotation adds:
+//   1. Process insight (diagnose-first principle)
+//   2. Speed-to-value (one session → plan in hand)
+//   3. Bespoke positioning (built for your business, not a framework)
 const SUBTITLES = [
-  "Live 1:1 with a senior AI operations strategist.",
-  "Confidential. NDA available. Action plan delivered.",
   "We map your operations before we touch your stack.",
+  "One conversation. A deployment plan in hand.",
+  "Built around your business — not a framework retrofit.",
 ];
 
 interface Benefit {
@@ -203,31 +198,6 @@ const AdvisorySection = () => {
           </motion.div>
         </div>
 
-        {/* What to Expect */}
-        <div className="container mx-auto px-6 mt-16">
-          <motion.div
-            className="max-w-2xl mx-auto text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <h3 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl text-foreground mb-6 leading-tight">
-              What to expect.
-            </h3>
-            <div className="space-y-4 text-left">
-              {WHAT_TO_EXPECT.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-3 text-muted-foreground font-body"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
       </div>
     </section>
   );

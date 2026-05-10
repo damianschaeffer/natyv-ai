@@ -1,32 +1,15 @@
-import { motion } from "framer-motion";
 import { Head } from "vite-react-ssg";
-import { Calendar, User, Map, ShieldCheck } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AdvisorySection from "@/components/AdvisorySection";
 
+// Direct URL access to /advisory now renders the same <AdvisorySection />
+// the homepage does. Whether visitors reach Advisory by clicking the
+// nav scroll-link, scrolling into it on /, or hitting /advisory by
+// direct URL, they see the identical content. Keeps the dedicated
+// route around for SEO (page-specific Head + JSON-LD) without
+// maintaining a parallel content tree.
 const Advisory = () => {
-  // Benefit tiles — mirror of the homepage AdvisorySection's BENEFITS
-  // array. Benefit-first (Who / What / Catch), no duration framing.
-  const benefits = [
-    {
-      icon: User,
-      title: "Founder-Led",
-      description:
-        "Direct line to the founder. The person designing your AI system answers your questions live — no handoffs."
-    },
-    {
-      icon: Map,
-      title: "Action Plan, Yours",
-      description:
-        "You leave with a prioritized roadmap mapped to your operations and ROI. Yours to keep."
-    },
-    {
-      icon: ShieldCheck,
-      title: "Zero Sales Pressure",
-      description:
-        "Confidential by default, NDA available. If we're not the right fit, we'll tell you fast."
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -73,150 +56,9 @@ const Advisory = () => {
         `}</script>
       </Head>
       <Navbar />
-
-      <main className="pt-32 pb-24">
-        {/* Hero Section */}
-        <section className="container mx-auto px-6 mb-20">
-          <motion.div
-            className="max-w-3xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-medium text-primary border border-primary/30 rounded-full">
-              Strategic Advisory
-            </span>
-
-            <h1 className="font-body font-extrabold tracking-tight text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-[1.05]">
-              Book a strategy{" "}
-              <span className="text-primary">consultation.</span>
-            </h1>
-            
-            <p className="text-lg text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto">
-              Schedule a confidential session to explore how autonomous AI systems 
-              can transform your operational architecture. Reserved for decision-makers 
-              ready to lead the next wave of enterprise intelligence.
-            </p>
-          </motion.div>
-        </section>
-
-        {/* Benefits Grid */}
-        <section className="container mx-auto px-6 mb-20">
-          <motion.div
-            className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={benefit.title}
-                className="p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              >
-                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                  <benefit.icon className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-body font-semibold text-base md:text-lg text-foreground mb-2 leading-snug">
-                  {benefit.title}
-                </h3>
-                <p className="text-sm text-muted-foreground font-body">
-                  {benefit.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </section>
-
-        {/* Booking Section */}
-        <section className="container mx-auto px-6">
-          <motion.div
-            className="max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <div className="rounded-2xl border border-border bg-card/30 backdrop-blur-xl overflow-hidden">
-              {/* Header */}
-              <div className="p-8 border-b border-border text-center">
-                <div className="inline-flex items-center gap-2 text-primary mb-4">
-                  <Calendar className="w-5 h-5" />
-                  <span className="text-sm font-medium">
-                    Schedule your session
-                  </span>
-                </div>
-                <h2 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl lg:text-4xl text-foreground leading-tight">
-                  Select a time that works for you.
-                </h2>
-              </div>
-              
-              {/* Cal.com embed — Damian's consultation booking link */}
-              <div className="p-2 md:p-4">
-                <iframe
-                  src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark"
-                  title="Book a consultation with Damian Schaeffer"
-                  className="w-full rounded-xl border border-border bg-background"
-                  style={{ height: "720px", border: 0 }}
-                  loading="lazy"
-                  allow="camera; microphone; autoplay; encrypted-media; fullscreen; picture-in-picture"
-                />
-                <p className="text-center text-xs text-muted-foreground/60 font-body mt-3">
-                  Trouble loading the calendar?{" "}
-                  <a
-                    href="https://cal.com/damian-schaeffer/consultation"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    Book directly on Cal.com →
-                  </a>
-                </p>
-              </div>
-
-              {/* Footer Note */}
-              <div className="px-8 pb-8 text-center">
-                <p className="text-xs text-muted-foreground font-body">
-                  All consultations are conducted under strict confidentiality. 
-                  Enterprise NDA available upon request.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* What to Expect */}
-        <section className="container mx-auto px-6 mt-20">
-          <motion.div
-            className="max-w-2xl mx-auto text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <h3 className="font-body font-extrabold tracking-tight text-2xl md:text-3xl text-foreground mb-6 leading-tight">
-              What to expect.
-            </h3>
-            <div className="space-y-4 text-left">
-              {[
-                "Strategic assessment of your current AI capabilities and gaps",
-                "Custom roadmap for autonomous system integration",
-                "Identification of high-impact automation opportunities",
-                "Clear next steps with actionable recommendations"
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-3 text-muted-foreground font-body"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
+      <main className="pt-24">
+        <AdvisorySection />
       </main>
-
       <Footer />
     </div>
   );

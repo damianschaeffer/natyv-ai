@@ -37,6 +37,7 @@ const Navbar = () => {
     const sectionMap: Record<string, string> = {
       "myagent-section": "Studio",
       "homepage-services": "Services",
+      "advisory": "Advisory",
     };
     const sectionIds = Object.keys(sectionMap);
 
@@ -77,10 +78,25 @@ const Navbar = () => {
     }
   };
 
+  // Scroll-link handler for Advisory — mirrors scrollToMyAgent pattern.
+  // On homepage: smooth-scroll to #advisory. On any other route:
+  // navigate to homepage with state flag, then Index.tsx handles the
+  // post-navigation scroll on mount.
+  const scrollToAdvisory = () => {
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollToAdvisory: true } });
+    } else {
+      const element = document.getElementById("advisory");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   const navLinks = [
-    { label: "Studio", href: "#myagent-section", isScrollLink: true },
+    { label: "Studio", href: "#myagent-section", isScrollLink: true, onScroll: scrollToMyAgent },
     { label: "Services", href: "/services", isRoute: true },
-    { label: "Advisory", href: "/advisory", isRoute: true },
+    { label: "Advisory", href: "#advisory", isScrollLink: true, onScroll: scrollToAdvisory },
     { label: "About", href: "/about", isRoute: true },
   ];
 
@@ -157,7 +173,7 @@ const Navbar = () => {
                   ) : link.isScrollLink ? (
                     <motion.button
                       onClick={() => {
-                        scrollToMyAgent();
+                        link.onScroll?.();
                       }}
                       className={`font-accent uppercase transition-colors duration-300 whitespace-nowrap cursor-pointer hover:text-primary ${
                         activeSection === link.label ? "text-primary" : "text-foreground"
@@ -273,7 +289,7 @@ const Navbar = () => {
                     <button
                       onClick={() => {
                         setMobileMenuOpen(false);
-                        scrollToMyAgent();
+                        link.onScroll?.();
                       }}
                       className="text-2xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em] cursor-pointer"
                     >

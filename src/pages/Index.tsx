@@ -15,9 +15,19 @@ const Index = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.state?.scrollToMyAgent) {
+    // Post-navigation scroll: when the visitor clicked a homepage-anchor
+    // nav link (Studio or Advisory) from a non-homepage route, the
+    // Navbar pushes a state flag and we scroll to the right id once the
+    // homepage has mounted.
+    const targetId = location.state?.scrollToMyAgent
+      ? "myagent-section"
+      : location.state?.scrollToAdvisory
+        ? "advisory"
+        : null;
+
+    if (targetId) {
       setTimeout(() => {
-        const element = document.getElementById("myagent-section");
+        const element = document.getElementById(targetId);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
