@@ -172,11 +172,11 @@ const AdvisorySection = () => {
                 </div>
               </div>
 
-              <div className="absolute left-[72px] sm:left-[86px] right-8 bottom-8 h-5 rounded-full bg-gradient-to-r from-cyan-300 via-primary/65 to-red-500/70 shadow-[0_0_30px_rgba(6,182,212,0.24)]">
-                <div className="absolute -left-4 -top-2.5 h-10 w-10 rounded-full bg-cyan-300 text-background flex items-center justify-center shadow-[0_0_28px_rgba(6,182,212,0.42)]">
+              <div className="absolute left-[72px] sm:left-[86px] right-8 bottom-8 h-5 rounded-full bg-gradient-to-r from-amber-200/65 via-amber-400/75 to-amber-500 shadow-[0_0_30px_rgba(245,158,11,0.28)]">
+                <div className="absolute -left-4 -top-2.5 h-10 w-10 rounded-full bg-amber-200 text-background flex items-center justify-center shadow-[0_0_28px_rgba(245,158,11,0.36)]">
                   <Clock3 className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <div className="absolute -right-6 -top-4 h-14 w-14 rounded-full bg-red-500 text-background flex items-center justify-center shadow-[0_0_34px_rgba(239,68,68,0.5)]">
+                <div className="absolute -right-6 -top-4 h-14 w-14 rounded-full bg-amber-500 text-background flex items-center justify-center shadow-[0_0_34px_rgba(245,158,11,0.52)]">
                   <Clock3 className="w-8 h-8" aria-hidden="true" />
                 </div>
               </div>
@@ -305,13 +305,9 @@ const AdvisorySection = () => {
                     </div>
 
                     <div
-                      className="h-full min-h-[4.75rem] rounded-xl border px-3 py-3 flex flex-col justify-center"
-                      style={{
-                        borderColor: `${item.color}55`,
-                        backgroundColor: `${item.color}14`,
-                      }}
+                      className="h-full min-h-[4.75rem] rounded-xl border border-emerald-300/35 bg-emerald-300/[0.08] px-3 py-3 flex flex-col justify-center"
                     >
-                      <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] mb-1" style={{ color: item.color }}>
+                      <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-emerald-300 mb-1">
                         <DollarSign className="w-3.5 h-3.5" aria-hidden="true" />
                         Payoff
                       </p>
@@ -320,8 +316,8 @@ const AdvisorySection = () => {
                       </p>
                     </div>
 
-                    <div className="h-full min-h-[4.75rem] rounded-xl border border-cyan-300/35 bg-cyan-300/[0.08] px-3 py-3 flex flex-col justify-center">
-                      <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-cyan-300 mb-1">
+                    <div className="h-full min-h-[4.75rem] rounded-xl border border-amber-300/40 bg-amber-300/[0.08] px-3 py-3 flex flex-col justify-center">
+                      <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-amber-300 mb-1">
                         <Clock3 className="w-3.5 h-3.5" aria-hidden="true" />
                         Setup time
                       </p>

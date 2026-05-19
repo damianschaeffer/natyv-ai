@@ -17,6 +17,9 @@
         --text: #f6f7fb;
         --muted: rgba(246, 247, 251, 0.66);
         --primary: #3c83f6;
+        --value: #34d399;
+        --time: #f59e0b;
+        --time-soft: #fde68a;
         --front-desk: #06b6d4;
         --sales: #10b981;
         --operations: #3c83f6;
@@ -240,8 +243,8 @@
         bottom: 34px;
         height: 20px;
         border-radius: 999px;
-        background: linear-gradient(to right, #67e8f9, rgba(60, 131, 246, 0.64), rgba(239, 68, 68, 0.72));
-        box-shadow: 0 0 34px rgba(6, 182, 212, 0.24);
+        background: linear-gradient(to right, rgba(253, 230, 138, 0.68), rgba(245, 158, 11, 0.78), var(--time));
+        box-shadow: 0 0 34px rgba(245, 158, 11, 0.28);
       }
 
       .x-axis::before,
@@ -260,9 +263,9 @@
         top: -10px;
         width: 40px;
         height: 40px;
-        background: #67e8f9;
+        background: var(--time-soft);
         font-size: 1.45rem;
-        box-shadow: 0 0 34px rgba(6, 182, 212, 0.48);
+        box-shadow: 0 0 34px rgba(245, 158, 11, 0.36);
       }
 
       .x-axis::after {
@@ -270,9 +273,9 @@
         top: -18px;
         width: 56px;
         height: 56px;
-        background: #ef4444;
+        background: var(--time);
         font-size: 2rem;
-        box-shadow: 0 0 34px rgba(239, 68, 68, 0.5);
+        box-shadow: 0 0 34px rgba(245, 158, 11, 0.52);
       }
 
       .pin {
@@ -427,13 +430,13 @@
       }
 
       .metric.payoff {
-        border-color: var(--accent);
-        background: var(--accent-bg);
+        border-color: rgba(52, 211, 153, 0.38);
+        background: rgba(52, 211, 153, 0.08);
       }
 
       .metric.time {
-        border-color: rgba(103, 232, 249, 0.34);
-        background: rgba(103, 232, 249, 0.08);
+        border-color: rgba(245, 158, 11, 0.42);
+        background: rgba(245, 158, 11, 0.08);
       }
 
       .metric.why {
@@ -454,6 +457,14 @@
       .metric strong {
         display: block;
         font-size: 0.9rem;
+      }
+
+      .metric.payoff .label {
+        color: var(--value);
+      }
+
+      .metric.time .label {
+        color: var(--time-soft);
       }
 
       .cta {
