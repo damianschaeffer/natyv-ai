@@ -43,13 +43,13 @@ const Index = () => {
         <title>Natyv AI · /ˈnātiv/ — Architecting Autonomy</title>
         <meta
           name="description"
-          content="Natyv (adj. /ˈnātiv/) — innate, original, native. We architect AI-native operations for service businesses, returning owners to a state of abundance. Studio · Solutions · Strategic Advisory."
+          content="Natyv (adj. /ˈnātiv/) - innate, original, native. We architect AI-native operations for service businesses, starting with an AI Opportunity Assessment."
         />
         <link rel="canonical" href="https://natyv.ai/" />
         <meta property="og:title" content="Natyv AI · /ˈnātiv/ — Architecting Autonomy" />
         <meta
           property="og:description"
-          content="Natyv (adj. /ˈnātiv/) — innate, original, native. AI-native operations for service businesses. Studio · Solutions · Strategic Advisory."
+          content="AI-native operations for service businesses. Start with an AI Opportunity Assessment, then build the systems that pay back first."
         />
         <meta property="og:url" content="https://natyv.ai/" />
         <meta property="og:type" content="website" />

@@ -8,20 +8,22 @@ import HomepageServices from "@/components/HomepageServices";
 // are byte-identical. Visitors who land on /services see the same
 // "Full-Service Agency. AI-Powered." H2 and the same six colored
 // category cards (with click-to-expand outcome lines on every pill).
+// The assessment copy establishes the paid diagnostic as the clean
+// starting point before a visitor buys a build.
 const Services = () => {
   return (
     <div className="min-h-screen bg-background">
       <Head>
-        <title>Services · 80+ AI Workflows for Service Businesses · Natyv AI</title>
+        <title>Services · AI Assessment + 75+ Workflows · Natyv AI</title>
         <meta
           name="description"
-          content="Six business functions. 75+ productized AI capabilities. Hire Natyv to install, configure, and operate them — or self-serve on MyAgent."
+          content="Start with an AI Opportunity Assessment, then choose from 75+ productized AI capabilities across front desk, sales, operations, finance, marketing, and customer experience."
         />
         <link rel="canonical" href="https://natyv.ai/services" />
-        <meta property="og:title" content="Services · 80+ AI Workflows · Natyv AI" />
+        <meta property="og:title" content="Services · AI Assessment + 75+ Workflows · Natyv AI" />
         <meta
           property="og:description"
-          content="Six functions. 75+ capabilities. Hire us to run them — or self-serve on MyAgent."
+          content="Diagnose first, then build the highest-ROI AI workflows for your service business."
         />
         <meta property="og:url" content="https://natyv.ai/services" />
         <meta property="og:type" content="website" />

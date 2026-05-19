@@ -14,9 +14,9 @@ const NORTH_STAR_PATH =
 // final-page legal nav isn't covered.
 //
 // Two-paths wayfinder: persistent eyebrow + asymmetric button pair so the
-// fork (MyAgent product vs. agency services) is always visible. The visual
+// fork (MyAgent product vs. AI assessment) is always visible. The visual
 // treatments themselves communicate the choice — MyAgent-branded chip on
-// the left, blue Agency-services pill on the right.
+// the left, blue AI-assessment pill on the right.
 const StickyDualCTA = () => {
   const [visible, setVisible] = useState(true);
 
@@ -160,16 +160,16 @@ const StickyDualCTA = () => {
                 </Button>
               </a>
 
-              {/* Right — Agency services. Blue pill = the prominent house CTA
-                  for visitors who want hands-on agency engagement instead of
-                  the self-serve product. */}
+              {/* Right — AI assessment. Blue pill = the prominent house CTA
+                  for visitors who need diagnosis before self-serve product or
+                  hands-on agency engagement. */}
               <Link
-                to="/services"
+                to="/advisory"
                 className="flex-1 sm:flex-initial max-w-[220px] sm:max-w-none"
               >
                 <Button className="w-full h-11 sm:h-10 px-3 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all">
-                  <span className="hidden sm:inline">Agency Services</span>
-                  <span className="sm:hidden">Services</span>
+                  <span className="hidden sm:inline">AI Assessment</span>
+                  <span className="sm:hidden">Assess</span>
                   <ArrowRight className="ml-1 sm:ml-1.5 w-3.5 h-3.5" />
                 </Button>
               </Link>

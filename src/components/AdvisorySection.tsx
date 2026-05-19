@@ -1,13 +1,21 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Map, ShieldCheck } from "lucide-react";
+import {
+  Bot,
+  FileText,
+  ShieldCheck,
+  BarChart3,
+  Target,
+  ListChecks,
+  CalendarCheck,
+  ArrowRight,
+  type LucideIcon,
+} from "lucide-react";
 
-// Static headline — punchy transition from the 75-item services catalog
-// into the consultation booking. The first half names the problem
-// (visitor doesn't know which services to pick), the blue-accent
-// second half makes the offer (we deliver the plan).
-const HEADLINE_PRE = "Skip guessing.";
-const HEADLINE_POST = "Get the plan.";
+// Static headline - positions the founder-led advisory call as a concrete
+// assessment offer instead of a generic consultation.
+const HEADLINE_PRE = "Start with the";
+const HEADLINE_POST = "AI Opportunity Assessment.";
 
 // Rotating subtitles — each line surfaces UNIQUE info that the three
 // tiles below don't already cover. The previous rotation duplicated
@@ -17,43 +25,68 @@ const HEADLINE_POST = "Get the plan.";
 //   2. Speed-to-value (one session → plan in hand)
 //   3. Bespoke positioning (built for your business, not a framework)
 const SUBTITLES = [
-  "We map your operations before we touch your stack.",
-  "One conversation. A deployment plan in hand.",
-  "Built around your business — not a framework retrofit.",
+  "20 minutes with our AI assessment agent. 48 hours later, a founder-reviewed action map.",
+  "Find what to automate, what to ignore, and what pays back first.",
+  "$500 founding assessment - credited toward your first build within 14 days.",
 ];
 
 interface Benefit {
-  icon: typeof User;
+  icon: LucideIcon;
   title: string;
   description: string;
 }
 
-// Three benefit tiles — benefit-first, not feature-first. Each tile
-// answers a different question the skeptical visitor has:
-//   1. WHO am I talking to?  → Founder-Led
-//   2. WHAT do I walk away with?  → Action Plan, Yours
-//   3. WHAT'S THE CATCH?  → Zero Sales Pressure
-// Replaces the earlier feature-tiles ("1:1 Strategy Session" /
-// "60-Minute Deep Dive" / "Confidential Brief") which described the
-// meeting format rather than the value of attending.
+interface AssessmentItem {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
 const BENEFITS: Benefit[] = [
   {
-    icon: User,
-    title: "Founder-Led",
+    icon: Bot,
+    title: "AI-Led Discovery",
     description:
-      "Direct line to the founder. The person designing your AI system answers your questions live — no junior account managers, no handoffs.",
+      "Start with a guided voice assessment that learns your calls, leads, follow-up, admin work, and recurring bottlenecks.",
   },
   {
-    icon: Map,
-    title: "Action Plan, Yours",
+    icon: FileText,
+    title: "48-Hour Opportunity Map",
     description:
-      "You leave with a prioritized roadmap mapped to your operations and ROI. Yours to keep, even if you don't engage further.",
+      "We turn the interview into a prioritized report with quick wins, ROI estimates, and the systems worth building first.",
   },
   {
     icon: ShieldCheck,
-    title: "Zero Sales Pressure",
+    title: "Credited Toward Build",
     description:
-      "Confidential by default, NDA available. If our agency or MyAgent isn't the right fit, we'll tell you fast.",
+      "Founding assessments are $500 and credited toward your first Natyv build if we move forward within 14 days.",
+  },
+];
+
+const ASSESSMENT_ITEMS: AssessmentItem[] = [
+  {
+    icon: BarChart3,
+    title: "ROI Snapshot",
+    description:
+      "Estimate the hours, missed leads, and manual work your business can realistically recover.",
+  },
+  {
+    icon: Target,
+    title: "Effort vs. Impact Map",
+    description:
+      "Separate quick wins from heavy lifts so you do not spend money on the wrong automation first.",
+  },
+  {
+    icon: ListChecks,
+    title: "4-Day Quick Win Plan",
+    description:
+      "A ground-level rollout sequence for the fastest fix we would implement before anything else.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Founder Walkthrough",
+    description:
+      "A live review of the report with clear next steps, including where MyAgent does or does not fit.",
   },
 ];
 
@@ -92,7 +125,7 @@ const AdvisorySection = () => {
             fontWeight: 500,
           }}
         >
-          Advisory
+          AI Opportunity Assessment
         </span>
       </motion.div>
 
@@ -109,7 +142,7 @@ const AdvisorySection = () => {
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
         >
           {HEADLINE_PRE}{" "}
-          <span className="text-primary inline-block whitespace-nowrap">{HEADLINE_POST}</span>
+          <span className="text-primary">{HEADLINE_POST}</span>
         </h2>
 
         <div className="min-h-[3rem] md:min-h-[3.5rem] flex items-center justify-center">
@@ -125,6 +158,39 @@ const AdvisorySection = () => {
               {SUBTITLES[currentSubtitle]}
             </motion.p>
           </AnimatePresence>
+        </div>
+      </motion.div>
+
+      {/* Founding offer strip - one compact commercial anchor before
+          the visitor reaches the calendar. */}
+      <motion.div
+        className="relative z-10 w-full max-w-5xl mx-auto px-2 sm:px-0 mb-8 md:mb-10"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="grid md:grid-cols-[1fr_auto] gap-4 md:gap-6 items-center rounded-2xl border border-primary/30 bg-primary/[0.06] backdrop-blur-md px-5 py-5 md:px-7 md:py-6">
+          <div className="text-center md:text-left">
+            <p className="font-accent uppercase text-primary text-xs tracking-[0.22em] mb-2">
+              Founding launch offer
+            </p>
+            <p className="font-poppins font-bold text-2xl md:text-3xl text-foreground leading-tight">
+              $500 assessment, credited toward your first build.
+            </p>
+            <p className="mt-2 text-sm md:text-base text-muted-foreground font-body leading-relaxed">
+              Designed for business owners who know AI matters, but need the
+              right starting point before buying software or custom work.
+            </p>
+          </div>
+          <a
+            href="#assessment-calendar"
+            className="inline-flex items-center justify-center gap-2 h-12 px-5 rounded-full bg-background/90 hover:bg-background border border-foreground/30 hover:border-foreground/50 text-foreground shadow-lg transition-all text-sm sm:text-base font-poppins font-semibold"
+            aria-label="Book your AI Opportunity Assessment"
+          >
+            Book assessment
+            <ArrowRight className="w-4 h-4 text-primary" aria-hidden="true" />
+          </a>
         </div>
       </motion.div>
 
@@ -158,6 +224,37 @@ const AdvisorySection = () => {
         ))}
       </motion.div>
 
+      {/* Assessment report preview - shows the buyer what the diagnostic
+          produces before asking them to book. */}
+      <motion.div
+        className="relative z-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 w-full max-w-5xl mx-auto mb-10 px-2 sm:px-0"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.18 }}
+        transition={{ duration: 0.6, delay: 0.35 }}
+      >
+        {ASSESSMENT_ITEMS.map((item, index) => (
+          <motion.article
+            key={item.title}
+            className="group flex flex-col p-5 rounded-2xl border border-border/60 bg-background/35 backdrop-blur-md hover:border-primary/40 hover:bg-background/55 transition-all duration-300"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 + index * 0.06 }}
+          >
+            <div className="w-11 h-11 mb-4 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <item.icon className="w-5 h-5 text-primary" aria-hidden="true" />
+            </div>
+            <h3 className="font-poppins font-bold text-base text-foreground mb-2 leading-snug">
+              {item.title}
+            </h3>
+            <p className="text-sm text-muted-foreground font-body leading-relaxed">
+              {item.description}
+            </p>
+          </motion.article>
+        ))}
+      </motion.div>
+
       {/* Inline booking — Cal.com iframe sits directly under the
           benefit cards, no chrome wrapper or "Select a time" header
           above it. Visual silence around the iframe lets the
@@ -167,7 +264,7 @@ const AdvisorySection = () => {
           is controlled by Damian's Cal.com event-type settings, not
           from this URL — disable it from the Cal.com dashboard if
           unwanted. */}
-      <div className="relative z-10 w-full mt-12 md:mt-16">
+      <div id="assessment-calendar" className="relative z-10 w-full mt-12 md:mt-16 scroll-mt-28">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-4xl mx-auto"
@@ -178,7 +275,7 @@ const AdvisorySection = () => {
           >
             <iframe
               src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark&hideEventTypeDetails=true"
-              title="Book a consultation with Damian Schaeffer"
+              title="Book an AI Opportunity Assessment with Damian Schaeffer"
               className="w-full rounded-2xl border border-border bg-background"
               style={{ height: "720px", border: 0 }}
               loading="lazy"

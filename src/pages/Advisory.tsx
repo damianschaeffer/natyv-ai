@@ -14,16 +14,16 @@ const Advisory = () => {
   return (
     <div className="min-h-screen bg-background">
       <Head>
-        <title>Book a Strategy Consultation | Natyv AI</title>
+        <title>AI Opportunity Assessment | Natyv AI</title>
         <meta
           name="description"
-          content="Book a strategy consultation with Damian Schaeffer, founder of Natyv AI. Reserved for decision-makers exploring how AI-native operations can transform their service business. Confidential. NDA available."
+          content="Book a $500 AI Opportunity Assessment with Natyv AI. Start with a guided AI interview, receive a 48-hour opportunity map, and credit the assessment toward your first build."
         />
         <link rel="canonical" href="https://natyv.ai/advisory" />
-        <meta property="og:title" content="Strategic AI Advisory — Natyv AI" />
+        <meta property="og:title" content="AI Opportunity Assessment — Natyv AI" />
         <meta
           property="og:description"
-          content="Live 1:1 strategy session with the founder of Natyv AI. AI operations roadmap, ROI modeling, integration plan."
+          content="A guided AI assessment, founder-reviewed report, ROI map, and prioritized quick-win plan for service businesses."
         />
         <meta property="og:url" content="https://natyv.ai/advisory" />
         <meta property="og:type" content="website" />
@@ -33,12 +33,12 @@ const Advisory = () => {
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": "https://natyv.ai/advisory#service",
-  "name": "Strategic AI Advisory",
-  "serviceType": "AI Operations Consulting",
+  "name": "AI Opportunity Assessment",
+  "serviceType": "AI Operations Assessment",
   "provider": { "@id": "https://natyv.ai/#organization" },
   "areaServed": "US",
   "url": "https://natyv.ai/advisory",
-  "description": "1:1 strategic AI advisory engagement with Damian Schaeffer covering AI capabilities assessment, autonomous-system roadmap, and high-impact automation opportunities for service businesses.",
+  "description": "Paid AI Opportunity Assessment covering an AI-led discovery interview, 48-hour opportunity map, ROI snapshot, quick-win plan, and founder walkthrough for service businesses.",
   "audience": {
     "@type": "BusinessAudience",
     "audienceType": "Service business owners, founders, and operators"
@@ -48,10 +48,10 @@ const Advisory = () => {
     "url": "https://cal.com/damian-schaeffer/consultation",
     "availability": "https://schema.org/InStock",
     "priceCurrency": "USD",
-    "price": "0",
-    "description": "Initial consultation at no cost. Engagement pricing follows scope assessment."
+    "price": "500",
+    "description": "Founding assessment offer credited toward the first Natyv build when the client moves forward within 14 days."
   },
-  "termsOfService": "Confidential. Enterprise NDA available upon request."
+  "termsOfService": "Confidential. NDA available upon request."
 }
         `}</script>
       </Head>

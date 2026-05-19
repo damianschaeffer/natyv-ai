@@ -351,13 +351,13 @@ const About = () => {
               Let's connect.
             </h3>
             <p className="text-muted-foreground font-body mb-6">
-              Interested in exploring strategic opportunities or advisory engagements?
+              Start with the AI Opportunity Assessment and leave with a real map.
             </p>
             <a
               href="/advisory"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-body text-sm rounded-md transition-colors"
             >
-              Book a Consultation
+              Book an Assessment
             </a>
           </motion.div>
         </section>

@@ -1,23 +1,23 @@
 # Natyv AI
 
-> Natyv AI is an AI-native operations agency founded by Damian Schaeffer. We design and deploy voice AI, autonomous workflows, and bespoke agent systems for service businesses — med spas, dental practices, property management, fitness studios, home services, and restaurants. Our productized SaaS platform is MyAgent (separate site at get-myagent.com).
+> Natyv AI is an AI-native operations agency founded by Damian Schaeffer. We design and deploy voice AI, autonomous workflows, and bespoke agent systems for service businesses - med spas, dental practices, property management, fitness studios, home services, and restaurants. Our productized SaaS platform is MyAgent (separate site at get-myagent.com).
 
 ## About
 
-- [About Damian Schaeffer](https://natyv.ai/about): Founder bio. 20+ years in business operations — scaled K&D Management (Cleveland, OH) to 40+ properties; led Sandcastle Community Management (Naples, FL) with 65 employees serving 150+ communities; founded Gulf Pointe Real Estate Group. Educated at The Ohio State University.
+- [About Damian Schaeffer](https://natyv.ai/about): Founder bio. 20+ years in business operations - scaled K&D Management (Cleveland, OH) to 40+ properties; led Sandcastle Community Management (Naples, FL) with 65 employees serving 150+ communities; founded Gulf Pointe Real Estate Group. Educated at The Ohio State University.
 
 ## Services
 
-- [Service Catalog](https://natyv.ai/services): 80+ productized AI workflows organized across 6 business functions — Front Desk, Sales, Operations, Finance, Marketing, and Customer Experience.
-- [Strategic AI Advisory](https://natyv.ai/advisory): 1:1 strategy consultations on AI operations architecture, deployment roadmaps, and ROI modeling for service businesses.
+- [Service Catalog](https://natyv.ai/services): 75+ productized AI workflows organized across 6 business functions - Front Desk, Sales, Operations, Finance, Marketing, and Customer Experience.
+- [AI Opportunity Assessment](https://natyv.ai/advisory): $500 founding assessment with guided AI interview, 48-hour opportunity map, ROI snapshot, quick-win plan, and founder walkthrough. Assessment is credited toward the first Natyv build when the client moves forward within 14 days.
 
 ## Products
 
-- [MyAgent](https://get-myagent.com/): Productized SaaS platform — AI voice agents, scheduling, lead intelligence, follow-up automation, payment workflows. Six packages from $99/mo to Enterprise. The platform Natyv AI deploys for white-glove agency engagements.
+- [MyAgent](https://get-myagent.com/): Productized SaaS platform - AI voice agents, scheduling, lead intelligence, follow-up automation, payment workflows. Six packages from $99/mo to Enterprise. The platform Natyv AI deploys for white-glove agency engagements.
 
 ## Contact
 
-- [Book a Consultation](https://natyv.ai/advisory): Schedule a 60-minute strategy session with Damian Schaeffer via Cal.com.
+- [Book an Assessment](https://natyv.ai/advisory): Schedule an AI Opportunity Assessment with Damian Schaeffer via Cal.com.
 
 ## Optional
 

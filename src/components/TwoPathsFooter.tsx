@@ -38,12 +38,12 @@ const MYAGENT_BADGES = [
 // the MyAgent badges so the two sides balance. Icons are intentionally
 // disjoint from MYAGENT_BADGES to avoid looking duplicated.
 const AGENCY_BADGES = [
-  { Icon: User, label: "Founder-Led" },
-  { Icon: Calendar, label: "Live 1:1" },
-  { Icon: Briefcase, label: "NDA Available" },
-  { Icon: FileText, label: "Custom Roadmap" },
+  { Icon: User, label: "AI Interview" },
+  { Icon: Calendar, label: "Founder Walkthrough" },
+  { Icon: Briefcase, label: "$500 Build Credit" },
+  { Icon: FileText, label: "48-Hour Map" },
   { Icon: Target, label: "ROI-Modeled" },
-  { Icon: Compass, label: "No Sales Pitch" },
+  { Icon: Compass, label: "No Sales Pressure" },
 ];
 
 const TwoPathsFooter = () => {
@@ -187,7 +187,7 @@ const TwoPathsFooter = () => {
           </ul>
         </motion.div>
 
-        {/* Agency card — bespoke, founder-led */}
+        {/* Agency card — diagnostic first, bespoke build second */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -196,22 +196,21 @@ const TwoPathsFooter = () => {
           className="group rounded-2xl border border-primary/30 hover:border-primary/50 bg-card/40 backdrop-blur-md p-6 md:p-8 flex flex-col transition-colors"
         >
           <h3 className="font-poppins font-bold text-2xl md:text-3xl text-primary text-center mb-3 leading-tight">
-            Architect with our team
+            Start with an assessment
           </h3>
           <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed text-center mb-7 max-w-sm mx-auto">
-            Live strategy session with the founder. We map the
-            highest-ROI automations to your business and walk you out
-            with a custom action plan.
+            A guided AI interview, founder-reviewed report, and 48-hour
+            opportunity map that shows what to automate first.
           </p>
 
           {/* CTA — equal-weight chrome to MyAgent's button. Calendar
               icon sized w-4 h-4 (= text-base ≈ 16px) so it matches the
-              "Strategy Consultation" type-size, mirroring the inline
+              "AI Opportunity Assessment" type-size, mirroring the inline
               MyAgent diamond's relationship to "Free Trial". */}
           <Link
             to="/advisory"
             className="inline-flex w-full"
-            aria-label="Book a strategy consultation with the founder"
+            aria-label="Book an AI Opportunity Assessment"
           >
             <button
               type="button"
@@ -223,7 +222,7 @@ const TwoPathsFooter = () => {
                 aria-hidden="true"
               />
               <span className="font-poppins font-semibold">
-                Strategy Consultation
+                AI Opportunity Assessment
               </span>
               <ArrowRight
                 className="w-4 h-4 transition-transform group-hover:translate-x-0.5"

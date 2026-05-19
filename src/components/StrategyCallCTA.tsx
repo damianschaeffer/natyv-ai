@@ -18,7 +18,7 @@ import {
  * "you've seen the catalog, here's how to pick from it."
  *
  * Layout mirrors the right-card pattern from TwoPathsFooter — same
- * chrome, same dark Strategy Consultation pill, same 6-item agency
+ * chrome, same dark AI Opportunity Assessment pill, same 6-item agency
  * proof-point grid — so visitors see the same offer treatment whether
  * they hit it here or at the page-end fork. The section h2 is the
  * white canonical homepage headline ("Not sure which functions to
@@ -31,12 +31,12 @@ import {
 // Kept inline (not extracted to a shared module) so the duplication is
 // visible and easy to keep in sync.
 const AGENCY_BADGES = [
-  { Icon: User, label: "Founder-Led" },
-  { Icon: Calendar, label: "Live 1:1" },
-  { Icon: Briefcase, label: "NDA Available" },
-  { Icon: FileText, label: "Custom Roadmap" },
+  { Icon: User, label: "AI Interview" },
+  { Icon: Calendar, label: "Founder Walkthrough" },
+  { Icon: Briefcase, label: "$500 Build Credit" },
+  { Icon: FileText, label: "48-Hour Map" },
   { Icon: Target, label: "ROI-Modeled" },
-  { Icon: Compass, label: "No Sales Pitch" },
+  { Icon: Compass, label: "No Sales Pressure" },
 ];
 
 const StrategyCallCTA = () => {
@@ -57,11 +57,11 @@ const StrategyCallCTA = () => {
           className="font-poppins font-bold tracking-tight text-foreground leading-[1.02]"
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
         >
-          Not sure which functions to start with?
+          Not sure where AI should start?
         </h2>
       </motion.div>
 
-      {/* Single Architect-with-our-team card — verbatim chrome from
+      {/* Single assessment card — verbatim chrome from
           TwoPathsFooter's right card so the visitor sees the same offer
           treatment in both contexts. Centered with max-w-xl so it
           reads as a balanced standalone offer, not a half of a
@@ -74,18 +74,17 @@ const StrategyCallCTA = () => {
         className="group relative z-10 max-w-xl mx-auto rounded-2xl border border-primary/30 hover:border-primary/50 bg-card/40 backdrop-blur-md p-6 md:p-8 flex flex-col transition-colors"
       >
         <h3 className="font-poppins font-bold text-2xl md:text-3xl text-primary text-center mb-3 leading-tight">
-          Architect with our team
+          Start with an assessment
         </h3>
         <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed text-center mb-7 max-w-sm mx-auto">
-          Live strategy session with the founder. We map the
-          highest-ROI automations to your business and walk you out
-          with a custom action plan.
+          A guided AI interview, founder-reviewed report, and 48-hour
+          opportunity map that shows what to automate first.
         </p>
 
         <Link
           to="/advisory"
           className="inline-flex w-full"
-          aria-label="Book a strategy consultation with the founder"
+          aria-label="Book an AI Opportunity Assessment"
         >
           <button
             type="button"
@@ -97,7 +96,7 @@ const StrategyCallCTA = () => {
               aria-hidden="true"
             />
             <span className="font-poppins font-semibold">
-              Strategy Consultation
+              AI Opportunity Assessment
             </span>
             <ArrowRight
               className="w-4 h-4 transition-transform group-hover:translate-x-0.5"

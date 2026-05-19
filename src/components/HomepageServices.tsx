@@ -180,7 +180,7 @@ const functions: ServiceFunction[] = [
       { name: "AI-Drafted Policy Templates", icon: Scale, outcome: "First-draft Terms, Privacy, and NDA — attorney review recommended, friction removed." },
       { name: "Technical Setup Service", icon: Wrench, outcome: "Hands-on white-glove setup of every tool, integration, and workflow." },
       { name: "Priority Support Access", icon: Headphones, outcome: "Dedicated Slack channel + 4-hour response SLA from real engineers." },
-      { name: "Strategy Consultation", icon: Lightbulb, outcome: "Quarterly working session with a Natyv operator who's done it 50x before." },
+      { name: "AI Opportunity Assessment", icon: Lightbulb, outcome: "20-minute diagnostic, 48-hour map, and the first build credited if we move forward." },
       { name: "A2P 10DLC Registration Support", icon: ShieldCheck, outcome: "Full carrier registration so your business texts actually deliver." },
       { name: "Waitlist Manager", icon: Clock, outcome: "Cap demand at the right price — auto-promote when slots open." },
     ],
@@ -252,9 +252,9 @@ const HEADLINE_POST = "AI-Powered.";
 // Rotating subtitles — carry the agency-engagement message that the
 // retired PivotBanner used to deliver, now native to the SERVICES section.
 const SUBTITLES = [
-  "Pick from 75 proven functions that move the needle.",
-  "Customized to your specific operations.",
-  "Designed and implemented by our team.",
+  "Start with an assessment, then build only what pays back.",
+  "Pick from 75 proven functions once the map is clear.",
+  "Designed and implemented around your actual operations.",
 ];
 
 // How many service pills are shown before the "Show all" expand kicks in.
