@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUp,
-  Bot,
   Clock3,
   Database,
   DollarSign,
@@ -10,17 +10,10 @@ import {
   MessageSquareText,
   PhoneCall,
   Send,
-  ShieldCheck,
   Star,
   Target,
   type LucideIcon,
 } from "lucide-react";
-
-interface Benefit {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}
 
 interface OpportunityItem {
   icon: LucideIcon;
@@ -35,24 +28,6 @@ interface OpportunityItem {
   mapX: number;
   mapY: number;
 }
-
-const BENEFITS: Benefit[] = [
-  {
-    icon: Bot,
-    title: "Answer once",
-    description: "The AI intake captures calls, leads, follow-up, and bottlenecks.",
-  },
-  {
-    icon: Target,
-    title: "Rank the moves",
-    description: "Every idea is sorted by payoff and setup time.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Build first",
-    description: "You leave with the first win, not another software wishlist.",
-  },
-];
 
 const OPPORTUNITIES: OpportunityItem[] = [
   {
@@ -123,6 +98,8 @@ const OPPORTUNITIES: OpportunityItem[] = [
 ];
 
 const AdvisorySection = () => {
+  const [activeRank, setActiveRank] = useState<number | null>(null);
+
   return (
     <section
       id="advisory"
@@ -170,66 +147,14 @@ const AdvisorySection = () => {
       </motion.div>
 
       <motion.div
-        className="relative z-10 grid sm:grid-cols-3 gap-3 md:gap-4 w-full max-w-4xl mx-auto mb-6 md:mb-7 px-2 sm:px-0"
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, delay: 0.22 }}
-      >
-        {BENEFITS.map((benefit, index) => (
-          <motion.article
-            key={benefit.title}
-            className="group grid grid-cols-[auto_1fr] gap-3 items-start p-4 rounded-2xl border border-border/60 bg-background/35 backdrop-blur-md hover:border-primary/40 hover:bg-background/55 transition-all duration-300"
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.28 + index * 0.06 }}
-          >
-            <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-              <benefit.icon className="w-5 h-5 text-primary" aria-hidden="true" />
-            </div>
-            <div>
-              <h3 className="font-poppins font-bold text-sm md:text-base text-foreground leading-snug mb-1">
-                {benefit.title}
-              </h3>
-              <p className="text-xs md:text-sm text-muted-foreground font-body leading-relaxed">
-                {benefit.description}
-              </p>
-            </div>
-          </motion.article>
-        ))}
-      </motion.div>
-
-      <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto px-2 sm:px-0 mb-12 md:mb-14"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.16 }}
-        transition={{ duration: 0.65, delay: 0.32 }}
+        transition={{ duration: 0.65, delay: 0.18 }}
       >
         <div className="rounded-2xl border border-primary/25 bg-background/45 backdrop-blur-md overflow-hidden">
           <div className="p-5 sm:p-7 md:p-8 border-b border-border/60">
-            <div className="flex flex-wrap gap-2 mb-5">
-              {OPPORTUNITIES.map((item) => (
-                <span
-                  key={item.area}
-                  className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-poppins font-semibold"
-                  style={{
-                    borderColor: `${item.color}66`,
-                    backgroundColor: `${item.color}14`,
-                    color: item.color,
-                  }}
-                >
-                  <span
-                    className="h-2 w-2 rounded-full"
-                    style={{ backgroundColor: item.color }}
-                    aria-hidden="true"
-                  />
-                  {item.area}
-                </span>
-              ))}
-            </div>
-
             <div className="relative h-[390px] sm:h-[460px] rounded-2xl border border-border/70 bg-black/45 overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(6,182,212,0.22),transparent_24%),radial-gradient(circle_at_35%_24%,rgba(16,185,129,0.16),transparent_22%),radial-gradient(circle_at_68%_24%,rgba(60,131,246,0.16),transparent_24%),radial-gradient(circle_at_76%_74%,rgba(251,146,60,0.10),transparent_24%)]" />
 
@@ -252,41 +177,73 @@ const AdvisorySection = () => {
                 <ArrowRight className="absolute -right-2 -top-2 w-8 h-8 text-white/55" aria-hidden="true" />
               </div>
 
-              <div className="absolute left-[92px] sm:left-[112px] top-7 rounded-2xl border border-cyan-300/35 bg-cyan-300/[0.10] px-3 py-2">
-                <p className="font-poppins font-bold text-sm text-foreground">Best first</p>
-                <p className="text-xs text-muted-foreground">More payoff + less time</p>
-              </div>
               <div className="absolute right-7 bottom-20 text-right hidden sm:block">
                 <p className="font-poppins font-bold text-sm text-muted-foreground">More setup time</p>
               </div>
               <div className="absolute left-[88px] sm:left-[104px] bottom-20">
                 <p className="font-poppins font-bold text-sm text-foreground">Least setup time</p>
               </div>
-              <div className="absolute left-11 sm:left-14 top-7">
-                <p className="font-poppins font-bold text-sm text-foreground">Payoff</p>
-              </div>
 
-              {OPPORTUNITIES.map((item) => (
+              {OPPORTUNITIES.map((item) => {
+                const isActive = item.rank === activeRank;
+                return (
                 <div
                   key={item.title}
-                  className="absolute group"
+                  className="absolute group z-20"
                   style={{
                     left: `${item.mapX}%`,
                     bottom: `${item.mapY}%`,
                     transform: "translate(-50%, 50%)",
                   }}
                 >
-                  <div
-                    className="h-11 w-11 sm:h-12 sm:w-12 rounded-full border-2 border-background/90 flex items-center justify-center font-poppins font-bold text-sm text-white"
+                  <button
+                    type="button"
+                    onClick={() => setActiveRank((current) => (current === item.rank ? null : item.rank))}
+                    className="relative h-11 w-11 sm:h-12 sm:w-12 rounded-full border-2 border-background/90 flex items-center justify-center font-poppins font-bold text-sm text-white transition-transform duration-200 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                     style={{
                       backgroundColor: item.color,
                       boxShadow: `0 0 34px ${item.color}66`,
                     }}
                     aria-label={`Priority ${item.rank}: ${item.title}`}
                   >
-                    {item.rank}
+                    <span
+                      className={`absolute inset-[-9px] rounded-full ${isActive ? "animate-ping opacity-35" : "animate-pulse opacity-20"}`}
+                      style={{ backgroundColor: item.color }}
+                      aria-hidden="true"
+                    />
+                    <span className="relative z-10">{item.rank}</span>
+                  </button>
+                  <div
+                    className={`absolute left-14 top-1/2 -translate-y-1/2 hidden sm:block min-w-[210px] rounded-xl border px-3 py-2 transition-all pointer-events-none ${
+                      isActive
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0"
+                    }`}
+                    style={{
+                      borderColor: `${item.color}55`,
+                      backgroundColor: "rgba(3, 5, 7, 0.94)",
+                      boxShadow: `0 18px 40px ${item.color}1f`,
+                    }}
+                  >
+                    <p className="font-poppins font-bold text-xs text-foreground leading-snug">
+                      {item.title}
+                    </p>
+                    <p className="mt-1 text-[10px] uppercase tracking-[0.14em]" style={{ color: item.color }}>
+                      {item.area}
+                    </p>
+                    <p className="text-[11px] text-muted-foreground leading-snug mt-1">
+                      {item.payoff} · {item.effort}
+                    </p>
                   </div>
-                  <div className="absolute left-14 top-1/2 -translate-y-1/2 hidden sm:block min-w-[180px] rounded-xl border border-border/70 bg-background/95 px-3 py-2 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none">
+                  <div
+                    className={`absolute left-1/2 top-14 -translate-x-1/2 sm:hidden w-[15rem] rounded-xl border px-3 py-2 transition-all pointer-events-none ${
+                      isActive ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
+                    }`}
+                    style={{
+                      borderColor: `${item.color}55`,
+                      backgroundColor: "rgba(3, 5, 7, 0.94)",
+                    }}
+                  >
                     <p className="font-poppins font-bold text-xs text-foreground leading-snug">
                       {item.title}
                     </p>
@@ -295,7 +252,8 @@ const AdvisorySection = () => {
                     </p>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -311,8 +269,8 @@ const AdvisorySection = () => {
                     style={{ backgroundColor: item.color }}
                     aria-hidden="true"
                   />
-                  <div className="grid lg:grid-cols-[auto_minmax(0,1fr)_minmax(11rem,0.72fr)_minmax(10rem,0.58fr)_minmax(11rem,0.7fr)] gap-3 lg:gap-4 items-center pl-2">
-                    <div className="flex items-center gap-3 lg:block">
+                  <div className="grid gap-3 lg:grid-cols-[4.25rem_minmax(20rem,1.6fr)_repeat(3,minmax(9.5rem,1fr))] items-stretch pl-2">
+                    <div className="flex flex-col items-center justify-center gap-2 self-stretch">
                       <div
                         className="h-11 w-11 rounded-xl flex items-center justify-center border border-white/10"
                         style={{ backgroundColor: `${item.color}22` }}
@@ -320,7 +278,7 @@ const AdvisorySection = () => {
                         <item.icon className="w-5 h-5" style={{ color: item.color }} aria-hidden="true" />
                       </div>
                       <div
-                        className="mt-0 lg:mt-2 h-8 w-8 rounded-full flex items-center justify-center font-poppins font-bold text-sm text-white"
+                        className="h-8 w-8 rounded-full flex items-center justify-center font-poppins font-bold text-sm text-white"
                         style={{ backgroundColor: item.color }}
                         aria-label={`Priority ${item.rank}`}
                       >
@@ -328,7 +286,7 @@ const AdvisorySection = () => {
                       </div>
                     </div>
 
-                    <div>
+                    <div className="self-center">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
                         <h5 className="font-poppins font-bold text-base md:text-lg text-foreground leading-snug">
                           {item.title}
@@ -350,7 +308,7 @@ const AdvisorySection = () => {
                     </div>
 
                     <div
-                      className="rounded-xl border px-3 py-3"
+                      className="h-full min-h-[4.75rem] rounded-xl border px-3 py-3 flex flex-col justify-center"
                       style={{
                         borderColor: `${item.color}55`,
                         backgroundColor: `${item.color}14`,
@@ -365,7 +323,7 @@ const AdvisorySection = () => {
                       </p>
                     </div>
 
-                    <div className="rounded-xl border border-cyan-300/30 bg-cyan-300/[0.08] px-3 py-3">
+                    <div className="h-full min-h-[4.75rem] rounded-xl border border-cyan-300/35 bg-cyan-300/[0.08] px-3 py-3 flex flex-col justify-center">
                       <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-cyan-300 mb-1">
                         <Clock3 className="w-3.5 h-3.5" aria-hidden="true" />
                         Setup time
@@ -375,8 +333,8 @@ const AdvisorySection = () => {
                       </p>
                     </div>
 
-                    <div className="rounded-xl border border-border/55 bg-background/45 px-3 py-3">
-                      <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1">
+                    <div className="h-full min-h-[4.75rem] rounded-xl border border-primary/35 bg-primary/[0.07] px-3 py-3 flex flex-col justify-center">
+                      <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-primary mb-1">
                         <Target className="w-3.5 h-3.5" aria-hidden="true" />
                         Why
                       </p>

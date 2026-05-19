@@ -137,33 +137,6 @@
         font-size: clamp(1rem, 1.8vw, 1.18rem);
       }
 
-      .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 18px;
-      }
-
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border: 1px solid var(--chip);
-        border-radius: 999px;
-        background: var(--chip-bg);
-        color: var(--chip);
-        padding: 8px 11px;
-        font-size: 0.78rem;
-        font-weight: 800;
-      }
-
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        background: currentColor;
-      }
-
       .map {
         position: relative;
         min-height: 460px;
@@ -272,8 +245,7 @@
       }
 
       .axis-label.payoff {
-        left: 54px;
-        top: 26px;
+        display: none;
       }
 
       .axis-label.less-time {
@@ -285,25 +257,6 @@
         right: 34px;
         bottom: 78px;
         color: var(--muted);
-      }
-
-      .best {
-        position: absolute;
-        left: 112px;
-        top: 34px;
-        border: 1px solid rgba(103, 232, 249, 0.36);
-        border-radius: 16px;
-        background: rgba(103, 232, 249, 0.1);
-        padding: 10px 12px;
-      }
-
-      .best strong {
-        display: block;
-      }
-
-      .best span {
-        color: var(--muted);
-        font-size: 0.82rem;
       }
 
       .pin {
@@ -319,6 +272,65 @@
         color: white;
         font-weight: 900;
         box-shadow: 0 0 34px var(--glow);
+        cursor: pointer;
+        transition: transform 180ms ease;
+      }
+
+      .pin::before {
+        content: "";
+        position: absolute;
+        inset: -9px;
+        z-index: -1;
+        border-radius: inherit;
+        background: var(--pin);
+        opacity: 0.22;
+        animation: pinPulse 2.2s ease-in-out infinite;
+      }
+
+      .pin:hover,
+      .pin:focus,
+      .pin.is-active {
+        transform: translate(-50%, 50%) scale(1.08);
+        outline: 0;
+      }
+
+      .pin::after {
+        content: attr(data-title) "\A" attr(data-meta);
+        position: absolute;
+        left: 58px;
+        top: 50%;
+        width: 220px;
+        transform: translateY(-50%) translateX(-4px);
+        border: 1px solid color-mix(in srgb, var(--pin) 45%, transparent);
+        border-radius: 14px;
+        background: rgba(3, 5, 7, 0.94);
+        color: var(--text);
+        white-space: pre-line;
+        padding: 10px 12px;
+        font-size: 0.76rem;
+        line-height: 1.35;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      .pin:hover::after,
+      .pin:focus::after,
+      .pin.is-active::after {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+
+      @keyframes pinPulse {
+        0%,
+        100% {
+          transform: scale(0.88);
+          opacity: 0.18;
+        }
+        50% {
+          transform: scale(1.18);
+          opacity: 0.34;
+        }
       }
 
       .priority-list {
@@ -328,9 +340,9 @@
 
       .priority {
         display: grid;
-        grid-template-columns: auto minmax(0, 1fr) minmax(11rem, 0.72fr) minmax(10rem, 0.55fr) minmax(11rem, 0.7fr);
+        grid-template-columns: 48px minmax(20rem, 1.6fr) repeat(3, minmax(9.5rem, 1fr));
         gap: 14px;
-        align-items: center;
+        align-items: stretch;
         position: relative;
         border: 1px solid var(--line);
         border-radius: 18px;
@@ -387,6 +399,10 @@
         border-radius: 14px;
         padding: 12px;
         background: rgba(255, 255, 255, 0.03);
+        min-height: 76px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       .metric.payoff {
@@ -397,6 +413,11 @@
       .metric.time {
         border-color: rgba(103, 232, 249, 0.34);
         background: rgba(103, 232, 249, 0.08);
+      }
+
+      .metric.why {
+        border-color: rgba(60, 131, 246, 0.35);
+        background: rgba(60, 131, 246, 0.07);
       }
 
       .label {
@@ -504,27 +525,17 @@
         </header>
 
         <section class="section">
-          <div class="chips">
-            <span class="chip" style="--chip: var(--front-desk); --chip-bg: rgba(6, 182, 212, 0.08)"><span class="dot"></span>Front Desk</span>
-            <span class="chip" style="--chip: var(--sales); --chip-bg: rgba(16, 185, 129, 0.08)"><span class="dot"></span>Sales</span>
-            <span class="chip" style="--chip: var(--operations); --chip-bg: rgba(60, 131, 246, 0.08)"><span class="dot"></span>Operations</span>
-            <span class="chip" style="--chip: var(--marketing); --chip-bg: rgba(251, 146, 60, 0.08)"><span class="dot"></span>Marketing</span>
-            <span class="chip" style="--chip: var(--cx); --chip-bg: rgba(139, 92, 246, 0.08)"><span class="dot"></span>Customer Experience</span>
-          </div>
-
           <div class="map" aria-label="Opportunity map by payoff and setup time">
             <div class="plot"></div>
             <div class="y-axis"></div>
             <div class="x-axis"></div>
-            <div class="axis-label payoff">Payoff</div>
             <div class="axis-label less-time">Least setup time</div>
             <div class="axis-label more-time">More setup time</div>
-            <div class="best"><strong>Best first</strong><span>More payoff + less time</span></div>
-            <div class="pin" style="left: 24%; bottom: 72%; background: var(--front-desk); --glow: rgba(6, 182, 212, 0.5)">1</div>
-            <div class="pin" style="left: 17%; bottom: 64%; background: var(--sales); --glow: rgba(16, 185, 129, 0.5)">2</div>
-            <div class="pin" style="left: 52%; bottom: 70%; background: var(--operations); --glow: rgba(60, 131, 246, 0.5)">3</div>
-            <div class="pin" style="left: 17%; bottom: 50%; background: var(--marketing); --glow: rgba(251, 146, 60, 0.5)">4</div>
-            <div class="pin" style="left: 35%; bottom: 43%; background: var(--cx); --glow: rgba(139, 92, 246, 0.5)">5</div>
+            <div class="pin" role="button" tabindex="0" data-title="Missed-call rescue agent" data-meta="Front Desk · $3,000/mo · Same-day setup" style="left: 24%; bottom: 72%; background: var(--front-desk); --pin: var(--front-desk); --glow: rgba(6, 182, 212, 0.5)">1</div>
+            <div class="pin" role="button" tabindex="0" data-title="Instant text-back follow-up" data-meta="Sales · Hours saved · 1 short workflow" style="left: 17%; bottom: 64%; background: var(--sales); --pin: var(--sales); --glow: rgba(16, 185, 129, 0.5)">2</div>
+            <div class="pin" role="button" tabindex="0" data-title="Simple CRM pipeline" data-meta="Operations · $3k-$5k value · 3-5 day build" style="left: 52%; bottom: 70%; background: var(--operations); --pin: var(--operations); --glow: rgba(60, 131, 246, 0.5)">3</div>
+            <div class="pin" role="button" tabindex="0" data-title="Review request automation" data-meta="Marketing · More reviews · 1 short workflow" style="left: 17%; bottom: 50%; background: var(--marketing); --pin: var(--marketing); --glow: rgba(251, 146, 60, 0.5)">4</div>
+            <div class="pin" role="button" tabindex="0" data-title="Past customer reactivation" data-meta="Customer Experience · Existing customers · 1-2 day cleanup" style="left: 35%; bottom: 43%; background: var(--cx); --pin: var(--cx); --glow: rgba(139, 92, 246, 0.5)">5</div>
           </div>
         </section>
 
@@ -538,7 +549,7 @@
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>$3,000/mo potential recovered revenue</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>Same-day setup</strong></div>
-              <div class="metric"><span class="label">Why</span><p>Biggest cash leak, lowest lift.</p></div>
+              <div class="metric why"><span class="label">Why</span><p>Biggest cash leak, lowest lift.</p></div>
             </div>
 
             <div class="priority" style="--accent: var(--sales); --accent-bg: rgba(16, 185, 129, 0.08)">
@@ -549,7 +560,7 @@
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>Hours saved every week</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>1 short workflow</strong></div>
-              <div class="metric"><span class="label">Why</span><p>Fast setup, immediate speed-to-lead.</p></div>
+              <div class="metric why"><span class="label">Why</span><p>Fast setup, immediate speed-to-lead.</p></div>
             </div>
 
             <div class="priority" style="--accent: var(--operations); --accent-bg: rgba(60, 131, 246, 0.08)">
@@ -560,7 +571,7 @@
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>$3k-$5k implementation value</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>3-5 day build</strong></div>
-              <div class="metric"><span class="label">Why</span><p>Heavier lift, but it becomes the operating base.</p></div>
+              <div class="metric why"><span class="label">Why</span><p>Heavier lift, but it becomes the operating base.</p></div>
             </div>
 
             <div class="priority" style="--accent: var(--marketing); --accent-bg: rgba(251, 146, 60, 0.08)">
@@ -571,7 +582,7 @@
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>More reviews without more admin</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>1 short workflow</strong></div>
-              <div class="metric"><span class="label">Why</span><p>Easy win after lead capture is tight.</p></div>
+              <div class="metric why"><span class="label">Why</span><p>Easy win after lead capture is tight.</p></div>
             </div>
 
             <div class="priority" style="--accent: var(--cx); --accent-bg: rgba(139, 92, 246, 0.08)">
@@ -582,7 +593,7 @@
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>Revenue from customers already earned</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>1-2 day cleanup</strong></div>
-              <div class="metric"><span class="label">Why</span><p>Strong upside once new leads stop leaking.</p></div>
+              <div class="metric why"><span class="label">Why</span><p>Strong upside once new leads stop leaking.</p></div>
             </div>
           </div>
         </section>
@@ -597,5 +608,19 @@
         </footer>
       </article>
     </main>
+    <script>
+      document.querySelectorAll(".pin").forEach((pin) => {
+        pin.addEventListener("click", () => {
+          document.querySelectorAll(".pin").forEach((item) => item.classList.remove("is-active"));
+          pin.classList.add("is-active");
+        });
+        pin.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            pin.click();
+          }
+        });
+      });
+    </script>
   </body>
 </html>
