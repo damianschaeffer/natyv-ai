@@ -162,21 +162,22 @@ const AdvisorySection = () => {
               <div className="absolute left-[72px] sm:left-[86px] right-5 top-1/2 h-px bg-white/20" />
               <div className="absolute left-1/2 top-5 bottom-[70px] w-px bg-white/20" />
 
-              <div className="absolute left-3 sm:left-5 top-8 bottom-[82px] w-12 sm:w-14">
-                <div className="absolute inset-y-3 left-1/2 -translate-x-1/2 w-full bg-gradient-to-t from-emerald-950/45 via-emerald-500/70 to-emerald-300 shadow-[0_0_34px_rgba(16,185,129,0.34)] [clip-path:polygon(43%_100%,57%_100%,78%_0,22%_0)]" />
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-7 w-7 rounded-full border border-emerald-300/45 bg-emerald-300/15 text-emerald-200 flex items-center justify-center">
-                  <DollarSign className="w-4 h-4" aria-hidden="true" />
+              <div className="absolute left-3 sm:left-5 top-8 bottom-[82px] w-14 pointer-events-none">
+                <div className="absolute inset-y-5 left-1/2 w-full -translate-x-1/2 bg-emerald-400 shadow-[0_0_34px_rgba(52,211,153,0.38)] [clip-path:polygon(42%_100%,58%_100%,78%_0,22%_0)]" />
+                <div className="absolute -bottom-1 left-1/2 h-10 w-10 -translate-x-1/2 rounded-full border border-black/15 bg-emerald-400 text-black flex items-center justify-center shadow-[0_0_28px_rgba(52,211,153,0.34)]">
+                  <DollarSign className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 h-14 w-14 rounded-full bg-emerald-400 text-background flex items-center justify-center shadow-[0_0_34px_rgba(16,185,129,0.55)]">
+                <div className="absolute -top-5 left-1/2 h-14 w-14 -translate-x-1/2 rounded-full border border-black/15 bg-emerald-400 text-black flex items-center justify-center shadow-[0_0_34px_rgba(52,211,153,0.55)]">
                   <DollarSign className="w-8 h-8" aria-hidden="true" />
                 </div>
               </div>
 
-              <div className="absolute left-[72px] sm:left-[86px] right-8 bottom-8 h-5 rounded-full bg-gradient-to-r from-amber-200/65 via-amber-400/75 to-amber-500 shadow-[0_0_30px_rgba(245,158,11,0.28)]">
-                <div className="absolute -left-4 -top-2.5 h-10 w-10 rounded-full bg-amber-200 text-background flex items-center justify-center shadow-[0_0_28px_rgba(245,158,11,0.36)]">
+              <div className="absolute left-[72px] sm:left-[86px] right-8 bottom-4 h-14 pointer-events-none">
+                <div className="absolute left-5 right-5 top-1/2 h-full -translate-y-1/2 bg-amber-400 shadow-[0_0_34px_rgba(245,158,11,0.38)] [clip-path:polygon(0_42%,100%_22%,100%_78%,0_58%)]" />
+                <div className="absolute -left-1 top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border border-black/15 bg-amber-400 text-black flex items-center justify-center shadow-[0_0_28px_rgba(245,158,11,0.34)]">
                   <Clock3 className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <div className="absolute -right-6 -top-4 h-14 w-14 rounded-full bg-amber-500 text-background flex items-center justify-center shadow-[0_0_34px_rgba(245,158,11,0.52)]">
+                <div className="absolute -right-4 top-1/2 h-14 w-14 -translate-y-1/2 rounded-full border border-black/15 bg-amber-400 text-black flex items-center justify-center shadow-[0_0_34px_rgba(245,158,11,0.55)]">
                   <Clock3 className="w-8 h-8" aria-hidden="true" />
                 </div>
               </div>

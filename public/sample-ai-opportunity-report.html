@@ -19,7 +19,6 @@
         --primary: #3c83f6;
         --value: #34d399;
         --time: #f59e0b;
-        --time-soft: #fde68a;
         --front-desk: #06b6d4;
         --sales: #10b981;
         --operations: #3c83f6;
@@ -192,90 +191,107 @@
         top: 44px;
         bottom: 92px;
         width: 56px;
+        pointer-events: none;
       }
 
-      .y-axis::before,
-      .y-axis::after {
-        content: "$";
+      .axis-end {
         position: absolute;
         display: grid;
         place-items: center;
         border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        color: #020403;
         font-weight: 900;
       }
 
-      .y-axis::before {
-        left: 50%;
-        top: -24px;
-        width: 56px;
-        height: 56px;
-        transform: translateX(-50%);
-        background: #34d399;
-        color: #041007;
-        font-size: 1.9rem;
-        box-shadow: 0 0 34px rgba(16, 185, 129, 0.55);
+      .axis-end svg {
+        display: block;
+        stroke: currentColor;
       }
 
-      .y-axis::after {
+      .axis-end-small {
+        width: 40px;
+        height: 40px;
+      }
+
+      .axis-end-small svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .axis-end-large {
+        width: 56px;
+        height: 56px;
+      }
+
+      .axis-end-large svg {
+        width: 32px;
+        height: 32px;
+      }
+
+      .y-axis .axis-end {
+        background: var(--value);
+      }
+
+      .y-axis .axis-end-large {
         left: 50%;
-        bottom: -8px;
-        width: 28px;
-        height: 28px;
+        top: -24px;
         transform: translateX(-50%);
-        border: 1px solid rgba(52, 211, 153, 0.45);
-        background: rgba(52, 211, 153, 0.14);
-        color: #bbf7d0;
-        font-size: 0.98rem;
+        box-shadow: 0 0 34px rgba(52, 211, 153, 0.55);
+      }
+
+      .y-axis .axis-end-small {
+        left: 50%;
+        bottom: -4px;
+        transform: translateX(-50%);
+        box-shadow: 0 0 28px rgba(52, 211, 153, 0.34);
       }
 
       .y-axis .axis-fill {
         position: absolute;
-        inset: 14px 0;
-        background: linear-gradient(to top, rgba(6, 78, 59, 0.42), rgba(16, 185, 129, 0.7), #6ee7b7);
-        clip-path: polygon(43% 100%, 57% 100%, 78% 0, 22% 0);
-        filter: drop-shadow(0 0 28px rgba(16, 185, 129, 0.34));
+        inset: 20px 0;
+        background: var(--value);
+        clip-path: polygon(42% 100%, 58% 100%, 78% 0, 22% 0);
+        filter: drop-shadow(0 0 34px rgba(52, 211, 153, 0.38));
       }
 
       .x-axis {
         position: absolute;
         left: 86px;
         right: 36px;
-        bottom: 34px;
-        height: 20px;
-        border-radius: 999px;
-        background: linear-gradient(to right, rgba(253, 230, 138, 0.68), rgba(245, 158, 11, 0.78), var(--time));
-        box-shadow: 0 0 34px rgba(245, 158, 11, 0.28);
-      }
-
-      .x-axis::before,
-      .x-axis::after {
-        content: "◷";
-        position: absolute;
-        display: grid;
-        place-items: center;
-        border-radius: 999px;
-        color: #041007;
-        font-weight: 900;
-      }
-
-      .x-axis::before {
-        left: -18px;
-        top: -10px;
-        width: 40px;
-        height: 40px;
-        background: var(--time-soft);
-        font-size: 1.45rem;
-        box-shadow: 0 0 34px rgba(245, 158, 11, 0.36);
-      }
-
-      .x-axis::after {
-        right: -28px;
-        top: -18px;
-        width: 56px;
+        bottom: 18px;
         height: 56px;
+        pointer-events: none;
+      }
+
+      .x-axis .axis-fill {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 50%;
+        height: 56px;
+        transform: translateY(-50%);
         background: var(--time);
-        font-size: 2rem;
-        box-shadow: 0 0 34px rgba(245, 158, 11, 0.52);
+        clip-path: polygon(0 42%, 100% 22%, 100% 78%, 0 58%);
+        filter: drop-shadow(0 0 34px rgba(245, 158, 11, 0.38));
+      }
+
+      .x-axis .axis-end {
+        background: var(--time);
+      }
+
+      .x-axis .axis-end-small {
+        left: -4px;
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: 0 0 28px rgba(245, 158, 11, 0.34);
+      }
+
+      .x-axis .axis-end-large {
+        right: -16px;
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: 0 0 34px rgba(245, 158, 11, 0.55);
       }
 
       .pin {
@@ -464,7 +480,7 @@
       }
 
       .metric.time .label {
-        color: var(--time-soft);
+        color: var(--time);
       }
 
       .cta {
@@ -543,8 +559,36 @@
         <section class="section">
           <div class="map" aria-label="Opportunity map by payoff and setup time">
             <div class="plot"></div>
-            <div class="y-axis"><span class="axis-fill"></span></div>
-            <div class="x-axis"></div>
+            <div class="y-axis">
+              <span class="axis-fill"></span>
+              <span class="axis-end axis-end-large" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" x2="12" y1="2" y2="22"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </span>
+              <span class="axis-end axis-end-small" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" x2="12" y1="2" y2="22"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </span>
+            </div>
+            <div class="x-axis">
+              <span class="axis-fill"></span>
+              <span class="axis-end axis-end-small" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16.5 12"></polyline>
+                </svg>
+              </span>
+              <span class="axis-end axis-end-large" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16.5 12"></polyline>
+                </svg>
+              </span>
+            </div>
             <div class="pin" role="button" tabindex="0" data-title="Missed-call rescue agent" data-meta="Front Desk · $3,000/mo · Same-day setup" style="left: 24%; bottom: 72%; background: var(--front-desk); --pin: var(--front-desk); --glow: rgba(6, 182, 212, 0.5)">1</div>
             <div class="pin" role="button" tabindex="0" data-title="Instant text-back follow-up" data-meta="Sales · Hours saved · 1 short workflow" style="left: 17%; bottom: 64%; background: var(--sales); --pin: var(--sales); --glow: rgba(16, 185, 129, 0.5)">2</div>
             <div class="pin" role="button" tabindex="0" data-title="Simple CRM pipeline" data-meta="Operations · $3k-$5k value · 3-5 day build" style="left: 52%; bottom: 70%; background: var(--operations); --pin: var(--operations); --glow: rgba(60, 131, 246, 0.5)">3</div>
