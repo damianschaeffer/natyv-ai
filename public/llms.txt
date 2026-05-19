@@ -9,7 +9,7 @@
 ## Services
 
 - [Service Catalog](https://natyv.ai/services): 75+ productized AI workflows organized across 6 business functions - Front Desk, Sales, Operations, Finance, Marketing, and Customer Experience.
-- [AI Opportunity Assessment](https://natyv.ai/advisory): $500 founding assessment with guided AI interview, 48-hour opportunity map, ROI snapshot, quick-win plan, and founder walkthrough. Assessment is credited toward the first Natyv build when the client moves forward within 14 days.
+- [AI Opportunity Assessment](https://natyv.ai/advisory): $500 founding assessment with guided AI interview, 48-hour effort-versus-impact Opportunity Map, ROI snapshot, quick-win plan, and founder walkthrough. Assessment is credited toward the first Natyv build when the client moves forward within 14 days.
 
 ## Products
 

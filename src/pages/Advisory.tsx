@@ -17,13 +17,13 @@ const Advisory = () => {
         <title>AI Opportunity Assessment | Natyv AI</title>
         <meta
           name="description"
-          content="Book a $500 AI Opportunity Assessment with Natyv AI. Start with a guided AI interview, receive a 48-hour opportunity map, and credit the assessment toward your first build."
+          content="Book a $500 AI Opportunity Assessment with Natyv AI. Start with a guided AI interview, receive a 48-hour effort-versus-impact Opportunity Map, and credit the assessment toward your first build."
         />
         <link rel="canonical" href="https://natyv.ai/advisory" />
         <meta property="og:title" content="AI Opportunity Assessment — Natyv AI" />
         <meta
           property="og:description"
-          content="A guided AI assessment, founder-reviewed report, ROI map, and prioritized quick-win plan for service businesses."
+          content="A guided AI assessment, founder-reviewed report, effort-versus-impact Opportunity Map, ROI snapshot, and prioritized quick-win plan for service businesses."
         />
         <meta property="og:url" content="https://natyv.ai/advisory" />
         <meta property="og:type" content="website" />
@@ -38,7 +38,7 @@ const Advisory = () => {
   "provider": { "@id": "https://natyv.ai/#organization" },
   "areaServed": "US",
   "url": "https://natyv.ai/advisory",
-  "description": "Paid AI Opportunity Assessment covering an AI-led discovery interview, 48-hour opportunity map, ROI snapshot, quick-win plan, and founder walkthrough for service businesses.",
+  "description": "Paid AI Opportunity Assessment covering an AI-led discovery interview, 48-hour effort-versus-impact Opportunity Map, ROI snapshot, quick-win plan, and founder walkthrough for service businesses.",
   "audience": {
     "@type": "BusinessAudience",
     "audienceType": "Service business owners, founders, and operators"
