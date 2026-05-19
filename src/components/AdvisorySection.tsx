@@ -13,7 +13,8 @@ import {
   MessageSquareText,
   Database,
   Star,
-  Gauge,
+  Send,
+  ExternalLink,
   type LucideIcon,
 } from "lucide-react";
 
@@ -50,13 +51,16 @@ interface AssessmentItem {
 
 interface OpportunityItem {
   icon: LucideIcon;
+  rank: number;
   title: string;
   area: string;
   description: string;
-  impact: number;
-  effort: number;
-  priority: string;
-  estimate: string;
+  payoffScore: number;
+  setupScore: number;
+  payoff: string;
+  effort: string;
+  reason: string;
+  nextStep: string;
   color: string;
 }
 
@@ -111,63 +115,78 @@ const ASSESSMENT_ITEMS: AssessmentItem[] = [
 const OPPORTUNITIES: OpportunityItem[] = [
   {
     icon: PhoneCall,
+    rank: 1,
     title: "Missed-call rescue agent",
     area: "Front Desk",
     description:
       "Answer after-hours calls, qualify intent, and route urgent leads before they shop around.",
-    impact: 94,
-    effort: 24,
-    priority: "Do first",
-    estimate: "2 recovered jobs/mo",
-    color: "#22d3ee",
+    payoffScore: 94,
+    setupScore: 22,
+    payoff: "$3,000/mo potential recovered revenue",
+    effort: "Same-day setup",
+    reason: "The business already gets enough calls. The fastest upside is catching the ones nobody answers.",
+    nextStep: "Launch with call answering, lead capture, and urgent-call routing.",
+    color: "#06B6D4",
   },
   {
     icon: MessageSquareText,
+    rank: 2,
     title: "Instant text-back follow-up",
     area: "Sales",
     description:
       "Reply to new inquiries in seconds, capture the reason for contact, and keep the lead warm.",
-    impact: 88,
-    effort: 20,
-    priority: "Do first",
-    estimate: "5-minute setup path",
-    color: "#38bdf8",
+    payoffScore: 88,
+    setupScore: 18,
+    payoff: "Hours saved every week",
+    effort: "1 short workflow",
+    reason: "Speed-to-lead compounds everything else. It works before a CRM rebuild is finished.",
+    nextStep: "Connect website forms, missed calls, and basic lead replies.",
+    color: "#10B981",
   },
   {
     icon: Database,
+    rank: 3,
     title: "Simple CRM pipeline",
     area: "Operations",
     description:
       "Move leads from inboxes and sticky notes into visible stages with owner, next step, and value.",
-    impact: 86,
-    effort: 55,
-    priority: "Plan next",
-    estimate: "$3k-$5k build scope",
-    color: "#2979FF",
+    payoffScore: 80,
+    setupScore: 52,
+    payoff: "$3k-$5k implementation value",
+    effort: "3-5 day build",
+    reason: "It is a bigger lift, but it prevents every future automation from becoming another disconnected tool.",
+    nextStep: "Create lead stages, owners, next steps, and dashboard visibility.",
+    color: "#3C83F6",
   },
   {
     icon: Star,
+    rank: 4,
     title: "Review request automation",
     area: "Marketing",
     description:
       "Trigger review asks after completed work and route unhappy customers to a private save path.",
-    impact: 68,
-    effort: 18,
-    priority: "Quick win",
-    estimate: "1 workflow",
-    color: "#a78bfa",
+    payoffScore: 68,
+    setupScore: 16,
+    payoff: "More reviews without more admin",
+    effort: "1 short workflow",
+    reason: "Easy win, but it matters after the lead-capture leaks are handled.",
+    nextStep: "Trigger review asks from completed appointments or paid invoices.",
+    color: "#FB923C",
   },
   {
-    icon: Gauge,
-    title: "Owner KPI dashboard",
-    area: "Leadership",
+    icon: Send,
+    rank: 5,
+    title: "Past customer reactivation",
+    area: "Customer Experience",
     description:
-      "Centralize lead volume, response time, booking rate, and revenue signals once the basics work.",
-    impact: 58,
-    effort: 72,
-    priority: "Later",
-    estimate: "After data cleanup",
-    color: "#64748b",
+      "Reach past customers with timely, relevant follow-up instead of waiting for them to remember you.",
+    payoffScore: 61,
+    setupScore: 34,
+    payoff: "Revenue from customers you already earned",
+    effort: "1-2 day cleanup",
+    reason: "Great upside, but only after the new-lead response path stops leaking.",
+    nextStep: "Segment past customers and write the first win-back sequence.",
+    color: "#8B5CF6",
   },
 ];
 
@@ -346,136 +365,251 @@ const AdvisorySection = () => {
         transition={{ duration: 0.65, delay: 0.38 }}
       >
         <div className="rounded-2xl border border-primary/25 bg-background/45 backdrop-blur-md overflow-hidden">
-          <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="p-5 sm:p-7 md:p-8 border-b lg:border-b-0 lg:border-r border-border/60">
-              <p className="font-accent uppercase text-primary text-xs tracking-[0.22em] mb-3">
-                Sample report output
-              </p>
-              <h3 className="font-poppins font-bold text-2xl md:text-3xl text-foreground leading-tight mb-3">
-                Your Opportunity Map
-              </h3>
-              <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed mb-6 max-w-xl">
-                This is the assessment artifact: every possible AI or automation
-                idea gets scored by business impact and implementation effort
-                so the first build is obvious.
-              </p>
+          <div className="p-5 sm:p-7 md:p-8 border-b border-border/60">
+            <div className="grid lg:grid-cols-[1fr_auto] gap-5 lg:gap-8 lg:items-start mb-6">
+              <div>
+                <p className="font-accent uppercase text-primary text-xs tracking-[0.22em] mb-3">
+                  Sample report output
+                </p>
+                <h3 className="font-poppins font-bold text-2xl md:text-4xl text-foreground leading-tight mb-3">
+                  From 75+ options to the first 5 moves.
+                </h3>
+                <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed max-w-3xl">
+                  The assessment turns the full Natyv service catalog into a
+                  simple order of operations: what makes or saves the most
+                  money, what takes the least setup time, and what should wait.
+                </p>
+              </div>
+              <a
+                href="/sample-ai-opportunity-report.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 h-11 px-4 rounded-full border border-primary/35 bg-primary/[0.08] hover:bg-primary/[0.14] text-primary font-poppins font-semibold text-sm transition-colors"
+              >
+                View sample PDF
+                <ExternalLink className="w-4 h-4" aria-hidden="true" />
+              </a>
+            </div>
 
-              <div className="relative h-[320px] sm:h-[360px] rounded-2xl border border-border/60 bg-black/35 overflow-hidden">
-                <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
-                  <div className="border-r border-b border-border/50 bg-primary/[0.05]" />
-                  <div className="border-b border-border/50 bg-foreground/[0.025]" />
-                  <div className="border-r border-border/50 bg-foreground/[0.025]" />
-                  <div className="bg-red-500/[0.025]" />
-                </div>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {OPPORTUNITIES.map((item) => (
+                <span
+                  key={item.area}
+                  className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-poppins font-semibold"
+                  style={{
+                    borderColor: `${item.color}66`,
+                    backgroundColor: `${item.color}14`,
+                    color: item.color,
+                  }}
+                >
+                  <span
+                    className="h-2 w-2 rounded-full"
+                    style={{ backgroundColor: item.color }}
+                    aria-hidden="true"
+                  />
+                  {item.area}
+                </span>
+              ))}
+            </div>
 
-                <div className="absolute top-4 left-4">
-                  <p className="font-poppins font-bold text-sm text-foreground">Quick Wins</p>
-                  <p className="text-xs text-muted-foreground">High impact, low effort</p>
-                </div>
-                <div className="absolute top-4 right-4 text-right">
-                  <p className="font-poppins font-bold text-sm text-foreground">Strategic Builds</p>
-                  <p className="text-xs text-muted-foreground">High impact, higher lift</p>
-                </div>
-                <div className="absolute bottom-4 left-4">
-                  <p className="font-poppins font-bold text-sm text-foreground">Easy Add-ons</p>
-                  <p className="text-xs text-muted-foreground">Useful, not urgent</p>
-                </div>
-                <div className="absolute bottom-4 right-4 text-right">
-                  <p className="font-poppins font-bold text-sm text-foreground">Later</p>
-                  <p className="text-xs text-muted-foreground">Sequence after cleanup</p>
-                </div>
+            <div className="relative h-[360px] sm:h-[430px] rounded-2xl border border-border/60 bg-black/35 overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_24%,rgba(6,182,212,0.16),transparent_28%),radial-gradient(circle_at_70%_20%,rgba(60,131,246,0.14),transparent_25%),radial-gradient(circle_at_72%_72%,rgba(251,146,60,0.1),transparent_26%)]" />
+              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
+                <div className="border-r border-b border-border/50 bg-foreground/[0.02]" />
+                <div className="border-b border-border/50 bg-foreground/[0.012]" />
+                <div className="border-r border-border/50 bg-foreground/[0.012]" />
+                <div className="bg-background/30" />
+              </div>
 
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 -rotate-90 origin-left hidden sm:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                  Impact
-                </div>
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden sm:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                  Effort
-                </div>
+              <div className="absolute top-4 left-4 max-w-[12rem]">
+                <p className="font-poppins font-bold text-sm sm:text-base text-foreground">
+                  Highest payoff first
+                </p>
+                <p className="text-xs text-muted-foreground leading-snug">
+                  More revenue saved, earned, or protected.
+                </p>
+              </div>
+              <div className="absolute bottom-4 left-4 max-w-[12rem]">
+                <p className="font-poppins font-bold text-sm sm:text-base text-foreground">
+                  Least setup time
+                </p>
+                <p className="text-xs text-muted-foreground leading-snug">
+                  Fastest path to a working win.
+                </p>
+              </div>
+              <div className="absolute bottom-4 right-4 max-w-[13rem] text-right">
+                <p className="font-poppins font-bold text-sm sm:text-base text-foreground">
+                  Wait until the base is ready
+                </p>
+                <p className="text-xs text-muted-foreground leading-snug">
+                  Still valuable, just not first.
+                </p>
+              </div>
 
-                {OPPORTUNITIES.map((item, index) => (
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 -rotate-90 origin-left hidden sm:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                Payoff
+              </div>
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden sm:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                Setup time
+              </div>
+
+              {OPPORTUNITIES.map((item, index) => (
+                <div
+                  key={item.title}
+                  className="absolute group"
+                  style={{
+                    left: `${Math.max(12, Math.min(item.setupScore, 88))}%`,
+                    bottom: `${Math.max(18, Math.min(item.payoffScore, 82))}%`,
+                    transform: "translate(-50%, 50%)",
+                  }}
+                >
                   <div
-                    key={item.title}
-                    className="absolute group"
+                    className="h-9 w-9 sm:h-11 sm:w-11 rounded-full border border-background/80 shadow-[0_0_28px_rgba(41,121,255,0.32)] flex items-center justify-center font-poppins font-bold text-sm text-white"
                     style={{
-                      left: `${Math.max(12, Math.min(item.effort, 88))}%`,
-                      bottom: `${Math.max(14, Math.min(item.impact, 76))}%`,
-                      transform: "translate(-50%, 50%)",
+                      backgroundColor: item.color,
+                      boxShadow: `0 0 30px ${item.color}55`,
                     }}
+                    aria-label={`Priority ${item.rank}: ${item.title}`}
                   >
-                    <div
-                      className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-background shadow-[0_0_24px_rgba(41,121,255,0.35)]"
-                      style={{ backgroundColor: item.color }}
-                      aria-label={`${item.title}: ${item.priority}`}
-                    />
-                    <div
-                      className={`absolute ${index < 2 ? "left-5" : "right-5"} top-1/2 -translate-y-1/2 hidden sm:block min-w-[150px] rounded-xl border border-border/70 bg-background/95 px-3 py-2 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none`}
-                    >
-                      <p className="font-poppins font-bold text-xs text-foreground leading-snug">
-                        {item.title}
-                      </p>
-                      <p className="text-[11px] text-muted-foreground leading-snug mt-1">
-                        {item.priority}
-                      </p>
-                    </div>
+                    {item.rank}
                   </div>
-                ))}
+                  <div
+                    className={`absolute ${index < 3 ? "left-12" : "right-12"} top-1/2 -translate-y-1/2 hidden sm:block min-w-[190px] rounded-xl border border-border/70 bg-background/95 px-3 py-2 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all pointer-events-none`}
+                  >
+                    <p className="font-poppins font-bold text-xs text-foreground leading-snug">
+                      {item.title}
+                    </p>
+                    <p className="text-[11px] text-muted-foreground leading-snug mt-1">
+                      {item.payoff}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-5 sm:p-7 md:p-8">
+            <div className="grid lg:grid-cols-[1fr_auto] gap-4 lg:gap-8 lg:items-end mb-5">
+              <div>
+                <p className="font-accent uppercase text-primary text-xs tracking-[0.22em] mb-2">
+                  Example: local service business
+                </p>
+                <h4 className="font-poppins font-bold text-xl md:text-3xl text-foreground leading-tight">
+                  The roadmap your eyes land on next.
+                </h4>
+                <p className="mt-2 text-sm md:text-base text-muted-foreground font-body leading-relaxed max-w-3xl">
+                  No vague buckets, no code names. The report gives the owner a
+                  numbered starting order, with the reason each move belongs
+                  where it does.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-primary/30 bg-primary/[0.08] px-4 py-3">
+                <p className="font-poppins font-bold text-primary text-lg leading-tight">
+                  $3,000/mo
+                </p>
+                <p className="text-xs text-muted-foreground font-body">
+                  sample upside from 2 recovered jobs
+                </p>
               </div>
             </div>
 
-            <div className="p-5 sm:p-7 md:p-8">
-              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
-                <div>
-                  <p className="font-accent uppercase text-primary text-xs tracking-[0.22em] mb-2">
-                    Example: local service business
-                  </p>
-                  <h4 className="font-poppins font-bold text-xl md:text-2xl text-foreground leading-tight">
-                    Ranked by what pays back first.
-                  </h4>
-                </div>
-                <div className="rounded-full border border-primary/30 bg-primary/[0.08] px-4 py-2 text-xs font-poppins font-semibold text-primary whitespace-nowrap">
-                  $3,000/mo sample upside
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                {OPPORTUNITIES.map((item) => (
-                  <article
-                    key={item.title}
-                    className="grid sm:grid-cols-[auto_1fr_auto] gap-3 sm:gap-4 items-start rounded-2xl border border-border/60 bg-background/45 px-4 py-4"
-                  >
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10"
-                      style={{ backgroundColor: `${item.color}22` }}
-                    >
-                      <item.icon className="w-5 h-5" style={{ color: item.color }} aria-hidden="true" />
+            <div className="space-y-3">
+              {OPPORTUNITIES.map((item) => (
+                <article
+                  key={item.title}
+                  className="relative overflow-hidden rounded-2xl border border-border/60 bg-background/45 px-4 py-4 sm:px-5 sm:py-5"
+                >
+                  <div
+                    className="absolute inset-y-0 left-0 w-1"
+                    style={{ backgroundColor: item.color }}
+                    aria-hidden="true"
+                  />
+                  <div className="grid md:grid-cols-[auto_1fr] gap-4">
+                    <div className="flex md:flex-col items-center md:items-start gap-3">
+                      <div
+                        className="h-11 w-11 rounded-xl flex items-center justify-center border border-white/10"
+                        style={{ backgroundColor: `${item.color}22` }}
+                      >
+                        <item.icon className="w-5 h-5" style={{ color: item.color }} aria-hidden="true" />
+                      </div>
+                      <div
+                        className="h-8 w-8 rounded-full flex items-center justify-center font-poppins font-bold text-sm text-white"
+                        style={{ backgroundColor: item.color }}
+                        aria-label={`Priority ${item.rank}`}
+                      >
+                        {item.rank}
+                      </div>
                     </div>
+
                     <div>
-                      <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h5 className="font-poppins font-bold text-sm md:text-base text-foreground leading-snug">
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                        <h5 className="font-poppins font-bold text-base md:text-lg text-foreground leading-snug">
                           {item.title}
                         </h5>
-                        <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground border border-border/70 rounded-full px-2 py-0.5">
+                        <span
+                          className="text-[10px] uppercase tracking-[0.14em] border rounded-full px-2 py-0.5"
+                          style={{
+                            borderColor: `${item.color}66`,
+                            backgroundColor: `${item.color}12`,
+                            color: item.color,
+                          }}
+                        >
                           {item.area}
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground font-body leading-relaxed">
                         {item.description}
                       </p>
-                      <p className="text-xs text-foreground/80 font-poppins font-semibold mt-2">
-                        {item.estimate}
-                      </p>
+
+                      <div className="grid sm:grid-cols-3 gap-3 mt-4">
+                        <div className="rounded-xl border border-border/50 bg-background/35 p-3">
+                          <p className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1">
+                            Why here
+                          </p>
+                          <p className="text-xs text-foreground/85 font-body leading-relaxed">
+                            {item.reason}
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-border/50 bg-background/35 p-3">
+                          <p className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1">
+                            Payoff
+                          </p>
+                          <p className="text-xs text-foreground/85 font-poppins font-semibold leading-relaxed">
+                            {item.payoff}
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-border/50 bg-background/35 p-3">
+                          <p className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-1">
+                            Setup time
+                          </p>
+                          <p className="text-xs text-foreground/85 font-poppins font-semibold leading-relaxed">
+                            {item.effort}
+                          </p>
+                          <p className="text-xs text-muted-foreground font-body leading-relaxed mt-1">
+                            {item.nextStep}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="sm:text-right">
-                      <p className="font-poppins font-bold text-sm text-primary whitespace-nowrap">
-                        {item.priority}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-1 whitespace-nowrap">
-                        I{item.impact} / E{item.effort}
-                      </p>
-                    </div>
-                  </article>
-                ))}
-              </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-5 rounded-2xl border border-primary/25 bg-primary/[0.06] px-5 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed">
+                The assessment does the sorting for you, so the first call
+                starts with context and the first build starts with confidence.
+              </p>
+              <a
+                href="/sample-ai-opportunity-report.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-full bg-background/90 hover:bg-background border border-foreground/25 hover:border-foreground/45 text-foreground font-poppins font-semibold text-sm transition-colors whitespace-nowrap"
+              >
+                Open full sample
+                <ExternalLink className="w-4 h-4 text-primary" aria-hidden="true" />
+              </a>
             </div>
           </div>
         </div>
