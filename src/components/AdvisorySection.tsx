@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  ArrowUp,
   Clock3,
   Database,
   DollarSign,
@@ -163,25 +162,23 @@ const AdvisorySection = () => {
               <div className="absolute left-[72px] sm:left-[86px] right-5 top-1/2 h-px bg-white/20" />
               <div className="absolute left-1/2 top-5 bottom-[70px] w-px bg-white/20" />
 
-              <div className="absolute left-5 sm:left-7 top-8 bottom-[82px] w-4 rounded-full bg-gradient-to-t from-white/10 via-primary/55 to-emerald-300 shadow-[0_0_30px_rgba(16,185,129,0.28)]">
-                <div className="absolute -top-4 -left-4 h-12 w-12 rounded-full bg-emerald-400 text-background flex items-center justify-center shadow-[0_0_34px_rgba(16,185,129,0.55)]">
-                  <DollarSign className="w-7 h-7" aria-hidden="true" />
+              <div className="absolute left-3 sm:left-5 top-8 bottom-[82px] w-12 sm:w-14">
+                <div className="absolute inset-y-3 left-1/2 -translate-x-1/2 w-full bg-gradient-to-t from-emerald-950/45 via-emerald-500/70 to-emerald-300 shadow-[0_0_34px_rgba(16,185,129,0.34)] [clip-path:polygon(43%_100%,57%_100%,78%_0,22%_0)]" />
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-7 w-7 rounded-full border border-emerald-300/45 bg-emerald-300/15 text-emerald-200 flex items-center justify-center">
+                  <DollarSign className="w-4 h-4" aria-hidden="true" />
                 </div>
-                <ArrowUp className="absolute -top-8 left-1/2 -translate-x-1/2 w-5 h-5 text-emerald-300" aria-hidden="true" />
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 h-14 w-14 rounded-full bg-emerald-400 text-background flex items-center justify-center shadow-[0_0_34px_rgba(16,185,129,0.55)]">
+                  <DollarSign className="w-8 h-8" aria-hidden="true" />
+                </div>
               </div>
 
-              <div className="absolute left-[72px] sm:left-[86px] right-8 bottom-8 h-4 rounded-full bg-gradient-to-r from-cyan-300 via-primary/65 to-white/10 shadow-[0_0_30px_rgba(6,182,212,0.24)]">
-                <div className="absolute -left-5 -top-4 h-12 w-12 rounded-full bg-cyan-300 text-background flex items-center justify-center shadow-[0_0_34px_rgba(6,182,212,0.48)]">
-                  <Clock3 className="w-6 h-6" aria-hidden="true" />
+              <div className="absolute left-[72px] sm:left-[86px] right-8 bottom-8 h-5 rounded-full bg-gradient-to-r from-cyan-300 via-primary/65 to-red-500/70 shadow-[0_0_30px_rgba(6,182,212,0.24)]">
+                <div className="absolute -left-4 -top-2.5 h-10 w-10 rounded-full bg-cyan-300 text-background flex items-center justify-center shadow-[0_0_28px_rgba(6,182,212,0.42)]">
+                  <Clock3 className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <ArrowRight className="absolute -right-2 -top-2 w-8 h-8 text-white/55" aria-hidden="true" />
-              </div>
-
-              <div className="absolute right-7 bottom-20 text-right hidden sm:block">
-                <p className="font-poppins font-bold text-sm text-muted-foreground">More setup time</p>
-              </div>
-              <div className="absolute left-[88px] sm:left-[104px] bottom-20">
-                <p className="font-poppins font-bold text-sm text-foreground">Least setup time</p>
+                <div className="absolute -right-6 -top-4 h-14 w-14 rounded-full bg-red-500 text-background flex items-center justify-center shadow-[0_0_34px_rgba(239,68,68,0.5)]">
+                  <Clock3 className="w-8 h-8" aria-hidden="true" />
+                </div>
               </div>
 
               {OPPORTUNITIES.map((item) => {
@@ -262,27 +259,27 @@ const AdvisorySection = () => {
               {OPPORTUNITIES.map((item) => (
                 <article
                   key={item.title}
-                  className="relative overflow-hidden rounded-2xl border border-border/60 bg-background/45 px-4 py-4 sm:px-5"
+                  className="relative overflow-visible rounded-2xl border border-border/60 bg-background/45 px-4 py-4 sm:px-5"
                 >
                   <div
                     className="absolute inset-y-0 left-0 w-1.5"
                     style={{ backgroundColor: item.color }}
                     aria-hidden="true"
                   />
+                  <div
+                    className="absolute left-0 top-1/2 z-10 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-background flex items-center justify-center font-poppins font-bold text-sm text-white shadow-lg"
+                    style={{ backgroundColor: item.color }}
+                    aria-label={`Priority ${item.rank}`}
+                  >
+                    {item.rank}
+                  </div>
                   <div className="grid gap-3 lg:grid-cols-[4.25rem_minmax(20rem,1.6fr)_repeat(3,minmax(9.5rem,1fr))] items-stretch pl-2">
-                    <div className="flex flex-col items-center justify-center gap-2 self-stretch">
+                    <div className="flex items-center justify-center self-stretch">
                       <div
                         className="h-11 w-11 rounded-xl flex items-center justify-center border border-white/10"
                         style={{ backgroundColor: `${item.color}22` }}
                       >
                         <item.icon className="w-5 h-5" style={{ color: item.color }} aria-hidden="true" />
-                      </div>
-                      <div
-                        className="h-8 w-8 rounded-full flex items-center justify-center font-poppins font-bold text-sm text-white"
-                        style={{ backgroundColor: item.color }}
-                        aria-label={`Priority ${item.rank}`}
-                      >
-                        {item.rank}
                       </div>
                     </div>
 

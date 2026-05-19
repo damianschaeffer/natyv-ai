@@ -185,30 +185,52 @@
 
       .y-axis {
         position: absolute;
-        left: 28px;
+        left: 20px;
         top: 44px;
         bottom: 92px;
-        width: 16px;
-        border-radius: 999px;
-        background: linear-gradient(to top, rgba(255, 255, 255, 0.1), rgba(60, 131, 246, 0.72), #34d399);
-        box-shadow: 0 0 34px rgba(16, 185, 129, 0.28);
+        width: 56px;
       }
 
-      .y-axis::before {
+      .y-axis::before,
+      .y-axis::after {
         content: "$";
         position: absolute;
-        left: -16px;
-        top: -24px;
-        width: 48px;
-        height: 48px;
         display: grid;
         place-items: center;
         border-radius: 999px;
+        font-weight: 900;
+      }
+
+      .y-axis::before {
+        left: 50%;
+        top: -24px;
+        width: 56px;
+        height: 56px;
+        transform: translateX(-50%);
         background: #34d399;
         color: #041007;
-        font-size: 1.8rem;
-        font-weight: 900;
+        font-size: 1.9rem;
         box-shadow: 0 0 34px rgba(16, 185, 129, 0.55);
+      }
+
+      .y-axis::after {
+        left: 50%;
+        bottom: -8px;
+        width: 28px;
+        height: 28px;
+        transform: translateX(-50%);
+        border: 1px solid rgba(52, 211, 153, 0.45);
+        background: rgba(52, 211, 153, 0.14);
+        color: #bbf7d0;
+        font-size: 0.98rem;
+      }
+
+      .y-axis .axis-fill {
+        position: absolute;
+        inset: 14px 0;
+        background: linear-gradient(to top, rgba(6, 78, 59, 0.42), rgba(16, 185, 129, 0.7), #6ee7b7);
+        clip-path: polygon(43% 100%, 57% 100%, 78% 0, 22% 0);
+        filter: drop-shadow(0 0 28px rgba(16, 185, 129, 0.34));
       }
 
       .x-axis {
@@ -216,47 +238,41 @@
         left: 86px;
         right: 36px;
         bottom: 34px;
-        height: 16px;
+        height: 20px;
         border-radius: 999px;
-        background: linear-gradient(to right, #67e8f9, rgba(60, 131, 246, 0.64), rgba(255, 255, 255, 0.1));
+        background: linear-gradient(to right, #67e8f9, rgba(60, 131, 246, 0.64), rgba(239, 68, 68, 0.72));
         box-shadow: 0 0 34px rgba(6, 182, 212, 0.24);
       }
 
-      .x-axis::before {
-        content: "time";
+      .x-axis::before,
+      .x-axis::after {
+        content: "◷";
         position: absolute;
-        left: -24px;
-        top: -16px;
-        width: 48px;
-        height: 48px;
         display: grid;
         place-items: center;
         border-radius: 999px;
-        background: #67e8f9;
         color: #041007;
-        font-size: 0.66rem;
         font-weight: 900;
+      }
+
+      .x-axis::before {
+        left: -18px;
+        top: -10px;
+        width: 40px;
+        height: 40px;
+        background: #67e8f9;
+        font-size: 1.45rem;
         box-shadow: 0 0 34px rgba(6, 182, 212, 0.48);
       }
 
-      .axis-label {
-        position: absolute;
-        font-weight: 900;
-      }
-
-      .axis-label.payoff {
-        display: none;
-      }
-
-      .axis-label.less-time {
-        left: 106px;
-        bottom: 78px;
-      }
-
-      .axis-label.more-time {
-        right: 34px;
-        bottom: 78px;
-        color: var(--muted);
+      .x-axis::after {
+        right: -28px;
+        top: -18px;
+        width: 56px;
+        height: 56px;
+        background: #ef4444;
+        font-size: 2rem;
+        box-shadow: 0 0 34px rgba(239, 68, 68, 0.5);
       }
 
       .pin {
@@ -340,15 +356,15 @@
 
       .priority {
         display: grid;
-        grid-template-columns: 48px minmax(20rem, 1.6fr) repeat(3, minmax(9.5rem, 1fr));
+        grid-template-columns: minmax(20rem, 1.6fr) repeat(3, minmax(9.5rem, 1fr));
         gap: 14px;
         align-items: stretch;
         position: relative;
         border: 1px solid var(--line);
         border-radius: 18px;
         background: rgba(3, 5, 7, 0.34);
-        padding: 16px;
-        overflow: hidden;
+        padding: 16px 16px 16px 42px;
+        overflow: visible;
       }
 
       .priority::before {
@@ -360,10 +376,15 @@
       }
 
       .rank {
-        width: 44px;
-        height: 44px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 34px;
+        height: 34px;
+        transform: translate(-50%, -50%);
         display: grid;
         place-items: center;
+        border: 4px solid #030507;
         border-radius: 999px;
         background: var(--accent);
         color: white;
@@ -456,11 +477,12 @@
 
         .priority {
           grid-template-columns: 1fr;
+          padding-left: 34px;
         }
 
         .rank {
-          width: 38px;
-          height: 38px;
+          width: 34px;
+          height: 34px;
         }
       }
 
@@ -487,23 +509,6 @@
         .x-axis {
           left: 60px;
         }
-
-        .best {
-          left: 76px;
-          top: 28px;
-        }
-
-        .axis-label.payoff {
-          left: 42px;
-        }
-
-        .axis-label.less-time {
-          left: 80px;
-        }
-
-        .axis-label.more-time {
-          display: none;
-        }
       }
     </style>
   </head>
@@ -527,10 +532,8 @@
         <section class="section">
           <div class="map" aria-label="Opportunity map by payoff and setup time">
             <div class="plot"></div>
-            <div class="y-axis"></div>
+            <div class="y-axis"><span class="axis-fill"></span></div>
             <div class="x-axis"></div>
-            <div class="axis-label less-time">Least setup time</div>
-            <div class="axis-label more-time">More setup time</div>
             <div class="pin" role="button" tabindex="0" data-title="Missed-call rescue agent" data-meta="Front Desk · $3,000/mo · Same-day setup" style="left: 24%; bottom: 72%; background: var(--front-desk); --pin: var(--front-desk); --glow: rgba(6, 182, 212, 0.5)">1</div>
             <div class="pin" role="button" tabindex="0" data-title="Instant text-back follow-up" data-meta="Sales · Hours saved · 1 short workflow" style="left: 17%; bottom: 64%; background: var(--sales); --pin: var(--sales); --glow: rgba(16, 185, 129, 0.5)">2</div>
             <div class="pin" role="button" tabindex="0" data-title="Simple CRM pipeline" data-meta="Operations · $3k-$5k value · 3-5 day build" style="left: 52%; bottom: 70%; background: var(--operations); --pin: var(--operations); --glow: rgba(60, 131, 246, 0.5)">3</div>
