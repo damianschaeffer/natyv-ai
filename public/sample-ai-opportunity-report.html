@@ -381,38 +381,58 @@
         position: relative;
         border: 1px solid var(--line);
         border-radius: 18px;
-        background: rgba(3, 5, 7, 0.34);
-        padding: 16px 16px 16px 42px;
-        overflow: visible;
+        background: linear-gradient(140deg, var(--accent-bg) 0%, rgba(3, 5, 7, 0.72) 55%, rgba(3, 5, 7, 0.9) 100%);
+        box-shadow: 0 20px 50px -24px color-mix(in srgb, var(--accent) 32%, transparent);
+        padding: 20px 16px 16px;
+        overflow: hidden;
       }
 
       .priority::before {
         content: "";
         position: absolute;
-        inset: 0 auto 0 0;
-        width: 6px;
+        inset: 0 0 auto 0;
+        height: 4px;
         background: var(--accent);
       }
 
       .rank {
         position: absolute;
-        left: 0;
-        top: 50%;
-        width: 34px;
-        height: 34px;
-        transform: translate(-50%, -50%);
+        right: 16px;
+        top: 15px;
+        color: var(--accent);
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+        font-weight: 900;
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-right: 30px;
+      }
+
+      .service-icon {
+        width: 48px;
+        height: 48px;
         display: grid;
         place-items: center;
-        border: 4px solid #030507;
+        flex: 0 0 auto;
         border-radius: 999px;
         background: var(--accent);
-        color: white;
-        font-weight: 900;
+        box-shadow: 0 8px 24px -8px color-mix(in srgb, var(--accent) 60%, transparent);
+      }
+
+      .service-icon svg {
+        width: 24px;
+        height: 24px;
+        stroke: white;
       }
 
       .title h3 {
         margin-bottom: 4px;
-        font-size: 1.08rem;
+        color: var(--text);
+        font-size: 0.92rem;
       }
 
       .title p,
@@ -422,16 +442,11 @@
       }
 
       .area {
-        display: inline-flex;
-        margin-left: 8px;
-        border: 1px solid var(--accent);
-        border-radius: 999px;
-        padding: 3px 8px;
+        display: block;
+        margin-bottom: 4px;
         color: var(--accent);
-        font-size: 0.64rem;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        vertical-align: middle;
+        font-size: 1.08rem;
+        font-weight: 700;
       }
 
       .metric {
@@ -504,12 +519,6 @@
 
         .priority {
           grid-template-columns: 1fr;
-          padding-left: 34px;
-        }
-
-        .rank {
-          width: 34px;
-          height: 34px;
         }
       }
 
@@ -589,43 +598,70 @@
                 </svg>
               </span>
             </div>
-            <div class="pin" role="button" tabindex="0" data-title="Missed-call rescue agent" data-meta="Front Desk · $3,000/mo · Same-day setup" style="left: 24%; bottom: 72%; background: var(--front-desk); --pin: var(--front-desk); --glow: rgba(6, 182, 212, 0.5)">1</div>
-            <div class="pin" role="button" tabindex="0" data-title="Instant text-back follow-up" data-meta="Sales · Hours saved · 1 short workflow" style="left: 17%; bottom: 64%; background: var(--sales); --pin: var(--sales); --glow: rgba(16, 185, 129, 0.5)">2</div>
-            <div class="pin" role="button" tabindex="0" data-title="Simple CRM pipeline" data-meta="Operations · $3k-$5k value · 3-5 day build" style="left: 52%; bottom: 70%; background: var(--operations); --pin: var(--operations); --glow: rgba(60, 131, 246, 0.5)">3</div>
-            <div class="pin" role="button" tabindex="0" data-title="Review request automation" data-meta="Marketing · More reviews · 1 short workflow" style="left: 17%; bottom: 50%; background: var(--marketing); --pin: var(--marketing); --glow: rgba(251, 146, 60, 0.5)">4</div>
-            <div class="pin" role="button" tabindex="0" data-title="Past customer reactivation" data-meta="Customer Experience · Existing customers · 1-2 day cleanup" style="left: 35%; bottom: 43%; background: var(--cx); --pin: var(--cx); --glow: rgba(139, 92, 246, 0.5)">5</div>
+            <div class="pin" role="button" tabindex="0" data-title="24/7 call answering" data-meta="Front Desk · $3,000/mo · Same-day setup" style="left: 24%; bottom: 72%; background: var(--front-desk); --pin: var(--front-desk); --glow: rgba(6, 182, 212, 0.5)">1</div>
+            <div class="pin" role="button" tabindex="0" data-title="Instant text response" data-meta="Front Desk · Hours saved · 1 short workflow" style="left: 17%; bottom: 64%; background: var(--front-desk); --pin: var(--front-desk); --glow: rgba(6, 182, 212, 0.5)">2</div>
+            <div class="pin" role="button" tabindex="0" data-title="Visual sales pipeline" data-meta="Sales · $3k-$5k value · 3-5 day build" style="left: 52%; bottom: 70%; background: var(--sales); --pin: var(--sales); --glow: rgba(16, 185, 129, 0.5)">3</div>
+            <div class="pin" role="button" tabindex="0" data-title="Auto-review requests" data-meta="Marketing · More reviews · 1 short workflow" style="left: 17%; bottom: 50%; background: var(--marketing); --pin: var(--marketing); --glow: rgba(251, 146, 60, 0.5)">4</div>
+            <div class="pin" role="button" tabindex="0" data-title="Past customer outreach" data-meta="Customer Experience · Existing customers · 1-2 day cleanup" style="left: 35%; bottom: 43%; background: var(--cx); --pin: var(--cx); --glow: rgba(139, 92, 246, 0.5)">5</div>
           </div>
         </section>
 
         <section class="section">
           <div class="priority-list">
             <div class="priority" style="--accent: var(--front-desk); --accent-bg: rgba(6, 182, 212, 0.08)">
-              <div class="rank">1</div>
+              <div class="rank">#1</div>
               <div class="title">
-                <h3>Missed-call rescue agent <span class="area">Front Desk</span></h3>
-                <p>Catch after-hours calls and route urgent jobs before they shop around.</p>
+                <div class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <span class="area">Front Desk</span>
+                  <h3>24/7 call answering</h3>
+                  <p>Answer after-hours calls, qualify intent, and route urgent jobs before they shop around.</p>
+                </div>
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>$3,000/mo potential recovered revenue</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>Same-day setup</strong></div>
               <div class="metric why"><span class="label">Why</span><p>Biggest cash leak, lowest lift.</p></div>
             </div>
 
-            <div class="priority" style="--accent: var(--sales); --accent-bg: rgba(16, 185, 129, 0.08)">
-              <div class="rank">2</div>
+            <div class="priority" style="--accent: var(--front-desk); --accent-bg: rgba(6, 182, 212, 0.08)">
+              <div class="rank">#2</div>
               <div class="title">
-                <h3>Instant text-back follow-up <span class="area">Sales</span></h3>
-                <p>Reply to new leads while they are still warm.</p>
+                <div class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <span class="area">Front Desk</span>
+                  <h3>Instant text response</h3>
+                  <p>Reply to missed calls, forms, and DMs before the lead cools off.</p>
+                </div>
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>Hours saved every week</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>1 short workflow</strong></div>
               <div class="metric why"><span class="label">Why</span><p>Fast setup, immediate speed-to-lead.</p></div>
             </div>
 
-            <div class="priority" style="--accent: var(--operations); --accent-bg: rgba(60, 131, 246, 0.08)">
-              <div class="rank">3</div>
+            <div class="priority" style="--accent: var(--sales); --accent-bg: rgba(16, 185, 129, 0.08)">
+              <div class="rank">#3</div>
               <div class="title">
-                <h3>Simple CRM pipeline <span class="area">Operations</span></h3>
-                <p>Move every lead into visible stages, owners, value, and next steps.</p>
+                <div class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="7" height="7" x="3" y="3" rx="1"></rect>
+                    <rect width="7" height="7" x="14" y="3" rx="1"></rect>
+                    <rect width="7" height="7" x="14" y="14" rx="1"></rect>
+                    <rect width="7" height="7" x="3" y="14" rx="1"></rect>
+                  </svg>
+                </div>
+                <div>
+                  <span class="area">Sales</span>
+                  <h3>Visual sales pipeline</h3>
+                  <p>Move every lead into visible stages, owners, value, and next steps.</p>
+                </div>
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>$3k-$5k implementation value</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>3-5 day build</strong></div>
@@ -633,10 +669,18 @@
             </div>
 
             <div class="priority" style="--accent: var(--marketing); --accent-bg: rgba(251, 146, 60, 0.08)">
-              <div class="rank">4</div>
+              <div class="rank">#4</div>
               <div class="title">
-                <h3>Review request automation <span class="area">Marketing</span></h3>
-                <p>Ask for reviews after completed work without extra admin.</p>
+                <div class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11.53 2.3a.53.53 0 0 1 .94 0l2.31 4.67a2.12 2.12 0 0 0 1.6 1.16l5.17.76a.53.53 0 0 1 .29.9l-3.74 3.64a2.12 2.12 0 0 0-.61 1.88l.88 5.14a.53.53 0 0 1-.77.56l-4.62-2.43a2.12 2.12 0 0 0-1.97 0l-4.62 2.43a.53.53 0 0 1-.77-.56l.88-5.14a2.12 2.12 0 0 0-.61-1.88L2.16 9.79a.53.53 0 0 1 .29-.9l5.17-.76a2.12 2.12 0 0 0 1.6-1.16z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <span class="area">Marketing</span>
+                  <h3>Auto-review requests</h3>
+                  <p>Ask for reviews after completed work without extra admin.</p>
+                </div>
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>More reviews without more admin</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>1 short workflow</strong></div>
@@ -644,10 +688,21 @@
             </div>
 
             <div class="priority" style="--accent: var(--cx); --accent-bg: rgba(139, 92, 246, 0.08)">
-              <div class="rank">5</div>
+              <div class="rank">#5</div>
               <div class="title">
-                <h3>Past customer reactivation <span class="area">Customer Experience</span></h3>
-                <p>Win back past customers with timely, relevant follow-up.</p>
+                <div class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <div>
+                  <span class="area">Customer Experience</span>
+                  <h3>Past customer outreach</h3>
+                  <p>Win back dormant customers with timely, relevant follow-up.</p>
+                </div>
               </div>
               <div class="metric payoff"><span class="label">Payoff</span><strong>Revenue from customers already earned</strong></div>
               <div class="metric time"><span class="label">Setup time</span><strong>1-2 day cleanup</strong></div>

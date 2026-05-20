@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   Clock3,
-  Database,
   DollarSign,
   ExternalLink,
-  MessageSquareText,
-  PhoneCall,
-  Send,
+  LayoutGrid,
+  MessageSquare,
+  Phone,
   Star,
   Target,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 
@@ -30,11 +30,11 @@ interface OpportunityItem {
 
 const OPPORTUNITIES: OpportunityItem[] = [
   {
-    icon: PhoneCall,
+    icon: Phone,
     rank: 1,
-    title: "Missed-call rescue agent",
+    title: "24/7 call answering",
     area: "Front Desk",
-    description: "Catch after-hours calls and route urgent jobs before they shop around.",
+    description: "Answer after-hours calls, qualify intent, and route urgent jobs before they shop around.",
     payoff: "$3,000/mo potential recovered revenue",
     effort: "Same-day setup",
     reason: "Biggest cash leak, lowest lift.",
@@ -43,35 +43,35 @@ const OPPORTUNITIES: OpportunityItem[] = [
     mapY: 72,
   },
   {
-    icon: MessageSquareText,
+    icon: MessageSquare,
     rank: 2,
-    title: "Instant text-back follow-up",
-    area: "Sales",
-    description: "Reply to new leads while they are still warm.",
+    title: "Instant text response",
+    area: "Front Desk",
+    description: "Reply to missed calls, forms, and DMs before the lead cools off.",
     payoff: "Hours saved every week",
     effort: "1 short workflow",
     reason: "Fast setup, immediate speed-to-lead.",
-    color: "#10B981",
+    color: "#06B6D4",
     mapX: 17,
     mapY: 64,
   },
   {
-    icon: Database,
+    icon: LayoutGrid,
     rank: 3,
-    title: "Simple CRM pipeline",
-    area: "Operations",
+    title: "Visual sales pipeline",
+    area: "Sales",
     description: "Move every lead into visible stages, owners, value, and next steps.",
     payoff: "$3k-$5k implementation value",
     effort: "3-5 day build",
     reason: "Heavier lift, but it becomes the operating base.",
-    color: "#3C83F6",
+    color: "#10B981",
     mapX: 52,
     mapY: 70,
   },
   {
     icon: Star,
     rank: 4,
-    title: "Review request automation",
+    title: "Auto-review requests",
     area: "Marketing",
     description: "Ask for reviews after completed work without extra admin.",
     payoff: "More reviews without more admin",
@@ -82,11 +82,11 @@ const OPPORTUNITIES: OpportunityItem[] = [
     mapY: 50,
   },
   {
-    icon: Send,
+    icon: Users,
     rank: 5,
-    title: "Past customer reactivation",
+    title: "Past customer outreach",
     area: "Customer Experience",
-    description: "Win back past customers with timely, relevant follow-up.",
+    description: "Win back dormant customers with timely, relevant follow-up.",
     payoff: "Revenue from customers already earned",
     effort: "1-2 day cleanup",
     reason: "Strong upside once new leads stop leaking.",
@@ -260,49 +260,50 @@ const AdvisorySection = () => {
               {OPPORTUNITIES.map((item) => (
                 <article
                   key={item.title}
-                  className="relative overflow-visible rounded-2xl border border-border/60 bg-background/45 px-4 py-4 sm:px-5"
+                  className="group relative overflow-hidden rounded-2xl border border-border/40 backdrop-blur-md transition-all duration-300"
+                  style={{
+                    background: `linear-gradient(140deg, ${item.color}14 0%, hsl(var(--background) / 0.72) 55%, hsl(var(--background) / 0.9) 100%)`,
+                    boxShadow: `0 20px 50px -24px ${item.color}33`,
+                  }}
                 >
                   <div
-                    className="absolute inset-y-0 left-0 w-1.5"
-                    style={{ backgroundColor: item.color }}
                     aria-hidden="true"
+                    className="absolute top-0 left-0 right-0 h-1"
+                    style={{ background: item.color }}
                   />
-                  <div
-                    className="absolute left-0 top-1/2 z-10 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-background flex items-center justify-center font-poppins font-bold text-sm text-white shadow-lg"
-                    style={{ backgroundColor: item.color }}
+                  <span
+                    className="absolute right-4 top-4 font-accent text-[10px] tracking-[0.18em]"
+                    style={{ color: item.color }}
                     aria-label={`Priority ${item.rank}`}
                   >
-                    {item.rank}
-                  </div>
-                  <div className="grid gap-3 lg:grid-cols-[4.25rem_minmax(20rem,1.6fr)_repeat(3,minmax(9.5rem,1fr))] items-stretch pl-2">
-                    <div className="flex items-center justify-center self-stretch">
+                    #{item.rank}
+                  </span>
+                  <div className="grid gap-3 lg:grid-cols-[minmax(20rem,1.6fr)_repeat(3,minmax(9.5rem,1fr))] items-stretch p-4 sm:p-5 pt-5 sm:pt-6">
+                    <div className="flex items-center gap-3 self-center min-w-0 pr-9 lg:pr-3">
                       <div
-                        className="h-11 w-11 rounded-xl flex items-center justify-center border border-white/10"
-                        style={{ backgroundColor: `${item.color}22` }}
+                        className="h-12 w-12 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{
+                          background: item.color,
+                          boxShadow: `0 8px 24px -8px ${item.color}99`,
+                        }}
                       >
-                        <item.icon className="w-5 h-5" style={{ color: item.color }} aria-hidden="true" />
+                        <item.icon className="w-6 h-6 text-white" strokeWidth={2.25} aria-hidden="true" />
                       </div>
-                    </div>
 
-                    <div className="self-center">
-                      <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h5 className="font-poppins font-bold text-base md:text-lg text-foreground leading-snug">
-                          {item.title}
-                        </h5>
-                        <span
-                          className="text-[10px] uppercase tracking-[0.14em] border rounded-full px-2 py-0.5"
-                          style={{
-                            borderColor: `${item.color}66`,
-                            backgroundColor: `${item.color}12`,
-                            color: item.color,
-                          }}
+                      <div className="min-w-0">
+                        <h5
+                          className="font-poppins font-bold text-base md:text-lg leading-tight"
+                          style={{ color: item.color }}
                         >
                           {item.area}
-                        </span>
+                        </h5>
+                        <p className="font-poppins font-semibold text-sm text-foreground leading-snug mt-1">
+                          {item.title}
+                        </p>
+                        <p className="text-sm text-muted-foreground font-body leading-relaxed mt-1">
+                          {item.description}
+                        </p>
                       </div>
-                      <p className="text-sm text-muted-foreground font-body leading-relaxed">
-                        {item.description}
-                      </p>
                     </div>
 
                     <div
