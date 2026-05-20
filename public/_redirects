@@ -1,8 +1,10 @@
 # Canonicalize www -> apex (single domain)
 https://www.natyv.ai/* https://natyv.ai/:splat 301!
 
-# Retire the generated PDF sample; the HTML report is the canonical version.
-/sample-ai-opportunity-report.pdf /sample-ai-opportunity-report 301!
+# Retired assessment artifact paths now resolve to the live assessment offer.
+/sample-ai-opportunity-report /advisory 301!
+/sample-ai-opportunity-report.html /advisory 301!
+/sample-ai-opportunity-report.pdf /advisory 301!
 
 # Note: SPA fallback for client-side routing is handled automatically by Cloudflare Pages
 # for unknown paths via the prerendered HTML files (index.html, about.html, advisory.html).

@@ -38,10 +38,10 @@ const MYAGENT_BADGES = [
 // the MyAgent badges so the two sides balance. Icons are intentionally
 // disjoint from MYAGENT_BADGES to avoid looking duplicated.
 const AGENCY_BADGES = [
-  { Icon: User, label: "AI Interview" },
-  { Icon: Calendar, label: "Founder Walkthrough" },
-  { Icon: Briefcase, label: "$500 Build Credit" },
-  { Icon: FileText, label: "48-Hour Map" },
+  { Icon: User, label: "AI Intake" },
+  { Icon: Calendar, label: "Strategy Call" },
+  { Icon: Briefcase, label: "Approve After Call" },
+  { Icon: FileText, label: "Ranked Roadmap" },
   { Icon: Target, label: "ROI-Modeled" },
   { Icon: Compass, label: "No Sales Pressure" },
 ];
@@ -199,8 +199,8 @@ const TwoPathsFooter = () => {
             Start with an assessment
           </h3>
           <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed text-center mb-7 max-w-sm mx-auto">
-            A guided AI interview, founder-reviewed report, and 48-hour
-            opportunity map that shows what to automate first.
+            A guided AI intake and consultation that shows what should be
+            automated first, what should wait, and where the payoff lives.
           </p>
 
           {/* CTA — equal-weight chrome to MyAgent's button. Calendar

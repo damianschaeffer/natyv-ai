@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
   Clock3,
   DollarSign,
-  ExternalLink,
   LayoutGrid,
   MessageSquare,
   Phone,
@@ -271,15 +269,16 @@ const AdvisorySection = () => {
                     className="absolute top-0 left-0 right-0 h-1"
                     style={{ background: item.color }}
                   />
-                  <span
-                    className="absolute right-4 top-4 font-accent text-[10px] tracking-[0.18em]"
-                    style={{ color: item.color }}
-                    aria-label={`Priority ${item.rank}`}
-                  >
-                    #{item.rank}
-                  </span>
-                  <div className="grid gap-3 lg:grid-cols-[minmax(20rem,1.6fr)_repeat(3,minmax(9.5rem,1fr))] items-stretch p-4 sm:p-5 pt-5 sm:pt-6">
-                    <div className="flex items-center gap-3 self-center min-w-0 pr-9 lg:pr-3">
+                  <div className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-3 lg:grid-cols-[3.25rem_minmax(20rem,1.6fr)_repeat(3,minmax(9.5rem,1fr))] items-stretch p-4 sm:p-5 pt-5 sm:pt-6">
+                    <div
+                      className="self-center font-poppins font-bold text-4xl md:text-5xl leading-none tabular-nums"
+                      style={{ color: item.color }}
+                      aria-label={`Priority ${item.rank}`}
+                    >
+                      {item.rank}
+                    </div>
+
+                    <div className="flex items-center gap-3 self-center min-w-0 lg:pr-3">
                       <div
                         className="h-12 w-12 rounded-full flex items-center justify-center flex-shrink-0"
                         style={{
@@ -307,7 +306,7 @@ const AdvisorySection = () => {
                     </div>
 
                     <div
-                      className="h-full min-h-[4.75rem] rounded-xl border border-emerald-300/35 bg-emerald-300/[0.08] px-3 py-3 flex flex-col justify-center"
+                      className="col-span-2 lg:col-span-1 h-full min-h-[4.75rem] rounded-xl border border-emerald-300/35 bg-emerald-300/[0.08] px-3 py-3 flex flex-col justify-center"
                     >
                       <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-emerald-300 mb-1">
                         <DollarSign className="w-3.5 h-3.5" aria-hidden="true" />
@@ -318,7 +317,7 @@ const AdvisorySection = () => {
                       </p>
                     </div>
 
-                    <div className="h-full min-h-[4.75rem] rounded-xl border border-amber-300/40 bg-amber-300/[0.08] px-3 py-3 flex flex-col justify-center">
+                    <div className="col-span-2 lg:col-span-1 h-full min-h-[4.75rem] rounded-xl border border-amber-300/40 bg-amber-300/[0.08] px-3 py-3 flex flex-col justify-center">
                       <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-amber-300 mb-1">
                         <Clock3 className="w-3.5 h-3.5" aria-hidden="true" />
                         Setup time
@@ -328,7 +327,7 @@ const AdvisorySection = () => {
                       </p>
                     </div>
 
-                    <div className="h-full min-h-[4.75rem] rounded-xl border border-primary/35 bg-primary/[0.07] px-3 py-3 flex flex-col justify-center">
+                    <div className="col-span-2 lg:col-span-1 h-full min-h-[4.75rem] rounded-xl border border-primary/35 bg-primary/[0.07] px-3 py-3 flex flex-col justify-center">
                       <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-primary mb-1">
                         <Target className="w-3.5 h-3.5" aria-hidden="true" />
                         Why
@@ -341,41 +340,11 @@ const AdvisorySection = () => {
                 </article>
               ))}
             </div>
-
-            <div className="mt-5 rounded-2xl border border-primary/35 bg-primary/[0.08] px-5 py-5 md:px-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-              <div>
-                <p className="font-accent uppercase text-primary text-xs tracking-[0.22em] mb-2">
-                  Founding launch offer
-                </p>
-                <p className="font-poppins font-bold text-xl md:text-2xl text-foreground leading-tight">
-                  $500 assessment, credited toward your first build.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href="/sample-ai-opportunity-report"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-background/90 hover:bg-background border border-foreground/30 hover:border-foreground/50 text-foreground font-poppins font-semibold text-sm transition-colors whitespace-nowrap sm:min-w-[11.5rem]"
-                >
-                  View sample report
-                  <ExternalLink className="w-4 h-4 text-primary" aria-hidden="true" />
-                </a>
-                <a
-                  href="#assessment-calendar"
-                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-poppins font-semibold text-sm transition-colors whitespace-nowrap sm:min-w-[11.5rem]"
-                  aria-label="Book your AI Opportunity Assessment"
-                >
-                  Book assessment
-                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </motion.div>
 
-      <div id="assessment-calendar" className="relative z-10 w-full mt-12 md:mt-16 scroll-mt-28">
+      <div id="assessment-calendar" className="relative z-10 w-full mt-3 md:mt-5 scroll-mt-28">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-4xl mx-auto"
@@ -384,6 +353,24 @@ const AdvisorySection = () => {
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
+            <a
+              href="https://cal.com/damian-schaeffer/consultation"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-2xl border border-primary/35 bg-primary/[0.08] px-5 py-5 md:px-6 mb-4 text-center transition-colors hover:border-primary/70 hover:bg-primary/[0.12]"
+              aria-label="Book the AI assessment call"
+            >
+              <p className="font-accent uppercase text-primary text-xs tracking-[0.22em] mb-2">
+                AI assessment
+              </p>
+              <h3 className="font-poppins font-bold text-2xl md:text-3xl text-foreground leading-tight">
+                Book the assessment call.
+              </h3>
+              <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto mt-2">
+                No payment today. Use the calendar below for the intake. If the opportunity is real,
+                you approve the paid assessment after the call and we turn it into your roadmap.
+              </p>
+            </a>
             <iframe
               src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark&hideEventTypeDetails=true"
               title="Book an AI Opportunity Assessment with Damian Schaeffer"

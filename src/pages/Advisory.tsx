@@ -17,13 +17,13 @@ const Advisory = () => {
         <title>AI Opportunity Assessment | Natyv AI</title>
         <meta
           name="description"
-          content="Book a $500 AI Opportunity Assessment with Natyv AI. Start with a guided AI interview, receive a 48-hour effort-versus-impact Opportunity Map, and credit the assessment toward your first build."
+          content="Book an AI Opportunity Assessment with Natyv AI. Start with a guided AI intake and consultation that ranks the highest-payoff, lowest-lift opportunities before you buy software or custom work."
         />
         <link rel="canonical" href="https://natyv.ai/advisory" />
         <meta property="og:title" content="AI Opportunity Assessment — Natyv AI" />
         <meta
           property="og:description"
-          content="A guided AI assessment, founder-reviewed report, effort-versus-impact Opportunity Map, ROI snapshot, and prioritized quick-win plan for service businesses."
+          content="A guided AI intake and consultation that ranks what should be automated first, what should wait, and where the fastest payoff lives."
         />
         <meta property="og:url" content="https://natyv.ai/advisory" />
         <meta property="og:type" content="website" />
@@ -38,7 +38,7 @@ const Advisory = () => {
   "provider": { "@id": "https://natyv.ai/#organization" },
   "areaServed": "US",
   "url": "https://natyv.ai/advisory",
-  "description": "Paid AI Opportunity Assessment covering an AI-led discovery interview, 48-hour effort-versus-impact Opportunity Map, ROI snapshot, quick-win plan, and founder walkthrough for service businesses.",
+  "description": "AI Opportunity Assessment covering a guided AI intake, consultation, effort-versus-impact ranking, ROI snapshot, and quick-win plan for service businesses.",
   "audience": {
     "@type": "BusinessAudience",
     "audienceType": "Service business owners, founders, and operators"
@@ -47,9 +47,7 @@ const Advisory = () => {
     "@type": "Offer",
     "url": "https://cal.com/damian-schaeffer/consultation",
     "availability": "https://schema.org/InStock",
-    "priceCurrency": "USD",
-    "price": "500",
-    "description": "Founding assessment offer credited toward the first Natyv build when the client moves forward within 14 days."
+    "description": "Schedule the initial AI assessment consultation. No upfront payment is required to book."
   },
   "termsOfService": "Confidential. NDA available upon request."
 }
