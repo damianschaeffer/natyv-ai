@@ -135,8 +135,8 @@ const AdvisorySection = () => {
           className="font-poppins font-bold text-foreground leading-[1.04] mb-5 max-w-[calc(100vw-2rem)] mx-auto break-words"
           style={{ fontSize: "clamp(2.15rem, 7.2vw, 4.35rem)", letterSpacing: "0" }}
         >
-          From 75+ options
-          <span className="block text-primary">to the first five moves.</span>
+          Many Opportunities.
+          <span className="block text-primary">Your Clear Roadmap.</span>
         </h2>
         <p className="text-sm sm:text-base md:text-lg text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto px-4">
           A guided AI intake ranks what pays back fastest, what takes the least
@@ -153,6 +153,11 @@ const AdvisorySection = () => {
       >
         <div className="rounded-2xl border border-primary/25 bg-background/45 backdrop-blur-md overflow-hidden">
           <div className="p-3 sm:p-7 md:p-8 border-b border-border/60">
+            <div className="mb-3 sm:mb-4 text-center">
+              <p className="font-accent uppercase text-[0.62rem] sm:text-xs tracking-[0.2em] text-primary/70">
+                Sample Business AI Opportunity Assessment
+              </p>
+            </div>
             <div className="relative h-[332px] sm:h-[460px] rounded-2xl border border-border/70 bg-black/45 overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(6,182,212,0.22),transparent_24%),radial-gradient(circle_at_35%_24%,rgba(16,185,129,0.16),transparent_22%),radial-gradient(circle_at_68%_24%,rgba(60,131,246,0.16),transparent_24%),radial-gradient(circle_at_76%_74%,rgba(251,146,60,0.10),transparent_24%)]" />
 
