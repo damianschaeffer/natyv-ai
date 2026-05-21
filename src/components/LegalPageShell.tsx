@@ -53,7 +53,10 @@ export const LegalPageShell = ({
             <Icon className="h-4 w-4" />
             {eyebrow}
           </span>
-          <h1 className="mt-8 font-roboto text-5xl sm:text-6xl lg:text-7xl font-black leading-[0.95] text-foreground">
+          <h1
+            className="mt-8 font-poppins font-bold text-foreground leading-[1.04] max-w-[calc(100vw-2rem)] mx-auto break-words"
+            style={{ fontSize: "clamp(2.15rem, 7.2vw, 4.35rem)", letterSpacing: "0" }}
+          >
             {title}
             <span className="block text-primary">{accentTitle}</span>
           </h1>
