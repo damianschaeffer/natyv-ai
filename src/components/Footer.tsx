@@ -37,9 +37,9 @@ const Footer = () => {
   ];
 
   const legalLinks = [
-    { label: "Privacy", href: "#" },
-    { label: "Terms", href: "#" },
-    { label: "Security", href: "#" },
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+    { label: "Security", href: "/security" },
   ];
 
 
@@ -144,13 +144,13 @@ const Footer = () => {
             </p>
             <div className="flex gap-2 sm:gap-6">
               {legalLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
+                  to={link.href}
                   className="inline-flex items-center min-h-[44px] sm:min-h-0 px-2 sm:px-0 text-xs text-muted-foreground font-body hover:text-foreground transition-colors duration-300"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

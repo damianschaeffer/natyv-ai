@@ -1,0 +1,4 @@
+Contact: mailto:security@natyv.ai
+Preferred-Languages: en
+Canonical: https://natyv.ai/.well-known/security.txt
+Policy: https://natyv.ai/security

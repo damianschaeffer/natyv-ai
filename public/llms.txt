@@ -19,6 +19,12 @@
 
 - [Book an Assessment](https://natyv.ai/advisory): Schedule an AI Opportunity Assessment with Damian Schaeffer via Cal.com.
 
+## Legal and Trust
+
+- [Privacy Policy](https://natyv.ai/privacy): How Natyv AI handles assessment intake, MyAgent service data, SMS consent, Google data, and privacy rights.
+- [Terms of Service](https://natyv.ai/terms): Terms for Natyv AI assessments, advisory work, MyAgent-powered services, SMS setup alerts, payment, acceptable use, and liability.
+- [Security](https://natyv.ai/security): Security practices for Natyv assessments, MyAgent workspaces, customer conversations, connected accounts, and vulnerability reporting.
+
 ## Optional
 
 - LinkedIn: https://www.linkedin.com/in/damianschaeffer
