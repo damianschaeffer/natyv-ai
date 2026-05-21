@@ -377,31 +377,35 @@ const AdvisorySection = () => {
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <a
-              href="https://cal.com/damian-schaeffer/consultation"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block rounded-2xl border border-primary/35 bg-primary/[0.08] px-4 py-4 sm:px-5 sm:py-5 md:px-6 mb-4 text-center transition-colors hover:border-primary/70 hover:bg-primary/[0.12]"
-              aria-label="Book the AI assessment call"
-            >
-              <p className="font-accent uppercase text-primary text-[11px] sm:text-xs tracking-[0.22em] mb-2">
-                AI assessment
-              </p>
-              <h3 className="font-poppins font-bold text-xl sm:text-2xl md:text-3xl text-foreground leading-tight">
-                Book the assessment call.
-              </h3>
-              <p className="text-xs sm:text-sm md:text-base text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto mt-2">
-                No payment today. Use the calendar below for the intake. If the opportunity is real,
-                you approve the paid assessment after the call and we turn it into your roadmap.
-              </p>
-            </a>
-            <iframe
-              src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark&hideEventTypeDetails=true"
-              title="Book an AI Opportunity Assessment with Damian Schaeffer"
-              className="w-full h-[620px] sm:h-[720px] rounded-2xl border-0 bg-background"
-              loading="lazy"
-              allow="camera; microphone; autoplay; encrypted-media; fullscreen; picture-in-picture"
-            />
+            <div className="group overflow-hidden rounded-2xl border border-primary/35 bg-background/45 backdrop-blur-md transition-colors hover:border-primary/70">
+              <a
+                href="https://cal.com/damian-schaeffer/consultation"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block border-b border-primary/25 bg-primary/[0.08] px-4 py-5 sm:px-6 md:px-8 text-center transition-colors group-hover:bg-primary/[0.12]"
+                aria-label="Book the AI assessment call"
+              >
+                <h3 className="font-poppins font-bold text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.05]">
+                  Book your
+                  <span className="block text-primary">AI assessment call</span>
+                </h3>
+                <p className="text-xs sm:text-sm md:text-base text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto mt-3">
+                  No payment today. Use the calendar below for the intake. If the opportunity is real,
+                  you approve the paid assessment after the call and we turn it into your roadmap.
+                </p>
+              </a>
+              <div className="p-2 sm:p-4 bg-black/20">
+                <div className="overflow-hidden rounded-xl border border-primary/25 bg-background/80">
+                  <iframe
+                    src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark&hideEventTypeDetails=true"
+                    title="Book an AI Opportunity Assessment with Damian Schaeffer"
+                    className="block w-full h-[620px] sm:h-[720px] border-0 bg-background"
+                    loading="lazy"
+                    allow="camera; microphone; autoplay; encrypted-media; fullscreen; picture-in-picture"
+                  />
+                </div>
+              </div>
+            </div>
             <p className="text-center text-xs text-muted-foreground/60 font-body mt-3">
               Trouble loading the calendar?{" "}
               <a
