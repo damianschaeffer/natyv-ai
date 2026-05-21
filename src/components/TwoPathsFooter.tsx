@@ -92,7 +92,8 @@ const TwoPathsFooter = () => {
           className="font-poppins font-bold tracking-tight text-foreground leading-[1.02]"
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
         >
-          Pick what fits your business today.
+          <span className="block">Two Paths.</span>
+          <span className="block text-primary">One Clear Start.</span>
         </h2>
       </motion.div>
 

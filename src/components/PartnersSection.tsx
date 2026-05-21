@@ -4,8 +4,8 @@ import { Cpu, Mic, PhoneCall, Server, Shield, Layers } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
 // Static headline — same pattern as Solutions / MyAgent.com section headers
-const HEADLINE_PRE = "Best-in-class AI.";
-const HEADLINE_POST = "Wired together.";
+const HEADLINE_PRE = "Best Models.";
+const HEADLINE_POST = "One System.";
 
 // Rotating subtitles — splice of MyAgentSection.tsx rotator pattern
 const SUBTITLES = [
@@ -90,8 +90,8 @@ const PartnersSection = () => {
           className="font-poppins font-bold tracking-tight text-foreground leading-[1.02] mb-6"
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
         >
-          {HEADLINE_PRE}{" "}
-          <span className="text-primary inline-block whitespace-nowrap">{HEADLINE_POST}</span>
+          <span className="block">{HEADLINE_PRE}</span>
+          <span className="block text-primary">{HEADLINE_POST}</span>
         </h2>
 
         <div className="min-h-[3rem] md:min-h-[3.5rem] flex items-center justify-center">
