@@ -152,11 +152,18 @@ const AdvisorySection = () => {
         transition={{ duration: 0.65, delay: 0.18 }}
       >
         <div className="rounded-2xl border border-primary/25 bg-background/45 backdrop-blur-md overflow-hidden">
-          <div className="p-3 sm:p-7 md:p-8 border-b border-border/60">
-            <div className="mb-3 sm:mb-4 text-center">
-              <p className="font-accent uppercase text-[0.62rem] sm:text-xs tracking-[0.2em] text-primary/70">
+          <div className="px-3 sm:px-7 md:px-8 pt-3 sm:pt-4 md:pt-5 pb-3 sm:pb-7 md:pb-8 border-b border-border/60">
+            <div className="mb-2 sm:mb-3 text-center">
+              <span
+                className="inline-flex max-w-full items-center justify-center px-3 sm:px-4 py-1.5 text-primary border border-primary/30 rounded-full font-accent uppercase leading-relaxed sm:leading-none"
+                style={{
+                  fontSize: "clamp(0.65rem, 1.1vw, 0.85rem)",
+                  letterSpacing: "0.18em",
+                  fontWeight: 500,
+                }}
+              >
                 Sample Business AI Opportunity Assessment
-              </p>
+              </span>
             </div>
             <div className="relative h-[332px] sm:h-[460px] rounded-2xl border border-border/70 bg-black/45 overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(6,182,212,0.22),transparent_24%),radial-gradient(circle_at_35%_24%,rgba(16,185,129,0.16),transparent_22%),radial-gradient(circle_at_68%_24%,rgba(60,131,246,0.16),transparent_24%),radial-gradient(circle_at_76%_74%,rgba(251,146,60,0.10),transparent_24%)]" />
