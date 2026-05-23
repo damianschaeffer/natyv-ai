@@ -292,12 +292,8 @@ const MyAgentShowcase = () => {
             className="font-poppins font-bold tracking-tight text-foreground leading-[1.05]"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
           >
-            Just ask.{" "}
-            <span className="inline-block whitespace-nowrap">
-              <span className="text-primary">My</span>
-              <span className="text-foreground">Agent</span>
-              <span className="text-primary"> handles it.</span>
-            </span>
+            Say the word.{" "}
+            <span className="text-primary inline-block whitespace-nowrap">Work gets done.</span>
           </h3>
           <div className="mt-3 md:mt-4 min-h-[1.75em] text-base md:text-lg text-muted-foreground font-body max-w-xl mx-auto" aria-live="polite">
             <AnimatePresence mode="wait">
