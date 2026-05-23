@@ -278,7 +278,7 @@ const MyAgentShowcase = () => {
       </div>
 
       {/* ──────────────────────────────────────────────────────────
-          SHOWCASE 2 — its own scroll-stop. "Live your life. Skip the rest." */}
+          SHOWCASE 2 — its own scroll-stop. "Just ask. MyAgent handles it." */}
       <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -292,8 +292,8 @@ const MyAgentShowcase = () => {
             className="font-poppins font-bold tracking-tight text-foreground leading-[1.05]"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
           >
-            Live your life.{" "}
-            <span className="text-primary inline-block whitespace-nowrap">Skip the rest.</span>
+            Just ask.{" "}
+            <span className="text-primary inline-block whitespace-nowrap">MyAgent handles it.</span>
           </h3>
           <div className="mt-3 md:mt-4 min-h-[1.75em] text-base md:text-lg text-muted-foreground font-body max-w-xl mx-auto" aria-live="polite">
             <AnimatePresence mode="wait">
