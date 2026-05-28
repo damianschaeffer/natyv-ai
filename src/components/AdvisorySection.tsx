@@ -385,7 +385,7 @@ const AdvisorySection = () => {
                 className="block border-b border-primary/25 bg-primary/[0.08] px-4 py-5 sm:px-6 md:px-8 text-center transition-colors group-hover:bg-primary/[0.12]"
                 aria-label="Book the AI assessment call"
               >
-                <h3 className="font-poppins font-bold text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.05]">
+                <h3 className="font-poppins font-bold text-3xl sm:text-4xl md:text-5xl text-foreground !leading-[1.14]">
                   Book your
                   <span className="block text-primary">AI assessment call</span>
                 </h3>

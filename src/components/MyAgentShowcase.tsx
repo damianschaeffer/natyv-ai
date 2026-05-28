@@ -223,7 +223,7 @@ const MyAgentShowcase = () => {
       </div>
 
       {/* ──────────────────────────────────────────────────────────
-          SHOWCASE 1 — its own scroll-stop. "Full control. Zero effort." */}
+          SHOWCASE 1 — its own scroll-stop. "Your calls. Always answered." */}
       <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -234,11 +234,11 @@ const MyAgentShowcase = () => {
       >
         <div className="text-center mb-6 md:mb-8 px-4">
           <h3
-            className="font-poppins font-bold tracking-tight text-foreground leading-[1.05]"
+            className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14]"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
           >
-            Full control.{" "}
-            <span className="text-primary inline-block whitespace-nowrap">Zero effort.</span>
+            Your calls.{" "}
+            <span className="text-primary inline-block whitespace-nowrap">Always answered.</span>
           </h3>
           <div className="mt-3 md:mt-4 min-h-[1.75em] text-base md:text-lg text-muted-foreground font-body max-w-xl mx-auto" aria-live="polite">
             <AnimatePresence mode="wait">
@@ -289,7 +289,7 @@ const MyAgentShowcase = () => {
       >
         <div className="text-center mb-8 md:mb-10 px-4">
           <h3
-            className="font-poppins font-bold tracking-tight text-foreground leading-[1.05]"
+            className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14]"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
           >
             Say the word.{" "}
@@ -335,7 +335,7 @@ const MyAgentShowcase = () => {
       >
         <div className="text-center mb-6 md:mb-8 px-4">
           <h3
-            className="font-poppins font-bold tracking-tight text-foreground leading-[1.05] mb-4"
+            className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14] mb-4"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
           >
             Your Life.{" "}
@@ -361,7 +361,7 @@ const MyAgentShowcase = () => {
       >
         <div className="text-center mb-6 md:mb-8 px-4">
           <h3
-            className="font-poppins font-bold tracking-tight text-foreground leading-[1.05] mb-4"
+            className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14] mb-4"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
           >
             Your website.{" "}

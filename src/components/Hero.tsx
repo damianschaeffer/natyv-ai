@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
-const HEADLINE_PRE = "Run your business.";
-const HEADLINE_POST = "Live your life.";
+const HEADLINE_PRE = "Finally, AI that";
+const HEADLINE_POST = "handles real work.";
 
 // Salon hero video — splice from get-myagent.com brand assets
 const HERO_VIDEO =
@@ -23,15 +23,9 @@ const Hero = () => {
         {/* Two-paths eyebrow lives in the sticky bar now (persistent) so the
             H1 leads the hero unobstructed. */}
 
-        <h1
-          className="font-poppins font-bold tracking-tight text-foreground"
-          style={{
-            fontSize: "clamp(2.75rem, 6.5vw, 5.25rem)",
-            letterSpacing: "-0.02em",
-            lineHeight: 1.25,
-          }}
-        >
-          {HEADLINE_PRE}{" "}
+        <h1 className="font-poppins font-bold text-[36px] sm:text-6xl md:text-7xl lg:text-[80px] !leading-[1.14] tracking-[-0.04em] text-foreground">
+          {HEADLINE_PRE}
+          <br />
           <span className="text-primary inline-block whitespace-nowrap">
             {HEADLINE_POST}
           </span>
