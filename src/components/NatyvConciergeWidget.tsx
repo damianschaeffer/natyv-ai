@@ -3,7 +3,7 @@ import { MessageCircle, X } from "lucide-react";
 
 const NATYV_CONCIERGE_AGENT_ID = "532c323e-e5bd-4ce6-bc94-45875b26bf99";
 const NATYV_CONCIERGE_AVATAR =
-  "https://mpbiwfisywymkdjlwivg.supabase.co/storage/v1/object/public/space-avatars/e16fc1f0-01eb-4478-8d02-a3bb5979b4a9/51449da6-b998-4a6a-97d7-70185da8dd52.png?t=1775262603440";
+  "https://mpbiwfisywymkdjlwivg.supabase.co/storage/v1/object/public/space-avatars/e16fc1f0-01eb-4478-8d02-a3bb5979b4a9/eva-natyv-concierge.png";
 
 const widgetUrl = `https://get-myagent.com/chat/${NATYV_CONCIERGE_AGENT_ID}?embed=true&source=natyv-ai`;
 
@@ -41,10 +41,18 @@ const NatyvConciergeWidget = () => {
           <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-background">
             <img
               src={NATYV_CONCIERGE_AVATAR}
-              alt=""
+              alt="Eva, Natyv AI Concierge"
               className="h-full w-full object-cover"
-              aria-hidden="true"
             />
+            <span
+              className="absolute -bottom-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full border border-background bg-black text-[10px] font-black leading-none text-white shadow-lg"
+              aria-hidden="true"
+            >
+              <span className="relative">
+                N
+                <span className="absolute -bottom-[3px] left-0 right-0 h-[2px] rounded-full bg-primary" />
+              </span>
+            </span>
             <span className="absolute inset-0 flex items-center justify-center bg-black/15 opacity-0 transition group-hover:opacity-100">
               <MessageCircle className="h-5 w-5 text-white" aria-hidden="true" />
             </span>
