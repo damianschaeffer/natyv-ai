@@ -41,7 +41,7 @@ const NatyvConciergeWidget = () => {
           <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-background">
             <img
               src={NATYV_CONCIERGE_AVATAR}
-              alt="Eva, Natyv AI Concierge"
+              alt="Ava, Natyv AI Concierge"
               className="h-full w-full object-cover"
             />
             <span
