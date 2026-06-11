@@ -2,6 +2,7 @@ import { Head } from "vite-react-ssg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HomepageServices from "@/components/HomepageServices";
+import StartHereOffers from "@/components/StartHereOffers";
 
 // /services route uses the same HomepageServices block that the
 // homepage renders, so the dedicated route and the homepage section
@@ -40,6 +41,17 @@ const Services = () => {
       ]
     },
     {
+      "@type": "Service",
+      "@id": "https://natyv.ai/services#start-here",
+      "name": "Natyv AI Fixed-Price Starting Points",
+      "provider": { "@id": "https://natyv.ai/#organization" },
+      "offers": [
+        { "@type": "Offer", "name": "Website & AI Visibility Audit", "price": "250", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "Scored website + AI search visibility report with prioritized fixes and a founder walkthrough. 48-hour turnaround." },
+        { "@type": "Offer", "name": "AI Opportunity Assessment", "price": "497", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "Founder-led AI discovery session and 48-hour AI Opportunity Map with ROI snapshot. Fully credited toward your first implementation." },
+        { "@type": "Offer", "name": "Founding Member Launch Package", "price": "999", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "White-glove MyAgent voice agent setup with local number, AI business page, and 90 days of Growth-tier service included. Limited to the first 10 businesses." }
+      ]
+    },
+    {
       "@type": "OfferCatalog",
       "@id": "https://natyv.ai/services#catalog",
       "name": "Natyv AI Service Catalog",
@@ -61,6 +73,7 @@ const Services = () => {
       <Navbar />
 
       <main className="pt-24">
+        <StartHereOffers />
         <HomepageServices />
       </main>
 
