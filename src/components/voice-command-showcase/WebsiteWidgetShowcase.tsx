@@ -1,11 +1,8 @@
-// WebsiteWidgetShowcase — verbatim port of the "Your website. Always on."
-// section markup from my-agent-ai/src/pages/MyLifeHero.tsx (lines 909-996).
-// Embeds the actual MyAgent live widget demo at get-myagent.com/demo-embed
-// inside a browser-frame chrome, with hover affordance that opens a real
-// MyAgent chat in a new tab. PhraseRotator + WidgetTypewriterSub inlined.
+// WebsiteWidgetShowcase — public Natyv website widget embedded in browser chrome.
+// The iframe points at the ownerless public Ava concierge, not a user-owned agent.
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Lock } from "lucide-react";
+import { Lock, PauseCircle, Volume2 } from "lucide-react";
 
 const WIDGET_PHRASES = [
   "Pre-trained on your business.",
@@ -15,7 +12,6 @@ const WIDGET_PHRASES = [
 ];
 
 const DEMO_EMBED_URL = "https://get-myagent.com/demo-embed?theme=light";
-const SOPHIA_CHAT_URL = "https://get-myagent.com/chat/b516aaab-99d8-457e-b2f4-ceef92222211";
 
 const PhraseRotator = ({
   phrases,
@@ -57,24 +53,38 @@ export const WidgetTypewriterSub = () => (
 );
 
 export const WebsiteWidgetShowcase = () => {
-  const [demoHovered, setDemoHovered] = useState(false);
+  const [demoListening, setDemoListening] = useState(false);
+  const [mobileFrame, setMobileFrame] = useState<HTMLIFrameElement | null>(null);
+  const [desktopFrame, setDesktopFrame] = useState<HTMLIFrameElement | null>(null);
 
-  const openSophiaChat = () => {
-    window.open(SOPHIA_CHAT_URL, "_blank", "noopener,noreferrer");
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
+      const isKnownFrame =
+        event.source === mobileFrame?.contentWindow ||
+        event.source === desktopFrame?.contentWindow;
+      if (!isKnownFrame) return;
+
+      const data = event.data;
+      if (!data || typeof data !== "object") return;
+      if (data.type === "demo-embed-audio-state") {
+        setDemoListening(Boolean(data.isPlaying || data.isLoading));
+      }
+    };
+
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [desktopFrame, mobileFrame]);
+
+  const toggleDemoAudio = () => {
+    const activeFrame = window.innerWidth >= 640 ? desktopFrame : mobileFrame;
+    activeFrame?.contentWindow?.postMessage({ type: "demo-embed-toggle-audio" }, new URL(DEMO_EMBED_URL).origin);
   };
 
   return (
     <div className="w-full max-w-6xl mx-auto">
-      {/* Mobile: CSS-scaled 3-panel view */}
-      <div className="sm:hidden relative overflow-hidden" style={{ height: 385 }}>
-        <div
-          style={{
-            transform: "scale(0.50)",
-            transformOrigin: "top left",
-            width: "200%",
-            pointerEvents: "none",
-          }}
-        >
+      {/* Mobile: native one-panel widget */}
+      <div className="sm:hidden relative overflow-hidden">
+        <div>
           <div className="relative rounded-xl bg-white border border-zinc-300 shadow-2xl shadow-black/60 overflow-hidden">
             <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 border-b border-zinc-200">
               <div className="flex gap-1" aria-hidden="true">
@@ -88,14 +98,24 @@ export const WebsiteWidgetShowcase = () => {
                   <span className="text-sm font-medium text-zinc-700">yourbusiness.com</span>
                 </div>
               </div>
+              <button
+                type="button"
+                onClick={toggleDemoAudio}
+                className="flex items-center gap-1.5 rounded-md border border-zinc-300 bg-white px-2.5 py-1 text-[11px] font-semibold text-zinc-700 shadow-sm transition hover:bg-zinc-50"
+              >
+                {demoListening ? <PauseCircle className="h-3.5 w-3.5 text-primary" /> : <Volume2 className="h-3.5 w-3.5 text-primary" />}
+                {demoListening ? "Pause" : "Listen"}
+              </button>
             </div>
             <iframe
+              ref={setMobileFrame}
               src={DEMO_EMBED_URL}
-              title="MyAgent live widget demo — full 3-panel view"
+              title="Natyv AI one-panel live widget demo"
               loading="lazy"
+              allow="microphone; autoplay"
               style={{
                 width: "100%",
-                height: 740,
+                height: 560,
                 border: "none",
                 display: "block",
                 background: "#ffffff",
@@ -105,12 +125,8 @@ export const WebsiteWidgetShowcase = () => {
         </div>
       </div>
 
-      {/* Desktop: interactive browser chrome with hover-to-chat affordance */}
-      <div
-        className="hidden sm:block relative"
-        onMouseEnter={() => setDemoHovered(true)}
-        onMouseLeave={() => setDemoHovered(false)}
-      >
+      {/* Desktop: interactive browser chrome */}
+      <div className="hidden sm:block relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/[0.04] rounded-full blur-[100px] pointer-events-none" />
         <div className="relative rounded-xl bg-white border border-zinc-300 shadow-2xl shadow-black/60 overflow-hidden">
           <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 border-b border-zinc-200">
@@ -125,12 +141,22 @@ export const WebsiteWidgetShowcase = () => {
                 <span className="text-xs md:text-sm font-medium text-zinc-700">yourbusiness.com</span>
               </div>
             </div>
+            <button
+              type="button"
+              onClick={toggleDemoAudio}
+              className="flex items-center gap-1.5 rounded-md border border-zinc-300 bg-white px-2.5 py-1 text-[11px] font-semibold text-zinc-700 shadow-sm transition hover:bg-zinc-50 md:text-xs"
+            >
+              {demoListening ? <PauseCircle className="h-3.5 w-3.5 text-primary" /> : <Volume2 className="h-3.5 w-3.5 text-primary" />}
+              {demoListening ? "Pause" : "Listen"}
+            </button>
           </div>
           <div className="relative">
             <iframe
+              ref={setDesktopFrame}
               src={DEMO_EMBED_URL}
-              title="MyAgent live widget demo — Sophia taking a real call"
+              title="Natyv AI one-panel live widget demo"
               loading="lazy"
+              allow="microphone; autoplay"
               style={{
                 width: "100%",
                 height: "clamp(300px, 62vh, 680px)",
@@ -139,30 +165,6 @@ export const WebsiteWidgetShowcase = () => {
                 background: "#ffffff",
               }}
             />
-            <div
-              className="absolute inset-0 flex items-center justify-center transition-opacity duration-200 cursor-pointer"
-              style={{
-                opacity: demoHovered ? 1 : 0,
-                backgroundColor: "rgba(0,0,0,0.35)",
-                pointerEvents: demoHovered ? "auto" : "none",
-              }}
-              onClick={openSophiaChat}
-            >
-              <button
-                type="button"
-                className="flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-white shadow-2xl transition-transform duration-150 hover:scale-105 active:scale-95 text-base"
-                style={{
-                  backgroundColor: "#2563EB",
-                  boxShadow: "0 0 40px #2563EB80",
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  openSophiaChat();
-                }}
-              >
-                Speak with Sophia
-              </button>
-            </div>
           </div>
         </div>
       </div>
