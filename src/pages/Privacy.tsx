@@ -83,6 +83,23 @@ const Privacy = () => (
       </p>
     </LegalSection>
 
+    <LegalSection title="Natyv AI Social Publishing Apps" accent="#0EA5E9">
+      <p>
+        Mission Control Publisher and Natyv AI Community Publisher are Natyv AI-operated apps used by authorized
+        Natyv AI administrators to connect official Natyv AI social media accounts and publish or schedule
+        human-approved Natyv AI content.
+      </p>
+      <p>
+        When those apps are connected to platforms such as TikTok, LinkedIn, X, YouTube, Instagram, or Facebook,
+        we may receive account identifiers, display names, usernames, profile or organization identifiers, access
+        tokens, refresh tokens, granted permission scopes, post metadata, media identifiers, publishing status,
+        and error or audit records needed to verify and operate social posting. We use this information only to
+        authenticate the connected account, prepare previews, publish approved content, verify delivery, maintain
+        security, and troubleshoot platform issues. We do not sell this information or share it with third parties
+        for advertising or promotional purposes.
+      </p>
+    </LegalSection>
+
     <LegalSection title="How We Share Information" accent="#EF4444">
       <p>
         We share data only with service providers and processors needed to operate the business, such as hosting,

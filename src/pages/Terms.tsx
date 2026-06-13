@@ -97,6 +97,20 @@ const Terms = () => (
       </p>
     </LegalSection>
 
+    <LegalSection title="Natyv AI Social Publishing Apps" accent="#0EA5E9">
+      <p>
+        Mission Control Publisher and Natyv AI Community Publisher are internal Natyv AI social publishing apps
+        operated by Natyv Ventures LLC. They are used by authorized Natyv AI administrators to connect official
+        Natyv AI social accounts, create platform previews, and publish or schedule human-approved Natyv AI content.
+      </p>
+      <LegalList>
+        <li>You must be authorized to connect or manage any social media profile, page, channel, organization, or account used with these apps.</li>
+        <li>Content must be reviewed and approved before publishing, and the apps may not be used for spam, deceptive activity, impersonation, or unauthorized posting.</li>
+        <li>Use of these apps is also subject to the applicable third-party platform terms, developer policies, API limits, review requirements, and account rules.</li>
+        <li>Access can be revoked through the third-party platform or by contacting Natyv AI at <a className="text-primary hover:underline" href="mailto:hello@natyv.ai">hello@natyv.ai</a>.</li>
+      </LegalList>
+    </LegalSection>
+
     <LegalSection title="Intellectual Property" accent="#3B82F6">
       <p>
         Natyv AI, MyAgent, our software, workflows, templates, designs, documentation, prompts, and implementation
