@@ -25,7 +25,9 @@ import { MYAGENT_NORTH_STAR_PATH } from "@/components/brand/MyAgentLogo";
 
 // Standard MyAgent trust badges — verbatim from MyAgentShowcase.tsx so
 // the product brand promise stays consistent everywhere it appears.
-const MYAGENT_BADGES = [
+// Exported so TwoPathOffers (/services) reuses the exact same set —
+// single source of truth, no duplicated definitions.
+export const MYAGENT_BADGES = [
   { Icon: Gift, label: "No Setup Fees" },
   { Icon: Clock, label: "14-Day Free Trial" },
   { Icon: CreditCard, label: "No Credit Card" },
@@ -37,7 +39,7 @@ const MYAGENT_BADGES = [
 // Agency engagement proof points — same number (6) and visual rhythm as
 // the MyAgent badges so the two sides balance. Icons are intentionally
 // disjoint from MYAGENT_BADGES to avoid looking duplicated.
-const AGENCY_BADGES = [
+export const AGENCY_BADGES = [
   { Icon: User, label: "AI Intake" },
   { Icon: Calendar, label: "Strategy Call" },
   { Icon: Briefcase, label: "Approve After Call" },

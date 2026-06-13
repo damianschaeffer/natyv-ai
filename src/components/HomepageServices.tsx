@@ -76,7 +76,6 @@ import {
   Scale,
   Wrench,
   Headphones,
-  Lightbulb,
   Palette,
   Film,
   MailCheck,
@@ -180,7 +179,6 @@ const functions: ServiceFunction[] = [
       { name: "AI-Drafted Policy Templates", icon: Scale, outcome: "First-draft Terms, Privacy, and NDA — attorney review recommended, friction removed." },
       { name: "Technical Setup Service", icon: Wrench, outcome: "Hands-on white-glove setup of every tool, integration, and workflow." },
       { name: "Priority Support Access", icon: Headphones, outcome: "Dedicated Slack channel + 4-hour response SLA from real engineers." },
-      { name: "AI Opportunity Assessment", icon: Lightbulb, outcome: "20-minute diagnostic, 48-hour map, and the first build credited if we move forward." },
       { name: "A2P 10DLC Registration Support", icon: ShieldCheck, outcome: "Full carrier registration so your business texts actually deliver." },
       { name: "Waitlist Manager", icon: Clock, outcome: "Cap demand at the right price — auto-promote when slots open." },
     ],
@@ -242,33 +240,60 @@ const functions: ServiceFunction[] = [
   },
 ];
 
-// Static headline — explicitly frames this section as the traditional
-// agency path (vs. the MyAgent product). "Full-Service Agency." in
-// white is the unmistakable agency signal; "AI-Powered" in primary
-// blue is the modern differentiator from a 1995 ad agency.
+// Total productized capabilities, computed from the catalog itself so the
+// number we advertise is always truthful no matter how the catalog changes.
+const TOTAL_SERVICES = functions.reduce((n, f) => n + f.services.length, 0);
+
+// Default (homepage) framing — the traditional agency path vs. the MyAgent
+// product. "Full-Service Agency." in white is the unmistakable agency
+// signal; "AI-Powered" in primary blue is the modern differentiator.
 const HEADLINE_PRE = "Full-Service Agency.";
 const HEADLINE_POST = "AI-Powered.";
 
-// Rotating subtitles — carry the agency-engagement message that the
-// retired PivotBanner used to deliver, now native to the SERVICES section.
+// Rotating subtitles — homepage default. Count is derived from
+// TOTAL_SERVICES so it never drifts out of sync with the catalog.
 const SUBTITLES = [
   "Start with an assessment, then build only what pays back.",
-  "Pick from 75 proven functions once the map is clear.",
+  `Pick from ${TOTAL_SERVICES} proven functions once the map is clear.`,
   "Designed and implemented around your actual operations.",
 ];
+
+// "menu" framing — used on /services BELOW the two-path offer block, where
+// this catalog is the menu of what gets built after a visitor picks a path
+// (not a competing third entry point). No assessment-first / numeric copy.
+const MENU_SUBTITLES = [
+  "Your agent and your roadmap both pull from this menu.",
+  "Productized capabilities across six business functions.",
+  "Designed and implemented around your actual operations.",
+];
+
+interface HomepageServicesProps {
+  // "homepage" (default) keeps the original framing byte-identical;
+  // "menu" reframes the section as the post-path build menu on /services.
+  variant?: "homepage" | "menu";
+  eyebrow?: string;
+  headlinePre?: string;
+  headlinePost?: string;
+}
 
 // How many service pills are shown before the "Show all" expand kicks in.
 // 4 = the count of the smallest category (CX), so every card starts the
 // same length regardless of category size.
 const VISIBLE_PILLS = 4;
 
-const HomepageServices = () => {
+const HomepageServices = ({
+  variant = "homepage",
+  eyebrow = "Services",
+  headlinePre = HEADLINE_PRE,
+  headlinePost = HEADLINE_POST,
+}: HomepageServicesProps = {}) => {
+  const subtitles = variant === "menu" ? MENU_SUBTITLES : SUBTITLES;
   const [currentSubtitle, setCurrentSubtitle] = useState(0);
   const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSubtitle((prev) => (prev + 1) % SUBTITLES.length);
+      setCurrentSubtitle((prev) => (prev + 1) % subtitles.length);
     }, 4500);
     return () => clearInterval(interval);
   }, []);
@@ -315,7 +340,7 @@ const HomepageServices = () => {
             fontWeight: 500,
           }}
         >
-          Services
+          {eyebrow}
         </span>
       </motion.div>
 
@@ -331,8 +356,8 @@ const HomepageServices = () => {
           className="font-poppins font-bold tracking-tight text-foreground leading-[1.02] mb-6"
           style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
         >
-          {HEADLINE_PRE}{" "}
-          <span className="text-primary inline-block whitespace-nowrap">{HEADLINE_POST}</span>
+          {headlinePre}{" "}
+          <span className="text-primary inline-block whitespace-nowrap">{headlinePost}</span>
         </h2>
 
         <div className="min-h-[3rem] md:min-h-[3.5rem] flex items-center justify-center">
@@ -345,7 +370,7 @@ const HomepageServices = () => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="text-lg md:text-xl text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto px-4"
             >
-              {SUBTITLES[currentSubtitle]}
+              {subtitles[currentSubtitle]}
             </motion.p>
           </AnimatePresence>
         </div>
@@ -373,7 +398,8 @@ const HomepageServices = () => {
           return (
             <motion.article
               key={fn.id}
-              className="group relative flex flex-col rounded-2xl backdrop-blur-md transition-all duration-300 overflow-hidden border border-border/40"
+              id={fn.id}
+              className="group relative flex flex-col rounded-2xl backdrop-blur-md transition-all duration-300 overflow-hidden border border-border/40 scroll-mt-24"
               // No outside colored border (per Damian's feedback - it
               // read as inconsistent). Just a subtle neutral border, a
               // gradient bg tinted with the category color, and a soft

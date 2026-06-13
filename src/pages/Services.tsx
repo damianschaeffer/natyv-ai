@@ -2,29 +2,28 @@ import { Head } from "vite-react-ssg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HomepageServices from "@/components/HomepageServices";
-import StartHereOffers from "@/components/StartHereOffers";
+import TwoPathOffers from "@/components/TwoPathOffers";
 
-// /services route uses the same HomepageServices block that the
-// homepage renders, so the dedicated route and the homepage section
-// are byte-identical. Visitors who land on /services see the same
-// "Full-Service Agency. AI-Powered." H2 and the same six colored
-// category cards (with click-to-expand outcome lines on every pill).
-// The assessment copy establishes the paid diagnostic as the clean
-// starting point before a visitor buys a build.
+// /services leads with the two-path offer system (TwoPathOffers) — the
+// same two-path model the homepage closes on, with the price rungs made
+// explicit. The 74-capability catalog (HomepageServices) renders BELOW
+// it in "menu" framing: it is what gets built once a visitor has chosen
+// a path, not a competing third entry point. This keeps one coherent
+// flow — choose a path → see the menu — instead of three rival taxonomies.
 const Services = () => {
   return (
     <div className="min-h-screen bg-background">
       <Head>
-        <title>Services · AI Assessment + 75+ Workflows · Natyv AI</title>
+        <title>Get Started · Two Ways to Begin with AI · Natyv AI</title>
         <meta
           name="description"
-          content="Start with an AI Opportunity Assessment, then choose from 75+ productized AI capabilities across front desk, sales, operations, finance, marketing, and customer experience."
+          content="Two ways to start: bring on your MyAgent AI employee today, or begin with a fixed-price diagnosis that maps where AI pays back first — every dollar credited toward your build."
         />
         <link rel="canonical" href="https://natyv.ai/services" />
-        <meta property="og:title" content="Services · AI Assessment + 75+ Workflows · Natyv AI" />
+        <meta property="og:title" content="Get Started · Two Ways to Begin with AI · Natyv AI" />
         <meta
           property="og:description"
-          content="Diagnose first, then build the highest-ROI AI workflows for your service business."
+          content="Start with your agent, or start with a diagnosis. Fixed price, no retainer — know the value before you spend another dollar."
         />
         <meta property="og:url" content="https://natyv.ai/services" />
         <meta property="og:type" content="website" />
@@ -37,16 +36,17 @@ const Services = () => {
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://natyv.ai/" },
-        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://natyv.ai/services" }
+        { "@type": "ListItem", "position": 2, "name": "Get Started", "item": "https://natyv.ai/services" }
       ]
     },
     {
       "@type": "Service",
       "@id": "https://natyv.ai/services#start-here",
-      "name": "Natyv AI Fixed-Price Starting Points",
+      "name": "Natyv AI — Two Ways to Start",
       "provider": { "@id": "https://natyv.ai/#organization" },
+      "description": "Two paths to begin with AI: start with your MyAgent AI employee (free trial or white-glove Founding Member build), or start with a fixed-price diagnosis credited toward your build.",
       "offers": [
-        { "@type": "Offer", "name": "Website & AI Visibility Audit", "price": "250", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "Scored website + AI search visibility report with prioritized fixes and a founder walkthrough. 48-hour turnaround." },
+        { "@type": "Offer", "name": "Website & AI Visibility Audit", "price": "250", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "Scored website + AI search visibility report with prioritized fixes and a founder walkthrough. 48-hour turnaround. Credited toward the Assessment." },
         { "@type": "Offer", "name": "AI Opportunity Assessment", "price": "497", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "Founder-led AI discovery session and 48-hour AI Opportunity Map with ROI snapshot. Fully credited toward your first implementation." },
         { "@type": "Offer", "name": "Founding Member Launch Package", "price": "999", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "White-glove MyAgent voice agent setup with local number, AI business page, and 90 days of Growth-tier service included. Limited to the first 10 businesses." }
       ]
@@ -73,8 +73,16 @@ const Services = () => {
       <Navbar />
 
       <main className="pt-24">
-        <StartHereOffers />
-        <HomepageServices />
+        <TwoPathOffers />
+        {/* The catalog as the build MENU, not a third entry point —
+            reframed via props so it reads as "what gets built after you
+            pick a path." Homepage keeps the default framing (props omitted). */}
+        <HomepageServices
+          variant="menu"
+          eyebrow="What We Build"
+          headlinePre="Pick a path."
+          headlinePost="We build the rest."
+        />
       </main>
 
       <Footer />
