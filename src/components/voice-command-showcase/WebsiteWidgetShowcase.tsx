@@ -11,8 +11,6 @@ const WIDGET_PHRASES = [
   "Listens. Responds. Remembers.",
 ];
 
-const DEMO_EMBED_URL = "https://get-myagent.com/demo-embed?theme=light";
-
 const PhraseRotator = ({
   phrases,
   intervalMs = 3000,
@@ -53,9 +51,27 @@ export const WidgetTypewriterSub = () => (
 );
 
 export const WebsiteWidgetShowcase = () => {
+  const [isDarkTheme, setIsDarkTheme] = useState(() =>
+    typeof document !== "undefined" ? document.documentElement.classList.contains("dark") : true
+  );
   const [demoListening, setDemoListening] = useState(false);
   const [mobileFrame, setMobileFrame] = useState<HTMLIFrameElement | null>(null);
   const [desktopFrame, setDesktopFrame] = useState<HTMLIFrameElement | null>(null);
+  const demoEmbedUrl = `https://get-myagent.com/demo-embed?theme=${isDarkTheme ? "dark" : "light"}`;
+
+  useEffect(() => {
+    const syncTheme = () => {
+      setIsDarkTheme(document.documentElement.classList.contains("dark"));
+    };
+
+    syncTheme();
+    const observer = new MutationObserver(syncTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "data-theme"],
+    });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
@@ -77,11 +93,11 @@ export const WebsiteWidgetShowcase = () => {
 
   const toggleDemoAudio = () => {
     const activeFrame = window.innerWidth >= 640 ? desktopFrame : mobileFrame;
-    activeFrame?.contentWindow?.postMessage({ type: "demo-embed-toggle-audio" }, new URL(DEMO_EMBED_URL).origin);
+    activeFrame?.contentWindow?.postMessage({ type: "demo-embed-toggle-audio" }, new URL(demoEmbedUrl).origin);
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full max-w-[700px] mx-auto">
       {/* Mobile: native one-panel widget */}
       <div className="sm:hidden relative overflow-hidden">
         <div>
@@ -109,7 +125,7 @@ export const WebsiteWidgetShowcase = () => {
             </div>
             <iframe
               ref={setMobileFrame}
-              src={DEMO_EMBED_URL}
+              src={demoEmbedUrl}
               title="Natyv AI one-panel live widget demo"
               loading="lazy"
               allow="microphone; autoplay"
@@ -118,7 +134,7 @@ export const WebsiteWidgetShowcase = () => {
                 height: 560,
                 border: "none",
                 display: "block",
-                background: "#ffffff",
+                background: isDarkTheme ? "#050505" : "#ffffff",
               }}
             />
           </div>
@@ -153,16 +169,16 @@ export const WebsiteWidgetShowcase = () => {
           <div className="relative">
             <iframe
               ref={setDesktopFrame}
-              src={DEMO_EMBED_URL}
+              src={demoEmbedUrl}
               title="Natyv AI one-panel live widget demo"
               loading="lazy"
               allow="microphone; autoplay"
               style={{
                 width: "100%",
-                height: "clamp(300px, 62vh, 680px)",
+                height: "clamp(470px, 58vh, 560px)",
                 border: "none",
                 display: "block",
-                background: "#ffffff",
+                background: isDarkTheme ? "#050505" : "#ffffff",
               }}
             />
           </div>

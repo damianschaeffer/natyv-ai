@@ -2,9 +2,9 @@ import { Head } from "vite-react-ssg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HomepageServices from "@/components/HomepageServices";
-import TwoPathOffers from "@/components/TwoPathOffers";
+import StartHereOffers from "@/components/StartHereOffers";
 
-// /services leads with the two-path offer system (TwoPathOffers) — the
+// /services leads with the two-path offer system (StartHereOffers) — the
 // same two-path model the homepage closes on, with the price rungs made
 // explicit. The 74-capability catalog (HomepageServices) renders BELOW
 // it in "menu" framing: it is what gets built once a visitor has chosen
@@ -73,7 +73,7 @@ const Services = () => {
       <Navbar />
 
       <main className="pt-24">
-        <TwoPathOffers />
+        <StartHereOffers />
         {/* The catalog as the build MENU, not a third entry point —
             reframed via props so it reads as "what gets built after you
             pick a path." Homepage keeps the default framing (props omitted). */}

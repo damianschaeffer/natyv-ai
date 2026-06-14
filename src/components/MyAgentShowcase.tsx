@@ -224,15 +224,15 @@ const MyAgentShowcase = () => {
 
       {/* ──────────────────────────────────────────────────────────
           SHOWCASE 1 — its own scroll-stop. "Your calls. Always answered." */}
-      <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
+      <div className="relative min-h-screen flex flex-col items-center justify-start px-2 sm:px-6 pt-4 md:pt-6 pb-6 md:pb-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.7 }}
-        className="relative z-10 w-full max-w-6xl mx-auto"
+        className="relative z-10 w-full max-w-[920px] mx-auto"
       >
-        <div className="text-center mb-6 md:mb-8 px-4">
+        <div className="text-center mb-3 md:mb-4 px-4">
           <h3
             className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14]"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
@@ -351,17 +351,17 @@ const MyAgentShowcase = () => {
 
       {/* ──────────────────────────────────────────────────────────
           SHOWCASE 4 — its own scroll-stop. "Your website. Always on." */}
-      <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
+      <div className="relative min-h-screen flex flex-col items-center justify-start px-2 sm:px-6 pt-4 md:pt-6 pb-6 md:pb-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.7 }}
-        className="relative z-10 w-full max-w-6xl mx-auto"
+        className="relative z-10 w-full max-w-[920px] mx-auto"
       >
-        <div className="text-center mb-6 md:mb-8 px-4">
+        <div className="text-center mb-3 md:mb-4 px-4">
           <h3
-            className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14] mb-4"
+            className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14]"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
           >
             Your website.{" "}
@@ -373,7 +373,7 @@ const MyAgentShowcase = () => {
       </motion.div>
 
       {/* Demo + Start Free Trial buttons — same chrome as StickyFooterCTA */}
-      <div className="relative z-10 flex justify-center gap-2 sm:gap-3 mt-12 md:mt-14 w-full">
+      <div className="relative z-10 flex justify-center gap-2 sm:gap-3 mt-4 md:mt-5 w-full">
         <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
           <Button
             variant="outline"
