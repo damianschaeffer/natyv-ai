@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Network,
@@ -52,6 +52,7 @@ const TRUST_BADGES = [
 ];
 
 const MYAGENT_URL = "https://get-myagent.com";
+const WIDGET_SECTION_SCROLL_OFFSET = 72;
 
 // Umbrella headline — MyAgent's canonical brand promise from get-myagent.com
 const UMBRELLA_PRE = "Your life.";
@@ -99,6 +100,7 @@ const VOICE_COMMANDS_PHRASES = [
 const MyAgentShowcase = () => {
   const [callPhraseIdx, setCallPhraseIdx] = useState(0);
   const [voicePhraseIdx, setVoicePhraseIdx] = useState(0);
+  const widgetSectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -112,6 +114,39 @@ const MyAgentShowcase = () => {
       setVoicePhraseIdx((prev) => (prev + 1) % VOICE_COMMANDS_PHRASES.length);
     }, 3000);
     return () => clearInterval(interval);
+  }, []);
+
+  const alignWidgetSection = (behavior: ScrollBehavior = "auto") => {
+    const section = widgetSectionRef.current;
+    if (!section) return;
+    const target = section.getBoundingClientRect().top + window.scrollY - WIDGET_SECTION_SCROLL_OFFSET;
+    window.scrollTo({ top: Math.max(0, Math.round(target)), behavior });
+  };
+
+  useEffect(() => {
+    let timeoutId: number | null = null;
+
+    const queueWidgetAlignment = () => {
+      if (timeoutId != null) window.clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(() => {
+        const section = widgetSectionRef.current;
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+        const targetZoneBottom = Math.min(window.innerHeight * 0.78, 680);
+        const alreadyAligned = Math.abs(rect.top - WIDGET_SECTION_SCROLL_OFFSET) < 10;
+        const closeEnoughToWidget = rect.top > -80 && rect.top < targetZoneBottom;
+        if (!alreadyAligned && closeEnoughToWidget) {
+          alignWidgetSection("auto");
+        }
+      }, 160);
+    };
+
+    window.addEventListener("scroll", queueWidgetAlignment, { passive: true });
+    return () => {
+      if (timeoutId != null) window.clearTimeout(timeoutId);
+      window.removeEventListener("scroll", queueWidgetAlignment);
+    };
   }, []);
 
   return (
@@ -351,7 +386,7 @@ const MyAgentShowcase = () => {
 
       {/* ──────────────────────────────────────────────────────────
           SHOWCASE 4 — its own scroll-stop. "Your website. Always on." */}
-      <div className="relative min-h-screen flex flex-col items-center justify-start px-2 sm:px-6 pt-4 md:pt-6 pb-6 md:pb-8">
+      <div ref={widgetSectionRef} className="relative min-h-screen flex flex-col items-center justify-start px-2 sm:px-6 pt-4 md:pt-6 pb-6 md:pb-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
