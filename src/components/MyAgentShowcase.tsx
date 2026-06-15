@@ -116,6 +116,15 @@ const MyAgentShowcase = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const html = document.documentElement;
+    const previousScrollBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    return () => {
+      html.style.scrollBehavior = previousScrollBehavior;
+    };
+  }, []);
+
   const alignWidgetSection = (behavior: ScrollBehavior = "auto") => {
     const section = widgetSectionRef.current;
     if (!section) return;
