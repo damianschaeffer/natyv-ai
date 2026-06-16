@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
+  ChevronDown,
   Clock3,
   DollarSign,
   LayoutGrid,
@@ -95,8 +96,21 @@ const OPPORTUNITIES: OpportunityItem[] = [
 ];
 
 const AdvisorySection = () => {
-  const [activeRank, setActiveRank] = useState<number | null>(null);
+  const [activeRank, setActiveRank] = useState<number | null>(1);
   const activeOpportunity = OPPORTUNITIES.find((item) => item.rank === activeRank);
+  const [showRoadmap, setShowRoadmap] = useState(false);
+
+  // Auto-play the top-3 opportunities lighting up in sequence — a quick,
+  // self-running "here are your highest-ROI wins" teaser instead of a wall.
+  useEffect(() => {
+    const seq = [1, 2, 3];
+    let i = 0;
+    const t = setInterval(() => {
+      i = (i + 1) % seq.length;
+      setActiveRank(seq[i]);
+    }, 1800);
+    return () => clearInterval(t);
+  }, []);
 
   return (
     <section
@@ -277,8 +291,20 @@ const AdvisorySection = () => {
             )}
           </div>
 
-          <div className="p-3 sm:p-7 md:p-8">
-            <div className="space-y-2.5 sm:space-y-3">
+          <div className="p-3 sm:p-5 md:p-6">
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowRoadmap((v) => !v)}
+                aria-expanded={showRoadmap}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/40 text-primary font-poppins font-semibold text-sm hover:bg-primary/10 transition-colors"
+              >
+                {showRoadmap ? "Hide the sample roadmap" : "See the full sample roadmap"}
+                <ChevronDown className={`w-4 h-4 transition-transform ${showRoadmap ? "rotate-180" : ""}`} aria-hidden="true" />
+              </button>
+            </div>
+            {showRoadmap && (
+            <div className="space-y-2.5 sm:space-y-3 mt-5">
               {OPPORTUNITIES.map((item) => (
                 <article
                   key={item.title}
@@ -364,62 +390,11 @@ const AdvisorySection = () => {
                 </article>
               ))}
             </div>
+            )}
           </div>
         </div>
       </motion.div>
 
-      <div id="assessment-calendar" className="relative z-10 w-full mt-3 md:mt-5 scroll-mt-28">
-        <div className="container mx-auto px-3 sm:px-6">
-          <motion.div
-            className="max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <div className="group overflow-hidden rounded-2xl border border-primary/35 bg-background/45 backdrop-blur-md transition-colors hover:border-primary/70">
-              <a
-                href="https://cal.com/damian-schaeffer/consultation"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block border-b border-primary/25 bg-primary/[0.08] px-4 py-5 sm:px-6 md:px-8 text-center transition-colors group-hover:bg-primary/[0.12]"
-                aria-label="Book the AI assessment call"
-              >
-                <h3 className="font-poppins font-bold text-3xl sm:text-4xl md:text-5xl text-foreground !leading-[1.14]">
-                  Book your
-                  <span className="block text-primary">AI assessment call</span>
-                </h3>
-                <p className="text-xs sm:text-sm md:text-base text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto mt-3">
-                  No payment today. Use the calendar below for the intake. If the opportunity is real,
-                  you approve the paid assessment after the call and we turn it into your roadmap.
-                </p>
-              </a>
-              <div className="p-2 sm:p-4 bg-black/20">
-                <div className="overflow-hidden rounded-xl border border-primary/25 bg-background/80">
-                  <iframe
-                    src="https://cal.com/damian-schaeffer/consultation?layout=month_view&theme=dark&hideEventTypeDetails=true"
-                    title="Book an AI Opportunity Assessment with Damian Schaeffer"
-                    className="block w-full h-[620px] sm:h-[720px] border-0 bg-background"
-                    loading="lazy"
-                    allow="camera; microphone; autoplay; encrypted-media; fullscreen; picture-in-picture"
-                  />
-                </div>
-              </div>
-            </div>
-            <p className="text-center text-xs text-muted-foreground/60 font-body mt-3">
-              Trouble loading the calendar?{" "}
-              <a
-                href="https://cal.com/damian-schaeffer/consultation"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                Book directly on Cal.com
-              </a>
-            </p>
-          </motion.div>
-        </div>
-      </div>
     </section>
   );
 };

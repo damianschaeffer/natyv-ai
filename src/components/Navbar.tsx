@@ -110,10 +110,15 @@ const Navbar = () => {
     }
   };
 
+  // Order leads with the consulting/implementation offer (Services →
+  // Advisory), then the MyAgent product (Studio) as proof, matching the
+  // homepage scroll. get-myagent.com sells the product on its own; natyv.ai
+  // leads with the diagnose-and-build layer that is unique to the agency.
   const navLinks = [
-    { label: "Studio", href: "#myagent-section", isScrollLink: true, onScroll: scrollToMyAgent },
     { label: "Services", href: "/services", isRoute: true },
     { label: "Advisory", href: "#advisory", isScrollLink: true, onScroll: scrollToAdvisory },
+    { label: "Studio", href: "#myagent-section", isScrollLink: true, onScroll: scrollToMyAgent },
+    { label: "Partners", href: "/partners", isRoute: true },
     { label: "About", href: "/about", isRoute: true },
   ];
 

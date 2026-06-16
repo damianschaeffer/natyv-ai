@@ -20,10 +20,13 @@ const Footer = () => {
     }
   };
 
+  // Order MUST mirror the header nav (Navbar.tsx): Services · Advisory ·
+  // Studio · Partners · About.
   const navLinks = [
-    { label: "Studio", href: "#myagent-section", isScrollLink: true },
     { label: "Services", href: "/services", isRoute: true },
     { label: "Advisory", href: "/advisory", isRoute: true },
+    { label: "Studio", href: "#myagent-section", isScrollLink: true },
+    { label: "Partners", href: "/partners", isRoute: true },
     { label: "About", href: "/about", isRoute: true },
   ];
 
@@ -37,6 +40,9 @@ const Footer = () => {
   ];
 
   const legalLinks = [
+    { label: "FAQ", href: "/faq" },
+    { label: "Referrals", href: "/referrals" },
+    { label: "Contact", href: "/contact" },
     { label: "Privacy", href: "/privacy" },
     { label: "Terms", href: "/terms" },
     { label: "Security", href: "/security" },

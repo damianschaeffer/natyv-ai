@@ -67,7 +67,15 @@ export function VoiceCommandShowcase({
         border: "1px solid hsl(var(--primary) / 0.30)",
       }}
     >
-      <style>{`
+      {/* CSS injected via dangerouslySetInnerHTML, NOT as a text child.
+          A quoted attribute selector ([data-clip-id="…"]) as a <style> text
+          child makes React's SSR HTML-escape the " to &quot; while the client
+          vDOM keeps the raw ", producing a React #425 text-content mismatch
+          that cascades into #418/#423 hydration failures. dangerouslySetInnerHTML
+          bypasses React text-escaping so server and client markup are identical. */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         @media (max-width: 767px) {
           [data-clip-id="${dataId}"] {
             grid-template-columns: 1fr !important;
@@ -85,7 +93,9 @@ export function VoiceCommandShowcase({
             background: transparent !important;
           }
         }
-      `}</style>
+      `,
+        }}
+      />
 
       <div style={{ minWidth: 0, display: "flex" }}>
         <CinematicClip

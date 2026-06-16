@@ -4,10 +4,9 @@ import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HomepageServices from "@/components/HomepageServices";
 import MyAgentShowcase from "@/components/MyAgentShowcase";
-import PartnersSection from "@/components/PartnersSection";
 import AdvisorySection from "@/components/AdvisorySection";
 import Hero from "@/components/Hero";
-import TwoPathsFooter from "@/components/TwoPathsFooter";
+import StartHereOffers from "@/components/StartHereOffers";
 import Footer from "@/components/Footer";
 import { MotionSection } from "@/components/MotionSection";
 
@@ -60,28 +59,30 @@ const Index = () => {
         {/* Hero — entry, dual fork CTAs, salon video */}
         <Hero />
 
-        {/* Studio (Path A) — MyAgent product showcase. */}
+        {/* Hero hands straight to the product SHOWING real work — no
+            commodity "here are your problems" grid in between. */}
         <MotionSection>
           <MyAgentShowcase />
         </MotionSection>
 
-        {/* Solutions (Path B) — agency catalog. */}
+        {/* The breadth — agency-level power across the whole operation. */}
         <MotionSection>
           <HomepageServices />
         </MotionSection>
 
-        {/* Advisory — Path B endpoint (consultation booking) */}
+        {/* PROOF — the worked SAMPLE of the AI Opportunity Assessment + the
+            roadmap. This demonstrates exactly what the offer produces, so it
+            MUST come before the close (show the demonstration, then ask). */}
         <MotionSection>
           <AdvisorySection />
         </MotionSection>
 
-        {/* Partners — trust signal */}
+        {/* THE CLOSE — the final beat. Three Grand Slam offers, the $497
+            Opportunity Map as the credited center. The page ENDS here on the
+            CTA — nothing follows it (Partners moved off the homepage). */}
         <MotionSection>
-          <PartnersSection />
+          <StartHereOffers />
         </MotionSection>
-
-        {/* Two-Paths pre-footer — final binary fork for any remaining un-converted scroller */}
-        <TwoPathsFooter />
       </main>
       <Footer />
     </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Network,
@@ -52,6 +52,7 @@ const TRUST_BADGES = [
 ];
 
 const MYAGENT_URL = "https://get-myagent.com";
+const WIDGET_SECTION_SCROLL_OFFSET = 72;
 
 // Umbrella headline — MyAgent's canonical brand promise from get-myagent.com
 const UMBRELLA_PRE = "Your life.";
@@ -99,6 +100,7 @@ const VOICE_COMMANDS_PHRASES = [
 const MyAgentShowcase = () => {
   const [callPhraseIdx, setCallPhraseIdx] = useState(0);
   const [voicePhraseIdx, setVoicePhraseIdx] = useState(0);
+  const widgetSectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -112,6 +114,48 @@ const MyAgentShowcase = () => {
       setVoicePhraseIdx((prev) => (prev + 1) % VOICE_COMMANDS_PHRASES.length);
     }, 3000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    const previousScrollBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    return () => {
+      html.style.scrollBehavior = previousScrollBehavior;
+    };
+  }, []);
+
+  const alignWidgetSection = (behavior: ScrollBehavior = "auto") => {
+    const section = widgetSectionRef.current;
+    if (!section) return;
+    const target = section.getBoundingClientRect().top + window.scrollY - WIDGET_SECTION_SCROLL_OFFSET;
+    window.scrollTo({ top: Math.max(0, Math.round(target)), behavior });
+  };
+
+  useEffect(() => {
+    let timeoutId: number | null = null;
+
+    const queueWidgetAlignment = () => {
+      if (timeoutId != null) window.clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(() => {
+        const section = widgetSectionRef.current;
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+        const targetZoneBottom = Math.min(window.innerHeight * 0.78, 680);
+        const alreadyAligned = Math.abs(rect.top - WIDGET_SECTION_SCROLL_OFFSET) < 10;
+        const closeEnoughToWidget = rect.top > -80 && rect.top < targetZoneBottom;
+        if (!alreadyAligned && closeEnoughToWidget) {
+          alignWidgetSection("auto");
+        }
+      }, 160);
+    };
+
+    window.addEventListener("scroll", queueWidgetAlignment, { passive: true });
+    return () => {
+      if (timeoutId != null) window.clearTimeout(timeoutId);
+      window.removeEventListener("scroll", queueWidgetAlignment);
+    };
   }, []);
 
   return (
@@ -224,15 +268,15 @@ const MyAgentShowcase = () => {
 
       {/* ──────────────────────────────────────────────────────────
           SHOWCASE 1 — its own scroll-stop. "Your calls. Always answered." */}
-      <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
+      <div className="relative min-h-screen flex flex-col items-center justify-start px-2 sm:px-6 pt-4 md:pt-6 pb-6 md:pb-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.7 }}
-        className="relative z-10 w-full max-w-6xl mx-auto"
+        className="relative z-10 w-full max-w-[920px] mx-auto"
       >
-        <div className="text-center mb-6 md:mb-8 px-4">
+        <div className="text-center mb-3 md:mb-4 px-4">
           <h3
             className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14]"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
@@ -351,17 +395,17 @@ const MyAgentShowcase = () => {
 
       {/* ──────────────────────────────────────────────────────────
           SHOWCASE 4 — its own scroll-stop. "Your website. Always on." */}
-      <div className="relative min-h-screen flex flex-col items-center justify-center px-2 sm:px-6 py-16 md:py-24">
+      <div ref={widgetSectionRef} className="relative min-h-screen flex flex-col items-center justify-start px-2 sm:px-6 pt-4 md:pt-6 pb-6 md:pb-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.7 }}
-        className="relative z-10 w-full max-w-6xl mx-auto"
+        className="relative z-10 w-full max-w-[920px] mx-auto"
       >
-        <div className="text-center mb-6 md:mb-8 px-4">
+        <div className="text-center mb-3 md:mb-4 px-4">
           <h3
-            className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14] mb-4"
+            className="font-poppins font-bold tracking-tight text-foreground !leading-[1.14]"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
           >
             Your website.{" "}
@@ -373,7 +417,7 @@ const MyAgentShowcase = () => {
       </motion.div>
 
       {/* Demo + Start Free Trial buttons — same chrome as StickyFooterCTA */}
-      <div className="relative z-10 flex justify-center gap-2 sm:gap-3 mt-12 md:mt-14 w-full">
+      <div className="relative z-10 flex justify-center gap-2 sm:gap-3 mt-4 md:mt-5 w-full">
         <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
           <Button
             variant="outline"
