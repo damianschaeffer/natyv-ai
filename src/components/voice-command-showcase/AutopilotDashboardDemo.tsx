@@ -105,7 +105,7 @@ const SPACES: Space[] = [
   {
     id: "work",
     name: "Work",
-    accent: "#3B82F6",
+    accent: "#1077FA",
     icon: Briefcase,
     cards: [
       {
@@ -321,9 +321,9 @@ function LeftSidebar({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="lg:hidden flex-1 px-1.5 py-1 rounded-md bg-blue-50 border border-blue-100"
+            className="lg:hidden flex-1 px-1.5 py-1 rounded-md bg-primary/10 border border-primary/20"
           >
-            <p className="text-[9px] text-blue-700 leading-snug">
+            <p className="text-[9px] text-primary leading-snug">
               Click between different spaces of your life.
             </p>
           </motion.div>
@@ -373,9 +373,9 @@ function LeftSidebar({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="hidden lg:block mt-3 px-2 py-2 rounded-lg bg-blue-50 border border-blue-100"
+          className="hidden lg:block mt-3 px-2 py-2 rounded-lg bg-primary/10 border border-primary/20"
         >
-          <p className="text-[10px] text-blue-700 leading-snug">
+          <p className="text-[10px] text-primary leading-snug">
             Click between different spaces of your life.
           </p>
         </motion.div>
@@ -615,7 +615,7 @@ function TasksCard({
 }: {
   tasks: Array<{ text: string; priority?: "high" | "normal" }>;
 }) {
-  const COLOR = "#3B82F6";
+  const COLOR = "#1077FA";
   return (
     <Card title="Tasks" icon={CheckSquare} color={COLOR} meta={`${tasks.length} active`}>
       <div className="space-y-1">
@@ -769,7 +769,7 @@ function ContactsCard({
   summary: string;
   recent: Array<{ name: string; role: string }>;
 }) {
-  const COLOR = "#3B82F6";
+  const COLOR = "#1077FA";
   return (
     <Card title="Contacts" icon={Users} color={COLOR} meta={summary}>
       <div className="space-y-1">
@@ -796,7 +796,7 @@ function FilesCard({
   summary: string;
   items: Array<{ name: string; meta: string }>;
 }) {
-  const COLOR = "#3B82F6";
+  const COLOR = "#1077FA";
   return (
     <Card title="Files" icon={FileText} color={COLOR} meta={summary}>
       <div className="space-y-1">
@@ -828,11 +828,11 @@ function FloatingAvaBubble() {
     >
       <div className="relative">
         <motion.div
-          className="absolute inset-0 rounded-full bg-blue-500 blur-md"
+          className="absolute inset-0 rounded-full bg-primary blur-md"
           animate={{ opacity: [0.25, 0.45, 0.25] }}
           transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
         />
-        <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-xl shadow-blue-500/30 ring-2 ring-white">
+        <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-xl shadow-primary/30 ring-2 ring-white">
           <img src={SOPHIA_AVATAR} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
         </div>
         <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white">

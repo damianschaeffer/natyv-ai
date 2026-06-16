@@ -3,41 +3,42 @@
 @tailwind utilities;
 
 /* Natyv AI Design System
-   Theme: Monolithic Dark Mode
-   Base: #050505 | Accent: #3B82F6 (Precision Blue)
+   Theme: Light/Dark
+   Primary: #1077FA light | #1C82FB dark
    All colors in HSL format
 */
 
 @layer base {
   :root {
-    /* Natyv Dark Theme - Always dark */
-    --background: 0 0% 2%;
-    --foreground: 0 0% 95%;
+    color-scheme: light;
 
-    --card: 0 0% 4%;
-    --card-foreground: 0 0% 95%;
+    --background: 0 0% 100%;
+    --foreground: 220 20% 13%;
 
-    --popover: 0 0% 4%;
-    --popover-foreground: 0 0% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 13%;
 
-    --primary: 217 91% 60%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 13%;
+
+    --primary: 214 96% 52%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 8%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 20% 13%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 40%;
 
-    --accent: 217 91% 60%;
+    --accent: 213 97% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 217 91% 60%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 214 96% 52%;
 
     --radius: 0.5rem;
 
@@ -48,19 +49,19 @@
     /* Protocol Status Green */
     --protocol-active: 142 76% 36%;
 
-    /* Sidebar - matching dark theme */
-    --sidebar-background: 0 0% 3%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-background: 220 14% 97%;
+    --sidebar-foreground: 220 20% 13%;
+    --sidebar-primary: 214 96% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 8%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-accent: 220 14% 93%;
+    --sidebar-accent-foreground: 220 20% 13%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 214 96% 52%;
   }
 
-  /* Keep dark class for compatibility but same values */
   .dark {
+    color-scheme: dark;
+
     --background: 0 0% 2%;
     --foreground: 0 0% 95%;
 
@@ -70,7 +71,7 @@
     --popover: 0 0% 4%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 217 91% 60%;
+    --primary: 213 97% 55%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 8%;
@@ -79,7 +80,7 @@
     --muted: 0 0% 12%;
     --muted-foreground: 0 0% 60%;
 
-    --accent: 217 91% 60%;
+    --accent: 213 97% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -87,7 +88,7 @@
 
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 217 91% 60%;
+    --ring: 213 97% 55%;
 
     --gold: 45 93% 47%;
     --gold-foreground: 0 0% 10%;
@@ -96,12 +97,12 @@
 
     --sidebar-background: 0 0% 3%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary: 213 97% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 0 0% 8%;
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-ring: 213 97% 55%;
   }
 }
 
@@ -139,6 +140,14 @@
 
   .font-roboto {
     font-family: 'Roboto', sans-serif;
+  }
+
+  .natyv-logo {
+    filter: brightness(0) saturate(100%) invert(9%) sepia(18%) saturate(1300%) hue-rotate(181deg) brightness(92%) contrast(96%);
+  }
+
+  .dark .natyv-logo {
+    filter: none;
   }
 }
 

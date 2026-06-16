@@ -61,7 +61,7 @@ const Footer = () => {
                 alt="Natyv AI"
                 loading="lazy"
                 decoding="async"
-                className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto"
+                className="natyv-logo h-[clamp(1rem,2.5vw,1.5rem)] w-auto"
               />
             </motion.a>
 

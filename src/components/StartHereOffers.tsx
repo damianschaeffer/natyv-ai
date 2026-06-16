@@ -32,7 +32,7 @@ const offers = [
     name: "AI Opportunity Assessment",
     price: "$497",
     priceNote: "one-time · fully credited toward your build",
-    color: "#3b82f6",
+    color: "#1077FA",
     icon: Map,
     featured: true,
     description:

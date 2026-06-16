@@ -13,7 +13,7 @@ const Privacy = () => (
     metaDescription="Natyv AI privacy policy covering assessment intake, MyAgent services, call data, SMS consent, Google data, security practices, and your privacy rights."
     icon={Shield}
   >
-    <LegalSection title="Last Updated" accent="#3B82F6">
+    <LegalSection title="Last Updated" accent="#1077FA">
       <p>May 21, 2026.</p>
       <p>
         Natyv AI and MyAgent are operated by Natyv Ventures LLC. This policy explains how we collect, use,
@@ -45,7 +45,7 @@ const Privacy = () => (
       </LegalList>
     </LegalSection>
 
-    <LegalSection title="How We Use Information" accent="#3B82F6">
+    <LegalSection title="How We Use Information" accent="#1077FA">
       <LegalList>
         <li>To deliver AI Opportunity Assessments, roadmap recommendations, and implementation proposals.</li>
         <li>To configure, operate, support, and improve MyAgent voice agents and Natyv automation services.</li>

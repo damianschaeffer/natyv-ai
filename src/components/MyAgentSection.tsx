@@ -44,15 +44,15 @@ const MyAgentSection = () => {
             animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0 }}
           >
-            <img 
-              src={natyvLogoTopline} 
-              alt="Natyv AI" 
-              className="w-full max-w-md mx-auto mb-4" 
+            <img
+              src={natyvLogoTopline}
+              alt="Natyv AI"
+              className="natyv-logo w-full max-w-md mx-auto mb-4"
             />
           </motion.div>
 
           {/* Stage 2: Separator line draws in */}
-          <motion.div 
+          <motion.div
             className="w-full max-w-md mx-auto h-px bg-foreground/40 mb-4"
             initial={{ scaleX: 0 }}
             animate={hasRevealed ? { scaleX: 1 } : {}}
@@ -60,13 +60,13 @@ const MyAgentSection = () => {
           />
 
           {/* Stage 3: STUDIO label */}
-          <motion.div 
+          <motion.div
             className="flex items-center justify-center gap-6 mb-20"
             initial={{ opacity: 0, y: 20 }}
             animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
-            <motion.span 
+            <motion.span
               className="w-[9px] h-9 bg-primary"
               initial={{ scaleY: 0 }}
               animate={hasRevealed ? { scaleY: 1 } : {}}
@@ -75,7 +75,7 @@ const MyAgentSection = () => {
             <span className="text-foreground font-body font-extrabold tracking-tight text-4xl md:text-5xl ml-1">
               Studio
             </span>
-            <motion.span 
+            <motion.span
               className="w-[9px] h-9 bg-primary"
               initial={{ scaleY: 0 }}
               animate={hasRevealed ? { scaleY: 1 } : {}}

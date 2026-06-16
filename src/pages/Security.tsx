@@ -13,7 +13,7 @@ const Security = () => (
     metaDescription="Natyv AI security practices for encryption, access control, MyAgent data isolation, vendor review, incident response, and vulnerability reporting."
     icon={ShieldCheck}
   >
-    <LegalSection title="Last Updated" accent="#3B82F6">
+    <LegalSection title="Last Updated" accent="#1077FA">
       <p>May 21, 2026.</p>
       <p>
         Security is not a separate promise tacked onto the end of the product. It shapes how we design assessments,
@@ -91,7 +91,7 @@ const Security = () => (
       </LegalList>
     </LegalSection>
 
-    <LegalSection title="Report a Security Issue" accent="#3B82F6">
+    <LegalSection title="Report a Security Issue" accent="#1077FA">
       <p>
         Please report suspected vulnerabilities or security concerns to{" "}
         <a className="text-primary hover:underline" href="mailto:security@natyv.ai">security@natyv.ai</a>.

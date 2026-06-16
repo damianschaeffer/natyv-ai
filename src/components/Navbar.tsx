@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Linkedin, Twitter, Youtube, Facebook, Instagram, Menu, X } from "lucide-react";
+import { Linkedin, Twitter, Youtube, Facebook, Instagram, Menu, Moon, Sun, X } from "lucide-react";
 import TikTokIcon from "./icons/TikTokIcon";
 import ProtocolStatus from "./ProtocolStatus";
 import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
@@ -9,11 +9,28 @@ import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   // Scroll-spy: which homepage section the visitor is currently in.
   // null when on a non-homepage route or above all tracked sections.
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("natyv-theme");
+    const nextTheme = savedTheme === "light" ? "light" : "dark";
+    setTheme(nextTheme);
+    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme((current) => {
+      const nextTheme = current === "dark" ? "light" : "dark";
+      window.localStorage.setItem("natyv-theme", nextTheme);
+      document.documentElement.classList.toggle("dark", nextTheme === "dark");
+      return nextTheme;
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -133,7 +150,7 @@ const Navbar = () => {
               <img
                 src={natyvLogoTopline}
                 alt="Natyv AI"
-                className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto"
+                className="natyv-logo h-[clamp(1rem,2.5vw,1.5rem)] w-auto"
               />
             </motion.a>
 
@@ -211,6 +228,26 @@ const Navbar = () => {
 
             {/* Right Section - Social Links & Protocol Status - Fluid sizing */}
             <div className="hidden md:flex items-center justify-end gap-[clamp(0.125rem,0.5vw,0.5rem)] flex-shrink-0">
+              <motion.button
+                type="button"
+                onClick={toggleTheme}
+                className="inline-flex items-center justify-center rounded-full border border-border bg-background/70 text-foreground shadow-sm backdrop-blur transition-colors hover:border-primary hover:text-primary"
+                style={{
+                  width: 'clamp(2rem, 2.6vw, 2.5rem)',
+                  height: 'clamp(2rem, 2.6vw, 2.5rem)',
+                }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.24, duration: 0.3 }}
+                whileHover={{ scale: 1.05 }}
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {theme === "dark" ? (
+                  <Sun style={{ width: 'clamp(0.875rem, 1.1vw, 1.125rem)', height: 'clamp(0.875rem, 1.1vw, 1.125rem)' }} />
+                ) : (
+                  <Moon style={{ width: 'clamp(0.875rem, 1.1vw, 1.125rem)', height: 'clamp(0.875rem, 1.1vw, 1.125rem)' }} />
+                )}
+              </motion.button>
               {socialLinks.map((social, index) => (
                 <motion.a
                   key={social.label}
@@ -306,6 +343,19 @@ const Navbar = () => {
                   )}
                 </motion.div>
               ))}
+
+              <motion.button
+                type="button"
+                onClick={toggleTheme}
+                className="inline-flex min-h-[44px] items-center gap-3 rounded-full border border-border bg-background px-5 py-2 font-accent uppercase tracking-[0.18em] text-foreground transition-colors hover:border-primary hover:text-primary"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                <span className="text-xs">{theme === "dark" ? "Light" : "Dark"}</span>
+              </motion.button>
               
               {/* Social Links in Mobile */}
               <motion.div

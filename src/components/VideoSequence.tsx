@@ -149,7 +149,7 @@ const VideoSequence = () => {
             <img
               src={natyvLogoTopline}
               alt="Natyv AI"
-              className="w-full max-w-2xl"
+              className="natyv-logo w-full max-w-2xl"
             />
 
             {/* Top horizontal separator line - flush with header */}
@@ -190,7 +190,7 @@ const VideoSequence = () => {
             <img
               src={natyvLogoFooter}
               alt="Studio | Solutions | Advisory"
-              className="w-full max-w-2xl"
+              className="natyv-logo w-full max-w-2xl"
             />
           </div>
         )}

@@ -55,6 +55,7 @@ const SectionHeader = ({
         src={natyvLogoTopline}
         alt=""
         aria-hidden="true"
+        className="natyv-logo"
         style={{ height: "1em", width: "auto", display: "block" }}
       />
 

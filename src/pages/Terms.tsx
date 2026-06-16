@@ -13,7 +13,7 @@ const Terms = () => (
     metaDescription="Natyv AI terms covering AI assessments, MyAgent services, SMS setup alerts, third-party integrations, payment, acceptable use, and liability."
     icon={FileText}
   >
-    <LegalSection title="Last Updated" accent="#3B82F6">
+    <LegalSection title="Last Updated" accent="#1077FA">
       <p>May 21, 2026.</p>
       <p>
         These Terms apply to Natyv AI websites, AI Opportunity Assessments, consulting, implementation work,
@@ -111,7 +111,7 @@ const Terms = () => (
       </LegalList>
     </LegalSection>
 
-    <LegalSection title="Intellectual Property" accent="#3B82F6">
+    <LegalSection title="Intellectual Property" accent="#1077FA">
       <p>
         Natyv AI, MyAgent, our software, workflows, templates, designs, documentation, prompts, and implementation
         methods remain our property or the property of our licensors. You retain ownership of your business data,

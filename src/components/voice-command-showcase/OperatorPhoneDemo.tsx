@@ -35,7 +35,7 @@ const NUDGE_TYPE_START = 5_000;
 const NUDGE_TYPE_DURATION = 600;
 const NUDGE_COMMIT = 5_700;
 
-const AGENT_COLOR = "#3B82F6";
+const AGENT_COLOR = "#1077FA";
 const AGENT_AVATAR = "https://get-myagent.com/avatars/agent-sophia.png";
 
 type Phase = "A" | "B" | "C";
@@ -179,7 +179,7 @@ export default function OperatorPhoneDemo({ videoTimeMs }: { videoTimeMs?: numbe
         </div>
         <div className="flex-1 min-w-0">
           <div className="text-[15px] font-semibold leading-tight text-slate-900">Ava</div>
-          <div className="text-[11px] text-blue-600 font-medium leading-tight">MyAgent</div>
+          <div className="text-[11px] text-primary font-medium leading-tight">MyAgent</div>
         </div>
         <span className="text-[11px] text-slate-500 font-medium">
           {phase === "A" ? "Incoming" : phase === "B" ? "Live" : "Completed"}
@@ -304,22 +304,22 @@ function PhaseB({ elapsed }: { elapsed: number }) {
       <div
         className="relative rounded-lg overflow-hidden"
         style={{
-          border: "1px solid rgba(59, 130, 246, 0.35)",
+          border: "1px solid hsl(var(--primary) / 0.35)",
           boxShadow:
-            "0 4px 20px rgba(59, 130, 246, 0.10), 0 0 10px rgba(59, 130, 246, 0.12)",
+            "0 4px 20px hsl(var(--primary) / 0.10), 0 0 10px hsl(var(--primary) / 0.12)",
         }}
       >
-        <div className="h-[3px] bg-blue-500" />
+        <div className="h-[3px] bg-primary" />
         <div className="p-3.5 space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Eye className="w-4 h-4 text-blue-600" aria-hidden="true" />
+              <Eye className="w-4 h-4 text-primary" aria-hidden="true" />
               <span className="text-[14px] font-semibold text-slate-900">Secret Mode</span>
             </div>
             <span className="text-sm" aria-hidden="true">🤫</span>
           </div>
 
-          <div className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white rounded-lg py-2.5 px-3">
+          <div className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground rounded-lg py-2.5 px-3">
             <Headphones className="w-4 h-4" aria-hidden="true" />
             <div className="text-left">
               <div className="text-[13px] font-bold leading-tight">Listen Live</div>
@@ -331,7 +331,7 @@ function PhaseB({ elapsed }: { elapsed: number }) {
 
           <div className="space-y-1.5">
             <div className="flex items-center gap-1.5">
-              <MessageSquareText className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
+              <MessageSquareText className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
               <span className="text-[12px] font-semibold text-slate-900">Coach</span>
             </div>
             <p className="text-[11px] text-slate-500 leading-snug">
@@ -355,7 +355,7 @@ function PhaseB({ elapsed }: { elapsed: number }) {
                 type="button"
                 tabIndex={-1}
                 aria-hidden="true"
-                className="w-8 h-8 flex items-center justify-center bg-blue-600 rounded-md"
+                className="w-8 h-8 flex items-center justify-center bg-primary rounded-md"
               >
                 <Send className="w-4 h-4 text-white" aria-hidden="true" />
               </button>

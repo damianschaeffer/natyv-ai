@@ -175,7 +175,7 @@ conversations (
 ## Visual Design System
 
 ### Colors (Matches natyv-ai-site)
-- **Primary:** `hsl(217 91% 60%)` - Vivid Blue (#2882F7)
+- **Primary:** `hsl(214 96% 52%)` light / `hsl(213 97% 55%)` dark - Unified Blue (#1077FA / #1C82FB)
 - **Gold:** `hsl(43 74% 50%)` - Celebration accent
 - **Background:** `hsl(0 0% 8%)` - Dark (#141414)
 - **Card:** `hsl(0 0% 12%)` - Slightly lighter
