@@ -421,7 +421,7 @@ const MyAgentShowcase = () => {
         <a href={MYAGENT_URL} target="_blank" rel="noopener noreferrer">
           <Button
             variant="outline"
-            className="h-8 sm:h-10 px-3 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full shadow-lg backdrop-blur-md bg-background/80 border-border/50 hover:bg-background/90 transition-all"
+            className="h-8 sm:h-10 px-3 sm:px-5 text-xs sm:text-sm font-poppins font-semibold rounded-full shadow-[0_0_0_2px_hsl(var(--primary)/0.18),0_10px_28px_-16px_hsl(var(--primary))] ring-1 ring-primary/25 backdrop-blur-md bg-background/80 border-primary/75 hover:border-primary hover:bg-background/90 hover:ring-primary/40 transition-all"
           >
             <Play className="w-3.5 h-3.5 mr-1.5 fill-current" aria-hidden="true" />
             Demo
