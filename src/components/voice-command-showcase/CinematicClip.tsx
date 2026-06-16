@@ -212,7 +212,7 @@ function ClipPlaceholder({ label }: { label: string }) {
           50% { background-position: 100% 50%; }
         }
       `}</style>
-      <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.2, color: "#2979FF" }}>
+      <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.2, color: "#1077FA" }}>
         CINEMATIC CLIP
       </div>
       <div style={{ fontSize: 14, fontWeight: 500, maxWidth: "80%" }}>{label}</div>

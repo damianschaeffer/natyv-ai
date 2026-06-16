@@ -4,7 +4,7 @@
 // To/Subject fill, body typing, attachment, and SEND lock.
 import { motion, AnimatePresence } from "framer-motion";
 
-const BRAND_BLUE = "#2979FF";
+const BRAND_BLUE = "#1077FA";
 const INK = "#f8fafc";
 const PANEL = "#ffffff";
 const BORDER = "rgba(0,0,0,0.08)";

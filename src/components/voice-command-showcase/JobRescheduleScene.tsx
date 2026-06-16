@@ -4,7 +4,7 @@
 // outbound team SMS. Pairs with the plumber-truck-voice clip.
 import { motion, AnimatePresence } from "framer-motion";
 
-const BRAND_BLUE = "#2979FF";
+const BRAND_BLUE = "#1077FA";
 const INK = "#0d0d1e";
 const PANEL = "#12131c";
 const BORDER = "rgba(255,255,255,0.08)";
