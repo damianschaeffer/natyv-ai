@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
+import NatyvLogo from "@/components/brand/NatyvLogo";
 
 const MyAgentSection = () => {
   const [currentLine, setCurrentLine] = useState(0);
@@ -44,11 +44,7 @@ const MyAgentSection = () => {
             animate={hasRevealed ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0 }}
           >
-            <img
-              src={natyvLogoTopline}
-              alt="Natyv AI"
-              className="natyv-logo w-full max-w-md mx-auto mb-4"
-            />
+            <NatyvLogo className="w-full max-w-md mx-auto mb-4" />
           </motion.div>
 
           {/* Stage 2: Separator line draws in */}

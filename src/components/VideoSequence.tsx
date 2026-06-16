@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
 import natyvLogoFooter from "@/assets/natyv-logo-footer.png";
+import NatyvLogo from "@/components/brand/NatyvLogo";
 
 const VideoSequence = () => {
   const [isPlaying, setIsPlaying] = useState(true); // Auto-play on mount
@@ -146,11 +146,7 @@ const VideoSequence = () => {
         {!isPlaying && currentScene >= scenes.length && (
           <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
             {/* Static Header - Using actual logo image */}
-            <img
-              src={natyvLogoTopline}
-              alt="Natyv AI"
-              className="natyv-logo w-full max-w-2xl"
-            />
+            <NatyvLogo className="w-full max-w-2xl" />
 
             {/* Top horizontal separator line - flush with header */}
             <div className="w-full max-w-2xl h-px bg-foreground/40 mt-2 mb-4" />

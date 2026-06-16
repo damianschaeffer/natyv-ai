@@ -33,26 +33,16 @@ const NatyvConciergeWidget = () => {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="group relative inline-flex h-16 w-16 items-center justify-center rounded-full border border-primary/45 bg-black/85 text-white shadow-2xl shadow-primary/25 transition hover:scale-105 hover:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className="group relative inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-transparent text-white transition hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label="Open Natyv AI Concierge"
         >
-          <span className="absolute inset-[-8px] rounded-full bg-primary/35 opacity-60 blur-sm transition group-hover:opacity-80" />
-          <span className="absolute inset-[-10px] rounded-full border border-primary/70 opacity-70 animate-ping" />
-          <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-background">
+          <span className="absolute inset-[-5px] rounded-full bg-primary/25 opacity-65 blur-md transition group-hover:opacity-85" />
+          <span className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-background ring-2 ring-primary shadow-xl shadow-primary/25">
             <img
               src={NATYV_CONCIERGE_AVATAR}
               alt="Ava, Natyv AI Concierge"
               className="h-full w-full object-cover"
             />
-            <span
-              className="absolute -bottom-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full border border-background bg-black text-[10px] font-black leading-none text-white shadow-lg"
-              aria-hidden="true"
-            >
-              <span className="relative">
-                N
-                <span className="absolute -bottom-[3px] left-0 right-0 h-[2px] rounded-full bg-primary" />
-              </span>
-            </span>
             <span className="absolute inset-0 flex items-center justify-center bg-black/15 opacity-0 transition group-hover:opacity-100">
               <MessageCircle className="h-5 w-5 text-white" aria-hidden="true" />
             </span>

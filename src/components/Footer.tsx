@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Linkedin, Twitter, Youtube, Facebook, Instagram } from "lucide-react";
 import TikTokIcon from "./icons/TikTokIcon";
 import ProtocolStatus from "./ProtocolStatus";
-import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
+import NatyvLogo from "@/components/brand/NatyvLogo";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -56,13 +56,7 @@ const Footer = () => {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
-              <img
-                src={natyvLogoTopline}
-                alt="Natyv AI"
-                loading="lazy"
-                decoding="async"
-                className="natyv-logo h-[clamp(1rem,2.5vw,1.5rem)] w-auto"
-              />
+              <NatyvLogo className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto" loading="lazy" />
             </motion.a>
 
             {/* Navigation Links - Fluid sizing with clamp */}

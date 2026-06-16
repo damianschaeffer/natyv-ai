@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Linkedin, Twitter, Youtube, Facebook, Instagram, Menu, Moon, Sun, X } from "lucide-react";
 import TikTokIcon from "./icons/TikTokIcon";
 import ProtocolStatus from "./ProtocolStatus";
-import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
+import NatyvLogo from "@/components/brand/NatyvLogo";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -147,11 +147,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
-              <img
-                src={natyvLogoTopline}
-                alt="Natyv AI"
-                className="natyv-logo h-[clamp(1rem,2.5vw,1.5rem)] w-auto"
-              />
+              <NatyvLogo className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto" />
             </motion.a>
 
             {/* Desktop Navigation - Fluid sizing with clamp */}

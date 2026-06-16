@@ -1,4 +1,4 @@
-import natyvLogoTopline from "@/assets/natyv-logo-topline.png";
+import NatyvLogo from "@/components/brand/NatyvLogo";
 
 /**
  * SectionHeader — section-entrance brand lockup.
@@ -51,11 +51,9 @@ const SectionHeader = ({
     >
       {/* Line 1 — NATYV AI wordmark. Height = 1em, width auto-derived
           from the asset's aspect ratio. This sets the lockup width. */}
-      <img
-        src={natyvLogoTopline}
-        alt=""
-        aria-hidden="true"
-        className="natyv-logo"
+      <NatyvLogo
+        decorative
+        className=""
         style={{ height: "1em", width: "auto", display: "block" }}
       />
 

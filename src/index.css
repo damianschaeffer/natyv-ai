@@ -142,13 +142,6 @@
     font-family: 'Roboto', sans-serif;
   }
 
-  .natyv-logo {
-    filter: brightness(0) saturate(100%) invert(9%) sepia(18%) saturate(1300%) hue-rotate(181deg) brightness(92%) contrast(96%);
-  }
-
-  .dark .natyv-logo {
-    filter: none;
-  }
 }
 
 @layer components {

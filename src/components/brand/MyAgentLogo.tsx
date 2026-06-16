@@ -27,6 +27,9 @@
  *     the lockup scales fluidly with the viewport.
  */
 
+import myAgentLockupBlack from "@/assets/brand/myagent/myagent-extended-lockup-black-approved-20260608.png";
+import myAgentLockupWhite from "@/assets/brand/myagent/myagent-extended-lockup-white-approved-20260608.png";
+
 const NORTH_STAR_PATH =
   "M100 34 Q108 88 166 100 Q108 112 100 166 Q92 112 34 100 Q92 88 100 34Z";
 
@@ -114,103 +117,24 @@ export const MyAgentLockup = ({ height = 56 }: { height?: number | string }) => 
       aria-label="MyAgent — Your Personal AI Agent"
       style={{
         fontSize: toFontSize(height),
-        display: "inline-flex",
-        flexDirection: "column",
-        alignItems: "stretch",
+        display: "inline-block",
         lineHeight: 1,
       }}
     >
-      {/* Logo — re-uses MyAgentLogo's em-based geometry by setting
-          font-size: 1em (= the lockup's height). */}
-      <span
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          height: "1em",
-          gap: "0.25em",
-          lineHeight: 1,
-        }}
+      <img
+        src={myAgentLockupWhite}
+        alt=""
         aria-hidden="true"
-      >
-        <span
-          style={{
-            width: "1em",
-            height: "1em",
-            borderRadius: "0.227em",
-            background: "hsl(var(--primary))",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
-          }}
-        >
-          <svg width="0.8em" height="0.8em" viewBox="24 24 152 152">
-            <path d={NORTH_STAR_PATH} fill="#ffffff" />
-          </svg>
-        </span>
-        <span
-          style={{
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 700,
-            fontSize: "1em",
-            lineHeight: 1,
-            whiteSpace: "nowrap",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          <span style={{ color: "hsl(var(--primary))" }}>My</span>
-          <span style={{ color: "#ffffff" }}>Agent</span>
-        </span>
-      </span>
-
-      {/* Tagline grid — line · gap · text · gap · line, all em-based. */}
-      <span
-        style={{
-          marginTop: "0.21em",
-          display: "grid",
-          gridTemplateColumns: "1em 0.25em minmax(0, 1fr) 0.25em 1em",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
-        <span
-          style={{
-            height: "0.045em",
-            width: "100%",
-            background: "hsl(var(--primary) / 0.4)",
-          }}
-          aria-hidden="true"
-        />
-        <span aria-hidden="true" />
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            // 0.297em was chosen so the natural width of "Your Personal
-            // AI Agent" in Inter regular fills the available column
-            // (column = 3.27em; text natural width ≈ fontSize × 11).
-            fontSize: "0.297em",
-            fontWeight: 400,
-            color: "hsl(var(--muted-foreground))",
-            letterSpacing: "0.005em",
-            lineHeight: 1.2,
-            whiteSpace: "nowrap",
-            textAlign: "left",
-            overflow: "hidden",
-            textOverflow: "clip",
-          }}
-        >
-          {TAGLINE}
-        </span>
-        <span aria-hidden="true" />
-        <span
-          style={{
-            height: "0.045em",
-            width: "100%",
-            background: "hsl(var(--primary) / 0.4)",
-          }}
-          aria-hidden="true"
-        />
-      </span>
+        className="block dark:hidden"
+        style={{ height: "1.35em", width: "auto", maxWidth: "min(82vw, 100%)" }}
+      />
+      <img
+        src={myAgentLockupBlack}
+        alt=""
+        aria-hidden="true"
+        className="hidden dark:block"
+        style={{ height: "1.35em", width: "auto", maxWidth: "min(82vw, 100%)" }}
+      />
     </span>
   );
 };
