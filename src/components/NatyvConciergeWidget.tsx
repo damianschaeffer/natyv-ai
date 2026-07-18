@@ -16,6 +16,7 @@ const NUDGE_MIN_DWELL_MS = 8000;
 const NatyvConciergeWidget = () => {
   const location = useLocation();
   const isServicesRoute = location.pathname.replace(/\/+$/, "") === "/services";
+  const isAssessmentRoute = location.pathname.replace(/\/+$/, "") === "/assessment";
 
   const [isDarkTheme, setIsDarkTheme] = useState(() =>
     typeof document !== "undefined" ? document.documentElement.classList.contains("dark") : true
@@ -124,6 +125,11 @@ const NatyvConciergeWidget = () => {
   };
 
   const showNudge = nudgeVisible && !isOpen && isServicesRoute;
+
+  // The assessment page already has one clear Ava entry point. Hiding the
+  // global launcher here prevents a competing CTA and avoids covering the
+  // mobile form or promise copy.
+  if (isAssessmentRoute) return null;
 
   return (
     <div className="fixed bottom-4 right-4 z-[80] sm:bottom-6 sm:right-6">
