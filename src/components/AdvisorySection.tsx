@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   ChevronDown,
   Clock3,
@@ -7,9 +8,7 @@ import {
   LayoutGrid,
   MessageSquare,
   Phone,
-  Star,
   Target,
-  Users,
   type LucideIcon,
 } from "lucide-react";
 
@@ -66,32 +65,6 @@ const OPPORTUNITIES: OpportunityItem[] = [
     color: "#10B981",
     mapX: 52,
     mapY: 70,
-  },
-  {
-    icon: Star,
-    rank: 4,
-    title: "Auto-review requests",
-    area: "Marketing",
-    description: "Ask for reviews after completed work without extra admin.",
-    payoff: "More reviews without more admin",
-    effort: "1 short workflow",
-    reason: "Easy win after lead capture is tight.",
-    color: "#FB923C",
-    mapX: 17,
-    mapY: 50,
-  },
-  {
-    icon: Users,
-    rank: 5,
-    title: "Past customer outreach",
-    area: "Customer Experience",
-    description: "Win back dormant customers with timely, relevant follow-up.",
-    payoff: "Revenue from customers already earned",
-    effort: "1-2 day cleanup",
-    reason: "Strong upside once new leads stop leaking.",
-    color: "#8B5CF6",
-    mapX: 35,
-    mapY: 43,
   },
 ];
 
@@ -393,6 +366,23 @@ const AdvisorySection = () => {
             )}
           </div>
         </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="relative z-10 flex flex-col items-center text-center"
+      >
+        <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+          Yours will be specific to how you work — not a generic list of AI tools.
+        </p>
+        <Link
+          to="/assessment#start"
+          className="mt-5 inline-flex min-h-12 items-center justify-center rounded-xl bg-primary px-6 font-poppins text-sm font-bold text-primary-foreground shadow-[0_15px_35px_-15px_rgba(16,119,250,0.9)] transition hover:-translate-y-0.5 hover:bg-primary/90"
+        >
+          Start my assessment — no upfront payment
+        </Link>
       </motion.div>
 
     </section>

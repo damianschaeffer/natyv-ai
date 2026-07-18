@@ -2,6 +2,7 @@ import type { RouteRecord } from "vite-react-ssg";
 import Layout from "./Layout";
 import Index from "./pages/Index";
 import Advisory from "./pages/Advisory";
+import Assessment from "./pages/Assessment";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Partners from "./pages/Partners";
@@ -23,6 +24,7 @@ export const routes: RouteRecord[] = [
       { path: "services", Component: Services, entry: "src/pages/Services.tsx" },
       { path: "about", Component: About, entry: "src/pages/About.tsx" },
       { path: "advisory", Component: Advisory, entry: "src/pages/Advisory.tsx" },
+      { path: "assessment", Component: Assessment, entry: "src/pages/Assessment.tsx" },
       { path: "partners", Component: Partners, entry: "src/pages/Partners.tsx" },
       { path: "faq", Component: FAQ, entry: "src/pages/FAQ.tsx" },
       { path: "contact", Component: Contact, entry: "src/pages/Contact.tsx" },
