@@ -46,9 +46,9 @@ const Services = () => {
       "provider": { "@id": "https://natyv.ai/#organization" },
       "description": "Two paths to begin with AI: start with your MyAgent AI employee (free trial or white-glove Founding Member build), or start with a fixed-price diagnosis credited toward your build.",
       "offers": [
-        { "@type": "Offer", "name": "Website & AI Visibility Audit", "price": "250", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "Scored website + AI search visibility report with prioritized fixes and a founder walkthrough. 48-hour turnaround. Credited toward the Assessment." },
-        { "@type": "Offer", "name": "AI Opportunity Assessment", "price": "497", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "Founder-led AI discovery session and 48-hour AI Opportunity Map with ROI snapshot. Fully credited toward your first implementation." },
-        { "@type": "Offer", "name": "Founding Member Launch Package", "price": "999", "priceCurrency": "USD", "url": "https://natyv.ai/services#start-here", "description": "White-glove MyAgent voice agent setup with local number, AI business page, and 90 days of Growth-tier service included. Limited to the first 10 businesses." }
+        { "@type": "Offer", "name": "AI Opportunity Assessment", "price": "250", "priceCurrency": "USD", "url": "https://natyv.ai/assessment", "description": "Private intake with Ava, human-reviewed report, three ranked AI opportunities within 48 hours. $250 credited toward White-Glove Build." },
+        { "@type": "Offer", "name": "Founder-Led AI Strategy Session", "price": "497", "priceCurrency": "USD", "url": "https://natyv.ai/services#founder-strategy-session", "description": "Live strategy session with the founder as your first point of contact—not the intake bot. $497 fully credited toward White-Glove Build." },
+        { "@type": "Offer", "name": "White-Glove Build", "price": "999", "priceCurrency": "USD", "url": "https://natyv.ai/services#founding-member", "description": "White-glove MyAgent voice agent setup with local number, AI business page, and 90 days of Growth-tier service included. Limited to the first 10 businesses." }
       ]
     },
     {
