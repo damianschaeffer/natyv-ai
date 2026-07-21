@@ -1,52 +1,51 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Search, Map, Rocket, ShieldCheck, X, CalendarDays } from "lucide-react";
+import { ArrowRight, Sparkles, Rocket, ShieldCheck, X, CalendarDays, UserRound } from "lucide-react";
 import { MYAGENT_NORTH_STAR_PATH } from "@/components/brand/MyAgentLogo";
 
-// "Start Here" — the three Grand Slam Offers (value-stacked, guaranteed,
-// $497 center). Copy kept deliberately terse: names, scannable stacks,
-// one-line guarantees. No prose. Dollar values / guarantee terms / scarcity
-// are DRAFTS for Damian's sign-off before deploy — real commitments.
+type CtaMode = "cal" | "link";
+
 const offers = [
   {
-    id: "visibility-audit",
-    name: "Visibility Audit",
+    id: "ai-opportunity-assessment",
+    name: "AI Opportunity Assessment",
     color: "#38bdf8",
-    icon: Search,
+    icon: Sparkles,
     featured: false,
     badge: "First step",
     price: "$250",
-    priceNote: "48-hr turnaround",
-    totalValue: "$1,450",
+    priceNote: "48-hr report",
+    totalValue: null as string | null,
     stack: [
-      ["AI + search visibility scan", "$500"],
-      ["Revenue-ranked fixes", "$400"],
-      ["Founder walkthrough", "$300"],
-      ["Credited to your Map", "$250"],
+      ["Private intake with Ava", ""],
+      ["Human-reviewed report", ""],
+      ["Three ranked opportunities", ""],
+      ["$250 credited toward White-Glove Build", ""],
     ],
-    guarantee: "3 opportunities or it's free.",
-    cta: "Get the audit",
-    href: "https://buy.stripe.com/6oU3cxboC7Sh9sxdAR93y03",
+    guarantee: "Three practical opportunities or your assessment is refunded.",
+    cta: "Book the assessment",
+    ctaMode: "link" as CtaMode,
+    href: "/assessment",
   },
   {
-    id: "opportunity-assessment",
-    name: "AI Opportunity Map",
+    id: "founder-strategy-session",
+    name: "Founder-Led AI Strategy Session",
     color: "#1077FA",
-    icon: Map,
+    icon: UserRound,
     featured: true,
     badge: "Most popular",
     price: "$497",
     priceNote: "fully credited",
     totalValue: "$3,147",
     stack: [
-      ["Founder strategy session", "$750"],
-      ["48-hr ROI map", "$1,000"],
-      ["Quick-win plan", "$500"],
-      ["Bonus: build-team access", "$400"],
+      ["Live session with Damian (founder)", ""],
+      ["Your first point of contact — not the intake bot", ""],
+      ["Clear next step before any build", ""],
+      ["$497 credited toward White-Glove Build", ""],
     ],
-    guarantee: "10× ROI or it's free.",
-    cta: "Book the map",
-    href: "https://buy.stripe.com/3cIcN72S66OdcEJ2Wd93y02",
+    guarantee: "Leave with a clear next step—or we follow up at no extra fee.",
+    cta: "Book with the founder",
+    ctaMode: "cal" as CtaMode,
   },
   {
     id: "founding-member",
@@ -66,7 +65,7 @@ const offers = [
     ],
     guarantee: "Live in days or we keep going free.",
     cta: "Claim a spot",
-    href: "https://buy.stripe.com/8x2aEZfES5K9fQV7ct93y04",
+    ctaMode: "cal" as CtaMode,
   },
 ];
 
@@ -80,6 +79,14 @@ const StartHereOffers = () => {
         `Interested in ${booking.name} (${booking.price})`
       )}`
     : "";
+
+  const onOfferClick = (offer: Offer) => {
+    if (offer.ctaMode === "link" && offer.href) {
+      window.location.href = offer.href;
+      return;
+    }
+    setBooking(offer);
+  };
 
   return (
     <section
@@ -125,7 +132,8 @@ const StartHereOffers = () => {
         {offers.map((offer, index) => (
           <motion.article
             key={offer.id}
-            className={`group relative flex flex-col overflow-hidden rounded-2xl backdrop-blur-md transition-all duration-300 border ${
+            id={offer.id}
+            className={`group relative flex flex-col overflow-hidden rounded-2xl backdrop-blur-md transition-all duration-300 border scroll-mt-28 ${
               offer.featured ? "border-primary/60 lg:scale-[1.03] lg:-translate-y-1 shadow-2xl" : "border-border/40"
             }`}
             style={{
@@ -140,9 +148,6 @@ const StartHereOffers = () => {
             <div aria-hidden="true" className="absolute top-0 left-0 right-0" style={{ height: 4, background: offer.color }} />
 
             <div className="flex flex-col h-full p-5 md:p-6 pt-5">
-              {/* Badge row — reserved on EVERY card (empty on the plain tier)
-                  so the three headers lock to the same frame and the badge
-                  never overlaps the title. */}
               <div className="h-7 mb-2 flex items-center justify-center">
                 {offer.badge && (
                   <span className="px-3 py-1 rounded-full text-[10px] font-poppins font-semibold uppercase tracking-wider text-white" style={{ background: offer.color }}>
@@ -151,13 +156,11 @@ const StartHereOffers = () => {
                 )}
               </div>
 
-              {/* Header — fixed min-height so a 1-line and a 2-line title
-                  still align the stacks/prices across all three cards. */}
               <div className="flex items-center gap-3 mb-4 min-h-[3.25rem]">
                 <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: offer.color, boxShadow: `0 8px 24px -8px ${offer.color}99` }}>
                   <offer.icon className="w-5 h-5 text-white" strokeWidth={2.25} aria-hidden="true" />
                 </div>
-                <h3 className="font-poppins font-bold text-base md:text-lg leading-tight" style={{ color: offer.color }}>
+                <h3 className="font-poppins font-bold text-base md:text-lg leading-tight text-left" style={{ color: offer.color }}>
                   {offer.name}
                 </h3>
               </div>
@@ -165,11 +168,11 @@ const StartHereOffers = () => {
               <ul className="flex flex-col gap-2 mb-4">
                 {offer.stack.map(([item, val]) => (
                   <li key={item} className="flex items-center justify-between gap-3 text-xs text-foreground/90">
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center gap-2 text-left">
                       <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: offer.color }} />
                       {item}
                     </span>
-                    <span className="text-muted-foreground whitespace-nowrap tabular-nums">{val}</span>
+                    {val ? <span className="text-muted-foreground whitespace-nowrap tabular-nums">{val}</span> : null}
                   </li>
                 ))}
               </ul>
@@ -177,19 +180,21 @@ const StartHereOffers = () => {
               <div aria-hidden="true" className="w-full mb-3" style={{ height: 1, background: `${offer.color}33` }} />
 
               <div className="mb-3">
-                <span className="text-xs text-muted-foreground line-through mr-2">{offer.totalValue}</span>
+                {offer.totalValue ? (
+                  <span className="text-xs text-muted-foreground line-through mr-2">{offer.totalValue}</span>
+                ) : null}
                 <span className="font-poppins font-bold text-3xl md:text-4xl text-foreground">{offer.price}</span>
                 <span className="text-xs text-muted-foreground ml-2">{offer.priceNote}</span>
               </div>
 
               <div className="flex items-center gap-2 rounded-lg px-3 py-2 mb-4 mt-auto" style={{ background: `${offer.color}12`, border: `1px solid ${offer.color}40` }}>
                 <ShieldCheck className="w-4 h-4 flex-shrink-0" style={{ color: offer.color }} strokeWidth={2.25} aria-hidden="true" />
-                <span className="text-[11px] text-foreground/90">{offer.guarantee}</span>
+                <span className="text-[11px] text-foreground/90 text-left">{offer.guarantee}</span>
               </div>
 
               <button
                 type="button"
-                onClick={() => setBooking(offer)}
+                onClick={() => onOfferClick(offer)}
                 className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 rounded-full font-poppins font-semibold text-sm text-white transition-all duration-200 hover:opacity-90 hover:gap-3"
                 style={{ background: offer.color, boxShadow: `0 8px 24px -10px ${offer.color}99` }}
               >
@@ -208,9 +213,9 @@ const StartHereOffers = () => {
         transition={{ delay: 0.4, duration: 0.6 }}
         className="relative z-10 mt-10 flex flex-col items-center gap-4"
       >
-        <p className="text-sm text-foreground/75 text-center max-w-md">
-          Not ready to pick one? You're not stuck — talk it through with me, or
-          try your agent yourself, free.
+        <p className="text-sm text-foreground/75 text-center max-w-lg">
+          Assessment fees stack toward White-Glove Build — $250 and $497 both credit to the $999 package.
+          Not sure which door? Talk it through, or try MyAgent free.
         </p>
         <div className="flex flex-col sm:flex-row items-center gap-3">
           <button
@@ -236,8 +241,6 @@ const StartHereOffers = () => {
         <p className="text-xs text-muted-foreground">No credit card · cancel anytime</p>
       </motion.div>
 
-      {/* Booking — the calendar opens ON CLICK of a card, for that offer.
-          No standalone calendar section bloating the page. */}
       <AnimatePresence>
         {booking && (
           <motion.div
