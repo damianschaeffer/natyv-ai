@@ -22,7 +22,7 @@ const offers = [
       ["Three ranked opportunities", ""],
       ["$250 credited toward White-Glove Build", ""],
     ],
-    guarantee: "Three practical opportunities or your assessment is refunded.",
+    guarantee: "Three practical opportunities—or your money back.",
     cta: "Book the assessment",
     ctaMode: "link" as CtaMode,
     href: "/assessment",
@@ -30,6 +30,7 @@ const offers = [
   {
     id: "founder-strategy-session",
     name: "Founder-Led AI Strategy Session",
+    titleLines: ["Founder-Led", "AI Strategy Session"] as const,
     color: "#1077FA",
     icon: UserRound,
     featured: true,
@@ -43,7 +44,7 @@ const offers = [
       ["Clear next step before any build", ""],
       ["$497 credited toward White-Glove Build", ""],
     ],
-    guarantee: "Leave with a clear next step—or we follow up at no extra fee.",
+    guarantee: "Clear next step—or we continue at no extra fee.",
     cta: "Book with the founder",
     ctaMode: "cal" as CtaMode,
   },
@@ -63,7 +64,7 @@ const offers = [
       ["90 days of service", "$1,500"],
       ["White-glove setup", "$1,000"],
     ],
-    guarantee: "Live in days or we keep going free.",
+    guarantee: "Live in days—or we keep going free.",
     cta: "Claim a spot",
     ctaMode: "cal" as CtaMode,
   },
@@ -156,12 +157,24 @@ const StartHereOffers = () => {
                 )}
               </div>
 
-              <div className="flex items-center gap-3 mb-4 min-h-[3.25rem]">
+              <div className={`flex gap-3 mb-4 ${offer.titleLines ? "items-start min-h-[3.75rem]" : "items-center min-h-[3.25rem]"}`}>
                 <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: offer.color, boxShadow: `0 8px 24px -8px ${offer.color}99` }}>
                   <offer.icon className="w-5 h-5 text-white" strokeWidth={2.25} aria-hidden="true" />
                 </div>
-                <h3 className="font-poppins font-bold text-base md:text-lg leading-tight text-left" style={{ color: offer.color }}>
-                  {offer.name}
+                <h3
+                  className={`font-poppins font-bold text-base md:text-lg text-left ${
+                    offer.titleLines ? "leading-[1.08]" : "leading-tight"
+                  }`}
+                  style={{ color: offer.color }}
+                >
+                  {"titleLines" in offer && offer.titleLines ? (
+                    <>
+                      <span className="block">{offer.titleLines[0]}</span>
+                      <span className="block mt-px">{offer.titleLines[1]}</span>
+                    </>
+                  ) : (
+                    offer.name
+                  )}
                 </h3>
               </div>
 
@@ -187,9 +200,11 @@ const StartHereOffers = () => {
                 <span className="text-xs text-muted-foreground ml-2">{offer.priceNote}</span>
               </div>
 
-              <div className="flex items-center gap-2 rounded-lg px-3 py-2 mb-4 mt-auto" style={{ background: `${offer.color}12`, border: `1px solid ${offer.color}40` }}>
+              <div className="flex items-center gap-2 rounded-lg px-3 py-2 mb-4 mt-auto min-h-[2.75rem]" style={{ background: `${offer.color}12`, border: `1px solid ${offer.color}40` }}>
                 <ShieldCheck className="w-4 h-4 flex-shrink-0" style={{ color: offer.color }} strokeWidth={2.25} aria-hidden="true" />
-                <span className="text-[11px] text-foreground/90 text-left">{offer.guarantee}</span>
+                <span className="text-[10px] sm:text-[11px] text-foreground/90 text-left leading-snug lg:whitespace-nowrap">
+                  {offer.guarantee}
+                </span>
               </div>
 
               <button
