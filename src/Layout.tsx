@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import NatyvConciergeWidget from "@/components/NatyvConciergeWidget";
+import { ReferralCapture } from "@/components/ReferralCapture";
 
 // vite-react-ssg's <Head> component handles HelmetProvider context internally —
 // no manual HelmetProvider wrapping needed.
@@ -16,6 +17,7 @@ export default function Layout() {
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <ReferralCapture />
         <Outlet />
         <NatyvConciergeWidget />
       </TooltipProvider>

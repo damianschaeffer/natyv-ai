@@ -1,8 +1,10 @@
 import { FormEvent, useState } from "react";
 import { ArrowRight, Check, Clock3, LockKeyhole, Sparkles } from "lucide-react";
-
-const ASSESSMENT_START_URL = import.meta.env.VITE_ASSESSMENT_START_URL ||
-  "https://mpbiwfisywymkdjlwivg.supabase.co/functions/v1/start-ai-opportunity-assessment";
+import {
+  ASSESSMENT_START_URL,
+  MYAGENT_SUPABASE_ANON_KEY,
+  readStoredAssessmentReferralCode,
+} from "@/lib/myagentAssessmentApi";
 
 export default function AssessmentStartForm() {
   const [firstName, setFirstName] = useState("");
@@ -17,14 +19,19 @@ export default function AssessmentStartForm() {
     setSubmitting(true);
     setError("");
     try {
+      const referral_code = readStoredAssessmentReferralCode();
       const response = await fetch(ASSESSMENT_START_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          apikey: MYAGENT_SUPABASE_ANON_KEY,
+        },
         body: JSON.stringify({
           first_name: firstName,
           email,
           company_or_role: companyOrRole,
           website,
+          referral_code: referral_code || undefined,
         }),
       });
       const result = await response.json();
