@@ -12,6 +12,10 @@ export const ASSESSMENT_START_URL =
 
 export const SUBMIT_CONTACT_FORM_URL = `${MYAGENT_SUPABASE_URL}/functions/v1/submit-contact-form`;
 
+export const ASSESSMENT_BY_SESSION_URL =
+  import.meta.env.VITE_ASSESSMENT_BY_SESSION_URL ??
+  `${MYAGENT_SUPABASE_URL}/functions/v1/get-ai-opportunity-assessment-by-session`;
+
 export const NATYV_BUSINESS_PAGE_SLUG = "natyv-ai";
 
 export const REFERRAL_LOCALSTORAGE_KEY = "myagent_ref";
@@ -55,6 +59,20 @@ export function buildAssessmentReferralShareUrl(code: string): string {
     }
   }
   return `https://natyv.ai/assessment?ref=${encodeURIComponent(cleaned)}`;
+}
+
+export type AssessmentBySessionResult =
+  | { ready: true; first_name: string | null; pdf_url: string; opportunities: string[] }
+  | { ready: false; reason: "not_paid" | "processing" };
+
+export async function fetchAssessmentBySession(sessionId: string): Promise<AssessmentBySessionResult> {
+  const response = await fetch(
+    `${ASSESSMENT_BY_SESSION_URL}?session_id=${encodeURIComponent(sessionId)}`,
+    { headers: { apikey: MYAGENT_SUPABASE_ANON_KEY } },
+  );
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || "Unable to load your report");
+  return data as AssessmentBySessionResult;
 }
 
 export type PublicAssessmentStartPayload = {

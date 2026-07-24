@@ -4,10 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AssessmentStartForm from "@/components/AssessmentStartForm";
 import AdvisorySection from "@/components/AdvisorySection";
+import PaymentSuccessReport from "@/components/PaymentSuccessReport";
 
 export default function Assessment() {
   const [searchParams] = useSearchParams();
   const payment = searchParams.get("payment");
+  const sessionId = searchParams.get("session_id");
 
   return (
     <div className="min-h-screen bg-background">
@@ -27,9 +29,13 @@ export default function Assessment() {
           <div className="pointer-events-none absolute left-1/2 top-0 h-[620px] w-[900px] -translate-x-1/2 rounded-full bg-primary/[0.08] blur-[170px]" />
           <div className="relative mx-auto max-w-6xl">
             {payment === "success" && (
-              <div className="mb-6 rounded-2xl border border-emerald-400/40 bg-emerald-400/10 px-5 py-4 text-sm text-foreground">
-                <strong>Payment received.</strong> Your completed assessment is being sent to your email now.
-              </div>
+              sessionId ? (
+                <PaymentSuccessReport sessionId={sessionId} />
+              ) : (
+                <div className="mb-6 rounded-2xl border border-emerald-400/40 bg-emerald-400/10 px-5 py-4 text-sm text-foreground">
+                  <strong>Payment received.</strong> Your completed assessment is being sent to your email now.
+                </div>
+              )
             )}
             {payment === "cancelled" && (
               <div className="mb-6 rounded-2xl border border-amber-400/40 bg-amber-400/10 px-5 py-4 text-sm text-foreground">
