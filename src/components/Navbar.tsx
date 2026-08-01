@@ -166,9 +166,9 @@ const Navbar = () => {
             </motion.a>
 
             {/* Desktop Navigation - Fluid sizing with clamp */}
-            <div className="hidden md:flex items-center justify-center gap-[clamp(0.5rem,2vw,1.5rem)] flex-1 min-w-0">
+            <div className="hidden md:flex items-center justify-center gap-[clamp(0.35rem,0.8vw,0.75rem)] flex-1 min-w-0">
               {navLinks.map((link, index) => (
-                <div key={link.label} className="flex items-center gap-[clamp(0.5rem,2vw,1.5rem)]">
+                <div key={link.label} className="flex items-center gap-[clamp(0.35rem,0.8vw,0.75rem)]">
                   {index > 0 && (
                     <div
                       className="bg-primary flex-shrink-0"
