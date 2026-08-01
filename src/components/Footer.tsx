@@ -117,7 +117,7 @@ const Footer = () => {
             </div>
 
             {/* Right Section - Social Links - Fluid sizing */}
-            <div className="hidden md:flex items-center justify-end gap-[clamp(0.125rem,0.5vw,0.5rem)] flex-shrink-0">
+            <div className="flex items-center justify-end gap-[clamp(0.125rem,0.5vw,0.5rem)] flex-shrink-0">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}

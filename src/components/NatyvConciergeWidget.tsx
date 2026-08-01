@@ -27,7 +27,9 @@ const NatyvConciergeWidget = () => {
   const widgetUrl = useMemo(() => {
     const url = new URL(`https://get-myagent.com/chat/${NATYV_CONCIERGE_AGENT_ID}`);
     url.searchParams.set("embed", "true");
+    url.searchParams.set("embedChrome", "none");
     url.searchParams.set("source", "natyv-ai");
+    url.searchParams.set("deployment", "natyv-concierge");
     url.searchParams.set("theme", isDarkTheme ? "dark" : "light");
     return url.toString();
   }, [isDarkTheme]);
@@ -112,6 +114,17 @@ const NatyvConciergeWidget = () => {
     };
   }, [isServicesRoute]);
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   const dismissNudge = () => {
     setNudgeVisible(false);
     if (typeof window !== "undefined") {
@@ -131,53 +144,59 @@ const NatyvConciergeWidget = () => {
   // mobile form or promise copy.
   if (isAssessmentRoute) return null;
 
+  if (isOpen) {
+    return (
+      <div
+        className="fixed inset-x-0 bottom-0 z-[45] overflow-hidden border-t border-border/60 bg-background shadow-[0_-12px_40px_-20px_rgba(0,0,0,0.45)]"
+        style={{ top: "var(--site-header-h, 73px)" }}
+      >
+        <iframe
+          src={widgetUrl}
+          title="Natyv AI Concierge"
+          className="h-full w-full border-0 bg-background"
+          allow="microphone; autoplay; clipboard-write"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="fixed bottom-4 right-4 z-[80] sm:bottom-6 sm:right-6">
-      {isOpen ? (
-        <div className="relative h-[calc(100vh-6rem)] max-h-[820px] w-[calc(100vw-1rem)] max-w-[920px] overflow-hidden rounded-[26px] bg-transparent">
-          <iframe
-            src={widgetUrl}
-            title="Natyv AI Concierge"
-            className="h-full w-full border-0 bg-transparent"
-            allow="microphone; autoplay; clipboard-write"
-          />
-        </div>
-      ) : (
-        <div className="flex flex-col items-end gap-3">
-          {showNudge && (
-            <div className="relative max-w-[260px] animate-in fade-in slide-in-from-bottom-2 duration-300">
-              <button
-                type="button"
-                onClick={openFromNudge}
-                className="flex items-start gap-2.5 rounded-2xl rounded-br-md border border-primary/35 bg-background/95 px-3.5 py-3 text-left shadow-2xl shadow-black/40 backdrop-blur transition hover:border-primary/60"
-                aria-label="Ask Ava which step is right for you"
-              >
-                <img
-                  src={NATYV_CONCIERGE_AVATAR}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-8 w-8 flex-shrink-0 rounded-full object-cover"
-                />
-                <span className="text-[13px] leading-snug text-foreground">
-                  Not sure which step is right? I&apos;ll point you in 20 seconds.
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={dismissNudge}
-                className="absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background text-muted-foreground shadow-md transition hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                aria-label="Dismiss"
-              >
-                <X className="h-3 w-3" aria-hidden="true" />
-              </button>
-            </div>
-          )}
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            className="group relative inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-transparent text-white transition hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            aria-label="Open Natyv AI Concierge"
-          >
+      <div className="flex flex-col items-end gap-3">
+        {showNudge && (
+          <div className="relative max-w-[260px] animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <button
+              type="button"
+              onClick={openFromNudge}
+              className="flex items-start gap-2.5 rounded-2xl rounded-br-md border border-primary/35 bg-background/95 px-3.5 py-3 text-left shadow-2xl shadow-black/40 backdrop-blur transition hover:border-primary/60"
+              aria-label="Ask Ava which step is right for you"
+            >
+              <img
+                src={NATYV_CONCIERGE_AVATAR}
+                alt=""
+                aria-hidden="true"
+                className="h-8 w-8 flex-shrink-0 rounded-full object-cover"
+              />
+              <span className="text-[13px] leading-snug text-foreground">
+                Not sure which step is right? I&apos;ll point you in 20 seconds.
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={dismissNudge}
+              className="absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background text-muted-foreground shadow-md transition hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              aria-label="Dismiss"
+            >
+              <X className="h-3 w-3" aria-hidden="true" />
+            </button>
+          </div>
+        )}
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="group relative inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-transparent text-white transition hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          aria-label="Open Natyv AI Concierge"
+        >
           <span className="absolute inset-[-5px] rounded-full bg-primary/25 opacity-65 blur-md transition group-hover:opacity-85" />
           <span className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-background ring-2 ring-primary shadow-xl shadow-primary/25">
             <img
@@ -189,9 +208,8 @@ const NatyvConciergeWidget = () => {
               <MessageCircle className="h-5 w-5 text-white" aria-hidden="true" />
             </span>
           </span>
-          </button>
-        </div>
-      )}
+        </button>
+      </div>
     </div>
   );
 };

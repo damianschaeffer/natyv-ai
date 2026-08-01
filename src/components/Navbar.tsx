@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Linkedin, Twitter, Youtube, Facebook, Instagram, Menu, Moon, Sun, X } from "lucide-react";
-import TikTokIcon from "./icons/TikTokIcon";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import ProtocolStatus from "./ProtocolStatus";
 import NatyvLogo from "@/components/brand/NatyvLogo";
+import HeaderConversionCTAs from "@/components/HeaderConversionCTAs";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -38,6 +38,24 @@ const Navbar = () => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // The concierge expands beneath the live header. Keep its top edge tied to
+  // the actual header height so the shell remains flush at every breakpoint.
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      const header = document.querySelector<HTMLElement>("[data-site-header]");
+      if (header) {
+        document.documentElement.style.setProperty(
+          "--site-header-h",
+          `${header.getBoundingClientRect().height}px`,
+        );
+      }
+    };
+
+    updateHeaderHeight();
+    window.addEventListener("resize", updateHeaderHeight);
+    return () => window.removeEventListener("resize", updateHeaderHeight);
   }, []);
 
   // Scroll-spy: track which homepage section is in view. STUDIO is
@@ -122,18 +140,10 @@ const Navbar = () => {
     { label: "About", href: "/about", isRoute: true },
   ];
 
-  const socialLinks = [
-    { icon: Linkedin, href: "https://linkedin.com/in/damianschaeffer", label: "LinkedIn" },
-    { icon: Twitter, href: "https://x.com/Natyv_AI", label: "X / Twitter" },
-    { icon: Youtube, href: "https://www.youtube.com/@NatyvAI", label: "YouTube" },
-    { icon: Facebook, href: "https://facebook.com/natyv_ai", label: "Facebook" },
-    { icon: Instagram, href: "https://instagram.com/natyv_ai", label: "Instagram" },
-    { icon: TikTokIcon, href: "https://www.tiktok.com/@natyv_ai", label: "TikTok" },
-  ];
-
   return (
     <>
       <motion.nav
+        data-site-header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? "bg-background/80 backdrop-blur-xl border-b border-border"
@@ -227,7 +237,7 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Right Section - Social Links & Protocol Status - Fluid sizing */}
+            {/* Right Section - Theme, conversion CTAs, and protocol status */}
             <div className="hidden md:flex items-center justify-end gap-[clamp(0.25rem,0.65vw,0.625rem)] flex-shrink-0">
               <motion.button
                 type="button"
@@ -249,23 +259,7 @@ const Navbar = () => {
                   <Moon style={{ width: 'clamp(0.875rem, 1.1vw, 1.125rem)', height: 'clamp(0.875rem, 1.1vw, 1.125rem)' }} />
                 )}
               </motion.button>
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith("http") ? "_blank" : undefined}
-                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-                  style={{ padding: 'clamp(0.25rem, 0.5vw, 0.5rem)' }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
-                  whileHover={{ scale: 1.1 }}
-                  aria-label={social.label}
-                >
-                  <social.icon style={{ width: 'clamp(0.875rem, 1.25vw, 1.25rem)', height: 'clamp(0.875rem, 1.25vw, 1.25rem)' }} />
-                </motion.a>
-              ))}
+              <HeaderConversionCTAs />
               <div className="hidden lg:block">
                 <ProtocolStatus />
               </div>
@@ -345,6 +339,8 @@ const Navbar = () => {
                 </motion.div>
               ))}
 
+              <HeaderConversionCTAs mobile />
+
               <motion.button
                 type="button"
                 onClick={toggleTheme}
@@ -357,26 +353,6 @@ const Navbar = () => {
                 {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </motion.button>
               
-              {/* Social Links in Mobile */}
-              <motion.div
-                className="flex items-center gap-4 mt-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-              >
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target={social.href.startsWith("http") ? "_blank" : undefined}
-                    rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </a>
-                ))}
-              </motion.div>
             </motion.div>
           </motion.div>
         )}
