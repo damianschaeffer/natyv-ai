@@ -1,15 +1,30 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, Monitor, Moon, Sun, X } from "lucide-react";
 import ProtocolStatus from "./ProtocolStatus";
 import NatyvLogo from "@/components/brand/NatyvLogo";
 import HeaderConversionCTAs from "@/components/HeaderConversionCTAs";
 
+type ThemeMode = "dark" | "light" | "auto";
+
+const THEME_MODES: ThemeMode[] = ["dark", "light", "auto"];
+const THEME_LABELS: Record<ThemeMode, string> = {
+  dark: "Dark",
+  light: "Light",
+  auto: "Auto",
+};
+
+const applyThemeMode = (mode: ThemeMode, mediaQuery: MediaQueryList) => {
+  const isDark = mode === "dark" || (mode === "auto" && mediaQuery.matches);
+  document.documentElement.classList.toggle("dark", isDark);
+  document.documentElement.dataset.themeMode = mode;
+};
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [themeMode, setThemeMode] = useState<ThemeMode>("dark");
   // Scroll-spy: which homepage section the visitor is currently in.
   // null when on a non-homepage route or above all tracked sections.
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -18,18 +33,29 @@ const Navbar = () => {
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("natyv-theme");
-    const nextTheme = savedTheme === "light" ? "light" : "dark";
-    setTheme(nextTheme);
-    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+    if (savedTheme === "dark" || savedTheme === "light" || savedTheme === "auto") {
+      setThemeMode(savedTheme);
+    }
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const syncTheme = () => applyThemeMode(themeMode, mediaQuery);
+
+    syncTheme();
+    if (themeMode !== "auto") return;
+
+    mediaQuery.addEventListener("change", syncTheme);
+    return () => mediaQuery.removeEventListener("change", syncTheme);
+  }, [themeMode]);
+
+  const nextThemeMode = THEME_MODES[(THEME_MODES.indexOf(themeMode) + 1) % THEME_MODES.length];
+  const themeButtonLabel = `Theme: ${THEME_LABELS[themeMode]}. Click to switch to ${THEME_LABELS[nextThemeMode]}.`;
+  const ThemeIcon = themeMode === "dark" ? Moon : themeMode === "light" ? Sun : Monitor;
+
   const toggleTheme = () => {
-    setTheme((current) => {
-      const nextTheme = current === "dark" ? "light" : "dark";
-      window.localStorage.setItem("natyv-theme", nextTheme);
-      document.documentElement.classList.toggle("dark", nextTheme === "dark");
-      return nextTheme;
-    });
+    setThemeMode(nextThemeMode);
+    window.localStorage.setItem("natyv-theme", nextThemeMode);
   };
 
   useEffect(() => {
@@ -249,13 +275,11 @@ const Navbar = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.24, duration: 0.3 }}
                 whileHover={{ scale: 1.05 }}
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                aria-label={themeButtonLabel}
+                title={themeButtonLabel}
+                data-theme-mode={themeMode}
               >
-                {theme === "dark" ? (
-                  <Sun style={{ width: 'clamp(0.875rem, 1.1vw, 1.125rem)', height: 'clamp(0.875rem, 1.1vw, 1.125rem)' }} />
-                ) : (
-                  <Moon style={{ width: 'clamp(0.875rem, 1.1vw, 1.125rem)', height: 'clamp(0.875rem, 1.1vw, 1.125rem)' }} />
-                )}
+                <ThemeIcon style={{ width: 'clamp(0.875rem, 1.1vw, 1.125rem)', height: 'clamp(0.875rem, 1.1vw, 1.125rem)' }} />
               </motion.button>
               <HeaderConversionCTAs />
               <div className="hidden lg:block">
@@ -346,9 +370,11 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                aria-label={themeButtonLabel}
+                title={themeButtonLabel}
+                data-theme-mode={themeMode}
               >
-                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                <ThemeIcon className="h-4 w-4" />
               </motion.button>
               
             </motion.div>
