@@ -136,8 +136,6 @@ const Navbar = () => {
     { label: "Services", href: "/services", isRoute: true },
     { label: "Advisory", href: "#advisory", isScrollLink: true, onScroll: scrollToAdvisory },
     { label: "Studio", href: "#myagent-section", isScrollLink: true, onScroll: scrollToMyAgent },
-    { label: "Partners", href: "/partners", isRoute: true },
-    { label: "About", href: "/about", isRoute: true },
   ];
 
   return (

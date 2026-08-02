@@ -20,14 +20,12 @@ const Footer = () => {
     }
   };
 
-  // Order MUST mirror the header nav (Navbar.tsx): Services · Advisory ·
-  // Studio · Partners · About.
+  // Keep the primary footer row aligned with the header nav: Services ·
+  // Advisory · Studio. Secondary destinations live in the lower utility row.
   const navLinks = [
     { label: "Services", href: "/services", isRoute: true },
     { label: "Advisory", href: "/advisory", isRoute: true },
     { label: "Studio", href: "#myagent-section", isScrollLink: true },
-    { label: "Partners", href: "/partners", isRoute: true },
-    { label: "About", href: "/about", isRoute: true },
   ];
 
   const socialLinks = [
@@ -43,6 +41,8 @@ const Footer = () => {
     { label: "FAQ", href: "/faq" },
     { label: "Referrals", href: "/referrals" },
     { label: "Contact", href: "/contact" },
+    { label: "Partners", href: "/partners" },
+    { label: "About", href: "/about" },
     { label: "Privacy", href: "/privacy" },
     { label: "Terms", href: "/terms" },
     { label: "Security", href: "/security" },
@@ -142,7 +142,7 @@ const Footer = () => {
             <p className="text-xs text-muted-foreground font-body">
               © {new Date().getFullYear()} Natyv AI. All rights reserved.
             </p>
-            <div className="flex gap-2 sm:gap-6">
+            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 sm:justify-end sm:gap-x-6">
               {legalLinks.map((link) => (
                 <Link
                   key={link.label}
