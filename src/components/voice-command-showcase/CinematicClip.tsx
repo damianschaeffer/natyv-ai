@@ -3,6 +3,7 @@
 // Parses WebVTT on mount, renders active cue in a blurred caption pill.
 // Emits timelinePosition (0-1) via onProgress so parent scenes can sync.
 import { useEffect, useRef, useState } from "react";
+import { useNearViewport } from "@/hooks/use-near-viewport";
 
 export interface VttCue {
   start: number;
@@ -40,12 +41,13 @@ export function CinematicClip({
   placeholderLoopSeconds = 6,
 }: CinematicClipProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const { ref: rootRef, hasEnteredViewport } = useNearViewport<HTMLDivElement>("320px 0px");
   const [cues, setCues] = useState<VttCue[]>([]);
   const [activeCue, setActiveCue] = useState<string>("");
-  const hasSrc = !!src && src.length > 0;
+  const hasSrc = !!src && src.length > 0 && hasEnteredViewport;
 
   useEffect(() => {
-    if (!captionsSrc || !showSubtitles) {
+    if (!hasEnteredViewport || !captionsSrc || !showSubtitles) {
       setCues([]);
       return;
     }
@@ -62,26 +64,13 @@ export function CinematicClip({
     return () => {
       cancelled = true;
     };
-  }, [captionsSrc, showSubtitles]);
+  }, [captionsSrc, hasEnteredViewport, showSubtitles]);
 
   useEffect(() => {
     if (!hasSrc) {
-      const startedAt = performance.now();
-      const loopMs = placeholderLoopSeconds * 1000;
-      let raf = 0;
-      const tick = () => {
-        const elapsed = (performance.now() - startedAt) % loopMs;
-        const t = elapsed / 1000;
-        const normalized = t / placeholderLoopSeconds;
-        if (onProgress) onProgress(normalized);
-        if (showSubtitles && cues.length > 0) {
-          const active = cues.find((c) => t >= c.start && t <= c.end);
-          setActiveCue(active ? active.text : "");
-        }
-        raf = requestAnimationFrame(tick);
-      };
-      raf = requestAnimationFrame(tick);
-      return () => cancelAnimationFrame(raf);
+      onProgress?.(0);
+      setActiveCue("");
+      return;
     }
 
     const vid = videoRef.current;
@@ -114,6 +103,7 @@ export function CinematicClip({
 
   return (
     <div
+      ref={rootRef}
       style={{
         position: "relative",
         width: "100%",
@@ -133,7 +123,7 @@ export function CinematicClip({
           muted={muted}
           loop={loop}
           playsInline
-          preload="metadata"
+          preload="none"
           onEnded={onEnded}
           style={{
             width: "100%",
@@ -143,7 +133,7 @@ export function CinematicClip({
           }}
         />
       ) : (
-        <ClipPlaceholder label={placeholderLabel ?? "Clip pending"} />
+        <ClipPlaceholder label={placeholderLabel ?? "Clip loads as you reach it"} />
       )}
 
       {showSubtitles && activeCue && (

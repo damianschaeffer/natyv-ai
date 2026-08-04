@@ -138,10 +138,6 @@
     font-family: 'Poppins', sans-serif;
   }
 
-  .font-roboto {
-    font-family: 'Roboto', sans-serif;
-  }
-
 }
 
 @layer components {

@@ -3,6 +3,7 @@
 // burned-in caption overlay, tap-to-unmute affordance, prefers-reduced-motion
 // handling, and a per-frame onTimeUpdate emitter to drive the synced phone demo.
 import { useEffect, useRef, useState } from "react";
+import { useNearViewport } from "@/hooks/use-near-viewport";
 
 const CALL_HANDLING_VIDEO =
   "https://get-myagent.com/videos/cinematic/listen-live-coach-v5.mp4";
@@ -15,6 +16,7 @@ export const CallHandlingVideo = ({
   onTimeUpdate?: (timeMs: number) => void;
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { ref: rootRef, hasEnteredViewport } = useNearViewport<HTMLDivElement>("320px 0px");
   const [caption, setCaption] = useState<string>("");
   const [muted, setMuted] = useState(true);
   const [reducedMotion, setReducedMotion] = useState(() =>
@@ -31,17 +33,17 @@ export const CallHandlingVideo = ({
   }, []);
 
   useEffect(() => {
-    if (reducedMotion && videoRef.current && !videoRef.current.paused) {
+    if (reducedMotion && hasEnteredViewport && videoRef.current && !videoRef.current.paused) {
       try {
         videoRef.current.pause();
       } catch {
         /* no-op */
       }
     }
-  }, [reducedMotion]);
+  }, [hasEnteredViewport, reducedMotion]);
 
   useEffect(() => {
-    if (!onTimeUpdate) return;
+    if (!onTimeUpdate || !hasEnteredViewport) return;
     const video = videoRef.current;
     if (!video) return;
     let cancelled = false;
@@ -68,9 +70,10 @@ export const CallHandlingVideo = ({
     const onTU = () => onTimeUpdate(video.currentTime * 1000);
     video.addEventListener("timeupdate", onTU);
     return () => video.removeEventListener("timeupdate", onTU);
-  }, [onTimeUpdate]);
+  }, [hasEnteredViewport, onTimeUpdate]);
 
   useEffect(() => {
+    if (!hasEnteredViewport) return;
     const video = videoRef.current;
     if (!video) return;
 
@@ -112,7 +115,7 @@ export const CallHandlingVideo = ({
     return () => {
       if (track && cuechangeHandler) track.removeEventListener("cuechange", cuechangeHandler);
     };
-  }, []);
+  }, [hasEnteredViewport]);
 
   const handleUnmuteToggle = () => {
     const v = videoRef.current;
@@ -126,31 +129,41 @@ export const CallHandlingVideo = ({
   };
 
   return (
-    <>
-      <video
-        ref={videoRef}
-        src={CALL_HANDLING_VIDEO}
-        autoPlay={!reducedMotion}
-        muted={muted}
-        loop={!reducedMotion}
-        playsInline
-        controls={reducedMotion}
-        crossOrigin="anonymous"
-        aria-label="Product demo: AI agent handling a real-estate call while the owner listens in and coaches the agent"
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        {/* kind="metadata" prevents Safari from rendering native
-            captions on top of our custom overlay below. cuechange
-            events still fire so our overlay works the same. */}
-        <track
-          kind="metadata"
-          src={CALL_HANDLING_CAPTIONS}
-          srcLang="en"
-          label="English"
-        />
-      </video>
+    <div ref={rootRef} className="absolute inset-0">
+      {hasEnteredViewport ? (
+        <video
+          ref={videoRef}
+          src={CALL_HANDLING_VIDEO}
+          autoPlay={!reducedMotion}
+          muted={muted}
+          loop={!reducedMotion}
+          playsInline
+          preload="none"
+          controls={reducedMotion}
+          crossOrigin="anonymous"
+          aria-label="Product demo: AI agent handling a real-estate call while the owner listens in and coaches the agent"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          {/* kind="metadata" prevents Safari from rendering native
+              captions on top of our custom overlay below. cuechange
+              events still fire so our overlay works the same. */}
+          <track
+            kind="metadata"
+            src={CALL_HANDLING_CAPTIONS}
+            srcLang="en"
+            label="English"
+          />
+        </video>
+      ) : (
+        <div
+          className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0b0b0b] via-[#111827] to-[#0b0b0b] px-6 text-center text-sm text-white/60"
+          aria-label="Call handling demo loads when visible"
+        >
+          <span>Call handling demo loads as you reach it.</span>
+        </div>
+      )}
 
-      {!reducedMotion && (
+      {hasEnteredViewport && !reducedMotion && (
         <button
           type="button"
           onClick={handleUnmuteToggle}
@@ -196,7 +209,7 @@ export const CallHandlingVideo = ({
         </button>
       )}
 
-      {caption && !reducedMotion && (
+      {hasEnteredViewport && caption && !reducedMotion && (
         <div
           className="absolute inset-x-0 bottom-6 flex justify-center px-4 pointer-events-none"
           aria-hidden="true"
@@ -208,7 +221,7 @@ export const CallHandlingVideo = ({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

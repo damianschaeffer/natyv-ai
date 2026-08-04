@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Lock, PauseCircle, Volume2 } from "lucide-react";
+import { useNearViewport } from "@/hooks/use-near-viewport";
 
 const WIDGET_PHRASES = [
   "Pre-trained on your business.",
@@ -51,13 +52,23 @@ export const WidgetTypewriterSub = () => (
 );
 
 export const WebsiteWidgetShowcase = () => {
+  const { ref: showcaseRef, hasEnteredViewport } = useNearViewport<HTMLDivElement>("320px 0px");
   const [isDarkTheme, setIsDarkTheme] = useState(() =>
     typeof document !== "undefined" ? document.documentElement.classList.contains("dark") : true
   );
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [demoListening, setDemoListening] = useState(false);
   const [mobileFrame, setMobileFrame] = useState<HTMLIFrameElement | null>(null);
   const [desktopFrame, setDesktopFrame] = useState<HTMLIFrameElement | null>(null);
   const demoEmbedUrl = `https://get-myagent.com/demo-embed?theme=${isDarkTheme ? "dark" : "light"}`;
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 639px)");
+    const syncViewport = () => setIsMobileViewport(mediaQuery.matches);
+    syncViewport();
+    mediaQuery.addEventListener("change", syncViewport);
+    return () => mediaQuery.removeEventListener("change", syncViewport);
+  }, []);
 
   useEffect(() => {
     const syncTheme = () => {
@@ -96,8 +107,11 @@ export const WebsiteWidgetShowcase = () => {
     activeFrame?.contentWindow?.postMessage({ type: "demo-embed-toggle-audio" }, new URL(demoEmbedUrl).origin);
   };
 
+  const shouldLoadMobileFrame = hasEnteredViewport && isMobileViewport;
+  const shouldLoadDesktopFrame = hasEnteredViewport && !isMobileViewport;
+
   return (
-    <div className="w-full max-w-[700px] mx-auto">
+    <div ref={showcaseRef} className="w-full max-w-[700px] mx-auto">
       {/* Mobile: native one-panel widget */}
       <div className="sm:hidden relative overflow-hidden">
         <div>
@@ -123,20 +137,24 @@ export const WebsiteWidgetShowcase = () => {
                 {demoListening ? "Pause" : "Listen"}
               </button>
             </div>
-            <iframe
-              ref={setMobileFrame}
-              src={demoEmbedUrl}
-              title="Natyv AI one-panel live widget demo"
-              loading="lazy"
-              allow="microphone; autoplay"
-              style={{
-                width: "100%",
-                height: 560,
-                border: "none",
-                display: "block",
-                background: isDarkTheme ? "#050505" : "#ffffff",
-              }}
-            />
+            {shouldLoadMobileFrame ? (
+              <iframe
+                ref={setMobileFrame}
+                src={demoEmbedUrl}
+                title="Natyv AI one-panel live widget demo"
+                loading="lazy"
+                allow="microphone; autoplay"
+                style={{
+                  width: "100%",
+                  height: 560,
+                  border: "none",
+                  display: "block",
+                  background: isDarkTheme ? "#050505" : "#ffffff",
+                }}
+              />
+            ) : (
+              <DemoPlaceholder height={560} isDarkTheme={isDarkTheme} />
+            )}
           </div>
         </div>
       </div>
@@ -167,25 +185,54 @@ export const WebsiteWidgetShowcase = () => {
             </button>
           </div>
           <div className="relative">
-            <iframe
-              ref={setDesktopFrame}
-              src={demoEmbedUrl}
-              title="Natyv AI one-panel live widget demo"
-              loading="lazy"
-              allow="microphone; autoplay"
-              style={{
-                width: "100%",
-                height: "clamp(470px, 58vh, 560px)",
-                border: "none",
-                display: "block",
-                background: isDarkTheme ? "#050505" : "#ffffff",
-              }}
-            />
+            {shouldLoadDesktopFrame ? (
+              <iframe
+                ref={setDesktopFrame}
+                src={demoEmbedUrl}
+                title="Natyv AI one-panel live widget demo"
+                loading="lazy"
+                allow="microphone; autoplay"
+                style={{
+                  width: "100%",
+                  height: "clamp(470px, 58vh, 560px)",
+                  border: "none",
+                  display: "block",
+                  background: isDarkTheme ? "#050505" : "#ffffff",
+                }}
+              />
+            ) : (
+              <DemoPlaceholder height="clamp(470px, 58vh, 560px)" isDarkTheme={isDarkTheme} />
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+function DemoPlaceholder({
+  height,
+  isDarkTheme,
+}: {
+  height: number | string;
+  isDarkTheme: boolean;
+}) {
+  return (
+    <div
+      role="img"
+      aria-label="Interactive demo loads when visible"
+      className="flex items-center justify-center px-6 text-center text-sm text-zinc-500"
+      style={{
+        width: "100%",
+        height,
+        background: isDarkTheme
+          ? "radial-gradient(circle at 50% 35%, rgba(16,119,250,0.16), #050505 58%)"
+          : "linear-gradient(135deg, #f8fafc, #eef2f7)",
+      }}
+    >
+      Interactive demo loads as you reach it.
+    </div>
+  );
+}
 
 export default WebsiteWidgetShowcase;
