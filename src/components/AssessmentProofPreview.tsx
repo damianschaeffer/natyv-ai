@@ -216,6 +216,9 @@ function CompactProofPreview() {
               Official product URL <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
             </a>
           </div>
+          <div className="mt-4 rounded-xl border border-amber-300/25 bg-amber-300/[0.06] px-3 py-2.5 text-sm leading-relaxed text-foreground/80">
+            <span className="font-semibold text-amber-200">Tradeoff:</span> {primary.tradeoff}
+          </div>
         </div>
 
         <div className="mt-5">
@@ -233,7 +236,13 @@ function CompactProofPreview() {
                     <p className="mt-0.5 text-xs text-muted-foreground">{item.fit} · {item.apiFit} API fit</p>
                   </div>
                 </div>
-                <p className="max-w-xl text-sm leading-relaxed text-foreground/75">{item.rank === 2 ? "Excellent calendar layer, but meal and grocery work stays separate." : "Lowest-cost list option, but the family still does the planning manually."}</p>
+                <div className="max-w-xl text-sm leading-relaxed text-foreground/75 sm:text-right">
+                  <p><span className="font-semibold text-foreground/85">Best for:</span> {item.strengths[0]}</p>
+                  <p className="mt-1"><span className="font-semibold text-amber-200">Tradeoff:</span> {item.tradeoff}</p>
+                  <a href={item.url} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline">
+                    Official product URL <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                  </a>
+                </div>
               </div>
             ))}
           </div>
