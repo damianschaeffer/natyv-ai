@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Check, Clock3, LockKeyhole, Sparkles } from "lucide-react";
 import {
   ASSESSMENT_START_URL,
@@ -7,6 +7,7 @@ import {
   normalizeAssessmentReferralCode,
   PublicAssessmentReferralOffer,
   readStoredAssessmentReferralCode,
+  trackAssessmentFunnelEvent,
 } from "@/lib/myagentAssessmentApi";
 
 type ReferralState =
@@ -27,6 +28,7 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
   const [website, setWebsite] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const formStartedRef = useRef(false);
   // Keep the first render identical to the statically generated page. The
   // referral lookup starts after hydration so query-dependent copy cannot
   // trigger a React hydration mismatch.
@@ -46,6 +48,7 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
       .then((offer) => {
         if (cancelled) return;
         setReferralState(offer ? { status: "valid", offer } : { status: "invalid" });
+        if (offer) trackAssessmentFunnelEvent("referral_loaded", { referrer_present: Boolean(offer.referrer_first_name) });
       })
       .catch(() => {
         if (!cancelled) setReferralState({ status: "invalid" });
@@ -93,6 +96,7 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    trackAssessmentFunnelEvent("form_submit", { referral_present: Boolean(referralOffer) });
     setSubmitting(true);
     setError("");
     try {
@@ -172,7 +176,16 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col justify-center p-6 sm:p-9 lg:p-11" aria-describedby={error ? "assessment-start-error" : undefined}>
+        <form
+          onSubmit={handleSubmit}
+          onFocusCapture={() => {
+            if (formStartedRef.current) return;
+            formStartedRef.current = true;
+            trackAssessmentFunnelEvent("form_start", { referral_present: Boolean(referralOffer) });
+          }}
+          className="flex flex-col justify-center p-6 sm:p-9 lg:p-11"
+          aria-describedby={error ? "assessment-start-error" : undefined}
+        >
           <p className="font-poppins text-sm font-semibold uppercase tracking-[0.15em] text-primary">
             {referralOffer ? "Your referral invitation" : referralChecking ? "Checking invitation" : "Start free"}
           </p>

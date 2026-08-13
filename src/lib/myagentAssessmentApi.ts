@@ -14,6 +14,10 @@ export const ASSESSMENT_REFERRAL_LOOKUP_URL =
   import.meta.env.VITE_ASSESSMENT_REFERRAL_LOOKUP_URL ??
   `${MYAGENT_SUPABASE_URL}/functions/v1/get-public-assessment-referral`;
 
+export const ASSESSMENT_FUNNEL_EVENT_URL =
+  import.meta.env.VITE_ASSESSMENT_FUNNEL_EVENT_URL ??
+  `${MYAGENT_SUPABASE_URL}/functions/v1/track-public-assessment-event`;
+
 export const SUBMIT_CONTACT_FORM_URL = `${MYAGENT_SUPABASE_URL}/functions/v1/submit-contact-form`;
 
 export const ASSESSMENT_BY_SESSION_URL =
@@ -23,6 +27,67 @@ export const ASSESSMENT_BY_SESSION_URL =
 export const NATYV_BUSINESS_PAGE_SLUG = "natyv-ai";
 
 export const REFERRAL_LOCALSTORAGE_KEY = "myagent_ref";
+
+const ASSESSMENT_FUNNEL_SESSION_KEY = "natyv_assessment_funnel_session_v1";
+
+export type AssessmentFunnelEventType =
+  | "page_view"
+  | "proof_view"
+  | "proof_recommendation_selected"
+  | "proof_cta_clicked"
+  | "form_start"
+  | "form_submit"
+  | "referral_loaded";
+
+/**
+ * A short-lived, anonymous browser session key lets Mission Control measure
+ * the funnel without sending names, email addresses, or assessment content.
+ */
+export function readAssessmentFunnelSessionId(): string {
+  if (typeof window === "undefined") return "";
+  try {
+    const existing = sessionStorage.getItem(ASSESSMENT_FUNNEL_SESSION_KEY);
+    if (existing && /^[a-z0-9-]{12,80}$/i.test(existing)) return existing;
+    const generated = typeof crypto?.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 14)}`;
+    sessionStorage.setItem(ASSESSMENT_FUNNEL_SESSION_KEY, generated);
+    return generated;
+  } catch {
+    return "";
+  }
+}
+
+/** Fire-and-forget, privacy-minimal funnel telemetry. Conversion actions never depend on it. */
+export function trackAssessmentFunnelEvent(
+  eventType: AssessmentFunnelEventType,
+  metadata: Record<string, unknown> = {},
+): void {
+  if (typeof window === "undefined") return;
+  const sessionId = readAssessmentFunnelSessionId();
+  if (!sessionId) return;
+  const referralCode = readStoredAssessmentReferralCode();
+  const safeMetadata = Object.fromEntries(
+    Object.entries(metadata).filter(([, value]) => ["string", "number", "boolean"].includes(typeof value)).slice(0, 8),
+  );
+  void fetch(ASSESSMENT_FUNNEL_EVENT_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: MYAGENT_SUPABASE_ANON_KEY,
+    },
+    keepalive: true,
+    body: JSON.stringify({
+      event_type: eventType,
+      session_id: sessionId,
+      referral_code: referralCode || undefined,
+      path: window.location.pathname,
+      metadata: safeMetadata,
+    }),
+  }).catch(() => {
+    // Funnel telemetry must never interrupt the assessment or form submit.
+  });
+}
 
 const REFERRER_SHARE_STORAGE_KEY = "natyv_assessment_referrer_share_v1";
 

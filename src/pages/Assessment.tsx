@@ -1,16 +1,23 @@
 import { Head } from "vite-react-ssg";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AssessmentStartForm from "@/components/AssessmentStartForm";
 import AdvisorySection from "@/components/AdvisorySection";
 import PaymentSuccessReport from "@/components/PaymentSuccessReport";
+import AssessmentProofPreview from "@/components/AssessmentProofPreview";
+import { trackAssessmentFunnelEvent } from "@/lib/myagentAssessmentApi";
 
 export default function Assessment() {
   const [searchParams] = useSearchParams();
   const payment = searchParams.get("payment");
   const sessionId = searchParams.get("session_id");
   const referralCode = searchParams.get("ref");
+
+  useEffect(() => {
+    trackAssessmentFunnelEvent("page_view", { referral_present: Boolean(referralCode) });
+  }, [referralCode]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -43,7 +50,10 @@ export default function Assessment() {
                 Nothing was charged. Your assessment remains saved if you want to return later.
               </div>
             )}
-            <AssessmentStartForm referralCode={referralCode} />
+            <AssessmentProofPreview />
+            <div className="mt-8">
+              <AssessmentStartForm referralCode={referralCode} />
+            </div>
           </div>
         </section>
         <AdvisorySection />
