@@ -27,9 +27,10 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
   const [website, setWebsite] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [referralState, setReferralState] = useState<ReferralState>(() => (
-    normalizedReferralCode ? { status: "loading" } : { status: "none" }
-  ));
+  // Keep the first render identical to the statically generated page. The
+  // referral lookup starts after hydration so query-dependent copy cannot
+  // trigger a React hydration mismatch.
+  const [referralState, setReferralState] = useState<ReferralState>({ status: "none" });
 
   useEffect(() => {
     let cancelled = false;
