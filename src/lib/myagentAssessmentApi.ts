@@ -70,6 +70,10 @@ export function trackAssessmentFunnelEvent(
   const safeMetadata = Object.fromEntries(
     Object.entries(metadata).filter(([, value]) => ["string", "number", "boolean"].includes(typeof value)).slice(0, 8),
   );
+  const entrySource = new URLSearchParams(window.location.search).get("source")?.trim() || "";
+  if (entrySource && /^[a-z0-9_-]{1,40}$/i.test(entrySource) && !safeMetadata.entry_source) {
+    safeMetadata.entry_source = entrySource;
+  }
   void fetch(ASSESSMENT_FUNNEL_EVENT_URL, {
     method: "POST",
     headers: {
