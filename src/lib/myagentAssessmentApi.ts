@@ -89,8 +89,7 @@ export function trackAssessmentFunnelEvent(
   if (entrySource && /^[a-z0-9_-]{1,40}$/i.test(entrySource) && !safeMetadata.entry_source) {
     safeMetadata.entry_source = entrySource;
   }
-  const qaParam = new URLSearchParams(window.location.search).get("qa")?.trim().toLowerCase();
-  const isQaTraffic = qaParam === "1" || qaParam === "true" || entrySource.toLowerCase().startsWith("qa_");
+  const isQaTraffic = assessmentFunnelTrafficClass(window.location.search) === "qa";
   if (isQaTraffic && !safeMetadata.traffic_class) {
     safeMetadata.traffic_class = "qa";
   }
