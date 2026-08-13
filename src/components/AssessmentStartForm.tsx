@@ -157,7 +157,7 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
   }
 
   return (
-    <div ref={formShellRef} id="start" className="relative overflow-hidden rounded-3xl border border-primary/30 bg-card/80 shadow-[0_30px_100px_-45px_rgba(16,119,250,0.75)] backdrop-blur-xl">
+    <div ref={formShellRef} id="start" className="relative scroll-mt-24 overflow-hidden rounded-3xl border border-primary/30 bg-card/80 shadow-[0_30px_100px_-45px_rgba(16,119,250,0.75)] backdrop-blur-xl">
       <div className="grid lg:grid-cols-[1.02fr_0.98fr]">
         <div className="border-b border-border/70 p-6 sm:p-9 lg:border-b-0 lg:border-r lg:p-11">
           {referralOffer && (

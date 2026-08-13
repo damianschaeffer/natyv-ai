@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import {
   ArrowRight,
   Check,
@@ -10,7 +10,6 @@ import {
   Target,
   X,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import { trackAssessmentFunnelEvent } from "@/lib/myagentAssessmentApi";
 
 type Recommendation = {
@@ -119,6 +118,16 @@ export default function AssessmentProofPreview() {
   function selectRecommendation(rank: number) {
     setActiveRank(rank);
     trackAssessmentFunnelEvent("proof_recommendation_selected", { rank, product: RECOMMENDATIONS.find((item) => item.rank === rank)?.product });
+  }
+
+  function handleStartClick(event: MouseEvent<HTMLAnchorElement>) {
+    trackAssessmentFunnelEvent("proof_cta_clicked", { surface: "assessment_proof_preview" });
+    if (window.location.pathname !== "/assessment") return;
+    const start = document.getElementById("start");
+    if (!start) return;
+    event.preventDefault();
+    window.history.replaceState({}, "", "/assessment#start");
+    start.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   return (
@@ -258,14 +267,14 @@ export default function AssessmentProofPreview() {
 
         <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-5 text-center sm:flex-row sm:text-left">
           <p className="max-w-2xl text-xs leading-relaxed text-muted-foreground">*This is an illustrative composite, not a promise about your result. Product pricing and integration availability are re-checked during the actual assessment.</p>
-          <Link
-            to="/assessment#start"
-            onClick={() => trackAssessmentFunnelEvent("proof_cta_clicked", { surface: "assessment_proof_preview" })}
+          <a
+            href="/assessment#start"
+            onClick={handleStartClick}
             aria-label="Start a 15-minute assessment with Ava with no upfront payment"
             className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 text-center font-poppins text-sm font-bold text-primary-foreground shadow-[0_15px_35px_-15px_rgba(16,119,250,0.9)] transition hover:-translate-y-0.5 hover:bg-primary/90"
           >
             See what yours could uncover — no upfront payment <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </a>
         </div>
       </div>
     </section>
