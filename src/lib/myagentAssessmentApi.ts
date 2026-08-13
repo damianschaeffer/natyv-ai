@@ -33,6 +33,7 @@ const ASSESSMENT_FUNNEL_SESSION_KEY = "natyv_assessment_funnel_session_v1";
 export type AssessmentFunnelEventType =
   | "page_view"
   | "proof_view"
+  | "proof_snapshot_view"
   | "proof_recommendation_selected"
   | "proof_cta_clicked"
   | "form_view"

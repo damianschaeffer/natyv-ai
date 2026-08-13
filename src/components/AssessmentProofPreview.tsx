@@ -1,4 +1,4 @@
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import {
   ArrowRight,
   Check,
@@ -109,10 +109,40 @@ function apiFitLabel(value: Recommendation["apiFit"]): string {
 
 export default function AssessmentProofPreview() {
   const [activeRank, setActiveRank] = useState(1);
+  const snapshotRef = useRef<HTMLDivElement>(null);
+  const snapshotViewedRef = useRef(false);
   const active = RECOMMENDATIONS.find((item) => item.rank === activeRank) || RECOMMENDATIONS[0];
 
   useEffect(() => {
     trackAssessmentFunnelEvent("proof_view", { surface: "assessment_proof_preview" });
+  }, []);
+
+  useEffect(() => {
+    const node = snapshotRef.current;
+    if (!node || snapshotViewedRef.current) return;
+
+    const markSnapshotViewed = () => {
+      if (snapshotViewedRef.current) return;
+      snapshotViewedRef.current = true;
+      trackAssessmentFunnelEvent("proof_snapshot_view", { surface: "assessment_report_snapshot" });
+    };
+
+    if (typeof IntersectionObserver === "undefined") {
+      markSnapshotViewed();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          markSnapshotViewed();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
   }, []);
 
   function selectRecommendation(rank: number) {
@@ -175,6 +205,7 @@ export default function AssessmentProofPreview() {
         <div
           className="mt-7 grid gap-4 lg:grid-cols-[1.08fr_0.92fr]"
           data-testid="assessment-report-snapshot"
+          ref={snapshotRef}
         >
           <div className="rounded-2xl border border-primary/30 bg-primary/[0.06] p-5 sm:p-6">
             <div className="flex flex-wrap items-center gap-2">
