@@ -26,7 +26,12 @@ export const ASSESSMENT_BY_SESSION_URL =
 
 export const NATYV_BUSINESS_PAGE_SLUG = "natyv-ai";
 
-export const REFERRAL_LOCALSTORAGE_KEY = "myagent_ref";
+/**
+ * Keep a referral invitation scoped to the current browser tab. A referral is
+ * an invitation context, not a permanent browser entitlement: localStorage
+ * could silently carry an old friend's discount into a later direct visit.
+ */
+export const REFERRAL_SESSIONSTORAGE_KEY = "myagent_ref_v2";
 
 const ASSESSMENT_FUNNEL_SESSION_KEY = "natyv_assessment_funnel_session_v1";
 
@@ -81,7 +86,10 @@ export function trackAssessmentFunnelEvent(
   if (typeof window === "undefined") return;
   const sessionId = readAssessmentFunnelSessionId();
   if (!sessionId) return;
-  const referralCode = readStoredAssessmentReferralCode();
+  const queryReferralCode = normalizeAssessmentReferralCode(
+    new URLSearchParams(window.location.search).get("ref"),
+  );
+  const referralCode = queryReferralCode || readStoredAssessmentReferralCode();
   const safeMetadata = Object.fromEntries(
     Object.entries(metadata).filter(([, value]) => ["string", "number", "boolean"].includes(typeof value)).slice(0, 8),
   );
@@ -125,7 +133,7 @@ export function normalizeAssessmentReferralCode(raw: string | null | undefined):
 
 export function readStoredAssessmentReferralCode(): string {
   try {
-    const raw = localStorage.getItem(REFERRAL_LOCALSTORAGE_KEY);
+    const raw = sessionStorage.getItem(REFERRAL_SESSIONSTORAGE_KEY);
     return normalizeAssessmentReferralCode(raw);
   } catch {
     return "";

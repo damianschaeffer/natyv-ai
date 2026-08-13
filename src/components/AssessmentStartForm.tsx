@@ -22,6 +22,11 @@ function dollars(cents: number): string {
 
 export default function AssessmentStartForm({ referralCode }: { referralCode?: string | null }) {
   const normalizedReferralCode = useMemo(() => normalizeAssessmentReferralCode(referralCode), [referralCode]);
+  const storedReferralCode = useMemo(() => readStoredAssessmentReferralCode(), []);
+  // The current URL wins when a visitor opens a new invitation in the same
+  // tab; otherwise preserve the active tab-scoped invitation and show the
+  // same offer that the submit path will use.
+  const activeReferralCode = normalizedReferralCode || storedReferralCode;
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [companyOrRole, setCompanyOrRole] = useState("");
@@ -66,7 +71,7 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
 
   useEffect(() => {
     let cancelled = false;
-    if (!normalizedReferralCode) {
+    if (!activeReferralCode) {
       setReferralState({ status: "none" });
       return () => {
         cancelled = true;
@@ -74,7 +79,7 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
     }
 
     setReferralState({ status: "loading" });
-    fetchPublicAssessmentReferral(normalizedReferralCode)
+    fetchPublicAssessmentReferral(activeReferralCode)
       .then((offer) => {
         if (cancelled) return;
         setReferralState(offer ? { status: "valid", offer } : { status: "invalid" });
@@ -87,7 +92,7 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
     return () => {
       cancelled = true;
     };
-  }, [normalizedReferralCode]);
+  }, [activeReferralCode]);
 
   const referralOffer = referralState.status === "valid" ? referralState.offer : null;
   const referralChecking = referralState.status === "loading";
@@ -130,7 +135,7 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
     setSubmitting(true);
     setError("");
     try {
-      const referral_code = readStoredAssessmentReferralCode() || normalizedReferralCode;
+      const referral_code = activeReferralCode;
       const response = await fetch(ASSESSMENT_START_URL, {
         method: "POST",
         headers: {

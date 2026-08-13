@@ -1,7 +1,9 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import {
   assessmentFunnelSessionStorageKey,
   assessmentFunnelTrafficClass,
+  readStoredAssessmentReferralCode,
+  REFERRAL_SESSIONSTORAGE_KEY,
 } from "./myagentAssessmentApi";
 
 describe("assessment funnel session isolation", () => {
@@ -14,5 +16,19 @@ describe("assessment funnel session isolation", () => {
     expect(assessmentFunnelTrafficClass("?source=warm_assessment")).toBe("clean");
     expect(assessmentFunnelTrafficClass("")).toBe("clean");
     expect(assessmentFunnelSessionStorageKey("?source=warm_assessment")).toContain("_clean");
+  });
+});
+
+describe("assessment referral context", () => {
+  afterEach(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+  });
+
+  it("uses the tab-scoped referral and ignores a stale localStorage value", () => {
+    localStorage.setItem("myagent_ref", "STALE123");
+    sessionStorage.setItem(REFERRAL_SESSIONSTORAGE_KEY, "FRESH456");
+
+    expect(readStoredAssessmentReferralCode()).toBe("FRESH456");
   });
 });
