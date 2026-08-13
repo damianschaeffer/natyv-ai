@@ -10,6 +10,10 @@ export const ASSESSMENT_START_URL =
   import.meta.env.VITE_ASSESSMENT_START_URL ??
   `${MYAGENT_SUPABASE_URL}/functions/v1/start-ai-opportunity-assessment`;
 
+export const ASSESSMENT_REFERRAL_LOOKUP_URL =
+  import.meta.env.VITE_ASSESSMENT_REFERRAL_LOOKUP_URL ??
+  `${MYAGENT_SUPABASE_URL}/functions/v1/get-public-assessment-referral`;
+
 export const SUBMIT_CONTACT_FORM_URL = `${MYAGENT_SUPABASE_URL}/functions/v1/submit-contact-form`;
 
 export const ASSESSMENT_BY_SESSION_URL =
@@ -22,12 +26,15 @@ export const REFERRAL_LOCALSTORAGE_KEY = "myagent_ref";
 
 const REFERRER_SHARE_STORAGE_KEY = "natyv_assessment_referrer_share_v1";
 
+export function normalizeAssessmentReferralCode(raw: string | null | undefined): string {
+  const cleaned = String(raw ?? "").trim().toUpperCase();
+  return /^[A-Z0-9-]{4,30}$/.test(cleaned) ? cleaned : "";
+}
+
 export function readStoredAssessmentReferralCode(): string {
   try {
     const raw = localStorage.getItem(REFERRAL_LOCALSTORAGE_KEY);
-    if (!raw) return "";
-    const cleaned = raw.trim().toUpperCase();
-    return /^[A-Z0-9-]{4,30}$/.test(cleaned) ? cleaned : "";
+    return normalizeAssessmentReferralCode(raw);
   } catch {
     return "";
   }
@@ -50,8 +57,8 @@ export function storeReferrerShareUrl(url: string) {
 }
 
 export function buildAssessmentReferralShareUrl(code: string): string {
-  const cleaned = code.trim().toUpperCase();
-  if (!/^[A-Z0-9-]{4,30}$/.test(cleaned)) return "";
+  const cleaned = normalizeAssessmentReferralCode(code);
+  if (!cleaned) return "";
   if (typeof window !== "undefined") {
     const host = window.location.hostname;
     if (host === "localhost" || host === "127.0.0.1") {
@@ -59,6 +66,29 @@ export function buildAssessmentReferralShareUrl(code: string): string {
     }
   }
   return `https://natyv.ai/assessment?ref=${encodeURIComponent(cleaned)}`;
+}
+
+export type PublicAssessmentReferralOffer = {
+  valid: true;
+  referral_code: string;
+  referrer_first_name: string | null;
+  full_price_cents: number;
+  discount_cents: number;
+  amount_total_cents: number;
+};
+
+export async function fetchPublicAssessmentReferral(code: string): Promise<PublicAssessmentReferralOffer | null> {
+  const normalized = normalizeAssessmentReferralCode(code);
+  if (!normalized) return null;
+
+  const response = await fetch(
+    `${ASSESSMENT_REFERRAL_LOOKUP_URL}?ref=${encodeURIComponent(normalized)}`,
+    { headers: { apikey: MYAGENT_SUPABASE_ANON_KEY } },
+  );
+  if (response.status === 404) return null;
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || "Unable to verify this referral invitation.");
+  return data as PublicAssessmentReferralOffer;
 }
 
 export type AssessmentBySessionResult =
