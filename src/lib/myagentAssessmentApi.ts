@@ -81,6 +81,10 @@ export function trackAssessmentFunnelEvent(
   if (isQaTraffic && !safeMetadata.traffic_class) {
     safeMetadata.traffic_class = "qa";
   }
+  const proofId = new URLSearchParams(window.location.search).get("proof_id")?.trim().toLowerCase() || "";
+  if (/^[a-f0-9]{20}$/.test(proofId)) {
+    safeMetadata.proof_id = proofId;
+  }
   void fetch(ASSESSMENT_FUNNEL_EVENT_URL, {
     method: "POST",
     headers: {

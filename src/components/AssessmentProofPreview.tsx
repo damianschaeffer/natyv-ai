@@ -160,6 +160,8 @@ export default function AssessmentProofPreview() {
     if (/^[a-z0-9_-]{1,40}$/i.test(source)) nextParams.set("source", source);
     const referral = new URLSearchParams(window.location.search).get("ref")?.trim() || "";
     if (/^[a-z0-9-]{4,30}$/i.test(referral)) nextParams.set("ref", referral);
+    const proofId = new URLSearchParams(window.location.search).get("proof_id")?.trim().toLowerCase() || "";
+    if (/^[a-f0-9]{20}$/.test(proofId)) nextParams.set("proof_id", proofId);
     const query = nextParams.toString();
     const destination = `/assessment${query ? `?${query}` : ""}#start`;
     if (window.location.pathname !== "/assessment") {
