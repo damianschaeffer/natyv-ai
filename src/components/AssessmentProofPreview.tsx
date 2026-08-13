@@ -172,6 +172,58 @@ export default function AssessmentProofPreview() {
           </div>
         </div>
 
+        <div
+          className="mt-7 grid gap-4 lg:grid-cols-[1.08fr_0.92fr]"
+          data-testid="assessment-report-snapshot"
+        >
+          <div className="rounded-2xl border border-primary/30 bg-primary/[0.06] p-5 sm:p-6">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full border border-primary/35 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary">
+                Sample report snapshot
+              </span>
+              <span className="text-xs text-muted-foreground">Anonymized household example</span>
+            </div>
+            <h3 className="mt-4 font-poppins text-xl font-bold text-foreground sm:text-2xl">
+              One painful weekly task becomes a decision you can actually act on.
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              The example client is coordinating meals, groceries, sports, newborn care, and household updates. The report turns that story into a ranked starting point, a product comparison, and a short proof window instead of a generic list of AI ideas.
+            </p>
+            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-xl border border-border/70 bg-background/55 p-3">
+                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Decision</p>
+                <p className="mt-1 text-sm font-semibold text-foreground">Choose one shared household system</p>
+              </div>
+              <div className="rounded-xl border border-border/70 bg-background/55 p-3">
+                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Proof window</p>
+                <p className="mt-1 text-sm font-semibold text-foreground">Run the first plan for 7 days</p>
+              </div>
+              <div className="rounded-xl border border-border/70 bg-background/55 p-3">
+                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Completion</p>
+                <p className="mt-1 text-sm font-semibold text-foreground">Plan, shop, and review together</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/70 bg-background/45 p-5 sm:p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary">What you can react to</p>
+            <ol className="mt-4 space-y-4 text-sm leading-relaxed">
+              <li className="flex gap-3">
+                <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">1</span>
+                <span><strong className="font-semibold text-foreground">The ranked choice.</strong> Why this product is first, and what would make another option better.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">2</span>
+                <span><strong className="font-semibold text-foreground">The tradeoffs.</strong> Cost, limitations, integration fit, and the work the household still has to do.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">3</span>
+                <span><strong className="font-semibold text-foreground">The next move.</strong> A measurable first proof step, including an honest MyAgent alternative when it fits.</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
         <div className="mt-8 overflow-hidden rounded-2xl border border-border/70 bg-background/45">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
