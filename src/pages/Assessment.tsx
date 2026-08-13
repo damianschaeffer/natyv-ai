@@ -10,6 +10,7 @@ export default function Assessment() {
   const [searchParams] = useSearchParams();
   const payment = searchParams.get("payment");
   const sessionId = searchParams.get("session_id");
+  const referralCode = searchParams.get("ref");
 
   return (
     <div className="min-h-screen bg-background">
@@ -42,7 +43,7 @@ export default function Assessment() {
                 Nothing was charged. Your assessment remains saved if you want to return later.
               </div>
             )}
-            <AssessmentStartForm />
+            <AssessmentStartForm referralCode={referralCode} />
           </div>
         </section>
         <AdvisorySection />
