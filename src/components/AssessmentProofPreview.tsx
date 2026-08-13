@@ -198,6 +198,21 @@ export default function AssessmentProofPreview() {
           </p>
         </div>
 
+        <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-primary/25 bg-primary/[0.06] p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+          <div>
+            <p className="font-poppins text-sm font-semibold text-foreground">Want this same decision clarity for your situation?</p>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Start the private 15-minute intake when you are ready. No upfront payment.</p>
+          </div>
+          <a
+            href="/assessment#start"
+            onClick={handleStartClick}
+            aria-label="Start a 15-minute assessment with Ava with no upfront payment"
+            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-center font-poppins text-sm font-bold text-primary-foreground shadow-[0_15px_35px_-15px_rgba(16,119,250,0.9)] transition hover:-translate-y-0.5 hover:bg-primary/90"
+          >
+            See what yours could uncover <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+
         <div className="mt-7 grid gap-3 sm:grid-cols-3">
           <div className="rounded-2xl border border-border/70 bg-background/55 p-4">
             <Target className="h-5 w-5 text-primary" aria-hidden="true" />
