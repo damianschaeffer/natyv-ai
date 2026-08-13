@@ -261,9 +261,10 @@ export default function AssessmentProofPreview() {
           <Link
             to="/assessment#start"
             onClick={() => trackAssessmentFunnelEvent("proof_cta_clicked", { surface: "assessment_proof_preview" })}
-            className="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-primary px-5 font-poppins text-sm font-bold text-primary-foreground shadow-[0_15px_35px_-15px_rgba(16,119,250,0.9)] transition hover:-translate-y-0.5 hover:bg-primary/90"
+            aria-label="Start a 15-minute assessment with Ava with no upfront payment"
+            className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 text-center font-poppins text-sm font-bold text-primary-foreground shadow-[0_15px_35px_-15px_rgba(16,119,250,0.9)] transition hover:-translate-y-0.5 hover:bg-primary/90"
           >
-            See what yours could uncover <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            See what yours could uncover — no upfront payment <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
       </div>
