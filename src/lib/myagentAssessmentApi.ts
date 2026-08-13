@@ -124,7 +124,7 @@ export function trackAssessmentFunnelEvent(
   });
 }
 
-export type AssessmentProofCtaPlacement = "hero" | "early" | "bottom";
+export type AssessmentProofCtaPlacement = "hero" | "early" | "bottom" | "compact";
 
 /**
  * Carry only the anonymous attribution fields that belong to the proof →

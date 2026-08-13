@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Head } from "vite-react-ssg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,6 +10,13 @@ import { handleAssessmentProofCtaClick } from "@/lib/myagentAssessmentApi";
  * decision artifact before they spend attention on the intake.
  */
 export default function AssessmentExample() {
+  const [showFull, setShowFull] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setShowFull(params.get("view") === "full");
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Head>
@@ -27,12 +35,12 @@ export default function AssessmentExample() {
           <div className="pointer-events-none absolute left-1/2 top-0 h-[620px] w-[900px] -translate-x-1/2 rounded-full bg-primary/[0.08] blur-[170px]" />
           <div className="relative mx-auto max-w-6xl">
             <div className="mx-auto mb-8 max-w-3xl text-center">
-              <p className="font-accent text-xs font-semibold uppercase tracking-[0.18em] text-primary">No signup to preview</p>
+              <p className="font-accent text-xs font-semibold uppercase tracking-[0.18em] text-primary">Illustrative completed assessment</p>
               <h1 className="mt-3 font-poppins text-4xl font-bold leading-tight text-foreground sm:text-5xl">
-                See the decision before you start.
+                See the finished report.
               </h1>
               <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                This anonymized example shows the ranked products, official sources, costs, tradeoffs, integration fit, and honest MyAgent alternative you can react to after your private intake.
+                Ranked products, prices, tradeoffs, and the recommended first step—shown before you start.
               </p>
               <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
                 <a
@@ -44,15 +52,15 @@ export default function AssessmentExample() {
                   Start my 15-minute assessment — no upfront payment
                 </a>
                 <a
-                  href="#example-report"
+                  href={showFull ? "/assessment/example" : "#example-report"}
                   className="inline-flex min-h-12 items-center justify-center rounded-xl border border-border/80 bg-background/45 px-5 text-center font-poppins text-sm font-semibold text-foreground transition hover:border-primary/50 hover:bg-primary/[0.06]"
                 >
-                  Review the ranked example
+                  {showFull ? "Back to the finished report" : "Review the finished report"}
                 </a>
               </div>
               <p className="mt-3 text-xs text-muted-foreground">No signup to preview · 15 minutes maximum · review the result before paying</p>
             </div>
-            <AssessmentProofPreview />
+            <AssessmentProofPreview compact={!showFull} />
           </div>
         </section>
       </main>

@@ -81,7 +81,7 @@ export default function Assessment() {
                 </a>
               </div>
             ) : (
-              <AssessmentProofPreview />
+              <AssessmentProofPreview compact />
             )}
             <div className="mt-8">
               <AssessmentStartForm referralCode={referralCode} compact={handoffMode} />

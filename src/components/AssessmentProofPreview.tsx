@@ -110,7 +110,166 @@ function apiFitLabel(value: Recommendation["apiFit"]): string {
   return value === "Strong" ? "Strong integration fit" : value === "Moderate" ? "Check integration path" : "Mostly manual today";
 }
 
-export default function AssessmentProofPreview() {
+function CompactProofPreview() {
+  const primary = RECOMMENDATIONS[0];
+  const alternatives = RECOMMENDATIONS.slice(1);
+  const snapshotRef = useRef<HTMLDivElement>(null);
+  const snapshotViewedRef = useRef(false);
+  const [detailsHref, setDetailsHref] = useState("/assessment/example?view=full");
+
+  useEffect(() => {
+    trackAssessmentFunnelEvent("proof_view", { surface: "assessment_proof_compact" });
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("view", "full");
+    setDetailsHref(`/assessment/example?${params.toString()}`);
+  }, []);
+
+  useEffect(() => {
+    const node = snapshotRef.current;
+    if (!node || snapshotViewedRef.current) return;
+
+    const markSnapshotViewed = () => {
+      if (snapshotViewedRef.current) return;
+      snapshotViewedRef.current = true;
+      trackAssessmentFunnelEvent("proof_snapshot_view", { surface: "assessment_report_compact" });
+    };
+
+    if (typeof IntersectionObserver === "undefined") {
+      markSnapshotViewed();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          markSnapshotViewed();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  function handleStartClick(event: MouseEvent<HTMLAnchorElement>) {
+    handleAssessmentProofCtaClick(event, "compact");
+  }
+
+  return (
+    <section
+      id="example-report"
+      aria-labelledby="assessment-proof-heading"
+      data-testid="assessment-report-preview"
+      className="relative overflow-hidden rounded-3xl border border-primary/30 bg-card/70 p-4 shadow-[0_30px_100px_-55px_rgba(16,119,250,0.8)] backdrop-blur-xl sm:p-6 lg:p-8"
+    >
+      <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
+      <div className="relative" ref={snapshotRef}>
+        <div className="flex flex-col gap-4 border-b border-border/60 pb-5 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="font-accent text-[10px] font-bold uppercase tracking-[0.18em] text-primary">Completed assessment · illustrative</p>
+            <h2 id="assessment-proof-heading" className="mt-2 font-poppins text-2xl font-bold leading-tight text-foreground sm:text-3xl">Weekly family meal + grocery plan</h2>
+            <p className="mt-1 text-sm text-muted-foreground">Decision ready · 3 ranked options · reviewed against the stated constraints</p>
+          </div>
+          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1.5 text-xs font-semibold text-emerald-200">
+            <Check className="h-3.5 w-3.5" aria-hidden="true" /> Recommendation made
+          </span>
+        </div>
+
+        <div className="mt-5 rounded-2xl border border-primary/40 bg-primary/[0.08] p-4 sm:p-5">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex gap-3">
+              <span className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-primary font-poppins text-lg font-bold text-primary-foreground">#1</span>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary">Selected recommendation</p>
+                <h3 className="mt-1 font-poppins text-xl font-bold text-foreground">{primary.product}</h3>
+                <p className="text-sm text-muted-foreground">{primary.plan}</p>
+              </div>
+            </div>
+            <div className="flex items-end gap-3 sm:flex-col sm:items-end sm:gap-1">
+              <span aria-label={`${primary.score}/100`} className="font-poppins text-3xl font-bold text-foreground">{primary.score}<span className="text-base text-muted-foreground">/100</span></span>
+              <span className="text-xs font-semibold text-primary">{primary.price}</span>
+            </div>
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            {[
+              "AI meal planner",
+              "Shared calendar",
+              "Shopping list",
+              `${primary.apiFit} API / automation fit`,
+            ].map((tag) => <span key={tag} className="rounded-full border border-border/70 bg-background/55 px-2.5 py-1 text-[11px] font-medium text-foreground/80">{tag}</span>)}
+          </div>
+
+          <div className="mt-4 grid gap-4 border-t border-primary/20 pt-4 sm:grid-cols-[1fr_auto] sm:items-end">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Why it won</p>
+              <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-foreground/90">
+                <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 flex-none text-emerald-300" aria-hidden="true" />One household system covers planning, calendar, recipes, and shopping.</li>
+                <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 flex-none text-emerald-300" aria-hidden="true" />Best match for the weekly plan and low-prep constraint.</li>
+              </ul>
+            </div>
+            <a href={primary.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
+              Official product URL <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-5">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">Ranked alternatives</p>
+            <span className="text-xs text-muted-foreground">Why they placed lower</span>
+          </div>
+          <div className="mt-2 divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-background/45">
+            {alternatives.map((item) => (
+              <div key={item.rank} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-3">
+                  <span className="grid h-8 w-8 flex-none place-items-center rounded-lg border border-border/70 bg-background/70 font-poppins text-sm font-bold" style={{ color: item.color }}>#{item.rank}</span>
+                  <div>
+                    <p className="font-poppins font-semibold text-foreground">{item.product} <span className="font-normal text-muted-foreground">· {item.price}</span></p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">{item.fit} · {item.apiFit} API fit</p>
+                  </div>
+                </div>
+                <p className="max-w-xl text-sm leading-relaxed text-foreground/75">{item.rank === 2 ? "Excellent calendar layer, but meal and grocery work stays separate." : "Lowest-cost list option, but the family still does the planning manually."}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-4 sm:grid-cols-[1fr_1fr]">
+          <div className="rounded-2xl border border-border/70 bg-background/45 p-4">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Decision</p>
+            <p className="mt-2 font-poppins text-lg font-bold text-foreground">Start with {primary.product}</p>
+            <p className="mt-1 text-sm leading-relaxed text-foreground/75">Proof window: 7 days · completion: plan, shop, and review one week together.</p>
+          </div>
+          <div className="rounded-2xl border border-primary/30 bg-primary/[0.06] p-4">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary">MyAgent alternative</p>
+            <p className="mt-2 font-poppins text-lg font-bold text-foreground">Ava household space</p>
+            <p className="mt-1 text-sm leading-relaxed text-foreground/75">Shared grocery list + calendar + weekly automation. More tailored; requires setup and approval.</p>
+          </div>
+        </div>
+
+        <div className="mt-6 flex flex-col gap-3 border-t border-border/60 pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <a href={detailsHref} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Open full comparison <ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
+          <a
+            href="/assessment#start"
+            onClick={handleStartClick}
+            aria-label="Start my 15-minute assessment with Ava with no upfront payment"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-center font-poppins text-sm font-bold text-primary-foreground shadow-[0_15px_35px_-15px_rgba(16,119,250,0.9)] transition hover:-translate-y-0.5 hover:bg-primary/90"
+          >
+            Start my 15-minute assessment <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+        <p className="mt-3 text-center text-[11px] leading-relaxed text-muted-foreground">*Illustrative composite. Pricing and integration availability are re-checked for the actual assessment.</p>
+      </div>
+    </section>
+  );
+}
+
+function FullAssessmentProofPreview() {
   const [activeRank, setActiveRank] = useState(1);
   const snapshotRef = useRef<HTMLDivElement>(null);
   const snapshotViewedRef = useRef(false);
@@ -374,4 +533,8 @@ export default function AssessmentProofPreview() {
       </div>
     </section>
   );
+}
+
+export default function AssessmentProofPreview({ compact = false }: { compact?: boolean } = {}) {
+  return compact ? <CompactProofPreview /> : <FullAssessmentProofPreview />;
 }
