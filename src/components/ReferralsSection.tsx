@@ -87,6 +87,7 @@ export default function ReferralsSection() {
   const [shareBusy, setShareBusy] = useState(false);
   const [shareError, setShareError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [messageCopied, setMessageCopied] = useState(false);
   const [shareForm, setShareForm] = useState({ firstName: "", email: "" });
 
   const [formState, setFormState] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -101,6 +102,7 @@ export default function ReferralsSection() {
   const openShare = () => {
     setShareError(null);
     setCopied(false);
+    setMessageCopied(false);
     const cached = readStoredReferrerShareUrl();
     if (cached) setShareUrl(cached);
     setShareOpen(true);
@@ -121,6 +123,7 @@ export default function ReferralsSection() {
         started.referral_share_url || (code ? buildAssessmentReferralShareUrl(code) : "");
       if (!url) throw new Error("We couldn't create your link. Please try again.");
       setShareUrl(url);
+      setMessageCopied(false);
       storeReferrerShareUrl(url);
     } catch (err) {
       setShareError(err instanceof Error ? err.message : "Something went wrong");
@@ -137,6 +140,22 @@ export default function ReferralsSection() {
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
       setShareError("Copy failed — select the link and copy manually.");
+    }
+  };
+
+  const suggestedShareMessage = useMemo(() => {
+    if (!shareUrl) return "";
+    return `I thought this might be useful: Natyv AI shows a finished example before you start. The intake is free, and my referral link saves you $100 — $150 instead of $250 if you decide the report is worth it: ${shareUrl}`;
+  }, [shareUrl]);
+
+  const copySuggestedMessage = async () => {
+    if (!suggestedShareMessage) return;
+    try {
+      await navigator.clipboard.writeText(suggestedShareMessage);
+      setMessageCopied(true);
+      window.setTimeout(() => setMessageCopied(false), 2000);
+    } catch {
+      setShareError("Copy failed — select the suggested message and copy manually.");
     }
   };
 
@@ -382,15 +401,41 @@ export default function ReferralsSection() {
 
           {showShareLinkStep ? (
             <div className="space-y-4">
+              <div className="rounded-xl border border-primary/30 bg-primary/[0.06] p-3 text-left">
+                <p className="mb-2 text-xs text-muted-foreground">Suggested message</p>
+                <textarea
+                  readOnly
+                  rows={5}
+                  value={suggestedShareMessage}
+                  aria-label="Suggested referral message"
+                  className="w-full resize-none bg-transparent text-sm leading-relaxed text-foreground outline-none"
+                />
+              </div>
               <div className="rounded-xl border border-border/60 bg-muted/30 p-3 text-left">
                 <p className="text-xs mb-2 text-muted-foreground">Your referral link</p>
                 <p className="text-sm break-all font-mono text-foreground">{shareUrl}</p>
               </div>
               {shareError && <p className="text-sm text-destructive">{shareError}</p>}
-              <div className="flex flex-col sm:flex-row gap-2">
+              <div className="flex flex-col gap-2 sm:flex-row">
                 <Button
                   type="button"
                   className="rounded-full flex-1 font-semibold bg-primary hover:bg-primary/90"
+                  onClick={() => {
+                    void copySuggestedMessage();
+                  }}
+                >
+                  {messageCopied ? (
+                    <>
+                      <Check className="mr-2 h-4 w-4" /> Message copied
+                    </>
+                  ) : (
+                    "Copy suggested message"
+                  )}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="rounded-full flex-1 font-semibold"
                   onClick={() => {
                     void copyShareLink();
                   }}
@@ -405,18 +450,19 @@ export default function ReferralsSection() {
                     </>
                   )}
                 </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="rounded-full"
-                  onClick={() => {
-                    setShareUrl("");
-                    storeReferrerShareUrl("");
-                  }}
-                >
-                  New link
-                </Button>
               </div>
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full rounded-full"
+                onClick={() => {
+                  setShareUrl("");
+                  setMessageCopied(false);
+                  storeReferrerShareUrl("");
+                }}
+              >
+                Create a different link
+              </Button>
             </div>
           ) : (
             <form
