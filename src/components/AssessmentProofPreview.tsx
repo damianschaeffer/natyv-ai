@@ -10,7 +10,10 @@ import {
   Target,
   X,
 } from "lucide-react";
-import { trackAssessmentFunnelEvent } from "@/lib/myagentAssessmentApi";
+import {
+  handleAssessmentProofCtaClick,
+  trackAssessmentFunnelEvent,
+} from "@/lib/myagentAssessmentApi";
 
 type Recommendation = {
   rank: number;
@@ -151,35 +154,7 @@ export default function AssessmentProofPreview() {
   }
 
   function handleStartClick(event: MouseEvent<HTMLAnchorElement>, placement: "early" | "bottom") {
-    trackAssessmentFunnelEvent("proof_cta_clicked", {
-      surface: "assessment_proof_preview",
-      placement,
-      cta_variant: "start_15_minute_no_upfront_payment",
-    });
-    // Preserve only attribution parameters while moving the visitor to the
-    // form. Without this, a warm proof visit becomes an unscoped form start
-    // and Mission Control cannot measure the message-to-form handoff.
-    const nextParams = new URLSearchParams();
-    const source = new URLSearchParams(window.location.search).get("source")?.trim() || "";
-    if (/^[a-z0-9_-]{1,40}$/i.test(source)) nextParams.set("source", source);
-    const referral = new URLSearchParams(window.location.search).get("ref")?.trim() || "";
-    if (/^[a-z0-9-]{4,30}$/i.test(referral)) nextParams.set("ref", referral);
-    const proofId = new URLSearchParams(window.location.search).get("proof_id")?.trim().toLowerCase() || "";
-    if (/^[a-f0-9]{20}$/.test(proofId)) nextParams.set("proof_id", proofId);
-    const qa = new URLSearchParams(window.location.search).get("qa")?.trim().toLowerCase() || "";
-    if (qa === "1" || qa === "true") nextParams.set("qa", qa);
-    const query = nextParams.toString();
-    const destination = `/assessment${query ? `?${query}` : ""}#start`;
-    if (window.location.pathname !== "/assessment") {
-      event.preventDefault();
-      window.location.assign(destination);
-      return;
-    }
-    const start = document.getElementById("start");
-    if (!start) return;
-    event.preventDefault();
-    window.history.replaceState({}, "", destination);
-    start.scrollIntoView({ behavior: "smooth", block: "start" });
+    handleAssessmentProofCtaClick(event, placement);
   }
 
   return (

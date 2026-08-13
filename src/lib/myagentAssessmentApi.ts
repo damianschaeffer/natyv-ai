@@ -124,6 +124,55 @@ export function trackAssessmentFunnelEvent(
   });
 }
 
+export type AssessmentProofCtaPlacement = "hero" | "early" | "bottom";
+
+/**
+ * Carry only the anonymous attribution fields that belong to the proof →
+ * intake handoff. This keeps a warm visitor measurable without copying
+ * arbitrary query parameters into the assessment form URL.
+ */
+export function buildAssessmentStartDestination(search = ""): string {
+  const sourceParams = new URLSearchParams(search);
+  const nextParams = new URLSearchParams();
+  const source = sourceParams.get("source")?.trim() || "";
+  if (/^[a-z0-9_-]{1,40}$/i.test(source)) nextParams.set("source", source);
+  const referral = sourceParams.get("ref")?.trim() || "";
+  if (/^[a-z0-9-]{4,30}$/i.test(referral)) nextParams.set("ref", referral);
+  const proofId = sourceParams.get("proof_id")?.trim().toLowerCase() || "";
+  if (/^[a-f0-9]{20}$/.test(proofId)) nextParams.set("proof_id", proofId);
+  const qa = sourceParams.get("qa")?.trim().toLowerCase() || "";
+  if (qa === "1" || qa === "true") nextParams.set("qa", qa);
+  const query = nextParams.toString();
+  return `/assessment${query ? `?${query}` : ""}#start`;
+}
+
+/**
+ * Shared proof CTA behavior. Conversion telemetry is best-effort; the
+ * navigation must remain usable if the event request is blocked or delayed.
+ */
+export function handleAssessmentProofCtaClick(
+  event: { preventDefault: () => void },
+  placement: AssessmentProofCtaPlacement,
+): void {
+  if (typeof window === "undefined") return;
+  trackAssessmentFunnelEvent("proof_cta_clicked", {
+    surface: "assessment_proof_preview",
+    placement,
+    cta_variant: "start_15_minute_no_upfront_payment",
+  });
+  const destination = buildAssessmentStartDestination(window.location.search);
+  if (window.location.pathname !== "/assessment") {
+    event.preventDefault();
+    window.location.assign(destination);
+    return;
+  }
+  const start = document.getElementById("start");
+  if (!start) return;
+  event.preventDefault();
+  window.history.replaceState({}, "", destination);
+  start.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 const REFERRER_SHARE_STORAGE_KEY = "natyv_assessment_referrer_share_v1";
 
 export function normalizeAssessmentReferralCode(raw: string | null | undefined): string {
