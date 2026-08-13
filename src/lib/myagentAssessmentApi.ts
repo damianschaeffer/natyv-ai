@@ -35,6 +35,7 @@ export type AssessmentFunnelEventType =
   | "proof_view"
   | "proof_recommendation_selected"
   | "proof_cta_clicked"
+  | "form_view"
   | "form_start"
   | "form_submit"
   | "referral_loaded";

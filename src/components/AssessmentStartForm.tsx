@@ -29,10 +29,40 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const formStartedRef = useRef(false);
+  const formViewedRef = useRef(false);
+  const formShellRef = useRef<HTMLDivElement>(null);
   // Keep the first render identical to the statically generated page. The
   // referral lookup starts after hydration so query-dependent copy cannot
   // trigger a React hydration mismatch.
   const [referralState, setReferralState] = useState<ReferralState>({ status: "none" });
+
+  useEffect(() => {
+    const node = formShellRef.current;
+    if (!node || formViewedRef.current) return;
+
+    const markFormViewed = () => {
+      if (formViewedRef.current) return;
+      formViewedRef.current = true;
+      trackAssessmentFunnelEvent("form_view", { surface: "assessment_start_form" });
+    };
+
+    if (typeof IntersectionObserver === "undefined") {
+      markFormViewed();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          markFormViewed();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -127,7 +157,7 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
   }
 
   return (
-    <div id="start" className="relative overflow-hidden rounded-3xl border border-primary/30 bg-card/80 shadow-[0_30px_100px_-45px_rgba(16,119,250,0.75)] backdrop-blur-xl">
+    <div ref={formShellRef} id="start" className="relative overflow-hidden rounded-3xl border border-primary/30 bg-card/80 shadow-[0_30px_100px_-45px_rgba(16,119,250,0.75)] backdrop-blur-xl">
       <div className="grid lg:grid-cols-[1.02fr_0.98fr]">
         <div className="border-b border-border/70 p-6 sm:p-9 lg:border-b-0 lg:border-r lg:p-11">
           {referralOffer && (
