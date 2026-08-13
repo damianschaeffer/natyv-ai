@@ -20,7 +20,13 @@ function dollars(cents: number): string {
   return `$${Math.round(cents / 100)}`;
 }
 
-export default function AssessmentStartForm({ referralCode }: { referralCode?: string | null }) {
+export default function AssessmentStartForm({
+  referralCode,
+  compact = false,
+}: {
+  referralCode?: string | null
+  compact?: boolean
+}) {
   const normalizedReferralCode = useMemo(() => normalizeAssessmentReferralCode(referralCode), [referralCode]);
   const storedReferralCode = useMemo(() => readStoredAssessmentReferralCode(), []);
   // The current URL wins when a visitor opens a new invitation in the same
@@ -197,18 +203,20 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
             ))}
           </div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-2xl border border-border/70 bg-background/55 p-4">
-              <Clock3 className="mb-3 h-5 w-5 text-primary" aria-hidden="true" />
-              <p className="font-poppins text-sm font-semibold text-foreground">15 minutes maximum</p>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">One thoughtful question at a time, with room to pause and think.</p>
+          {!compact && (
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl border border-border/70 bg-background/55 p-4">
+                <Clock3 className="mb-3 h-5 w-5 text-primary" aria-hidden="true" />
+                <p className="font-poppins text-sm font-semibold text-foreground">15 minutes maximum</p>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">One thoughtful question at a time, with room to pause and think.</p>
+              </div>
+              <div className="rounded-2xl border border-border/70 bg-background/55 p-4">
+                <LockKeyhole className="mb-3 h-5 w-5 text-primary" aria-hidden="true" />
+                <p className="font-poppins text-sm font-semibold text-foreground">Private, permission-based intake</p>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Ava explains recording and asks permission before the assessment begins.</p>
+              </div>
             </div>
-            <div className="rounded-2xl border border-border/70 bg-background/55 p-4">
-              <LockKeyhole className="mb-3 h-5 w-5 text-primary" aria-hidden="true" />
-              <p className="font-poppins text-sm font-semibold text-foreground">Private, permission-based intake</p>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Ava explains recording and asks permission before the assessment begins.</p>
-            </div>
-          </div>
+          )}
         </div>
 
         <form
@@ -236,26 +244,28 @@ export default function AssessmentStartForm({ referralCode }: { referralCode?: s
                 : "Enter your details and we’ll open your private intake immediately."}
           </p>
 
-          <div
-            className="mt-6 rounded-2xl border border-primary/25 bg-primary/[0.07] p-4"
-            data-testid="assessment-next-steps"
-          >
-            <p className="font-poppins text-sm font-semibold text-foreground">What happens after you start</p>
-            <ol className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
-              <li className="flex items-start gap-3">
-                <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">1</span>
-                <span><strong className="font-semibold text-foreground">Ava opens your private voice intake.</strong> You do not have to find another page or schedule a call.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">2</span>
-                <span><strong className="font-semibold text-foreground">Answer one thoughtful question at a time.</strong> The conversation is capped at 15 minutes and you can pause whenever you need to.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">3</span>
-                <span><strong className="font-semibold text-foreground">Review the result before paying.</strong> We prepare a human-reviewed assessment with three ranked opportunities and the simplest first step.</span>
-              </li>
-            </ol>
-          </div>
+          {!compact && (
+            <div
+              className="mt-6 rounded-2xl border border-primary/25 bg-primary/[0.07] p-4"
+              data-testid="assessment-next-steps"
+            >
+              <p className="font-poppins text-sm font-semibold text-foreground">What happens after you start</p>
+              <ol className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
+                <li className="flex items-start gap-3">
+                  <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">1</span>
+                  <span><strong className="font-semibold text-foreground">Ava opens your private voice intake.</strong> You do not have to find another page or schedule a call.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">2</span>
+                  <span><strong className="font-semibold text-foreground">Answer one thoughtful question at a time.</strong> The conversation is capped at 15 minutes and you can pause whenever you need to.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">3</span>
+                  <span><strong className="font-semibold text-foreground">Review the result before paying.</strong> We prepare a human-reviewed assessment with three ranked opportunities and the simplest first step.</span>
+                </li>
+              </ol>
+            </div>
+          )}
 
           <label className="mt-7 text-sm font-medium text-foreground" htmlFor="assessment-first-name">First name</label>
           <input

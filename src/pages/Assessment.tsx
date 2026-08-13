@@ -14,6 +14,16 @@ export default function Assessment() {
   const payment = searchParams.get("payment");
   const sessionId = searchParams.get("session_id");
   const referralCode = searchParams.get("ref");
+  const proofId = searchParams.get("proof_id");
+  // A referral or proof CTA is already a committed handoff. Re-rendering the
+  // full interactive example above the form makes the recipient scroll through
+  // the same sales story twice and buries the one action we want next.
+  const handoffMode = Boolean(referralCode || proofId);
+  const exampleHref = referralCode
+    ? `/assessment/example?source=referral&ref=${encodeURIComponent(referralCode)}`
+    : proofId
+      ? `/assessment/example?source=warm_assessment&proof_id=${encodeURIComponent(proofId)}`
+      : "/assessment/example";
 
   useEffect(() => {
     trackAssessmentFunnelEvent("page_view", { referral_present: Boolean(referralCode) });
@@ -50,9 +60,25 @@ export default function Assessment() {
                 Nothing was charged. Your assessment remains saved if you want to return later.
               </div>
             )}
-            <AssessmentProofPreview />
+            {handoffMode ? (
+              <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-primary/25 bg-primary/[0.06] px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-poppins font-semibold text-foreground">One short next step</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    {referralCode
+                      ? "Your invitation is attached. Add your details and Ava will open the private intake; your referral savings are confirmed before you start."
+                      : "You have seen the finished example. Add your details and Ava will turn your situation into the same kind of ranked decision."}
+                  </p>
+                </div>
+                <a href={exampleHref} className="inline-flex shrink-0 items-center justify-center rounded-xl border border-primary/35 bg-background/55 px-3 py-2 text-xs font-semibold text-primary transition hover:bg-primary/[0.08]">
+                  Review the example again
+                </a>
+              </div>
+            ) : (
+              <AssessmentProofPreview />
+            )}
             <div className="mt-8">
-              <AssessmentStartForm referralCode={referralCode} />
+              <AssessmentStartForm referralCode={referralCode} compact={handoffMode} />
             </div>
           </div>
         </section>

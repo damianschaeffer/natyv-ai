@@ -16,4 +16,13 @@ describe("AssessmentStartForm", () => {
     expect(form).toHaveAttribute("id", "start");
     expect(form?.closest("#assessment-form")).toBeInTheDocument();
   });
+
+  it("supports a compact handoff without repeating the full next-step explainer", () => {
+    vi.stubGlobal("fetch", vi.fn(() => Promise.resolve(new Response("{}", { status: 200 }))));
+
+    render(<AssessmentStartForm compact />);
+
+    expect(screen.queryByTestId("assessment-next-steps")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Start my 15-minute assessment" })).toBeInTheDocument();
+  });
 });
