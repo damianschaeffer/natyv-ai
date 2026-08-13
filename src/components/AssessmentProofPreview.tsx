@@ -151,7 +151,11 @@ export default function AssessmentProofPreview() {
   }
 
   function handleStartClick(event: MouseEvent<HTMLAnchorElement>, placement: "early" | "bottom") {
-    trackAssessmentFunnelEvent("proof_cta_clicked", { surface: "assessment_proof_preview", placement });
+    trackAssessmentFunnelEvent("proof_cta_clicked", {
+      surface: "assessment_proof_preview",
+      placement,
+      cta_variant: "start_15_minute_no_upfront_payment",
+    });
     // Preserve only attribution parameters while moving the visitor to the
     // form. Without this, a warm proof visit becomes an unscoped form start
     // and Mission Control cannot measure the message-to-form handoff.
@@ -210,10 +214,10 @@ export default function AssessmentProofPreview() {
           <a
             href="/assessment#start"
             onClick={(event) => handleStartClick(event, "early")}
-            aria-label="Start a 15-minute assessment with Ava with no upfront payment"
+            aria-label="Start my 15-minute assessment with Ava with no upfront payment"
             className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-center font-poppins text-sm font-bold text-primary-foreground shadow-[0_15px_35px_-15px_rgba(16,119,250,0.9)] transition hover:-translate-y-0.5 hover:bg-primary/90"
           >
-            See what yours could uncover <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            Start my 15-minute assessment — no upfront payment <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
 
@@ -386,10 +390,10 @@ export default function AssessmentProofPreview() {
           <a
             href="/assessment#start"
             onClick={(event) => handleStartClick(event, "bottom")}
-            aria-label="Start a 15-minute assessment with Ava with no upfront payment"
+            aria-label="Start my 15-minute assessment with Ava with no upfront payment"
             className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 text-center font-poppins text-sm font-bold text-primary-foreground shadow-[0_15px_35px_-15px_rgba(16,119,250,0.9)] transition hover:-translate-y-0.5 hover:bg-primary/90"
           >
-            See what yours could uncover — no upfront payment <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            Start my 15-minute assessment — no upfront payment <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
       </div>

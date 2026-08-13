@@ -30,6 +30,18 @@ export const REFERRAL_LOCALSTORAGE_KEY = "myagent_ref";
 
 const ASSESSMENT_FUNNEL_SESSION_KEY = "natyv_assessment_funnel_session_v1";
 
+/** Keep controlled QA browser checks out of the same anonymous session as real traffic. */
+export function assessmentFunnelTrafficClass(search = ""): "qa" | "clean" {
+  const params = new URLSearchParams(search);
+  const source = params.get("source")?.trim().toLowerCase() || "";
+  const qa = params.get("qa")?.trim().toLowerCase() || "";
+  return qa === "1" || qa === "true" || source.startsWith("qa_") ? "qa" : "clean";
+}
+
+export function assessmentFunnelSessionStorageKey(search = ""): string {
+  return `${ASSESSMENT_FUNNEL_SESSION_KEY}_${assessmentFunnelTrafficClass(search)}`;
+}
+
 export type AssessmentFunnelEventType =
   | "page_view"
   | "proof_view"
@@ -48,12 +60,13 @@ export type AssessmentFunnelEventType =
 export function readAssessmentFunnelSessionId(): string {
   if (typeof window === "undefined") return "";
   try {
-    const existing = sessionStorage.getItem(ASSESSMENT_FUNNEL_SESSION_KEY);
+    const storageKey = assessmentFunnelSessionStorageKey(window.location.search);
+    const existing = sessionStorage.getItem(storageKey);
     if (existing && /^[a-z0-9-]{12,80}$/i.test(existing)) return existing;
     const generated = typeof crypto?.randomUUID === "function"
       ? crypto.randomUUID()
       : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 14)}`;
-    sessionStorage.setItem(ASSESSMENT_FUNNEL_SESSION_KEY, generated);
+    sessionStorage.setItem(storageKey, generated);
     return generated;
   } catch {
     return "";
