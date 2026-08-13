@@ -1,5 +1,5 @@
 import { Head } from "vite-react-ssg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,10 +15,16 @@ export default function Assessment() {
   const sessionId = searchParams.get("session_id");
   const referralCode = searchParams.get("ref");
   const proofId = searchParams.get("proof_id");
+  // Keep the SSG HTML and the first hydrated render identical. Query-aware
+  // layout changes only after mount, avoiding a hydration error on referral
+  // and proof handoff URLs.
+  const [handoffMode, setHandoffMode] = useState(false);
+  useEffect(() => {
+    setHandoffMode(Boolean(referralCode || proofId));
+  }, [proofId, referralCode]);
   // A referral or proof CTA is already a committed handoff. Re-rendering the
   // full interactive example above the form makes the recipient scroll through
   // the same sales story twice and buries the one action we want next.
-  const handoffMode = Boolean(referralCode || proofId);
   const exampleHref = referralCode
     ? `/assessment/example?source=referral&ref=${encodeURIComponent(referralCode)}`
     : proofId
