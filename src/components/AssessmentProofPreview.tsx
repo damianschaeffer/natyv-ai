@@ -201,7 +201,7 @@ export default function AssessmentProofPreview() {
         <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-primary/25 bg-primary/[0.06] p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
           <div>
             <p className="font-poppins text-sm font-semibold text-foreground">Want this same decision clarity for your situation?</p>
-            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Start the private 15-minute intake when you are ready. No upfront payment.</p>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Start the private 15-minute intake when you are ready. No upfront payment; the $250 report fee is only due when the report is ready.</p>
           </div>
           <a
             href="/assessment#start"
