@@ -24,6 +24,7 @@ const Footer = () => {
   // Advisory · Studio. Secondary destinations live in the lower utility row.
   const navLinks = [
     { label: "Services", href: "/services", isRoute: true },
+    { label: "Offers", href: "/offers", isRoute: true },
     { label: "Advisory", href: "/advisory", isRoute: true },
     { label: "Studio", href: "#myagent-section", isScrollLink: true },
   ];

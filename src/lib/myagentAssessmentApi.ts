@@ -24,6 +24,10 @@ export const ASSESSMENT_BY_SESSION_URL =
   import.meta.env.VITE_ASSESSMENT_BY_SESSION_URL ??
   `${MYAGENT_SUPABASE_URL}/functions/v1/get-ai-opportunity-assessment-by-session`;
 
+export const PUBLIC_OFFER_CHECKOUT_URL =
+  import.meta.env.VITE_PUBLIC_OFFER_CHECKOUT_URL ??
+  `${MYAGENT_SUPABASE_URL}/functions/v1/create-public-offer-checkout`;
+
 export const NATYV_BUSINESS_PAGE_SLUG = "natyv-ai";
 
 /**
@@ -289,4 +293,37 @@ export async function startPublicAiOpportunityAssessment(payload: PublicAssessme
     referral_code?: string;
     referral_share_url?: string;
   };
+}
+
+export type PublicOfferCheckoutResult = {
+  success: true;
+  order_id: string;
+  checkout_url: string;
+  amount_total: number;
+  currency: string;
+  offer_slug: string;
+  reused?: boolean;
+};
+
+export async function startPublicOfferCheckout(input: {
+  offerSlug: string;
+  email: string;
+  name?: string;
+}) {
+  const response = await fetch(PUBLIC_OFFER_CHECKOUT_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: MYAGENT_SUPABASE_ANON_KEY,
+    },
+    body: JSON.stringify({
+      offer_slug: input.offerSlug,
+      email: input.email.trim().toLowerCase(),
+      name: input.name?.trim() || undefined,
+      request_id: typeof crypto?.randomUUID === "function" ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
+    }),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || !data.checkout_url) throw new Error(data.error || "Unable to start checkout");
+  return data as PublicOfferCheckoutResult;
 }

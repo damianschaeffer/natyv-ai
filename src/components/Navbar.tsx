@@ -160,6 +160,7 @@ const Navbar = () => {
   // leads with the diagnose-and-build layer that is unique to the agency.
   const navLinks = [
     { label: "Services", href: "/services", isRoute: true },
+    { label: "Offers", href: "/offers", isRoute: true },
     { label: "Advisory", href: "#advisory", isScrollLink: true, onScroll: scrollToAdvisory },
     { label: "Studio", href: "#myagent-section", isScrollLink: true, onScroll: scrollToMyAgent },
   ];
