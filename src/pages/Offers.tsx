@@ -143,13 +143,18 @@ export default function Offers() {
                     <h2 className="mt-4 font-poppins text-xl font-bold leading-tight text-foreground">{offer.name}</h2>
                     <p className="mt-2 min-h-14 text-sm leading-6 text-muted-foreground">{offer.description}</p>
                     <div className="mt-5 flex items-end gap-2">
-                      <span className="font-poppins text-3xl font-bold text-foreground">{formatOfferPrice(offer.amountCents)}</span>
-                      <span className="pb-1 text-xs text-muted-foreground">one time</span>
+                      <span className="font-poppins text-3xl font-bold text-foreground">{formatOfferPrice(offer.firstChargeCents)}</span>
+                      <span className="pb-1 text-xs text-muted-foreground">first payment</span>
                     </div>
+                    {offer.recurringCents ? (
+                      <p className="mt-1 text-sm font-medium text-primary">Then {formatOfferPrice(offer.recurringCents)}/month</p>
+                    ) : (
+                      <p className="mt-1 text-sm text-muted-foreground">One-time purchase</p>
+                    )}
                     <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
                       <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />Prepared for your specific goal</li>
                       <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />Clear next actions and evidence</li>
-                      <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />No subscription required</li>
+                      <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{offer.recurringCents ? "Recurring plan starts after setup" : "No subscription required"}</li>
                     </ul>
                     <form className="mt-6" onSubmit={(event) => startCheckout(event, offer)}>
                       <button type="submit" disabled={Boolean(activeOffer)} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-4 font-poppins text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_-16px_hsl(var(--primary))] transition hover:bg-primary/90 disabled:cursor-wait disabled:opacity-70">

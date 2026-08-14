@@ -3,6 +3,8 @@ export type PublicOffer = {
   name: string;
   description: string;
   amountCents: number;
+  firstChargeCents: number;
+  recurringCents?: number;
   eyebrow: string;
   featured?: boolean;
 };
@@ -29,6 +31,7 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "Instant AI Opportunity Snapshot",
     description: "A concise, decision-ready snapshot of the highest-value AI opportunity for your business.",
     amountCents: 4900,
+    firstChargeCents: 4900,
     eyebrow: "Fastest start",
     featured: true,
   },
@@ -37,6 +40,8 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "Revenue Leak Monitor Setup",
     description: "A focused setup that identifies and tracks the revenue leaks costing your business money.",
     amountCents: 4900,
+    firstChargeCents: 14800,
+    recurringCents: 9900,
     eyebrow: "Find missed money",
   },
   {
@@ -44,6 +49,8 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "AI Operator Pack",
     description: "A focused operator workflow pack with implementation-ready prompts, SOPs, and next actions.",
     amountCents: 7900,
+    firstChargeCents: 9800,
+    recurringCents: 1900,
     eyebrow: "Turn insight into action",
     featured: true,
   },
@@ -52,6 +59,8 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "AI Front Desk Launch Pack",
     description: "A launch-ready AI front desk package for answering, qualification, and safe handoff.",
     amountCents: 19900,
+    firstChargeCents: 39800,
+    recurringCents: 19900,
     eyebrow: "Customer response",
   },
   {
@@ -59,6 +68,8 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "Vertical Quickstart",
     description: "A practical industry-specific quickstart for deploying a narrow AI workflow fast.",
     amountCents: 19900,
+    firstChargeCents: 39800,
+    recurringCents: 19900,
     eyebrow: "Narrow and practical",
   },
   {
@@ -66,6 +77,8 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "Missed-Call Recovery Sprint",
     description: "A focused sprint to turn missed calls into captured leads and booked follow-up.",
     amountCents: 24900,
+    firstChargeCents: 34800,
+    recurringCents: 9900,
     eyebrow: "Recover demand",
   },
   {
@@ -73,6 +86,8 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "Vertical Agent Kit",
     description: "A narrow, industry-specific agent kit designed for immediate operational use.",
     amountCents: 29900,
+    firstChargeCents: 59800,
+    recurringCents: 29900,
     eyebrow: "Deploy a workflow",
   },
   {
@@ -80,6 +95,7 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "Revenue-Leak Assessment Plus",
     description: "A deeper, evidence-backed assessment of the highest-value revenue leaks and fixes.",
     amountCents: 75000,
+    firstChargeCents: 75000,
     eyebrow: "Evidence-backed",
   },
   {
@@ -87,6 +103,7 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "Agency Partner Starter License",
     description: "A 90-day starter license for partners who want to launch their first AI client workflow.",
     amountCents: 49900,
+    firstChargeCents: 49900,
     eyebrow: "For agencies",
   },
   {
@@ -94,6 +111,7 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
     name: "Partner White-label Enablement",
     description: "A partner enablement package for launching a white-label AI workflow offer.",
     amountCents: 99900,
+    firstChargeCents: 99900,
     eyebrow: "For white-label partners",
   },
 ];
