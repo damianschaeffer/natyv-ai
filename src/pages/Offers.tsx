@@ -7,8 +7,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PUBLIC_OFFERS, formatOfferPrice, type PublicOffer } from "@/lib/publicOfferCatalog";
-import { startPublicOfferCheckout } from "@/lib/myagentAssessmentApi";
+import {
+  PUBLIC_OFFERS,
+  PUBLIC_SUBSCRIPTION_OFFERS,
+  formatOfferPrice,
+  type PublicOffer,
+  type PublicSubscriptionOffer,
+} from "@/lib/publicOfferCatalog";
+import { startPublicOfferCheckout, startPublicSubscriptionCheckout } from "@/lib/myagentAssessmentApi";
 
 export default function Offers() {
   const [searchParams] = useSearchParams();
@@ -22,6 +28,10 @@ export default function Offers() {
       toast.success("Checkout returned successfully. Your order is being reconciled now.");
     } else if (checkout === "cancelled") {
       toast("Checkout was cancelled. Nothing was charged.");
+    } else if (checkout === "subscription_success") {
+      toast.success("Subscription checkout returned. Your plan is being activated from the signed Stripe event.");
+    } else if (checkout === "subscription_cancelled") {
+      toast("Subscription checkout was cancelled. Nothing was charged.");
     }
   }, [searchParams]);
 
@@ -39,6 +49,24 @@ export default function Offers() {
       window.location.assign(result.checkout_url);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "We could not start checkout. Please try again.");
+      setActiveOffer(null);
+    }
+  };
+
+  const startSubscriptionCheckout = async (event: FormEvent<HTMLFormElement>, offer: PublicSubscriptionOffer) => {
+    event.preventDefault();
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!trimmedEmail) {
+      toast.error("Enter your email so Stripe can send your receipt.");
+      return;
+    }
+
+    setActiveOffer(offer.slug);
+    try {
+      const result = await startPublicSubscriptionCheckout({ offerSlug: offer.slug, email: trimmedEmail, name });
+      window.location.assign(result.checkout_url);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "We could not start subscription checkout. Please try again.");
       setActiveOffer(null);
     }
   };
@@ -133,10 +161,51 @@ export default function Offers() {
               })}
             </div>
 
+            <section className="mt-16 border-t border-border/40 pt-14">
+              <div className="mx-auto max-w-3xl text-center">
+                <p className="font-accent text-xs font-semibold uppercase tracking-[0.18em] text-primary">Recurring, self-serve</p>
+                <h2 className="mt-3 font-poppins text-3xl font-bold leading-tight text-foreground sm:text-4xl">Keep the value working every month.</h2>
+                <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                  Start with a focused recurring capability. Checkout is secure, priced by the server, and begins without a sales call or trial delay.
+                </p>
+              </div>
+
+              <div className="mt-8 grid gap-5 md:grid-cols-3">
+                {PUBLIC_SUBSCRIPTION_OFFERS.map((offer) => {
+                  const isActive = activeOffer === offer.slug;
+                  return (
+                    <article key={offer.slug} className={`relative flex flex-col overflow-hidden rounded-2xl border bg-card/60 p-5 backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-primary/50 ${offer.featured ? "border-primary/60 shadow-[0_24px_60px_-30px_hsl(var(--primary))]" : "border-border/50"}`}>
+                      <div aria-hidden="true" className="absolute left-0 right-0 top-0 h-1 bg-primary" />
+                      <div className="flex items-start justify-between gap-3">
+                        <span className="font-accent text-[10px] font-semibold uppercase tracking-[0.14em] text-primary">{offer.eyebrow}</span>
+                        {offer.featured && <span className="rounded-full bg-primary/10 px-2 py-1 font-accent text-[10px] font-semibold uppercase tracking-wide text-primary">Best entry</span>}
+                      </div>
+                      <h2 className="mt-4 font-poppins text-xl font-bold leading-tight text-foreground">{offer.name}</h2>
+                      <p className="mt-2 min-h-14 text-sm leading-6 text-muted-foreground">{offer.description}</p>
+                      <div className="mt-5 flex items-end gap-2">
+                        <span className="font-poppins text-3xl font-bold text-foreground">{formatOfferPrice(offer.amountCents)}</span>
+                        <span className="pb-1 text-xs text-muted-foreground">/{offer.interval}</span>
+                      </div>
+                      <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
+                        <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />Secure Stripe subscription</li>
+                        <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />No founder call required</li>
+                        <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />Upgrade when your workflow grows</li>
+                      </ul>
+                      <form className="mt-6" onSubmit={(event) => startSubscriptionCheckout(event, offer)}>
+                        <button type="submit" disabled={Boolean(activeOffer)} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-4 font-poppins text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_-16px_hsl(var(--primary))] transition hover:bg-primary/90 disabled:cursor-wait disabled:opacity-70">
+                          {isActive ? <><Loader2 className="h-4 w-4 animate-spin" />Opening secure checkout…</> : <>Start monthly plan <ArrowRight className="h-4 w-4" /></>}
+                        </button>
+                      </form>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+
             <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
               <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-primary" />Secure Stripe Checkout</span>
               <span className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Server-priced offers</span>
-              <span className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />No automatic subscription</span>
+              <span className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Choose one-time or monthly</span>
             </div>
             <p className="mx-auto mt-5 max-w-2xl text-center text-xs leading-5 text-muted-foreground">Looking for the referral credit? Start with the <a className="text-primary underline-offset-2 hover:underline" href="/assessment#start">AI Opportunity Assessment</a> so the referral rail can apply automatically.</p>
           </div>

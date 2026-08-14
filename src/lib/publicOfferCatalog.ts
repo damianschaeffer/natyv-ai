@@ -7,6 +7,16 @@ export type PublicOffer = {
   featured?: boolean;
 };
 
+export type PublicSubscriptionOffer = {
+  slug: string;
+  name: string;
+  description: string;
+  amountCents: number;
+  interval: "month";
+  eyebrow: string;
+  featured?: boolean;
+};
+
 /**
  * Display catalog for the self-serve offer shelf. The Supabase Edge Function
  * remains authoritative for amounts, descriptions, and fulfillment policy;
@@ -88,6 +98,40 @@ export const PUBLIC_OFFERS: readonly PublicOffer[] = [
   },
 ];
 
+/**
+ * Display catalog for the approved self-serve recurring rails. The Supabase
+ * worker remains authoritative for the Stripe price ID and metadata.
+ * Partner/white-label plans stay qualified and are intentionally not listed
+ * here because they carry separate contract and delivery commitments.
+ */
+export const PUBLIC_SUBSCRIPTION_OFFERS: readonly PublicSubscriptionOffer[] = [
+  {
+    slug: "agent_starter_v1",
+    name: "Agent Starter",
+    description: "One focused AI agent with adoption-first voice and chat capacity, safe fallback, and a clear upgrade path.",
+    amountCents: 2999,
+    interval: "month",
+    eyebrow: "Start a daily habit",
+    featured: true,
+  },
+  {
+    slug: "outbound_goal_packs",
+    name: "Outbound Goal Packs",
+    description: "A focused recurring pack for an approved outbound workflow and its measurable next actions.",
+    amountCents: 2900,
+    interval: "month",
+    eyebrow: "Create pipeline",
+  },
+  {
+    slug: "operator_pack_updates",
+    name: "Operator Pack Updates",
+    description: "Ongoing updates for an AI operator workflow pack as the operating system improves.",
+    amountCents: 1900,
+    interval: "month",
+    eyebrow: "Keep improving",
+  },
+];
+
 export function formatOfferPrice(amountCents: number): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -95,4 +139,3 @@ export function formatOfferPrice(amountCents: number): string {
     minimumFractionDigits: 2,
   }).format(amountCents / 100);
 }
-
