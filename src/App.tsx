@@ -35,6 +35,11 @@ export const routes: RouteRecord[] = [
         entry: "src/pages/AssessmentExample.tsx",
       },
       {
+        path: "offers",
+        lazy: async () => ({ Component: (await import("./pages/Offers")).default }),
+        entry: "src/pages/Offers.tsx",
+      },
+      {
         path: "partners",
         lazy: async () => ({ Component: (await import("./pages/Partners")).default }),
         entry: "src/pages/Partners.tsx",
