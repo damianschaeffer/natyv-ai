@@ -6,7 +6,12 @@ describe("public offer catalog", () => {
     const slugs = PUBLIC_OFFERS.map((offer) => offer.slug);
     expect(new Set(slugs).size).toBe(PUBLIC_OFFERS.length);
     expect(PUBLIC_OFFERS).toHaveLength(10);
-    expect(PUBLIC_OFFERS.every((offer) => offer.amountCents > 0 && offer.description.length > 20)).toBe(true);
+    expect(PUBLIC_OFFERS.every((offer) => offer.amountCents > 0 && offer.firstChargeCents >= offer.amountCents && offer.description.length > 20)).toBe(true);
+    expect(PUBLIC_OFFERS.find((offer) => offer.slug === "ai_operator_pack")).toMatchObject({
+      amountCents: 7900,
+      firstChargeCents: 9800,
+      recurringCents: 1900,
+    });
   });
 
   it("formats customer-facing USD prices", () => {
