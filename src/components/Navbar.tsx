@@ -167,13 +167,13 @@ const Navbar = () => {
   const isNavActive = (link: { label: string; href: string; isRoute?: boolean }) =>
     activeSection === link.label || Boolean(link.isRoute && location.pathname === link.href);
 
-  // Match get-myagent.com: sentence-case Inter, no all-caps, no block separators.
+  // Identical to get-myagent.com header links: Poppins 14px, sentence case.
   const desktopNavClass = (active: boolean) =>
-    `text-sm font-semibold whitespace-nowrap transition-colors duration-300 hover:text-primary ${
+    `font-poppins text-sm whitespace-nowrap transition-colors hover:text-primary ${
       active ? "text-primary" : "text-foreground"
     }`;
   const mobileNavClass =
-    "text-lg font-semibold text-foreground hover:text-primary transition-colors duration-300";
+    "font-poppins text-lg text-foreground hover:text-primary transition-colors";
 
   return (
     <>

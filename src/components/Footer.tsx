@@ -46,7 +46,7 @@ const Footer = () => {
   ];
 
   const navLinkClass =
-    "text-sm font-semibold text-muted-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap";
+    "font-poppins text-sm text-muted-foreground hover:text-primary transition-colors whitespace-nowrap";
 
   return (
     <footer className="border-t border-border relative overflow-hidden py-[clamp(0.75rem,1.5vw,1.25rem)]">
