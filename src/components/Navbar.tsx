@@ -157,11 +157,11 @@ const Navbar = () => {
   // Public chrome matches get-myagent.com. /offers stays live for anyone
   // with the URL, but is not in the natural nav until the shelf is ready.
   const navLinks = [
+    { label: "Studio", href: "#myagent-section", isScrollLink: true, onScroll: scrollToMyAgent },
     { label: "Services", href: "/services", isRoute: true },
+    { label: "Advisory", href: "#advisory", isScrollLink: true, onScroll: scrollToAdvisory },
     { label: "Referrals", href: "/referrals", isRoute: true },
     { label: "FAQ", href: "/faq", isRoute: true },
-    { label: "Advisory", href: "#advisory", isScrollLink: true, onScroll: scrollToAdvisory },
-    { label: "Studio", href: "#myagent-section", isScrollLink: true, onScroll: scrollToMyAgent },
   ];
 
   const isNavActive = (link: { label: string; href: string; isRoute?: boolean }) =>
@@ -169,11 +169,11 @@ const Navbar = () => {
 
   // Match get-myagent.com: sentence-case Inter, no all-caps, no block separators.
   const desktopNavClass = (active: boolean) =>
-    `text-sm whitespace-nowrap transition-colors duration-300 hover:text-primary ${
+    `text-sm font-semibold whitespace-nowrap transition-colors duration-300 hover:text-primary ${
       active ? "text-primary" : "text-foreground"
     }`;
   const mobileNavClass =
-    "text-lg text-foreground hover:text-primary transition-colors duration-300";
+    "text-lg font-semibold text-foreground hover:text-primary transition-colors duration-300";
 
   return (
     <>
@@ -188,12 +188,11 @@ const Navbar = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="container mx-auto px-[clamp(0.75rem,2vw,1.5rem)] py-[clamp(0.5rem,1.5vw,1rem)]">
-          <div className="flex items-center justify-between gap-[clamp(0.5rem,2vw,1rem)]">
+        <div className="container mx-auto flex h-10 items-center justify-between gap-2 px-4 pt-0 pb-0 sm:h-14">
             {/* Logo - fluid sizing */}
             <motion.a
               href="/"
-              className="inline-flex items-center min-h-[44px] sm:min-h-0 flex-shrink-0"
+              className="inline-flex items-center flex-shrink-0"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
@@ -274,14 +273,13 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <motion.button
-              className="md:hidden inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2 text-foreground hover:text-primary transition-colors"
+              className="md:hidden inline-flex h-8 w-8 items-center justify-center text-foreground hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </motion.button>
-          </div>
         </div>
       </motion.nav>
 

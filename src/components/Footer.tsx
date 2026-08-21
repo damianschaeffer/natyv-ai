@@ -23,11 +23,11 @@ const Footer = () => {
   // One footer row, same type size as the header. /offers stays reachable
   // by URL but is not listed until the public shelf is ready.
   const navLinks = [
+    { label: "Studio", href: "#myagent-section", isScrollLink: true },
     { label: "Services", href: "/services" },
+    { label: "Advisory", href: "/advisory" },
     { label: "Referrals", href: "/referrals" },
     { label: "FAQ", href: "/faq" },
-    { label: "Advisory", href: "/advisory" },
-    { label: "Studio", href: "#myagent-section", isScrollLink: true },
     { label: "Contact", href: "/contact" },
     { label: "Partners", href: "/partners" },
     { label: "About", href: "/about" },
@@ -46,7 +46,7 @@ const Footer = () => {
   ];
 
   const navLinkClass =
-    "text-sm text-muted-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap";
+    "text-sm font-semibold text-muted-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap";
 
   return (
     <footer className="border-t border-border relative overflow-hidden py-[clamp(0.75rem,1.5vw,1.25rem)]">
