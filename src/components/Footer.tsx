@@ -46,7 +46,7 @@ const Footer = () => {
   ];
 
   const navLinkClass =
-    "font-poppins text-sm text-muted-foreground hover:text-primary transition-colors whitespace-nowrap";
+    "font-poppins text-base font-semibold text-muted-foreground hover:text-primary transition-colors whitespace-nowrap";
 
   return (
     <footer className="border-t border-border relative overflow-hidden py-[clamp(0.75rem,1.5vw,1.25rem)]">
@@ -58,7 +58,7 @@ const Footer = () => {
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            <NatyvLogo className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto" loading="lazy" />
+            <NatyvLogo className="h-7 w-auto" loading="lazy" />
           </motion.a>
 
           <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5">

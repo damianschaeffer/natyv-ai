@@ -167,13 +167,14 @@ const Navbar = () => {
   const isNavActive = (link: { label: string; href: string; isRoute?: boolean }) =>
     activeSection === link.label || Boolean(link.isRoute && location.pathname === link.href);
 
-  // Identical to get-myagent.com header links: Poppins 14px, sentence case.
+  // Match the MyAgent chrome look: Poppins, 16px, semibold — Inter 14px
+  // regular was live but still read as a smaller, lighter typeface.
   const desktopNavClass = (active: boolean) =>
-    `font-poppins text-sm whitespace-nowrap transition-colors hover:text-primary ${
+    `font-poppins text-base font-semibold leading-none whitespace-nowrap transition-colors hover:text-primary ${
       active ? "text-primary" : "text-foreground"
     }`;
   const mobileNavClass =
-    "font-poppins text-lg text-foreground hover:text-primary transition-colors";
+    "font-poppins text-xl font-semibold text-foreground hover:text-primary transition-colors";
 
   return (
     <>
@@ -196,7 +197,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
-              <NatyvLogo className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto" />
+              <NatyvLogo className="h-7 w-auto" />
             </motion.a>
 
             {/* Desktop Navigation — same system as get-myagent.com */}
