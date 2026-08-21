@@ -20,13 +20,20 @@ const Footer = () => {
     }
   };
 
-  // Keep the primary footer row aligned with the header nav: Services ·
-  // Advisory · Studio. Secondary destinations live in the lower utility row.
+  // One footer row, same type size as the header. /offers stays reachable
+  // by URL but is not listed until the public shelf is ready.
   const navLinks = [
-    { label: "Services", href: "/services", isRoute: true },
-    { label: "Offers", href: "/offers", isRoute: true },
-    { label: "Advisory", href: "/advisory", isRoute: true },
+    { label: "Services", href: "/services" },
+    { label: "Referrals", href: "/referrals" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Advisory", href: "/advisory" },
     { label: "Studio", href: "#myagent-section", isScrollLink: true },
+    { label: "Contact", href: "/contact" },
+    { label: "Partners", href: "/partners" },
+    { label: "About", href: "/about" },
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+    { label: "Security", href: "/security" },
   ];
 
   const socialLinks = [
@@ -38,126 +45,72 @@ const Footer = () => {
     { icon: TikTokIcon, href: "https://www.tiktok.com/@natyv_ai", label: "TikTok" },
   ];
 
-  const legalLinks = [
-    { label: "FAQ", href: "/faq" },
-    { label: "Referrals", href: "/referrals" },
-    { label: "Contact", href: "/contact" },
-    { label: "Partners", href: "/partners" },
-    { label: "About", href: "/about" },
-    { label: "Privacy", href: "/privacy" },
-    { label: "Terms", href: "/terms" },
-    { label: "Security", href: "/security" },
-  ];
-
+  const navLinkClass =
+    "text-sm text-muted-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap";
 
   return (
-    <>
-      {/* Footer */}
-      <footer className="py-[clamp(0.5rem,1.5vw,1rem)] border-t border-border relative overflow-hidden">
-        <div className="container mx-auto px-[clamp(0.75rem,2vw,1.5rem)]">
-          <div className="flex items-center justify-between gap-[clamp(0.5rem,2vw,1rem)]">
-            {/* Logo - fluid sizing */}
-            <motion.a
-              href="/"
-              className="inline-flex items-center min-h-[44px] sm:min-h-0 flex-shrink-0"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <NatyvLogo className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto" loading="lazy" />
-            </motion.a>
+    <footer className="border-t border-border relative overflow-hidden py-[clamp(0.75rem,1.5vw,1.25rem)]">
+      <div className="container mx-auto px-[clamp(0.75rem,2vw,1.5rem)]">
+        <div className="flex flex-col items-center gap-3 md:flex-row md:justify-between md:gap-4">
+          <motion.a
+            href="/"
+            className="inline-flex items-center min-h-[44px] sm:min-h-0 flex-shrink-0"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            <NatyvLogo className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto" loading="lazy" />
+          </motion.a>
 
-            {/* Navigation Links - Fluid sizing with clamp */}
-            <div className="hidden md:flex items-center justify-center gap-[clamp(0.5rem,2vw,1.5rem)] flex-1 min-w-0">
-              {navLinks.map((link, index) => (
-                <div key={link.label} className="flex items-center gap-[clamp(0.5rem,2vw,1.5rem)]">
-                  {index > 0 && (
-                    <div
-                      className="bg-primary flex-shrink-0"
-                      style={{
-                        width: 'clamp(4px, 0.5vw, 8px)',
-                        height: 'clamp(4px, 0.5vw, 8px)',
-                      }}
-                    />
-                  )}
-                  {link.isRoute ? (
-                    <Link
-                      to={link.href}
-                      className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap"
-                      style={{ 
-                        fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
-                        letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  ) : link.isScrollLink ? (
-                    <button
-                      onClick={scrollToMyAgent}
-                      className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap cursor-pointer"
-                      style={{ 
-                        fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
-                        letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
-                      }}
-                    >
-                      {link.label}
-                    </button>
-                  ) : (
-                    <a
-                      href={link.href}
-                      className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap"
-                      style={{ 
-                        fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
-                        letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
-                      }}
-                    >
-                      {link.label}
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Right Section - Social Links - Fluid sizing */}
-            <div className="flex items-center justify-end gap-[clamp(0.125rem,0.5vw,0.5rem)] flex-shrink-0">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith("http") ? "_blank" : undefined}
-                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-                  style={{ padding: 'clamp(0.25rem, 0.5vw, 0.5rem)' }}
-                  aria-label={social.label}
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5">
+            {navLinks.map((link) =>
+              link.isScrollLink ? (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={scrollToMyAgent}
+                  className={`${navLinkClass} cursor-pointer`}
                 >
-                  <social.icon style={{ width: 'clamp(0.875rem, 1.25vw, 1.25rem)', height: 'clamp(0.875rem, 1.25vw, 1.25rem)' }} />
-                </a>
-              ))}
-              <div className="hidden lg:block">
-                <ProtocolStatus />
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Bar with Legal Links */}
-          <div className="mt-2 pt-2 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-muted-foreground font-body">
-              © {new Date().getFullYear()} Natyv AI. All rights reserved.
-            </p>
-            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 sm:justify-end sm:gap-x-6">
-              {legalLinks.map((link) => (
+                  {link.label}
+                </button>
+              ) : (
                 <Link
                   key={link.label}
                   to={link.href}
-                  className="inline-flex items-center min-h-[44px] sm:min-h-0 px-2 sm:px-0 text-xs text-muted-foreground font-body hover:text-foreground transition-colors duration-300"
+                  className={navLinkClass}
                 >
                   {link.label}
                 </Link>
-              ))}
+              )
+            )}
+          </nav>
+
+          <div className="flex items-center justify-center gap-[clamp(0.125rem,0.5vw,0.5rem)] flex-shrink-0">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target={social.href.startsWith("http") ? "_blank" : undefined}
+                rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+                style={{ padding: "clamp(0.25rem, 0.5vw, 0.5rem)" }}
+                aria-label={social.label}
+              >
+                <social.icon style={{ width: "clamp(0.875rem, 1.25vw, 1.25rem)", height: "clamp(0.875rem, 1.25vw, 1.25rem)" }} />
+              </a>
+            ))}
+            <div className="hidden lg:block">
+              <ProtocolStatus />
             </div>
           </div>
         </div>
-      </footer>
-    </>
+
+        <div className="mt-3 flex flex-col items-center justify-between gap-2 border-t border-border/60 pt-3 md:flex-row">
+          <p className="text-xs text-muted-foreground font-body">
+            © {new Date().getFullYear()} Natyv AI. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 };
 

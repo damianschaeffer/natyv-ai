@@ -154,16 +154,26 @@ const Navbar = () => {
     }
   };
 
-  // Order leads with the consulting/implementation offer (Services →
-  // Advisory), then the MyAgent product (Studio) as proof, matching the
-  // homepage scroll. get-myagent.com sells the product on its own; natyv.ai
-  // leads with the diagnose-and-build layer that is unique to the agency.
+  // Public chrome matches get-myagent.com. /offers stays live for anyone
+  // with the URL, but is not in the natural nav until the shelf is ready.
   const navLinks = [
     { label: "Services", href: "/services", isRoute: true },
-    { label: "Offers", href: "/offers", isRoute: true },
+    { label: "Referrals", href: "/referrals", isRoute: true },
+    { label: "FAQ", href: "/faq", isRoute: true },
     { label: "Advisory", href: "#advisory", isScrollLink: true, onScroll: scrollToAdvisory },
     { label: "Studio", href: "#myagent-section", isScrollLink: true, onScroll: scrollToMyAgent },
   ];
+
+  const isNavActive = (link: { label: string; href: string; isRoute?: boolean }) =>
+    activeSection === link.label || Boolean(link.isRoute && location.pathname === link.href);
+
+  // Match get-myagent.com: sentence-case Inter, no all-caps, no block separators.
+  const desktopNavClass = (active: boolean) =>
+    `text-sm whitespace-nowrap transition-colors duration-300 hover:text-primary ${
+      active ? "text-primary" : "text-foreground"
+    }`;
+  const mobileNavClass =
+    "text-lg text-foreground hover:text-primary transition-colors duration-300";
 
   return (
     <>
@@ -190,77 +200,51 @@ const Navbar = () => {
               <NatyvLogo className="h-[clamp(1rem,2.5vw,1.5rem)] w-auto" />
             </motion.a>
 
-            {/* Desktop Navigation - Fluid sizing with clamp */}
-            <div className="hidden md:flex items-center justify-center gap-[clamp(0.35rem,0.8vw,0.75rem)] flex-1 min-w-0">
+            {/* Desktop Navigation — same system as get-myagent.com */}
+            <nav className="hidden md:flex items-center justify-center gap-6 flex-1 min-w-0">
               {navLinks.map((link, index) => (
-                <div key={link.label} className="flex items-center gap-[clamp(0.35rem,0.8vw,0.75rem)]">
-                  {index > 0 && (
-                    <div
-                      className="bg-primary flex-shrink-0"
-                      style={{
-                        width: 'clamp(4px, 0.5vw, 8px)',
-                        height: 'clamp(4px, 0.5vw, 8px)',
-                      }}
-                    />
-                  )}
-                  {link.isRoute ? (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 * index, duration: 0.4 }}
-                      whileHover={{ y: -2 }}
-                    >
-                      <Link
-                        to={link.href}
-                        className={`font-accent uppercase transition-colors duration-300 whitespace-nowrap hover:text-primary ${
-                          activeSection === link.label ? "text-primary" : "text-foreground"
-                        }`}
-                        style={{
-                          fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
-                          letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
-                        }}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ) : link.isScrollLink ? (
-                    <motion.button
-                      onClick={() => {
-                        link.onScroll?.();
-                      }}
-                      className={`font-accent uppercase transition-colors duration-300 whitespace-nowrap cursor-pointer hover:text-primary ${
-                        activeSection === link.label ? "text-primary" : "text-foreground"
-                      }`}
-                      style={{
-                        fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
-                        letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
-                      }}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 * index, duration: 0.4 }}
-                      whileHover={{ y: -2 }}
+                link.isRoute ? (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index, duration: 0.4 }}
+                  >
+                    <Link
+                      to={link.href}
+                      className={desktopNavClass(isNavActive(link))}
                     >
                       {link.label}
-                    </motion.button>
-                  ) : (
-                    <motion.a
-                      href={link.href}
-                      className="font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap"
-                      style={{ 
-                        fontSize: 'clamp(0.65rem, 1.4vw, 1.25rem)',
-                        letterSpacing: 'clamp(0.1em, 0.15vw, 0.2em)'
-                      }}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 * index, duration: 0.4 }}
-                      whileHover={{ y: -2 }}
-                    >
-                      {link.label}
-                    </motion.a>
-                  )}
-                </div>
+                    </Link>
+                  </motion.div>
+                ) : link.isScrollLink ? (
+                  <motion.button
+                    key={link.label}
+                    type="button"
+                    onClick={() => {
+                      link.onScroll?.();
+                    }}
+                    className={`${desktopNavClass(isNavActive(link))} cursor-pointer`}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index, duration: 0.4 }}
+                  >
+                    {link.label}
+                  </motion.button>
+                ) : (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    className={desktopNavClass(false)}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index, duration: 0.4 }}
+                  >
+                    {link.label}
+                  </motion.a>
+                )
               ))}
-            </div>
+            </nav>
 
             {/* Right Section - Theme, conversion CTAs, and protocol status */}
             <div className="hidden md:flex items-center justify-end gap-[clamp(0.25rem,0.65vw,0.625rem)] flex-shrink-0">
@@ -336,7 +320,7 @@ const Navbar = () => {
                     <Link
                       to={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-2xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em]"
+                      className={mobileNavClass}
                     >
                       {link.label}
                     </Link>
@@ -346,7 +330,7 @@ const Navbar = () => {
                         setMobileMenuOpen(false);
                         link.onScroll?.();
                       }}
-                      className="text-2xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em] cursor-pointer"
+                      className={`${mobileNavClass} cursor-pointer`}
                     >
                       {link.label}
                     </button>
@@ -354,7 +338,7 @@ const Navbar = () => {
                     <a
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-2xl font-accent uppercase text-foreground hover:text-primary transition-colors duration-300 tracking-[0.2em]"
+                      className={mobileNavClass}
                     >
                       {link.label}
                     </a>
