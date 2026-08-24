@@ -13,10 +13,11 @@ describe("AssessmentProofPreview", () => {
     render(<AssessmentProofPreview compact />);
 
     expect(screen.getByTestId("assessment-report-preview")).toBeInTheDocument();
-    expect(screen.getByText("Cozi Max")).toBeInTheDocument();
-    expect(screen.getByLabelText("89/100")).toBeInTheDocument();
-    expect(screen.getByText("Google Calendar")).toBeInTheDocument();
-    expect(screen.getByText("AnyList")).toBeInTheDocument();
+    expect(screen.getByText("MyAgent Foundation")).toBeInTheDocument();
+    expect(screen.getByLabelText("91/100")).toBeInTheDocument();
+    expect(screen.getByText("Ruby")).toBeInTheDocument();
+    expect(screen.getByText("Google Voice")).toBeInTheDocument();
+    expect(screen.getByText("Missed-call capture and 24/7 front desk")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /open full comparison/i })).toHaveAttribute("href", "/assessment/example?view=full");
   });
 });

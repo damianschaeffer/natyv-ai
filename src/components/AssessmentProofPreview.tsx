@@ -37,61 +37,61 @@ type Recommendation = {
 const RECOMMENDATIONS: Recommendation[] = [
   {
     rank: 1,
-    opportunity: "Weekly family meal and grocery plan",
-    score: 89,
-    product: "Cozi Max",
-    plan: "Max household plan",
-    price: "$79.99 / year*",
-    url: "https://www.cozi.com/",
+    opportunity: "After-hours and overflow call answering",
+    score: 91,
+    product: "MyAgent Foundation",
+    plan: "Foundation voice agent",
+    price: "$99 / month*",
+    url: "https://get-myagent.com/",
     fit: "Best overall fit",
-    why: "It is the only candidate in this example that combines an AI meal planner, shared calendar, reminders, recipes, and a shopping list in one household system.",
+    why: "It is the only candidate in this example that combines 24/7 AI call answering, lead qualification, and appointment routing in one setup sized for a solo operator or small crew.",
     strengths: [
-      "AI-assisted meal planning around preferences and schedule",
-      "Shared calendar, reminders, recipes, and shopping lists",
-      "One household upgrade covers the family across devices",
+      "Answers after-hours and busy-hour overflow without adding staff",
+      "Captures caller intent, urgency, and callback details on every ring",
+      "Routes booked jobs and urgent calls with a path to human takeover",
     ],
-    tradeoff: "The family still needs a short review before shopping, and adoption depends on every caregiver using the shared system.",
-    myAgentAlternative: "Ava could create a household grocery space with a shared list, calendar, weekly planning automation, and proactive reminders. It would be more tailored, but would require a small build and ongoing configuration.",
-    apiFit: "Moderate",
+    tradeoff: "The owner still needs a short onboarding to tune greetings, service areas, and escalation rules—and to review the first week of calls.",
+    myAgentAlternative: "Natyv White-Glove Build deploys the same platform with a local number, tuned scripts, and 90 days of Growth-tier support—the $250 assessment fee credits toward that $999 package when you upgrade.",
+    apiFit: "Strong",
     color: "#38bdf8",
   },
   {
     rank: 2,
-    opportunity: "Family updates and appointment hub",
-    score: 82,
-    product: "Google Calendar",
-    plan: "Personal / family setup",
-    price: "$0 / year*",
-    url: "https://calendar.google.com/",
-    fit: "Strongest low-cost alternative",
-    why: "It handles shared appointments and reminders exceptionally well, but it does not solve meal planning or shopping without additional tools and manual upkeep.",
+    opportunity: "Human virtual receptionist backup",
+    score: 84,
+    product: "Ruby",
+    plan: "Virtual receptionist",
+    price: "$245 / month*",
+    url: "https://www.ruby.com/",
+    fit: "Strongest human-backup alternative",
+    why: "Live receptionists handle complex conversations well, but monthly cost is higher, coverage windows vary, and lead data still needs manual transfer into the shop's calendar or CRM.",
     strengths: [
-      "Familiar, free, and already available to most households",
-      "Reliable shared calendars, reminders, and invitations",
-      "Strong integration surface for future automations",
+      "Real people for nuanced scheduling and difficult callers",
+      "Established brand trust with service businesses",
+      "Predictable per-minute or bundled monthly pricing",
     ],
-    tradeoff: "The household would still need a separate grocery workflow and a clear convention for ownership, updates, and recurring tasks.",
-    myAgentAlternative: "Ava could turn the calendar into a guided family operating rhythm, summarize the week, surface conflicts, and turn conversations into tasks without replacing the calendar itself.",
-    apiFit: "Strong",
+    tradeoff: "Higher recurring cost, less instant text-back on missed calls, and weaker integration with automated follow-up workflows.",
+    myAgentAlternative: "Ava could draft overflow scripts and monitor Ruby handoffs, but the live answering itself stays on Ruby's team unless you replace it with MyAgent voice.",
+    apiFit: "Moderate",
     color: "#34d399",
   },
   {
     rank: 3,
-    opportunity: "Shared household grocery list",
-    score: 75,
-    product: "AnyList",
-    plan: "Complete household plan",
-    price: "$14.99 / year*",
-    url: "https://www.anylist.com/",
-    fit: "Lowest-cost focused option",
-    why: "It is excellent for a shared list and recurring items, but it requires more manual meal selection and does not provide the same calendar-and-planning breadth.",
+    opportunity: "Low-cost voicemail and call forwarding",
+    score: 72,
+    product: "Google Voice",
+    plan: "Free personal setup",
+    price: "$0 / month*",
+    url: "https://voice.google.com/",
+    fit: "Lowest-cost fallback",
+    why: "It forwards calls and stores voicemail, but it does not answer, qualify, book, or text back—so high-intent callers still go to competitors while the owner is on a job.",
     strengths: [
-      "Fast shared list capture from any device",
-      "Good recurring-item and grocery organization features",
-      "Low annual cost and easy to reverse",
+      "Free and familiar for owner-operators already on Google Workspace",
+      "Simple forwarding rules for one or two lines",
+      "Easy to reverse if you upgrade later",
     ],
-    tradeoff: "It is a list tool, not a full weekly planning system, so it leaves the highest-value coordination work to the family.",
-    myAgentAlternative: "Ava could keep the list continuously current from the family's preferences, receipts, and calendar, but only after the household gives her those inputs and approves the automation rules.",
+    tradeoff: "No proactive lead capture, no after-hours answering, and no structured job intake—just voicemail and manual callbacks.",
+    myAgentAlternative: "Ava could summarize voicemails and draft callback texts, but only after the owner forwards transcripts or recordings into MyAgent each day.",
     apiFit: "Limited",
     color: "#f59e0b",
   },
@@ -171,7 +171,7 @@ function CompactProofPreview() {
         <div className="flex flex-col gap-4 border-b border-border/60 pb-5 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p className="font-accent text-[10px] font-bold uppercase tracking-[0.18em] text-primary">Completed assessment · illustrative</p>
-            <h2 id="assessment-proof-heading" className="mt-2 font-poppins text-2xl font-bold leading-tight text-foreground sm:text-3xl">Weekly family meal + grocery plan</h2>
+            <h2 id="assessment-proof-heading" className="mt-2 font-poppins text-2xl font-bold leading-tight text-foreground sm:text-3xl">Missed-call capture and 24/7 front desk</h2>
             <p className="mt-1 text-sm text-muted-foreground">Decision ready · 3 ranked options · reviewed against the stated constraints</p>
           </div>
           <span className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1.5 text-xs font-semibold text-emerald-200">
@@ -197,9 +197,9 @@ function CompactProofPreview() {
 
           <div className="mt-4 flex flex-wrap gap-2">
             {[
-              "AI meal planner",
-              "Shared calendar",
-              "Shopping list",
+              "24/7 answering",
+              "Lead capture",
+              "After-hours coverage",
               `${primary.apiFit} API / automation fit`,
             ].map((tag) => <span key={tag} className="rounded-full border border-border/70 bg-background/55 px-2.5 py-1 text-[11px] font-medium text-foreground/80">{tag}</span>)}
           </div>
@@ -208,8 +208,8 @@ function CompactProofPreview() {
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Why it won</p>
               <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-foreground/90">
-                <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 flex-none text-emerald-300" aria-hidden="true" />One household system covers planning, calendar, recipes, and shopping.</li>
-                <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 flex-none text-emerald-300" aria-hidden="true" />Best match for the weekly plan and low-prep constraint.</li>
+                <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 flex-none text-emerald-300" aria-hidden="true" />One system answers, qualifies, and routes after-hours and overflow calls.</li>
+                <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 flex-none text-emerald-300" aria-hidden="true" />Best match for the missed-call leak and same-day-setup constraint.</li>
               </ul>
             </div>
             <a href={primary.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
@@ -252,12 +252,12 @@ function CompactProofPreview() {
           <div className="rounded-2xl border border-border/70 bg-background/45 p-4">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Decision</p>
             <p className="mt-2 font-poppins text-lg font-bold text-foreground">Start with {primary.product}</p>
-            <p className="mt-1 text-sm leading-relaxed text-foreground/75">Proof window: 7 days · completion: plan, shop, and review one week together.</p>
+            <p className="mt-1 text-sm leading-relaxed text-foreground/75">Proof window: 7 days · completion: track missed calls recovered and booked follow-ups.</p>
           </div>
           <div className="rounded-2xl border border-primary/30 bg-primary/[0.06] p-4">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary">MyAgent alternative</p>
-            <p className="mt-2 font-poppins text-lg font-bold text-foreground">Ava household space</p>
-            <p className="mt-1 text-sm leading-relaxed text-foreground/75">Shared grocery list + calendar + weekly automation. More tailored; requires setup and approval.</p>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary">Natyv upgrade path</p>
+            <p className="mt-2 font-poppins text-lg font-bold text-foreground">White-Glove Build</p>
+            <p className="mt-1 text-sm leading-relaxed text-foreground/75">Done-for-you MyAgent setup with local number and tuned scripts. $250 assessment credits toward the $999 package.</p>
           </div>
         </div>
 
@@ -392,26 +392,26 @@ function FullAssessmentProofPreview() {
               <span className="rounded-full border border-primary/35 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary">
                 Sample report snapshot
               </span>
-              <span className="text-xs text-muted-foreground">Anonymized household example</span>
+              <span className="text-xs text-muted-foreground">Anonymized local HVAC example</span>
             </div>
             <h3 className="mt-4 font-poppins text-xl font-bold text-foreground sm:text-2xl">
-              One painful weekly task becomes a decision you can actually act on.
+              One painful missed-call leak becomes a decision you can actually act on.
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              The example client is coordinating meals, groceries, sports, newborn care, and household updates. The report turns that story into a ranked starting point, a product comparison, and a short proof window instead of a generic list of AI ideas.
+              The example client is an owner-operated HVAC shop losing after-hours and on-job leads to voicemail. The report turns that story into a ranked starting point, a product comparison, and a short proof window instead of a generic list of AI ideas.
             </p>
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               <div className="rounded-xl border border-border/70 bg-background/55 p-3">
                 <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Decision</p>
-                <p className="mt-1 text-sm font-semibold text-foreground">Choose one shared household system</p>
+                <p className="mt-1 text-sm font-semibold text-foreground">Capture after-hours demand</p>
               </div>
               <div className="rounded-xl border border-border/70 bg-background/55 p-3">
                 <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Proof window</p>
-                <p className="mt-1 text-sm font-semibold text-foreground">Run the first plan for 7 days</p>
+                <p className="mt-1 text-sm font-semibold text-foreground">Run live answering for 7 days</p>
               </div>
               <div className="rounded-xl border border-border/70 bg-background/55 p-3">
                 <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Completion</p>
-                <p className="mt-1 text-sm font-semibold text-foreground">Plan, shop, and review together</p>
+                <p className="mt-1 text-sm font-semibold text-foreground">Book follow-ups and review conversion</p>
               </div>
             </div>
           </div>
@@ -425,7 +425,7 @@ function FullAssessmentProofPreview() {
               </li>
               <li className="flex gap-3">
                 <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">2</span>
-                <span><strong className="font-semibold text-foreground">The tradeoffs.</strong> Cost, limitations, integration fit, and the work the household still has to do.</span>
+                <span><strong className="font-semibold text-foreground">The tradeoffs.</strong> Cost, limitations, integration fit, and the work the owner still has to do.</span>
               </li>
               <li className="flex gap-3">
                 <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">3</span>
