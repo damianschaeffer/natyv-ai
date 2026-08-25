@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import AssessmentStartForm from "@/components/AssessmentStartForm";
 import AdvisorySection from "@/components/AdvisorySection";
 import PaymentSuccessReport from "@/components/PaymentSuccessReport";
-import AssessmentProofPreview from "@/components/AssessmentProofPreview";
 import { trackAssessmentFunnelEvent } from "@/lib/myagentAssessmentApi";
 
 export default function Assessment() {
@@ -22,14 +21,6 @@ export default function Assessment() {
   useEffect(() => {
     setHandoffMode(Boolean(referralCode || proofId));
   }, [proofId, referralCode]);
-  // A referral or proof CTA is already a committed handoff. Re-rendering the
-  // full interactive example above the form makes the recipient scroll through
-  // the same sales story twice and buries the one action we want next.
-  const exampleHref = referralCode
-    ? `/assessment/example?source=referral&ref=${encodeURIComponent(referralCode)}`
-    : proofId
-      ? `/assessment/example?source=warm_assessment&proof_id=${encodeURIComponent(proofId)}`
-      : "/assessment/example";
 
   useEffect(() => {
     trackAssessmentFunnelEvent("page_view", { referral_present: Boolean(referralCode) });
@@ -66,7 +57,7 @@ export default function Assessment() {
                 Nothing was charged. Your assessment remains saved if you want to return later.
               </div>
             )}
-            {handoffMode ? (
+            {handoffMode && (
               <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-primary/25 bg-primary/[0.06] px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="font-poppins font-semibold text-foreground">One short next step</p>
@@ -76,16 +67,20 @@ export default function Assessment() {
                       : "You have seen the finished example. Add your details and Ava will turn your situation into the same kind of ranked decision."}
                   </p>
                 </div>
-                <a href={exampleHref} className="inline-flex shrink-0 items-center justify-center rounded-xl border border-primary/35 bg-background/55 px-3 py-2 text-xs font-semibold text-primary transition hover:bg-primary/[0.08]">
-                  Review the example again
+                <a href="#example-report" className="inline-flex shrink-0 items-center justify-center rounded-xl border border-primary/35 bg-background/55 px-3 py-2 text-xs font-semibold text-primary transition hover:bg-primary/[0.08]">
+                  Review the sample report
                 </a>
               </div>
-            ) : (
-              <AssessmentProofPreview compact />
             )}
-            <div className="mt-8">
-              <AssessmentStartForm referralCode={referralCode} compact={handoffMode} />
-            </div>
+            <AssessmentStartForm referralCode={referralCode} compact={handoffMode} />
+            {!handoffMode && (
+              <p className="mt-6 text-center text-sm text-muted-foreground">
+                Prefer to see a finished example first?{" "}
+                <a href="#example-report" className="font-semibold text-primary hover:underline">
+                  See the full sample roadmap
+                </a>
+              </p>
+            )}
           </div>
         </section>
         <AdvisorySection />

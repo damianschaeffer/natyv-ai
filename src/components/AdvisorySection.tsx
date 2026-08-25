@@ -11,6 +11,7 @@ import {
   Target,
   type LucideIcon,
 } from "lucide-react";
+import AssessmentProofPreview from "@/components/AssessmentProofPreview";
 
 interface OpportunityItem {
   icon: LucideIcon;
@@ -30,9 +31,9 @@ const OPPORTUNITIES: OpportunityItem[] = [
   {
     icon: Phone,
     rank: 1,
-    title: "24/7 call answering",
+    title: "Missed-call capture",
     area: "Front Desk",
-    description: "Answer after-hours calls, qualify intent, and route urgent jobs before they shop around.",
+    description: "Answer after-hours and missed calls, qualify intent, and book the next appointment before the lead shops around.",
     payoff: "$3,000/mo potential recovered revenue",
     effort: "Same-day setup",
     reason: "Biggest cash leak, lowest lift.",
@@ -72,6 +73,22 @@ const AdvisorySection = () => {
   const [activeRank, setActiveRank] = useState<number | null>(1);
   const activeOpportunity = OPPORTUNITIES.find((item) => item.rank === activeRank);
   const [showRoadmap, setShowRoadmap] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const syncFromHash = () => {
+      if (window.location.hash === "#example-report") setShowRoadmap(true);
+    };
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
+
+  useEffect(() => {
+    if (!showRoadmap) return;
+    const report = document.getElementById("example-report");
+    report?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [showRoadmap]);
 
   // Auto-play the top-3 opportunities lighting up in sequence — a quick,
   // self-running "here are your highest-ROI wins" teaser instead of a wall.
@@ -149,7 +166,7 @@ const AdvisorySection = () => {
                   fontWeight: 500,
                 }}
               >
-                Sample Business AI Opportunity Assessment
+                Sample dental office · AI Opportunity Assessment
               </span>
             </div>
             <div className="relative h-[332px] sm:h-[460px] rounded-2xl border border-border/70 bg-black/45 overflow-hidden">
@@ -277,92 +294,9 @@ const AdvisorySection = () => {
               </button>
             </div>
             {showRoadmap && (
-            <div className="space-y-2.5 sm:space-y-3 mt-5">
-              {OPPORTUNITIES.map((item) => (
-                <article
-                  key={item.title}
-                  className="group relative overflow-hidden rounded-2xl border border-border/40 backdrop-blur-md transition-all duration-300"
-                  style={{
-                    background: `linear-gradient(140deg, ${item.color}14 0%, hsl(var(--background) / 0.72) 55%, hsl(var(--background) / 0.9) 100%)`,
-                    boxShadow: `0 20px 50px -24px ${item.color}33`,
-                  }}
-                >
-                  <div
-                    aria-hidden="true"
-                    className="absolute top-0 left-0 right-0 h-1"
-                    style={{ background: item.color }}
-                  />
-                  <div className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-2.5 sm:grid-cols-[2.75rem_minmax(0,1fr)] sm:gap-3 lg:grid-cols-[3.25rem_minmax(20rem,1.6fr)_repeat(3,minmax(9.5rem,1fr))] items-stretch p-3.5 sm:p-5 pt-4 sm:pt-6">
-                    <div
-                      className="self-start pt-1 sm:self-center sm:pt-0 font-poppins font-bold text-3xl sm:text-4xl md:text-5xl leading-none tabular-nums"
-                      style={{ color: item.color }}
-                      aria-label={`Priority ${item.rank}`}
-                    >
-                      {item.rank}
-                    </div>
-
-                    <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 self-center min-w-0 lg:pr-3">
-                      <div
-                        className="h-10 w-10 sm:h-12 sm:w-12 rounded-full flex items-center justify-center flex-shrink-0"
-                        style={{
-                          background: item.color,
-                          boxShadow: `0 8px 24px -8px ${item.color}99`,
-                        }}
-                      >
-                        <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" strokeWidth={2.25} aria-hidden="true" />
-                      </div>
-
-                      <div className="min-w-0">
-                        <h5
-                          className="font-poppins font-bold text-sm sm:text-base md:text-lg leading-tight"
-                          style={{ color: item.color }}
-                        >
-                          {item.area}
-                        </h5>
-                        <p className="font-poppins font-semibold text-sm text-foreground leading-snug mt-0.5 sm:mt-1">
-                          {item.title}
-                        </p>
-                        <p className="text-xs sm:text-sm text-muted-foreground font-body leading-relaxed mt-1">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div
-                      className="col-span-2 lg:col-span-1 h-full min-h-[4rem] sm:min-h-[4.75rem] rounded-xl border border-emerald-300/35 bg-emerald-300/[0.08] px-3 py-2.5 sm:py-3 flex flex-col justify-center"
-                    >
-                      <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-emerald-300 mb-1">
-                        <DollarSign className="w-3.5 h-3.5" aria-hidden="true" />
-                        Payoff
-                      </p>
-                      <p className="text-xs sm:text-sm text-foreground font-poppins font-bold leading-snug">
-                        {item.payoff}
-                      </p>
-                    </div>
-
-                    <div className="col-span-2 lg:col-span-1 h-full min-h-[4rem] sm:min-h-[4.75rem] rounded-xl border border-amber-300/40 bg-amber-300/[0.08] px-3 py-2.5 sm:py-3 flex flex-col justify-center">
-                      <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-amber-300 mb-1">
-                        <Clock3 className="w-3.5 h-3.5" aria-hidden="true" />
-                        Setup time
-                      </p>
-                      <p className="text-xs sm:text-sm text-foreground font-poppins font-bold leading-snug">
-                        {item.effort}
-                      </p>
-                    </div>
-
-                    <div className="col-span-2 lg:col-span-1 h-full min-h-[4rem] sm:min-h-[4.75rem] rounded-xl border border-primary/35 bg-primary/[0.07] px-3 py-2.5 sm:py-3 flex flex-col justify-center">
-                      <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-primary mb-1">
-                        <Target className="w-3.5 h-3.5" aria-hidden="true" />
-                        Why
-                      </p>
-                      <p className="text-xs sm:text-sm text-foreground/85 font-body leading-snug">
-                        {item.reason}
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+              <div className="mt-5">
+                <AssessmentProofPreview embedded />
+              </div>
             )}
           </div>
         </div>
