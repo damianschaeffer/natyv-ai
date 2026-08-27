@@ -159,7 +159,14 @@
       Silently no-ops in browsers without WebMCP; the widget still loads.
       See my-agent-ai/docs/superpowers/specs/2026-08-27-agent-layer-design.md
     -->
-    <script src="https://get-myagent.com/agent-layer/agent-layer.js"
+    <!--
+      ?v= is load-bearing. Cloudflare pins .js to a 4-hour browser cache at
+      the zone level, overriding the 300s in my-agent-ai/public/_headers
+      (the .json manifest does honour 300s). Without a version bump, a fix
+      to the bundle takes up to 4 hours to reach anyone who already visited.
+      Bump v when the bundle changes; manifest-only changes need no bump.
+    -->
+    <script src="https://get-myagent.com/agent-layer/agent-layer.js?v=2"
             data-slug="natyv-ai" async></script>
   </body>
 </html>
