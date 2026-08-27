@@ -145,5 +145,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!--
+      MyAgent Agent Layer — the same one-line install we sell to clients, so
+      natyv.ai runs the product rather than only describing it.
+
+      Adds two things and removes nothing: WebMCP tools for AI agents (via
+      document.modelContext — renders no markup at all) and the trained Ava
+      concierge widget for human visitors (one floating button). Both are
+      driven by the manifest at get-myagent.com/agent-layer/natyv-ai.json,
+      so tools and copy change without touching this site again.
+
+      Silently no-ops in browsers without WebMCP; the widget still loads.
+      See my-agent-ai/docs/superpowers/specs/2026-08-27-agent-layer-design.md
+    -->
+    <script src="https://get-myagent.com/agent-layer/agent-layer.js"
+            data-slug="natyv-ai" async></script>
   </body>
 </html>
